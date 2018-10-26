@@ -4,7 +4,7 @@
 
 <!-- HEADER -->
 <%@ include file="./public/header.jsp"%>
-<!-- ./. HEADER -->
+<!-- HEADER [END] -->
 <!-- content-wrapper -->
 <div class="content-wrapper">
 	<div class="row section social-section">
@@ -386,5 +386,5 @@
 
 <!-- FOOTER -->
 <%@ include file="./public/footer.jsp"%>
-<!-- ./. FOOTER -->
+<!-- FOOTER [END]-->
 

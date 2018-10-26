@@ -1,3 +1,4 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -49,6 +50,9 @@
 										<label for="emPassword">Mật khẩu</label> <input
 											type="password" class="form-control" id="emPassword" name="emPassword"
 											placeholder="Mật khẩu" value="admin"> <i class="mdi mdi-eye"></i>
+									</div>
+									<div class="form-group">
+										<p class="label-error"><c:out value = "${error}"/></p>
 									</div>
 									<div class="mt-5">
 										<button class="btn btn-block btn-warning btn-lg font-weight-medium"

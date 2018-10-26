@@ -17,7 +17,6 @@
 	</div>
 	<!-- container-scroller -->
 	<!-- plugins:js -->
-	<script src="../resouces/node_modules/jquery/dist/jquery.min.js"></script>
 	<script src="../resouces/node_modules/popper.js/dist/umd/popper.min.js"></script>
 	<script
 		src="../resouces/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -28,7 +27,7 @@
 	<script src="../resouces/js/off-canvas.js"></script>
 	<script src="../resouces/js/misc.js"></script>
 	<!-- Modal -->
-	<script src="../resouces/js/my-style.js"></script>
+	<script src="../resouces/style-js/my-style.js"></script>
 	<!-- End Modal -->
 	<!-- endinject -->
 	<!-- Custom js for this page-->

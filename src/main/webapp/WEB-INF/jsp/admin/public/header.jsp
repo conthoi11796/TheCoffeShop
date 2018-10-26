@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -27,6 +28,8 @@
 <link rel="shortcut icon" href="../resouces/images/favicon.png" />
 <!-- my-style-css -->
 <link rel="stylesheet" href="../resouces/css/my-style-v2.css">
+<!-- plugins:js -->
+<script src="../resouces/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body>
@@ -41,7 +44,10 @@
 			</div>
 			<div class="navbar-menu-wrapper d-flex align-items-center">
 				<span class="icon-heart icons"></span>
-				<p class="page-name d-none d-lg-block">Chào, <c:out value = "${employee.getEmId()} "/></p>
+				<p class="page-name d-none d-lg-block">
+					Chào,
+					<c:out value="${employee.getEmName()}" />
+				</p>
 				<ul class="navbar-nav ml-lg-auto">
 					<li class="nav-item">
 						<form class="mt-2 mt-md-0 d-none d-lg-block search-input">
@@ -262,8 +268,8 @@
 											class="menu-title">Lịch làm</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Thức ăn- Đồ uống</span>
+										href="./add-product"> <span class="menu-title">Thức
+												ăn- Đồ uống</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
 										href="pages/charts/flot-chart.html"> <span

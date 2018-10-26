@@ -18,15 +18,22 @@ public class EmployeeService implements EmployeeDAOImp {
 	private EmloyeeDAO emloyeeDAO;
 
 	@Override
-	public Employee logIn(String username, String password) {
+	public String logIn(String username, String password) {
 
-		Employee employee = emloyeeDAO.logIn(username, password);
-		return employee;
-		
+		return emloyeeDAO.logIn(username, password);
+
 	}
 
+	@Override
+	public Employee getInfoById(String emId) {
+
+		return emloyeeDAO.getInfoById(emId);
+	}
+
+	@Override
 	public List<Employee> findAll() {
-		return emloyeeDAO.findAll();
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 //	public Customer findById(final int id) {

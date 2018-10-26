@@ -20,27 +20,28 @@ public class LoginController {
 	private EmployeeService employeeService;
 
 	@GetMapping(value = { "/admin/login" })
-	public String index() {
+	public String index(HttpSession httpSession) {
 
+		// check logined
+		if (httpSession.getAttribute("emId") != null) {
+			return "redirect:/admin/index";
+		}
 		return "/admin/login";
 
 	}
 
 	@PostMapping(value = { "/admin/login" })
-	public String listCustomer(@RequestParam String emUsername, @RequestParam String emPassword, Model model,
-			HttpSession session, HttpServletResponse servletResponse) {
+	public String index(@RequestParam String emUsername, @RequestParam String emPassword, Model model,
+			HttpSession httpSession, HttpServletResponse servletResponse) {
 
-		Employee employee = employeeService.logIn(emUsername, emPassword);
+		String emId = employeeService.logIn(emUsername, emPassword);
 
-		model.addAttribute(employee);
-
-		if (employee == null) {
+		if (emId == null) {
+			model.addAttribute("error", "Sai mật khẩu hoặc tài khoản");
 			return "/admin/login";
 		}
+		httpSession.setAttribute("emId", emId);
 
-		session.setAttribute("emId", employee.getEmId());
-//		return "/admin/index";
-		
 		return "redirect:/admin/index";
 
 	}

@@ -863,3 +863,13 @@ div{
 	background-image: url("../images/Background3.jpg");
 	background-size: auto;
 }
+.label-error{
+	color: red; 
+	font-size: 16px;
+	font-weight: 700;
+}
+.btn-disable{
+	background-color: #e9f0f9;
+	border-color: #e9f0f9;
+	color:white;
+}
