@@ -3,11 +3,11 @@ package com.thecoffeshop.DAOImp;
 import java.util.List;
 import com.thecoffeshop.Models.*;
 
-public interface CategoryProductDAOImp {
+public interface CategoryProductDAOImp extends CommonDAOImp {
 
-	public static Boolean IS_DELETE = true;
-
-	public static Boolean IS_NOT_DELETE = false;
-	
 	public List<Categoryproduct> findAll();
+
+	public Boolean addCategoryProduct(Categoryproduct categoryproduct);
+	
+	public Categoryproduct getInfoById(String cgPrdId);
 }

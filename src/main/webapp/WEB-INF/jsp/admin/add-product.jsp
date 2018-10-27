@@ -15,32 +15,34 @@
 						<h4 class="card-title mb-0">Thêm sản phẩm</h4>
 						<ul class="nav nav-tabs tab-solid tab-solid-primary mb-0"
 							id="myTab" role="tablist">
-							<li class="nav-item"><a class="nav-link" id="info-tab"
-								data-toggle="tab" href="#info" role="tab" aria-controls="info"
-								aria-expanded="true" aria-selected="false">Sản phẩm</a></li>
-							<li class="nav-item"><a class="nav-link active show"
-								id="security-tab" data-toggle="tab" href="#security" role="tab"
-								aria-controls="security" aria-selected="true">Loại sản phẩm</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" id="avatar-tab"
-								data-toggle="tab" href="#avatar" role="tab"
-								aria-controls="avatar" aria-selected="false">Hình ảnh</a></li>
+							<li class="nav-item "><a class="nav-link disabled active"
+								id="Product-tab" data-toggle="tab" href="#Product" role="tab"
+								aria-controls="Product" aria-selected="true">Sản phẩm</a></li>
+							<li class="nav-item"><a class="nav-link disabled"
+								id="CategoryProduct-tab" data-toggle="tab"
+								href="#CategoryProduct" role="tab"
+								aria-controls="CategoryProduct">Loại sản phẩm</a></li>
+							<li class="nav-item"><a class="nav-link disabled"
+								id="image-tab" data-toggle="tab" href="#image" role="tab"
+								aria-controls="image">Hình ảnh</a></li>
 						</ul>
 					</div>
 					<div class="wrapper">
 						<hr>
 						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade" id="info" role="tabpanel"
-								aria-labelledby="info">
+							<div class="tab-pane fade active show" id="Product"
+								role="tabpanel" aria-labelledby="Product">
 								<form id="formProduct" method="post">
 									<div class="form-group">
 										<label for="PId">Mã sản phẩm</label> <input type="text"
-											class="form-control" id="PId" name="PId" placeholder="#"
-											disabled="disabled">
+											class="form-control" id="ShowPId" name="ShowPId"
+											placeholder="#" disabled="disabled"> <input
+											type="text" hidden="" class="form-control" id="PId"
+											name="PId" placeholder="#">
 									</div>
 									<div class="form-group">
-										<label for="PName">Tên (*)</label> <input type="text"
-											class="form-control" id="PName" name="PName"
+										<label for="PName">Tên <span>(*)</span></label> <input
+											type="text" class="form-control" id="PName" name="PName"
 											placeholder="Tên sản phẩm ...">
 									</div>
 									<div class="form-group">
@@ -51,35 +53,35 @@
 									</div>
 									<div class="form-group row">
 										<div class="col-sm-6">
-											<label for="prPrice">Giá (*)</label> <input type="number"
-												class="form-control" id="prPrice" name="prPrice"
-												placeholder="Giá sản phẩm ...">
+											<label for="prPrice">Giá <span>(*)</span></label> <input
+												type="number" class="form-control" id="prPrice"
+												name="prPrice" placeholder="Giá sản phẩm ...">
 										</div>
 										<div class="col-sm-6">
-											<label for="prDatestart">Ngày áp dụng (*)</label> <input
-												type="date" class="form-control" id="prDatestart"
-												name="prDatestart" placeholder="Ngày áp dụng...">
+											<label for="prDatestart">Ngày áp dụng <span>(*)</span></label>
+											<input type="date" class="form-control" id="prDatestart"
+												name="prDatestart" placeholder="Ngày áp dụng giá...">
 										</div>
 									</div>
 									<div class="form-group mt-5">
-										<button type="button" class="btn btn-outline-danger">Làm
+										<button id="btnClean1" type="button" class="btn btn-outline-danger">Làm
 											mới</button>
-										<button id="btnStep1"  type="button"
+										<button id="btnStep1" type="button"
 											class="btn mr-2 btn-disable">Bước tiếp</button>
 									</div>
 								</form>
 							</div>
 							<!-- tab content ends -->
-							<div class="tab-pane fade active show" id="security"
-								role="tabpanel" aria-labelledby="security-tab">
+							<div class="tab-pane fade" id="CategoryProduct" role="tabpanel"
+								aria-labelledby="CategoryProduct-tab">
 								<form id="formCateGoryProduct" method="post">
 									<div class="form-group">
-										<label for="cgPrdId">Mã loại</label> <input
-											type="text" class="form-control" id="cgPrdId"
-											placeholder="#" disabled="disabled">
+										<label for="ShowcgPrdId">Mã loại</label> <input
+											id="ShowcgPrdId" name="cgPrdId" type="text"
+											class="form-control" placeholder="#" disabled="disabled">
 									</div>
 									<div class="form-group">
-										<select class="form-control" id="cgPrdName">
+										<select id="cgPrdId" name="cgPrdId" class="form-control">
 											<option disabled="disabled" selected="selected">---Chọn
 												loại sản phẩm---</option>
 											<c:forEach items="${categoryproducts}" var="categoryproduct">
@@ -91,24 +93,27 @@
 										</select>
 									</div>
 									<div class="form-group mt-5">
-										<button type="button" class="btn btn-outline-danger">Cancel</button>
-										<button id="btnStep2" type="button" class="btn btn-disable mr-2">Bước tiếp</button>
+										<button id="btnClean2" type="button" class="btn btn-outline-danger">Làm
+											mới</button>
+										<button id="btnStep2" type="button"
+											class="btn btn-disable mr-2">Bước tiếp</button>
 									</div>
 								</form>
 							</div>
-							<div class="tab-pane fade" id="avatar" role="tabpanel"
-								aria-labelledby="avatar-tab">
-
+							<div class="tab-pane fade" id="image" role="tabpanel"
+								aria-labelledby="image-tab">
 								<div class="wrapper mb-5 mt-4">
 									<span class="badge badge-warning text-white">Chú ý : </span>
 									<p class="d-inline ml-3 text-muted">Hình ảnh phải nhỏ hơn
 										1MB .</p>
 								</div>
-								<form id="formImagesOfProduct" method="post" action="#">
+								<form id="formImagesOfProduct" name="formImagesOfProduct"
+									method="post" action="#">
 									<input type="file" class="dropify" data-max-file-size="1mb"
 										data-default-file="../../images/faces/face6.jpg">
 									<div class="form-group mt-5">
-										<button id="btnStep3" type="button" class="btn btn-success mr-2">Hoàn tất</button>
+										<button id="btnStep3" type="button"
+											class="btn btn-success mr-2">Hoàn tất</button>
 									</div>
 								</form>
 							</div>
@@ -134,6 +139,22 @@
 										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
 									</figcaption>
 								</figure>
+							</div>
+							<div id="modalResult" class="modal fade modalResult" tabindex="-1" role="document"
+								aria-labelledby="modalResult" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+										<h5 class="modal-title">Thông báo</h5>
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">×</span>
+											</button>
+										</div>
+										<div class="modal-body"></div>
+										<div class="modal-footer"></div>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>

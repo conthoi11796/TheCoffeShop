@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 24, 2018 11:35:31 AM by Hibernate Tools 5.1.7.Final
+// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

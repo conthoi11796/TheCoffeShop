@@ -868,8 +868,16 @@ div{
 	font-size: 16px;
 	font-weight: 700;
 }
+.label-success{
+	color: #289f25; 
+	font-size: 16px;
+	font-weight: 700;
+}
 .btn-disable{
 	background-color: #e9f0f9;
 	border-color: #e9f0f9;
 	color:white;
+}
+.modal-content{
+	text-align: center;
 }

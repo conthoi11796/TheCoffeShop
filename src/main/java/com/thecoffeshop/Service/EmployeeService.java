@@ -31,9 +31,9 @@ public class EmployeeService implements EmployeeDAOImp {
 	}
 
 	@Override
-	public List<Employee> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> findAll(int start, int numberRow) {
+		
+		return emloyeeDAO.findAll(start, numberRow);
 	}
 
 //	public Customer findById(final int id) {

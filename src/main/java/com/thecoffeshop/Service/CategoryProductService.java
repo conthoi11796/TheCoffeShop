@@ -23,4 +23,16 @@ public class CategoryProductService implements CategoryProductDAOImp {
 		return categoryProductDAO.findAll();
 	}
 
+	@Override
+	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Categoryproduct getInfoById(String cgPrdId) {
+		
+		return categoryProductDAO.getInfoById(cgPrdId);
+	}
+
 }

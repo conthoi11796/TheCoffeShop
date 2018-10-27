@@ -4,27 +4,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thecoffeshop.DAO.PriceDAO;
 import com.thecoffeshop.DAO.ProductDAO;
 import com.thecoffeshop.DAOImp.*;
-import com.thecoffeshop.Models.Product;
+import com.thecoffeshop.Models.Price;
 
 @Service
 @Transactional
-public class ProductService implements ProductDAOImp {
+public class PriceService implements PriceDAOImp {
 
 	@Autowired
-	private ProductDAO productDAO;
-
+	private PriceDAO priceDAO;
+	
 	@Override
-	public Boolean addProduct(Product product) {
-
-		return productDAO.addProduct(product);
-	}
-
-	@Override
-	public Product getInfoById(String PId) {
-		
-		return productDAO.getInfoById(PId);
+	public Boolean addPrice(Price price) {
+		return priceDAO.addPrice(price);
 	}
 
 }

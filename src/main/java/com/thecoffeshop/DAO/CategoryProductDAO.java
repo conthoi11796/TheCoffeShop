@@ -33,4 +33,32 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 		}
 	}
 
+	@Override
+	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.save(categoryproduct);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Categoryproduct getInfoById(String cgPrdId) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+
+			Categoryproduct categoryproduct= session
+					.createQuery("FROM Categoryproduct cp WHERE cp.cgPrdId = :cgPrdId and cp.isDelete =: is_delete", Categoryproduct.class)
+					.setParameter("cgPrdId", cgPrdId).setParameter("is_delete", this.IS_NOT_DELETE).getSingleResult();
+			return categoryproduct;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
 }
