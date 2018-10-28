@@ -54,10 +54,10 @@ $(document).ready(
 /*---------------------------------------------------------------*/
 			/** Effect Clean Button */
 			$("#btnClean1").click(function(){
-				$("#formProduct").reset();
+				document.getElementById("formProduct").reset();
 			});
 			$("#btnClean2").click(function(){
-				$("#formCateGoryProduct").reset();
+				document.getElementById("formCateGoryProduct").reset();
 			});
 			/** Effect Clean Button [END] */
 /*---------------------------------------------------------------*/
@@ -83,10 +83,10 @@ $(document).ready(
 			}
 
 			$("#btnStep1").click(function() {
-				_effect("#Product-tab", "#CategoryProduct-tab", "#Product", "#CategoryProduct");
+				_effect("#Product", "#CategoryProduct", "#Product-tab", "#CategoryProduct-tab" );
 			});
 			$("#btnStep2").click(function() {
-				_effect("#CategoryProduct-tab", "#image-tab", "#CategoryProduct", "#image");
+				_effect( "#CategoryProduct", "#image", "#CategoryProduct-tab", "#image-tab");
 			});
 			/** Effect TabContent [END] */
 /*---------------------------------------------------------------*/
@@ -110,17 +110,21 @@ $(document).ready(
 					 var object = JSON.parse(data);
 // alert(object.success);
 // alert(object.warning);
-					 if(object.success!=""){
-						 alert(object.success);
-						$('#modalResult').modal('show');
-						$('#modalResult').fadeOut("slow");;
+					 if(object.success!=null){
 						$('.modal-body').text(object.success);
 						$('.modal-body').addClass('label-success');
-					 }
-					 if(object.warning!=""){
+						
+						$('#pname').text(object.pname);
+						$('#cgPrdName').text(object.cgPrdName);
+						$('#prPrice').text(object.prprice + " Ngày áp dụng: " + object.prDatestart);
+						$('#pdescription').text(object.pdescription);
+
 						$('#modalResult').modal('show');
-						 alert(object.warning);
-						$('#modalResult').fadeOut("slow");;
+						$('#modalResult').fadeOut("slow");
+					 }
+					 if(object.warning!=null){
+						$('#modalResult').modal('show');
+						$('#modalResult').fadeOut("slow");
 						$('.modal-body').text(object.warning);
 						$('.modal-body').addClass('label-warning');
 					 }
@@ -133,6 +137,11 @@ $(document).ready(
 				console.log($('form').serialize());
 				
 				_saveProduct($('form').serialize());
+				$("#btnStep3").removeClass("btn-success");
+				$("#btnStep3").addClass("btn-disable");
+				document.getElementById("formProduct").reset();
+				document.getElementById("formCateGoryProduct").reset();
+				_effect( "#image", "#Product", "#image-tab", "#Product-tab");
 			});
 			/** Submit Form [END] */
 /*---------------------------------------------------------------*/

@@ -9,4 +9,8 @@ import com.thecoffeshop.DAOImp.*;
 public interface PriceDAOImp extends CommonDAOImp {
 
 	public Boolean addPrice(Price price);
+	
+	public Price getInfoById(String prId);
+	
+	public Price getInfoByProduct(String PId);
 }

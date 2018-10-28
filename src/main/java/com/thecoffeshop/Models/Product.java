@@ -81,7 +81,7 @@ public class Product implements java.io.Serializable {
 		this.PId = PId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CG_PRD_ID")
 	public Categoryproduct getCategoryproduct() {
 		return this.categoryproduct;
@@ -214,7 +214,7 @@ public class Product implements java.io.Serializable {
 		this.exportbills = exportbills;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	public Set<Price> getPrices() {
 		return this.prices;
 	}

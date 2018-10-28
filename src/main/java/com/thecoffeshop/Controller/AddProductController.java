@@ -60,7 +60,8 @@ public class AddProductController extends Common {
 
 	/**
 	 * add product
-	 * @throws JsonProcessingException 
+	 * 
+	 * @throws JsonProcessingException
 	 */
 	@PostMapping(value = { "/add-product" })
 	public @ResponseBody String index(@RequestParam String FormData, HttpSession httpSession, ModelMap modelMap)
@@ -73,9 +74,9 @@ public class AddProductController extends Common {
 //		System.out.println("-------Form Data: " + FormData);
 
 		// check logined
-//		if (this.checkLogIn(httpSession) != null) {
-//			return this.checkLogIn(httpSession);
-//		}
+		if (this.checkLogIn(httpSession) != null) {
+			return this.checkLogIn(httpSession);
+		}
 
 		// Convert FormData to JsonObject
 		JsonObject objFormData = this.convertStringToJson(FormData);
@@ -95,10 +96,9 @@ public class AddProductController extends Common {
 			Date PrDatestart = null;
 			try {
 				PrDatestart = new SimpleDateFormat("yyyy-MM-dd")
-						.parse(this.getValueJsonObject(objFormData, "PrDatestart"));
+						.parse(this.getValueJsonObject(objFormData, "prDatestart"));
 			} catch (Exception e) {
 			}
-
 			price.setPrPrice(Integer.valueOf(this.getValueJsonObject(objFormData, "prPrice")));
 			price.setPrDatestart(PrDatestart);
 //			price.setCreateBy(httpSession.getAttribute("emId").toString());
@@ -107,19 +107,28 @@ public class AddProductController extends Common {
 
 			if (priceService.addPrice(price)) {
 				Product productNew = productService.getInfoById(product.getPId());
+
+				String categoryproductcg_PrdName = productNew.getCategoryproduct().getCgPrdName();
+				String pricespr_Price = priceService.getInfoByProduct(productNew.getPId()).getPrPrice().toString();
+				String pricespr_Datestart = priceService.getInfoByProduct(productNew.getPId()).getPrDatestart()
+						.toString();
 				productNew.setCategoryproduct(null);
 				productNew.setBilldetails(null);
 				productNew.setExportbills(null);
 				productNew.setImages(null);
 				productNew.setPrices(null);
+
 				ObjectMapper mapper = new ObjectMapper();
 				String jsonString = mapper.writeValueAsString(productNew);
 //				System.out.println("-------JSon object result: "+jsonString);
 //				{"categoryproduct":null,"createBy":null}
-				System.out.println("-------JSon object result: "+jsonString);
+				System.out.println("-------JSon object result: " + jsonString);
 				jsonResult = this.convertStringToJson(jsonString);
+				jsonResult.addProperty("cgPrdName", categoryproductcg_PrdName);
+				jsonResult.addProperty("prPrice", pricespr_Price);
+				jsonResult.addProperty("prDatestart", pricespr_Datestart);
 				jsonResult.addProperty("success", "Thêm sản phẩm thành công!");
-				
+
 			} else {
 				jsonResult.addProperty("warning", "Lỗi thêm giá sản phẩm!");
 			}

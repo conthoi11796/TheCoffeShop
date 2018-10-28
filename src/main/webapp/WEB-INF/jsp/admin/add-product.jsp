@@ -129,14 +129,16 @@
 					<div class="card">
 						<div class="card-body overview">
 							<div class="wrapper about-user">
-								<h4 class="card-title mt-4 mb-3">Sản phẩm vừa thêm</h4>
+								<h6 class="card-title mt-4 mb-3">Sản phẩm vừa thêm</h6>
 							</div>
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<figure class="effect-text-in">
-									<img src="../../images/samples/300x300/1.jpg" alt="image">
+									<img src="../resouces/images/samples/300x300/13.jpg" alt="image">
 									<figcaption>
-										<h4>Photography</h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+										<h4 id="pname"></h4>
+										<p id="cgPrdName"></p>
+										<p id="prPrice"></p>
+										<p id="pdescription"></p>
 									</figcaption>
 								</figure>
 							</div>

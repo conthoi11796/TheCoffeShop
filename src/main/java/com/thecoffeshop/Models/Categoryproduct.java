@@ -138,7 +138,7 @@ public class Categoryproduct implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoryproduct")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryproduct")
 	public Set<Product> getProducts() {
 		return this.products;
 	}

@@ -21,4 +21,15 @@ public class PriceService implements PriceDAOImp {
 		return priceDAO.addPrice(price);
 	}
 
+	@Override
+	public Price getInfoById(String prId) {
+		return priceDAO.getInfoById(prId);
+	}
+
+	@Override
+	public Price getInfoByProduct(String PId) {
+		
+		return priceDAO.getInfoByProduct(PId);
+	}
+
 }
