@@ -1,46 +1,44 @@
-package com.thecoffeshop;
+package com.thecoffeshop.Service;
 
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-public class Common {
-	/**
-	 * check logined
-	 * 
-	 * @param HttpSession
-	 */
-	public String checkLogIn(HttpSession httpSession) {
-		if (httpSession.getAttribute("emId") == null) {
-			// has a session emId
-			return "redirect:/admin/login";
-		} else {
-			return null;
-		}
-	}
+public class ConvertJSON {
+
+	private JsonObject jsonObject;
 
 	/**
 	 * Convert String to Json
 	 * 
 	 * @param FormData
 	 */
-	public JsonObject convertStringToJson(String FormData) {
-		// Format FormData : PName=adasd&cgPrdName=126&cgPrdName=
-		// Format JSon {"firstName":"Sergey","lastName":"Kargopolov","lastName":""}
+	public JsonObject SetJS(String FormData) {
+		// FormData is String Format FormData : PName=adasd&cgPrdName=126&cgPrdName=
+		// FormData is Stringwhen Format JSon
+		// {"firstName":"Sergey","lastName":"Kargopolov","lastName":""}
 
-		/** Convert String to JSon String */
+		// when is String: FormData=PName=adasd&cgPrdName=126&cgPrdName=
+		if (FormData.indexOf("FormData=") != -1) {
+			FormData = FormData.substring(9, FormData.length());
+			System.out.println();
+		}
 
+		/**
+		 * Convert String to JSon String
+		 */
 		/* Format FormData when "PName"="adasd","cgPrdName"="126","cgPrdName"=null */
 		while (FormData.indexOf("null") != -1) {
 			int postion = FormData.indexOf("null");
-			FormData = FormData.substring(0, postion)+"\"\""
+			FormData = FormData.substring(0, postion) + "\"\""
 					+ FormData.substring(postion + "null".length(), FormData.length());
 
 		}
-//		System.out.println("[1]:"+ FormData);
-		
-		/* Format FormData when Format FormData : PName=adasd&cgPrdName=126&cgPrdName= */
+
+		/*
+		 * * Format FormData when Format FormData : PName=adasd&cgPrdName=126&cgPrdName=
+		 */
 		/* Repalce = to ":" */
 		while (FormData.indexOf('=') != -1) {
 
@@ -53,8 +51,10 @@ public class Common {
 			FormData = FormData.substring(0, postion) + "\":\"" + FormData.substring(postion + 1, FormData.length());
 //			System.out.println("[2]:"+ FormData);
 		}
-		
-		/* Format FormData when Format FormData : PName=adasd&cgPrdName=126&cgPrdName= */
+
+		/*
+		 * Format FormData when Format FormData : PName=adasd&cgPrdName=126&cgPrdName=
+		 */
 		/* Repalce & to "," */
 		while (FormData.indexOf('&') != -1) {
 
@@ -68,13 +68,15 @@ public class Common {
 //			System.out.println("[3]:"+ FormData);
 		}
 //		"firstName":"Sergey","lastName":"Kargopolov","lastName":""
-		if (FormData.indexOf("{") == -1) {
+		if (FormData.charAt(0) != '{' && FormData.charAt(FormData.length() - 1) != '}') {
 			FormData = "{\"" + FormData + "\"}";
 		}
 		System.out.println("-------JSon String: " + FormData);
 		JsonParser jsonParser = new JsonParser();
 		JsonObject objectFromString = jsonParser.parse(FormData).getAsJsonObject();
-		return objectFromString;
+
+		this.jsonObject = objectFromString;
+		return jsonObject;
 	}
 
 	/**
@@ -82,9 +84,9 @@ public class Common {
 	 * 
 	 * @param JsonObject
 	 */
-	public String getValueJsonObject(JsonObject jsonObject, String Key) {
+	public String getJS(String Key) {
 
-		String value = jsonObject.get(Key).toString();
+		String value = this.jsonObject.get(Key).toString();
 		return value.substring(1, value.length() - 1);
 	}
 }

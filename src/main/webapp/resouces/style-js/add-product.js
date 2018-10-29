@@ -4,6 +4,8 @@
 
 $(document).ready(
 		function() { 
+			
+			$("#notifyResult").hide();
 
 /*---------------------------------------------------------------*/
 			/** Create PId */
@@ -106,34 +108,28 @@ $(document).ready(
 				$.post("/admin/add-product", {
 					FormData
 				}, function(data, status) {
-// alert("Data: " + data + "\nStatus: " + status);
 					 var object = JSON.parse(data);
-// alert(object.success);
-// alert(object.warning);
-					 if(object.success!=null){
-						$('.modal-body').text(object.success);
-						$('.modal-body').addClass('label-success');
+					 if(object.code == '101'){
+						$("#mesResult").html(object.mes);
+						$("#notifyResult").show();
 						
 						$('#pname').text(object.pname);
 						$('#cgPrdName').text(object.cgPrdName);
 						$('#prPrice').text(object.prprice + " Ngày áp dụng: " + object.prDatestart);
 						$('#pdescription').text(object.pdescription);
-
-						$('#modalResult').modal('show');
-						$('#modalResult').fadeOut("slow");
+					 }else 
+						 if(object.code=='102'){
+							$("#mesResult").html(object.mes);
+							$("#notifyResult").show(); 
 					 }
-					 if(object.warning!=null){
-						$('#modalResult').modal('show');
-						$('#modalResult').fadeOut("slow");
-						$('.modal-body').text(object.warning);
-						$('.modal-body').addClass('label-warning');
-					 }
+						 else if(object.code=='103'){
+							$("#mesResult").html(object.mes);
+							$("#notifyResult").show();
+						 }
 				});
 			}
 			
 			$("#btnStep3").click(function(){
-// alert($('#PId').val());
-// alert($('#cgPrdId').val());
 				console.log($('form').serialize());
 				
 				_saveProduct($('form').serialize());

@@ -9,6 +9,12 @@
 	<div class="row user-profile">
 		<div class="col-lg-8 side-left stretch-card">
 			<div class="card">
+				<div id="notifyResult" class="faq-section" style="padding: 5px;">
+					<div class="container-fluid bg-success py-3" style="border-radius:5px 5px; ">
+						<p id="mesResult" class="mb-0 text-white" style="font-size: 1rem; font-weight: 700; text-align: center; "></p>
+					</div>
+
+				</div>
 				<div class="card-body">
 					<div
 						class="wrapper d-block d-sm-flex align-items-center justify-content-between">
@@ -64,8 +70,8 @@
 										</div>
 									</div>
 									<div class="form-group mt-5">
-										<button id="btnClean1" type="button" class="btn btn-outline-danger">Làm
-											mới</button>
+										<button id="btnClean1" type="button"
+											class="btn btn-outline-danger">Làm mới</button>
 										<button id="btnStep1" type="button"
 											class="btn mr-2 btn-disable">Bước tiếp</button>
 									</div>
@@ -93,8 +99,8 @@
 										</select>
 									</div>
 									<div class="form-group mt-5">
-										<button id="btnClean2" type="button" class="btn btn-outline-danger">Làm
-											mới</button>
+										<button id="btnClean2" type="button"
+											class="btn btn-outline-danger">Làm mới</button>
 										<button id="btnStep2" type="button"
 											class="btn btn-disable mr-2">Bước tiếp</button>
 									</div>
@@ -133,7 +139,8 @@
 							</div>
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<figure class="effect-text-in">
-									<img src="../resouces/images/samples/300x300/13.jpg" alt="image">
+									<img src="../resouces/images/samples/300x300/13.jpg"
+										alt="image">
 									<figcaption>
 										<h4 id="pname"></h4>
 										<p id="cgPrdName"></p>
@@ -141,22 +148,6 @@
 										<p id="pdescription"></p>
 									</figcaption>
 								</figure>
-							</div>
-							<div id="modalResult" class="modal fade modalResult" tabindex="-1" role="document"
-								aria-labelledby="modalResult" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-										<h5 class="modal-title">Thông báo</h5>
-											<button type="button" class="close" data-dismiss="modal"
-												aria-label="Close">
-												<span aria-hidden="true">×</span>
-											</button>
-										</div>
-										<div class="modal-body"></div>
-										<div class="modal-footer"></div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
