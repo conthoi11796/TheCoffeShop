@@ -9,11 +9,10 @@
 	<div class="row user-profile">
 		<div class="col-lg-8 side-left stretch-card">
 			<div class="card">
-				<div id="notifyResult" class="faq-section" style="padding: 5px;">
-					<div class="container-fluid bg-success py-3" style="border-radius:5px 5px; ">
-						<p id="mesResult" class="mb-0 text-white" style="font-size: 1rem; font-weight: 700; text-align: center; "></p>
+				<div class="faq-section notify">
+					<div id="notifyResult" class="container-fluid py-3">
+						<p class="mb-0 text-white"></p>
 					</div>
-
 				</div>
 				<div class="card-body">
 					<div
@@ -113,10 +112,10 @@
 									<p class="d-inline ml-3 text-muted">Hình ảnh phải nhỏ hơn
 										1MB .</p>
 								</div>
-								<form id="formImagesOfProduct" name="formImagesOfProduct"
-									method="post" action="#">
-									<input type="file" class="dropify" data-max-file-size="1mb"
-										data-default-file="../../images/faces/face6.jpg">
+								<form id="formImagesOfProduct" name="formImagesOfProduct" enctype="multipart/form-data"
+									method="post" >
+									<input name="file" id="file" type="file" class="dropify" data-max-file-size="5mb"
+										data-default-file="">
 									<div class="form-group mt-5">
 										<button id="btnStep3" type="button"
 											class="btn btn-success mr-2">Hoàn tất</button>
@@ -137,7 +136,7 @@
 							<div class="wrapper about-user">
 								<h6 class="card-title mt-4 mb-3">Sản phẩm vừa thêm</h6>
 							</div>
-							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+							<div id="newProduct" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<figure class="effect-text-in">
 									<img src="../resouces/images/samples/300x300/13.jpg"
 										alt="image">

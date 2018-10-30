@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +30,7 @@ import com.thecoffeshop.Service.Common;
 import com.thecoffeshop.Service.ConvertJSON;
 import com.thecoffeshop.Service.PriceService;
 import com.thecoffeshop.Service.ProductService;
+import com.thecoffeshop.Service.UploadFile;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -64,74 +66,84 @@ public class AddProductController extends Common {
 	 * @throws JsonProcessingException
 	 */
 	@PostMapping(value = { "/add-product" })
-	public @ResponseBody String index(@RequestParam String FormData, HttpSession httpSession, ModelMap modelMap)
-			throws ParseException, JsonProcessingException {
-		System.out.println("-------Form Data: " + FormData);
-		/* Convert FormData to JsonObject */
-		ConvertJSON req = new ConvertJSON();
-		req.SetJS(FormData);
+	public @ResponseBody String index(/*@RequestParam String FormData,*/ @RequestParam("file") MultipartFile file,
+			HttpSession httpSession, ModelMap modelMap) throws ParseException, JsonProcessingException {
+//		System.out.println("-------Form Data: " + FormData);
+//		/* Convert FormData to JsonObject */
+//		ConvertJSON req = new ConvertJSON();
+//		req.SetJS(FormData);
 		JsonObject res = new JsonObject();
-
-		/* check logined */
-		if (this.checkLogIn(httpSession))
-			return this.HOME_REDIRECT;
-
-		Product product = new Product();
-		product.setPId(req.getJS("PId"));
-		product.setPName(req.getJS("PName"));
-		product.setPDescription(req.getJS("PDescription"));
-		product.setCreateBy(httpSession.getAttribute("emId").toString());
-		product.setCreateAt(new Date());
-		product.setIsDelete(productService.IS_NOT_DELETE);
-		product.setCategoryproduct(new Categoryproduct(req.getJS("cgPrdId")));
-
-		if (productService.addProduct(product)) {
-			Price price = new Price();
-			price.setProduct(product);
-			Date PrDatestart = null;
-			try {
-				PrDatestart = new SimpleDateFormat("yyyy-MM-dd").parse(req.getJS("prDatestart"));
-			} catch (Exception e) {
-			}
-			price.setPrPrice(Integer.valueOf(req.getJS("prPrice")));
-			price.setPrDatestart(PrDatestart);
-			price.setCreateBy(httpSession.getAttribute("emId").toString());
-			price.setCreateAt(new Date());
-			price.setIsDelete(priceService.IS_NOT_DELETE);
-
-			if (priceService.addPrice(price)) {
-				Product productNew = productService.getInfoById(product.getPId());
-
-				String categoryproductcg_PrdName = productNew.getCategoryproduct().getCgPrdName();
-				String pricespr_Price = priceService.getInfoByProduct(productNew.getPId()).getPrPrice().toString();
-				String pricespr_Datestart = priceService.getInfoByProduct(productNew.getPId()).getPrDatestart()
-						.toString();
-				productNew.setCategoryproduct(null);
-				productNew.setBilldetails(null);
-				productNew.setExportbills(null);
-				productNew.setImages(null);
-				productNew.setPrices(null);
-
-				ObjectMapper mapper = new ObjectMapper();
-				String jsonString = mapper.writeValueAsString(productNew);
-				System.out.println("-------JSon object result: " + jsonString);
-//				{"categoryproduct":null,"createBy":null}
-				res = new ConvertJSON().SetJS(jsonString);
-				res.addProperty("cgPrdName", categoryproductcg_PrdName);
-				res.addProperty("prPrice", pricespr_Price);
-				res.addProperty("prDatestart", pricespr_Datestart);
-				res.addProperty("mes", "Thêm sản phẩm thành công!");
-				res.addProperty("code", "101");
-
-			} else {
-				res.addProperty("mes", "Lỗi thêm giá sản phẩm!");
-				res.addProperty("code", "102");
-			}
-		} else {
-			res.addProperty("mes", "Lỗi không thể thêm sản phẩm!");
-			res.addProperty("code", "103");
-		}
-
+//
+//		/* check logined */
+//		if (this.checkLogIn(httpSession))
+//			return this.HOME_REDIRECT;
+//
+//		Product product = new Product();
+//		product.setPId(req.getJS("PId"));
+//		product.setPName(req.getJS("PName"));
+//		product.setPDescription(req.getJS("PDescription"));
+//		product.setCreateBy(httpSession.getAttribute("emId").toString());
+//		product.setCreateAt(new Date());
+//		product.setIsDelete(productService.IS_NOT_DELETE);
+//		product.setCategoryproduct(new Categoryproduct(req.getJS("cgPrdId")));
+//
+//		/* add product */
+//		if (productService.addProduct(product)) {
+//			Price price = new Price();
+//			price.setProduct(product);
+//			Date PrDatestart = null;
+//			try {
+//				PrDatestart = new SimpleDateFormat("yyyy-MM-dd").parse(req.getJS("prDatestart"));
+//			} catch (Exception e) {
+//			}
+//			price.setPrPrice(Integer.valueOf(req.getJS("prPrice")));
+//			price.setPrDatestart(PrDatestart);
+//			price.setCreateBy(httpSession.getAttribute("emId").toString());
+//			price.setCreateAt(new Date());
+//			price.setIsDelete(priceService.IS_NOT_DELETE);
+//
+//			/* add price */
+//			if (priceService.addPrice(price)) {
+//				Product productNew = productService.getInfoById(product.getPId());
+//
+//				String categoryproductcg_PrdName = productNew.getCategoryproduct().getCgPrdName();
+//				String pricespr_Price = priceService.getInfoByProduct(productNew.getPId()).getPrPrice().toString();
+//				String pricespr_Datestart = priceService.getInfoByProduct(productNew.getPId()).getPrDatestart()
+//						.toString();
+//				productNew.setCategoryproduct(null);
+//				productNew.setBilldetails(null);
+//				productNew.setExportbills(null);
+//				productNew.setImages(null);
+//				productNew.setPrices(null);
+//
+//				ObjectMapper mapper = new ObjectMapper();
+//				String jsonString = mapper.writeValueAsString(productNew);
+//				System.out.println("-------JSon object result: " + jsonString);
+////				{"categoryproduct":null,"createBy":null}
+//				res = new ConvertJSON().SetJS(jsonString);
+//				res.addProperty("cgPrdName", categoryproductcg_PrdName);
+//				res.addProperty("prPrice", pricespr_Price);
+//				res.addProperty("prDatestart", pricespr_Datestart);
+//
+//				/* add image */
+				UploadFile uploadFile = new UploadFile();
+				if (uploadFile.store(file)) {
+					res.addProperty("mes", "Thêm sản phẩm thành công!");
+					res.addProperty("code", "101");
+				} else {
+					res.addProperty("mes", "Lỗi thêm hình, click để chỉnh sửa!");
+					res.addProperty("code", "104");
+				}
+//
+//			} else {
+//				res.addProperty("mes", "Lỗi thêm giá sản phẩm!");
+//				res.addProperty("code", "102");
+//			}
+//		} else {
+//			res.addProperty("mes", "Lỗi không thể thêm sản phẩm!");
+//			res.addProperty("code", "103");
+//		}
+//
 		return res.toString();
 
 	}
@@ -147,21 +159,27 @@ public class AddProductController extends Common {
 			return null;
 		}
 
-		/*replace space " " to ""*/
+		/* replace space " " to "" */
 		PName = PName.trim();
 		while (PName.indexOf(' ') != -1) {
 			PName = PName.substring(0, PName.indexOf(' ')) + PName.substring(PName.indexOf(' '), PName.length() - 1);
 		}
 
-		/*stringleght default = 4*/
+		/* stringleght default = 4 */
 		String PId = PName.substring(0, PName.length() >= 4 ? 4 : PName.length());
-		/*stringleght default 3*/
+		/* stringleght default 3 */
 		int number;
-		/*if PName.lenght() >= 4 -> stringleght default = 3. Because total must PId.lenght =7*/
+		/*
+		 * if PName.lenght() >= 4 -> stringleght default = 3. Because total must
+		 * PId.lenght =7
+		 */
 		if (PId.length() >= 4) {
 			number = 1000;
 		}
-		/*if PName < 4 -> stringleght default = 7 - PName.lenght(). Because total must PId.lenght =7*/
+		/*
+		 * if PName < 4 -> stringleght default = 7 - PName.lenght(). Because total must
+		 * PId.lenght =7
+		 */
 		else {
 			int k = 7 - PName.length();
 			String strTemb = "1";

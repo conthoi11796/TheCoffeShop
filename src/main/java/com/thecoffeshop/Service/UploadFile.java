@@ -13,10 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadFile {
 
 	private final Path rootLocation = Paths.get("upload-dir");
-	
 
-
-	public void store(MultipartFile file) {
+	public Boolean store(MultipartFile file) {
 		String filename = StringUtils.cleanPath(file.getOriginalFilename());
 		try {
 			if (file.isEmpty()) {
@@ -29,6 +27,7 @@ public class UploadFile {
 			}
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, this.rootLocation.resolve(filename), StandardCopyOption.REPLACE_EXISTING);
+				return true;
 			}
 		} catch (IOException e) {
 			throw new FileUploadStorageException("Failed to store file " + filename, e);

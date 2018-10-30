@@ -5,7 +5,7 @@
 $(document).ready(
 		function() { 
 			
-			$("#notifyResult").hide();
+			$("#notifyResult:parent").hide();
 
 /*---------------------------------------------------------------*/
 			/** Create PId */
@@ -104,14 +104,17 @@ $(document).ready(
 /*---------------------------------------------------------------*/
 			/** Submit Form */
 			function _saveProduct(FormData) {
-				console.log(FormData);
+				alert($('#formImagesOfProduct')[0]);
+				var data = new FormData($('input[name^="file"]'));    
+				alert( $("#formImagesOfProduct input").val());
 				$.post("/admin/add-product", {
-					FormData
+					file : $("#formImagesOfProduct input").val()
 				}, function(data, status) {
 					 var object = JSON.parse(data);
 					 if(object.code == '101'){
-						$("#mesResult").html(object.mes);
-						$("#notifyResult").show();
+						$("#notifyResult > p ").html(object.mes);
+						$("#notifyResult").addClass("bg-success");
+						$("#notifyResult:parent").show();
 						
 						$('#pname').text(object.pname);
 						$('#cgPrdName').text(object.cgPrdName);
@@ -119,13 +122,20 @@ $(document).ready(
 						$('#pdescription').text(object.pdescription);
 					 }else 
 						 if(object.code=='102'){
-							$("#mesResult").html(object.mes);
-							$("#notifyResult").show(); 
+							$("#notifyResult > p").html(object.mes);
+							$("#mesResult").addClass("bg-danger");
+							$("#notifyResult:parent").show(); 
 					 }
 						 else if(object.code=='103'){
 							$("#mesResult").html(object.mes);
-							$("#notifyResult").show();
+							$("#notifyResult").addClass("bg-danger");
+							$("#notifyResult:parent").show();
 						 }
+						 	else if(object.code=='104'){
+								$("#mesResult").html(object.mes);
+								$("#notifyResult").addClass("bg-warning");
+								$("#notifyResult:parent").show();
+							 }
 				});
 			}
 			
@@ -140,5 +150,17 @@ $(document).ready(
 				_effect( "#image", "#Product", "#image-tab", "#Product-tab");
 			});
 			/** Submit Form [END] */
+/*---------------------------------------------------------------*/
+
+			/** Submit Upload */
+//			$("#file").change(function(){
+//				console.log($("formImagesOfProduct").serialize());
+//				$.post("/admin/add-product", {
+//					file : $("formImagesOfProduct").serialize()
+//				}, function(data, status) {
+//					
+//				});
+//			});
+			/** Submit Upload [END] */
 /*---------------------------------------------------------------*/
 		});
