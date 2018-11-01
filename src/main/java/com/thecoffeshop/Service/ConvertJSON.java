@@ -87,6 +87,7 @@ public class ConvertJSON {
 	public String getJS(String Key) {
 
 		String value = this.jsonObject.get(Key).toString();
-		return value.substring(1, value.length() - 1);
+		// result-> "value12"
+		return value.substring(1, value.length() - 1); //result -> value12
 	}
 }

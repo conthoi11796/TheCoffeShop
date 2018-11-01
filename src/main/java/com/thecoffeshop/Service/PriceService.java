@@ -15,7 +15,7 @@ public class PriceService implements PriceDAOImp {
 
 	@Autowired
 	private PriceDAO priceDAO;
-	
+
 	@Override
 	public Boolean addPrice(Price price) {
 		return priceDAO.addPrice(price);
@@ -28,8 +28,20 @@ public class PriceService implements PriceDAOImp {
 
 	@Override
 	public Price getInfoByProduct(String PId) {
-		
+
 		return priceDAO.getInfoByProduct(PId);
+	}
+
+	@Override
+	public Price getNewPrice(String PId) {
+
+		return priceDAO.getNewPrice(PId);
+	}
+
+	@Override
+	public int getOldPrice(String PId) {
+
+		return priceDAO.getOldPrice(PId);
 	}
 
 }

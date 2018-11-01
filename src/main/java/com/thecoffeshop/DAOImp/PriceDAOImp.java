@@ -13,4 +13,11 @@ public interface PriceDAOImp extends CommonDAOImp {
 	public Price getInfoById(String prId);
 	
 	public Price getInfoByProduct(String PId);
+	
+	/*get price will apply*/
+	public Price getNewPrice(String PId);
+	
+	/*get price applied*/
+	public int getOldPrice(String PId);
+	
 }

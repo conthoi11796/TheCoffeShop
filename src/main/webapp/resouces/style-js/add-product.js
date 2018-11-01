@@ -104,11 +104,8 @@ $(document).ready(
 /*---------------------------------------------------------------*/
 			/** Submit Form */
 			function _saveProduct(FormData) {
-				alert($('#formImagesOfProduct')[0]);
-				var data = new FormData($('input[name^="file"]'));    
-				alert( $("#formImagesOfProduct input").val());
 				$.post("/admin/add-product", {
-					file : $("#formImagesOfProduct input").val()
+					FormData
 				}, function(data, status) {
 					 var object = JSON.parse(data);
 					 if(object.code == '101'){
@@ -140,7 +137,6 @@ $(document).ready(
 			}
 			
 			$("#btnStep3").click(function(){
-				console.log($('form').serialize());
 				
 				_saveProduct($('form').serialize());
 				$("#btnStep3").removeClass("btn-success");
