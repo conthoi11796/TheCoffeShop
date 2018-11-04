@@ -162,7 +162,7 @@ public class Schedule implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "schedule")
 	public Set<Register> getRegisters() {
 		return this.registers;
 	}

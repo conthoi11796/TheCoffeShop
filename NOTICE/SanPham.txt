@@ -1,0 +1,8 @@
+Sản phẩm: 	
+	add | 	Nếu sản phẩm mới thì thêm 1 thuộc tính vào bảng sản phẩm, hiệu lực giảm giá- đơn vị ngày,
+			 và cho nhập % giảm giá -> code sẽ thêm 1 giá mới giảm theo % và 1 giá cũ không giảm,
+			 giá mới sẽ tồn tại 7 ngày sau 7 ngày trở về giá cũ.
+	show|	Nếu sp mới thêm <7 ngày  -> Show chữ NEW -> Show ngày áp dụng giá "Ra mắt 1/1/1000"
+			Nếu sp có giá mới thấp hơn giá cũ -> Show tỷ lệ, nếu giá chưa áp dụng  -> show ngày "Từ ngày 1/1/1000"
+Đặt sản phẩm:
+		|	Nếu sản phẩm chưa bán vẫn cho đặt hàng nhưng ngày giao là ngày ra mắt.

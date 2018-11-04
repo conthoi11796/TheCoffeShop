@@ -138,7 +138,7 @@ public class Unit implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "unit")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "unit")
 	public Set<Material> getMaterials() {
 		return this.materials;
 	}

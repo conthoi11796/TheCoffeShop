@@ -77,7 +77,7 @@ public class Booktable implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CU_ID", nullable = false, insertable = false, updatable = false)
 	public Customer getCustomer() {
 		return this.customer;
@@ -87,7 +87,7 @@ public class Booktable implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DN_ID", nullable = false, insertable = false, updatable = false)
 	public Dinnertable getDinnertable() {
 		return this.dinnertable;
@@ -97,7 +97,7 @@ public class Booktable implements java.io.Serializable {
 		this.dinnertable = dinnertable;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "EM_ID", nullable = false, insertable = false, updatable = false)
 	public Employee getEmployee() {
 		return this.employee;

@@ -69,7 +69,7 @@ public class Exportbill implements java.io.Serializable {
 		this.ebId = ebId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "EM_ID")
 	public Employee getEmployee() {
 		return this.employee;
@@ -79,7 +79,7 @@ public class Exportbill implements java.io.Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MD_ID")
 	public Materialdetail getMaterialdetail() {
 		return this.materialdetail;
@@ -89,7 +89,7 @@ public class Exportbill implements java.io.Serializable {
 		this.materialdetail = materialdetail;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "P_ID")
 	public Product getProduct() {
 		return this.product;

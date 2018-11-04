@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.thecoffeshop.DAO.CategoryProductDAO;
 import com.thecoffeshop.DAO.ProductDAO;
-import com.thecoffeshop.DAOImp.*;
+import com.thecoffeshop.DAOImp.ProductDAOImp;
 import com.thecoffeshop.Models.Product;
 
 @Service
@@ -16,6 +17,8 @@ public class ProductService implements ProductDAOImp {
 
 	@Autowired
 	private ProductDAO productDAO;
+	@Autowired
+	private CategoryProductDAO categoryProductDAO;
 
 	@Override
 	public Boolean addProduct(Product product) {
@@ -31,6 +34,10 @@ public class ProductService implements ProductDAOImp {
 
 	@Override
 	public List<Product> getListProductLimit(int startPosition, String cgPrdId, String strSearch) {
+
+		if (categoryProductDAO.getInfoById(cgPrdId) == null) {
+			cgPrdId = null;
+		}
 
 		return productDAO.getListProductLimit(startPosition, cgPrdId, strSearch);
 	}

@@ -67,7 +67,7 @@ public class Importbill implements java.io.Serializable {
 		this.ibId = ibId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SU_ID")
 	public Supplier getSupplier() {
 		return this.supplier;
@@ -153,7 +153,7 @@ public class Importbill implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "importbill")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "importbill")
 	public Set<Materialdetail> getMaterialdetails() {
 		return this.materialdetails;
 	}

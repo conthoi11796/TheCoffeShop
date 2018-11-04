@@ -72,7 +72,7 @@ public class Material implements java.io.Serializable {
 		this.maId = maId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "UN_ID")
 	public Unit getUnit() {
 		return this.unit;
@@ -157,7 +157,7 @@ public class Material implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "material")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "material")
 	public Set<Materialdetail> getMaterialdetails() {
 		return this.materialdetails;
 	}
@@ -166,7 +166,7 @@ public class Material implements java.io.Serializable {
 		this.materialdetails = materialdetails;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofmaterial", catalog = "luanvan", joinColumns = {
 			@JoinColumn(name = "MA_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) })

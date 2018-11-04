@@ -67,7 +67,7 @@ public class Price implements java.io.Serializable {
 		this.prId = prId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "P_ID")
 	public Product getProduct() {
 		return this.product;

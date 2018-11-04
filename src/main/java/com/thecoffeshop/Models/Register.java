@@ -72,7 +72,7 @@ public class Register implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "EM_ID", nullable = false, insertable = false, updatable = false)
 	public Employee getEmployee() {
 		return this.employee;
@@ -82,7 +82,7 @@ public class Register implements java.io.Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SC_ID", nullable = false, insertable = false, updatable = false)
 	public Schedule getSchedule() {
 		return this.schedule;

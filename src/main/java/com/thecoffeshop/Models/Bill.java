@@ -82,7 +82,7 @@ public class Bill implements java.io.Serializable {
 		this.biId = biId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BT_ID")
 	public Billstatus getBillstatus() {
 		return this.billstatus;
@@ -92,7 +92,7 @@ public class Bill implements java.io.Serializable {
 		this.billstatus = billstatus;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "CU_ID")
 	public Customer getCustomer() {
 		return this.customer;
@@ -102,7 +102,7 @@ public class Bill implements java.io.Serializable {
 		this.customer = customer;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DN_ID")
 	public Dinnertable getDinnertable() {
 		return this.dinnertable;
@@ -112,7 +112,7 @@ public class Bill implements java.io.Serializable {
 		this.dinnertable = dinnertable;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "EM_ID")
 	public Employee getEmployee() {
 		return this.employee;
@@ -122,7 +122,7 @@ public class Bill implements java.io.Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PS_ID")
 	public Productstatus getProductstatus() {
 		return this.productstatus;
@@ -132,7 +132,7 @@ public class Bill implements java.io.Serializable {
 		this.productstatus = productstatus;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "VO_ID")
 	public Voucher getVoucher() {
 		return this.voucher;
@@ -228,7 +228,7 @@ public class Bill implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "bill")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "bill")
 	public Set<Billdetail> getBilldetails() {
 		return this.billdetails;
 	}

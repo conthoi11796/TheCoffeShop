@@ -174,7 +174,7 @@ public class Voucher implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "voucher")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "voucher")
 	public Set<Bill> getBills() {
 		return this.bills;
 	}

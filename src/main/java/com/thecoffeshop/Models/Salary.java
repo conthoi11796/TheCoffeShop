@@ -150,7 +150,7 @@ public class Salary implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "salary")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "salary")
 	public Set<Employee> getEmployees() {
 		return this.employees;
 	}

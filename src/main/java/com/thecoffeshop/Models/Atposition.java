@@ -71,7 +71,7 @@ public class Atposition implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "EM_ID", nullable = false, insertable = false, updatable = false)
 	public Employee getEmployee() {
 		return this.employee;
@@ -81,7 +81,7 @@ public class Atposition implements java.io.Serializable {
 		this.employee = employee;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PO_ID", nullable = false, insertable = false, updatable = false)
 	public Position getPosition() {
 		return this.position;

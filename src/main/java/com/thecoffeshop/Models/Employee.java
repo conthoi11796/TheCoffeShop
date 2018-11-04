@@ -90,7 +90,7 @@ public class Employee implements java.io.Serializable {
 		this.emId = emId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "SA_ID")
 	public Salary getSalary() {
 		return this.salary;
@@ -220,7 +220,7 @@ public class Employee implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
 	public Set<Bill> getBills() {
 		return this.bills;
 	}
@@ -229,7 +229,7 @@ public class Employee implements java.io.Serializable {
 		this.bills = bills;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
 	public Set<Atposition> getAtpositions() {
 		return this.atpositions;
 	}
@@ -238,7 +238,7 @@ public class Employee implements java.io.Serializable {
 		this.atpositions = atpositions;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
 	public Set<Exportbill> getExportbills() {
 		return this.exportbills;
 	}
@@ -247,7 +247,7 @@ public class Employee implements java.io.Serializable {
 		this.exportbills = exportbills;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
 	public Set<Register> getRegisters() {
 		return this.registers;
 	}
@@ -256,7 +256,7 @@ public class Employee implements java.io.Serializable {
 		this.registers = registers;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "employees")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employees")
 	public Set<Image> getImages() {
 		return this.images;
 	}
@@ -265,7 +265,7 @@ public class Employee implements java.io.Serializable {
 		this.images = images;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
 	public Set<Booktable> getBooktables() {
 		return this.booktables;
 	}

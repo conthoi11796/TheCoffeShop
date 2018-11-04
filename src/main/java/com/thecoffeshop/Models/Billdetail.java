@@ -70,7 +70,7 @@ public class Billdetail implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BI_ID", nullable = false, insertable = false, updatable = false)
 	public Bill getBill() {
 		return this.bill;
@@ -80,7 +80,7 @@ public class Billdetail implements java.io.Serializable {
 		this.bill = bill;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "P_ID", nullable = false, insertable = false, updatable = false)
 	public Product getProduct() {
 		return this.product;

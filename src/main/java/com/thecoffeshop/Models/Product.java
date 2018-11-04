@@ -28,7 +28,7 @@ public class Product implements java.io.Serializable {
 	private Categoryproduct categoryproduct;
 	private String PName;
 	private String PDescription;
-	private String PNumberInventory;
+	private Integer PNumberInventory;
 	private String createBy;
 	private Date createAt;
 	private String updateBy;
@@ -49,7 +49,7 @@ public class Product implements java.io.Serializable {
 	}
 
 	public Product(String PId, Categoryproduct categoryproduct, String PName, String PDescription,
-			String PNumberInventory, String createBy, Date createAt, String updateBy, Date updateAt, Boolean isDelete,
+			Integer PNumberInventory, String createBy, Date createAt, String updateBy, Date updateAt, Boolean isDelete,
 			String deleteBy, Date deleteAt, Set<Billdetail> billdetails, Set<Image> images, Set<Exportbill> exportbills,
 			Set<Price> prices) {
 		this.PId = PId;
@@ -109,12 +109,12 @@ public class Product implements java.io.Serializable {
 		this.PDescription = PDescription;
 	}
 
-	@Column(name = "P_NUMBER_INVENTORY", length = 10)
-	public String getPNumberInventory() {
+	@Column(name = "P_NUMBER_INVENTORY")
+	public Integer getPNumberInventory() {
 		return this.PNumberInventory;
 	}
 
-	public void setPNumberInventory(String PNumberInventory) {
+	public void setPNumberInventory(Integer PNumberInventory) {
 		this.PNumberInventory = PNumberInventory;
 	}
 
@@ -184,7 +184,7 @@ public class Product implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	public Set<Billdetail> getBilldetails() {
 		return this.billdetails;
 	}
@@ -193,7 +193,7 @@ public class Product implements java.io.Serializable {
 		this.billdetails = billdetails;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofproduct", catalog = "luanvan", joinColumns = {
 			@JoinColumn(name = "P_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) })
@@ -205,7 +205,7 @@ public class Product implements java.io.Serializable {
 		this.images = images;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	public Set<Exportbill> getExportbills() {
 		return this.exportbills;
 	}

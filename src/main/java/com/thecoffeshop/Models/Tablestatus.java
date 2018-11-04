@@ -138,7 +138,7 @@ public class Tablestatus implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tablestatus")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "tablestatus")
 	public Set<Tablestatusdetail> getTablestatusdetails() {
 		return this.tablestatusdetails;
 	}

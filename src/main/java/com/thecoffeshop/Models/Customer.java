@@ -163,7 +163,7 @@ public class Customer implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
 	public Set<Bill> getBills() {
 		return this.bills;
 	}
@@ -172,7 +172,7 @@ public class Customer implements java.io.Serializable {
 		this.bills = bills;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
 	public Set<Booktable> getBooktables() {
 		return this.booktables;
 	}

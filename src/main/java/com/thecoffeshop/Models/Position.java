@@ -138,7 +138,7 @@ public class Position implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "position")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "position")
 	public Set<Atposition> getAtpositions() {
 		return this.atpositions;
 	}

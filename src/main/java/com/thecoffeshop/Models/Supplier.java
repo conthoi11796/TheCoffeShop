@@ -161,7 +161,7 @@ public class Supplier implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "supplier")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "supplier")
 	public Set<Importbill> getImportbills() {
 		return this.importbills;
 	}

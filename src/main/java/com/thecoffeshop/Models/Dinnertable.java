@@ -157,7 +157,7 @@ public class Dinnertable implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dinnertable")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "dinnertable")
 	public Set<Booktable> getBooktables() {
 		return this.booktables;
 	}
@@ -166,7 +166,7 @@ public class Dinnertable implements java.io.Serializable {
 		this.booktables = booktables;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dinnertable")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "dinnertable")
 	public Set<Bill> getBills() {
 		return this.bills;
 	}
@@ -175,7 +175,7 @@ public class Dinnertable implements java.io.Serializable {
 		this.bills = bills;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "dinnertable")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "dinnertable")
 	public Set<Tablestatusdetail> getTablestatusdetails() {
 		return this.tablestatusdetails;
 	}
@@ -184,7 +184,7 @@ public class Dinnertable implements java.io.Serializable {
 		this.tablestatusdetails = tablestatusdetails;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "dinnertables")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "dinnertables")
 	public Set<Image> getImages() {
 		return this.images;
 	}

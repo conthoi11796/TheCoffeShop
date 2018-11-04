@@ -26,7 +26,7 @@ import com.thecoffeshop.Models.Price;
 import com.thecoffeshop.Models.Product;
 import com.thecoffeshop.Service.CategoryProductService;
 import com.thecoffeshop.Service.Common;
-import com.thecoffeshop.Service.ConvertJSON;
+import com.thecoffeshop.Service.Convert;
 import com.thecoffeshop.Service.PriceService;
 import com.thecoffeshop.Service.ProductService;
 
@@ -68,7 +68,7 @@ public class AddProductController extends Common {
 			HttpSession httpSession, ModelMap modelMap) throws ParseException, JsonProcessingException {
 //		System.out.println("-------Form Data: " + FormData);
 		/* Convert FormData to JsonObject */
-		ConvertJSON req = new ConvertJSON();
+		Convert req = new Convert();
 		req.SetJS(FormData);
 		JsonObject res = new JsonObject();
 
@@ -119,7 +119,7 @@ public class AddProductController extends Common {
 				String jsonString = mapper.writeValueAsString(productNew);
 				System.out.println("-------JSon object result: " + jsonString);
 //				{"categoryproduct":null,"createBy":null}
-				res = new ConvertJSON().SetJS(jsonString);
+				res = new Convert().SetJS(jsonString);
 				res.addProperty("cgPrdName", categoryproductcg_PrdName);
 				res.addProperty("prPrice", pricespr_Price);
 				res.addProperty("prDatestart", pricespr_Datestart);

@@ -63,7 +63,7 @@ public class Image implements java.io.Serializable {
 		this.imgName = imgName;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofemployee", catalog = "luanvan", joinColumns = {
 			@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "EM_ID", nullable = false, updatable = false) })
@@ -75,7 +75,7 @@ public class Image implements java.io.Serializable {
 		this.employees = employees;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofdinnertable", catalog = "luanvan", joinColumns = {
 			@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "DN_ID", nullable = false, updatable = false) })
@@ -87,7 +87,7 @@ public class Image implements java.io.Serializable {
 		this.dinnertables = dinnertables;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "images")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "images")
 	public Set<Product> getProducts() {
 		return this.products;
 	}
@@ -96,7 +96,7 @@ public class Image implements java.io.Serializable {
 		this.products = products;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "images")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "images")
 	public Set<Material> getMaterials() {
 		return this.materials;
 	}

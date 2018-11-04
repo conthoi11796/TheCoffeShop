@@ -67,7 +67,7 @@ public class Tablestatusdetail implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DN_ID", nullable = false, insertable = false, updatable = false)
 	public Dinnertable getDinnertable() {
 		return this.dinnertable;
@@ -77,7 +77,7 @@ public class Tablestatusdetail implements java.io.Serializable {
 		this.dinnertable = dinnertable;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "TS_ID", nullable = false, insertable = false, updatable = false)
 	public Tablestatus getTablestatus() {
 		return this.tablestatus;

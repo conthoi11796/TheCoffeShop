@@ -138,7 +138,7 @@ public class Billstatus implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "billstatus")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "billstatus")
 	public Set<Bill> getBills() {
 		return this.bills;
 	}

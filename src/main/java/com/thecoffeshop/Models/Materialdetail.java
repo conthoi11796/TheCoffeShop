@@ -74,7 +74,7 @@ public class Materialdetail implements java.io.Serializable {
 		this.mdId = mdId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "IB_ID")
 	public Importbill getImportbill() {
 		return this.importbill;
@@ -84,7 +84,7 @@ public class Materialdetail implements java.io.Serializable {
 		this.importbill = importbill;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "MA_ID")
 	public Material getMaterial() {
 		return this.material;
@@ -189,7 +189,7 @@ public class Materialdetail implements java.io.Serializable {
 		this.deleteAt = deleteAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "materialdetail")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "materialdetail")
 	public Set<Exportbill> getExportbills() {
 		return this.exportbills;
 	}

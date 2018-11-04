@@ -56,15 +56,15 @@ public class ProductDAO implements ProductDAOImp {
 
 			String hql = "FROM Product p WHERE p.isDelete =: is_delete";
 			if (cgPrdId != null) {
-				hql = hql + "p.categoryproduct =:categoryproduct ";
+				hql = hql + " AND p.categoryproduct =:categoryproduct ";
 			}
 			Query query = session.createQuery(hql, Product.class);
 			query.setParameter("is_delete", this.IS_NOT_DELETE);
 			if (cgPrdId != null) {
 				query.setParameter("categoryproduct", new Categoryproduct(cgPrdId));
 			}
-			query.setFirstResult(startPosition);
-			query.setMaxResults(startPosition + NUM_PRODUCT_ONE_PAGE - 1);
+			query.setFirstResult(startPosition * NUM_PRODUCT_ONE_PAGE);
+			query.setMaxResults(NUM_PRODUCT_ONE_PAGE);
 			List<Product> products = query.getResultList();
 			return products;
 		} catch (Exception e) {
