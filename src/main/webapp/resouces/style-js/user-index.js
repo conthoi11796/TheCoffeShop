@@ -91,7 +91,7 @@ function addToCart(PId) {
 		var number = $("#number-product-"+PId).val();
 		number = Number(number) + 1 ;
 		$("#number-product-"+PId).val(number);
-
+		
 		changeTolalPrice(PId);
 	}
 	else{
@@ -119,7 +119,10 @@ function addToCart(PId) {
 				+ 			'<i class="fa fa-close"></i>'
 				+ 		'</button>'
 				+ 	'</div>';
-		$(".cart-list").append(data);
+		$(".cart-list").prepend(data);
+		/* add idProduct to href thanh toan */
+		var listCard = $("#btnPay").attr("href") + PId + "," ;
+		$("#btnPay").attr("href", listCard);
 		
 		sumPriceProduct(0, 1, priceValue);
 		showNumberProductInCart();
@@ -155,7 +158,7 @@ function changeTolalPrice(PId){
 }
 /* Toal price product [END] */
 $(function () {
-
+	
 	$('#btnPay').hide();
 
 	$(".btn-View").click(function() {
@@ -177,8 +180,17 @@ $(function () {
 	$("#selectCategoryProduct").change(function() {
 		window.location.href = "../index/search?page=0&cgPrdId="+ $(this).val() +"&strSearch=null" ;
 	});
-})
-/* End Add to cart */
-/* Pay */
+	
+	$("#btnPay").click(function() {
 
-/* Pay [END]*/
+		var listNumberProduct="";
+		var num = $(".cart-list input[type=number]").length;
+		var input = $(".cart-list input[type=number]");
+		for (var i = 0; i < num; i++) {
+			listNumberProduct += input.eq(i).val()+",";
+		}
+		var link =$(this).attr("href");
+		$(this).attr("href",link+"&listNumberProduct="+listNumberProduct);
+		
+	});
+})

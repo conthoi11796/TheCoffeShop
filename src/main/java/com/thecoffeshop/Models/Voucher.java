@@ -25,6 +25,7 @@ public class Voucher implements java.io.Serializable {
 	private Date voDatestart;
 	private Date voDatefinish;
 	private Integer voSaleoff;
+	private Integer voNumber;
 	private String createBy;
 	private Date createAt;
 	private String updateBy;
@@ -41,7 +42,7 @@ public class Voucher implements java.io.Serializable {
 		this.voId = voId;
 	}
 
-	public Voucher(String voId, String voName, Date voDatestart, Date voDatefinish, Integer voSaleoff, String createBy,
+	public Voucher(String voId, String voName, Date voDatestart, Date voDatefinish, Integer voSaleoff, Integer voNumber, String createBy,
 			Date createAt, String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt,
 			Set<Bill> bills) {
 		this.voId = voId;
@@ -49,6 +50,7 @@ public class Voucher implements java.io.Serializable {
 		this.voDatestart = voDatestart;
 		this.voDatefinish = voDatefinish;
 		this.voSaleoff = voSaleoff;
+		this.voNumber = voNumber;
 		this.createBy = createBy;
 		this.createAt = createAt;
 		this.updateBy = updateBy;
@@ -182,5 +184,16 @@ public class Voucher implements java.io.Serializable {
 	public void setBills(Set<Bill> bills) {
 		this.bills = bills;
 	}
+
+	@Column(name = "VO_NUMBER", nullable = false)
+	public Integer getVoNumber() {
+		return voNumber;
+	}
+
+	public void setVoNumber(Integer voNumber) {
+		this.voNumber = voNumber;
+	}
+	
+	
 
 }

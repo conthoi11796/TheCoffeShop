@@ -27,18 +27,19 @@
 									id="selectCategoryProduct">
 									<option>Phân loại</option>
 									<c:forEach items="${categoryProducts}" var="categoryProduct">
-										<option 
+										<option
 											<c:if test="${cgPrdId!=null && cgPrdId==categoryProduct.getCgPrdId()}">
 													<c:out value="selected" />
 											</c:if>
 											value='<c:out value = "${categoryProduct.getCgPrdId()}" />'>
-											<c:out value="${categoryProduct.getCgPrdName() }"/>
+											<c:out value="${categoryProduct.getCgPrdName() }" />
 										</option>
 									</c:forEach>
 								</select>
 							</div>
 							<div class="header-search">
-								<form id="formSearch" method="GET" action="../index/search" class="nav-search">
+								<form id="formSearch" method="GET" action="../index/search"
+									class="nav-search">
 									<input class="input" placeholder="Từ khóa ..."> <i
 										id="boloc" class="fa fa-sliders" data-toggle="popover"
 										data-placement="bottom" data-title="Bộ lọc"
@@ -60,16 +61,16 @@
 									</a>
 									<div class="dropdown-menu cart-dropdown your-card"
 										aria-labelledby="dropdownMenuButton">
-										<div class="cart-list">
-											
-										</div>
+										<div class="cart-list"></div>
 										<div class="cart-summary">
 											<small>2 sản phẩm được chọn</small>
 											<h5>0</h5>
 										</div>
 										<div class="cart-btns row">
-											<a id="btnClean">Làm mới</a> <a id="btnPay">Thanh toán <i
-												class="fa fa-arrow-circle-right"></i></a>
+											<a id="btnClean">Làm mới</a> <a id="btnPay"
+												href="/order-product?listCart=" listNumberProduct="">Thanh
+												toán <i class="fa fa-arrow-circle-right"></i>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -112,7 +113,8 @@
 												</ol>
 												<div class="carousel-inner ">
 													<div class="carousel-item active">
-														<img class="d-block w-100 col-lg-12 img-<c:out value="${product.getPId()}" />"
+														<img
+															class="d-block w-100 col-lg-12 img-<c:out value="${product.getPId()}" />"
 															src="../resouces/images/my-images/15015802962_d494f36194.jpg"
 															alt="First slide">
 													</div>
@@ -161,10 +163,12 @@
 												<c:out
 													value="${product.getCategoryproduct().getCgPrdName()}" />
 											</p>
-											<h3 class="product-name product-name-<c:out value="${product.getPId()}" />">
+											<h3
+												class="product-name product-name-<c:out value="${product.getPId()}" />">
 												<c:out value="${product.getPName()}" />
 											</h3>
-											<h4 class="product-price product-price-<c:out value="${product.getPId()}" />">
+											<h4
+												class="product-price product-price-<c:out value="${product.getPId()}" />">
 												<c:if test="${priceProducts[i][0] == product.getPId()}">
 													<c:if test="${priceProducts[i][2]!=null}">
 														<!-- new price -->
@@ -232,7 +236,8 @@
 					<div
 						class="align-items-center justify-content-between flex-wrap container"
 						style="text-align: center;">
-						<a href='../index/search?page=
+						<a
+							href='../index/search?page=
 							<c:if test="${startPosition!=null}">
 								<c:out value="${startPosition}" />
 							</c:if>

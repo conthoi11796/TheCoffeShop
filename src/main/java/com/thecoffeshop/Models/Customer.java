@@ -20,14 +20,10 @@ import javax.persistence.TemporalType;
 @Table(name = "customer", catalog = "luanvan")
 public class Customer implements java.io.Serializable {
 
-	private String cuId;
+	private int cuId;
 	private String cuName;
 	private String cuAddress;
-	private Integer cuPhoneNumber;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
+	private String cuPhoneNumber;
 	private Boolean isDelete;
 	private String deleteBy;
 	private Date deleteAt;
@@ -37,21 +33,16 @@ public class Customer implements java.io.Serializable {
 	public Customer() {
 	}
 
-	public Customer(String cuId) {
+	public Customer(int cuId) {
 		this.cuId = cuId;
 	}
 
-	public Customer(String cuId, String cuName, String cuAddress, Integer cuPhoneNumber, String createBy, Date createAt,
-			String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt, Set<Bill> bills,
+	public Customer(int cuId, String cuName, String cuAddress, String cuPhoneNumber, Boolean isDelete, String deleteBy, Date deleteAt, Set<Bill> bills,
 			Set<Booktable> booktables) {
 		this.cuId = cuId;
 		this.cuName = cuName;
 		this.cuAddress = cuAddress;
 		this.cuPhoneNumber = cuPhoneNumber;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
 		this.isDelete = isDelete;
 		this.deleteBy = deleteBy;
 		this.deleteAt = deleteAt;
@@ -62,11 +53,11 @@ public class Customer implements java.io.Serializable {
 	@Id
 
 	@Column(name = "CU_ID", unique = true, nullable = false, length = 7)
-	public String getCuId() {
+	public int getCuId() {
 		return this.cuId;
 	}
 
-	public void setCuId(String cuId) {
+	public void setCuId(int cuId) {
 		this.cuId = cuId;
 	}
 
@@ -88,51 +79,13 @@ public class Customer implements java.io.Serializable {
 		this.cuAddress = cuAddress;
 	}
 
-	@Column(name = "CU_PHONE_NUMBER", precision = 8, scale = 0)
-	public Integer getCuPhoneNumber() {
+	@Column(name = "CU_PHONE_NUMBER", length = 10)
+	public String getCuPhoneNumber() {
 		return this.cuPhoneNumber;
 	}
 
-	public void setCuPhoneNumber(Integer cuPhoneNumber) {
+	public void setCuPhoneNumber(String cuPhoneNumber) {
 		this.cuPhoneNumber = cuPhoneNumber;
-	}
-
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
-	}
-
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
 	}
 
 	@Column(name = "IS_DELETE")

@@ -6,12 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.thecoffeshop.Models.Price;
 import com.thecoffeshop.Models.Product;
+import com.thecoffeshop.DAOImp.*;
 
-public class Common {
+public class Common implements CommonDAOImp {
 
 	public static String HOME_REDIRECT = "redirect:/admin/login";
 

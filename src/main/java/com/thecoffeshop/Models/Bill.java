@@ -32,6 +32,7 @@ public class Bill implements java.io.Serializable {
 	private Voucher voucher;
 	private Date biDatetimeStart;
 	private Date biDateimeFinish;
+	private String biNotice;
 	private String createBy;
 	private Date createAt;
 	private String updateBy;
@@ -226,6 +227,15 @@ public class Bill implements java.io.Serializable {
 
 	public void setDeleteAt(Date deleteAt) {
 		this.deleteAt = deleteAt;
+	}
+
+	@Column(name = "BI_NOTICE", length = 500)
+	public String getBiNotice() {
+		return biNotice;
+	}
+
+	public void setBiNotice(String biNotice) {
+		this.biNotice = biNotice;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "bill")
