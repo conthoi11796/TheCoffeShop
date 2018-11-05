@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name = "supplier", catalog = "luanvan")
 public class Supplier implements java.io.Serializable {
 
-	private String suId;
+	private int suId;
 	private String suName;
 	private String suAddress;
 	private Integer suPhoneNumber;
@@ -36,11 +38,11 @@ public class Supplier implements java.io.Serializable {
 	public Supplier() {
 	}
 
-	public Supplier(String suId) {
+	public Supplier(int suId) {
 		this.suId = suId;
 	}
 
-	public Supplier(String suId, String suName, String suAddress, Integer suPhoneNumber, String createBy, Date createAt,
+	public Supplier(int suId, String suName, String suAddress, Integer suPhoneNumber, String createBy, Date createAt,
 			String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt,
 			Set<Importbill> importbills) {
 		this.suId = suId;
@@ -59,12 +61,13 @@ public class Supplier implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "SU_ID", unique = true, nullable = false, length = 7)
-	public String getSuId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SU_ID", unique = true, nullable = false)
+	public int getSuId() {
 		return this.suId;
 	}
 
-	public void setSuId(String suId) {
+	public void setSuId(int suId) {
 		this.suId = suId;
 	}
 

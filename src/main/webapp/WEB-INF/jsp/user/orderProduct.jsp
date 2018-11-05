@@ -138,6 +138,8 @@
 								<div class="card-body">
 									<h4 class="card-title">Thông tin khách hàng</h4>
 									<form method="post" action="/order-product" class="forms-sample">
+										<!-- <input id="listProduct" name="listProduct" type="hidden" class="form-control form-control-sm">
+										<input id="listProduct" name="cuName" type="hidden" class="form-control form-control-sm"> -->
 										<div class="form-group">
 											<input id="cuName" name="cuName" type="text"
 												class="form-control form-control-sm" placeholder="Họ tên:(*)">

@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -51,8 +53,8 @@ public class Customer implements java.io.Serializable {
 	}
 
 	@Id
-
-	@Column(name = "CU_ID", unique = true, nullable = false, length = 7)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CU_ID", nullable = false)
 	public int getCuId() {
 		return this.cuId;
 	}

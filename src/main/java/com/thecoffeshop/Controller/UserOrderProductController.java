@@ -38,6 +38,8 @@ public class UserOrderProductController extends Common {
 	VoucherService voucherService;
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	BillService billService;
 
 	@GetMapping(value = "/order-product", produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String index(ModelMap modelMap, HttpSession httpSession, @RequestParam String listCart,
@@ -99,17 +101,25 @@ public class UserOrderProductController extends Common {
 		customer.setCuPhoneNumber(cuPhoneNumber);
 		customer.setIsDelete(super.IS_NOT_DELETE);
 
-		System.out.println(customerService.addCustomer(customer)+"--------------------------------------------------");
-		
-		Bill bill = new Bill();
-		Date DatetimeStart = null;
-		try {
-			DatetimeStart = super.sdf.parse(biDatetimeStart);
-		} catch (Exception e) {
+		int cuId = customerService.addCustomer(customer);
+		if (cuId != -1) { /* customer has inserted */
+
+			Bill bill = new Bill();
+			Date DatetimeStart = null;
+			try {
+				DatetimeStart = super.sdf.parse(biDatetimeStart);
+			} catch (Exception e) {
+			}
+			bill.setBiDatetimeStart(DatetimeStart);
+			bill.setBiNotice(biNotice);
+			bill.setVoucher(new Voucher(voId));
+
+			int biId = billService.addBill(bill);
+			if (biId != -1) {
+				
+			}
+
 		}
-		bill.setBiDatetimeStart(DatetimeStart);
-		bill.setBiNotice(biNotice);
-		bill.setVoucher(new Voucher(voId));
 
 		return "/user/orderProduct";
 	}

@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -24,7 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "material", catalog = "luanvan")
 public class Material implements java.io.Serializable {
 
-	private String maId;
+	private int maId;
 	private Unit unit;
 	private String maName;
 	private String createBy;
@@ -40,11 +42,11 @@ public class Material implements java.io.Serializable {
 	public Material() {
 	}
 
-	public Material(String maId) {
+	public Material(int maId) {
 		this.maId = maId;
 	}
 
-	public Material(String maId, Unit unit, String maName, String createBy, Date createAt, String updateBy,
+	public Material(int maId, Unit unit, String maName, String createBy, Date createAt, String updateBy,
 			Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt, Set<Materialdetail> materialdetails,
 			Set<Image> images) {
 		this.maId = maId;
@@ -62,13 +64,13 @@ public class Material implements java.io.Serializable {
 	}
 
 	@Id
-
-	@Column(name = "MA_ID", unique = true, nullable = false, length = 7)
-	public String getMaId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "MA_ID",  nullable = false)
+	public int getMaId() {
 		return this.maId;
 	}
 
-	public void setMaId(String maId) {
+	public void setMaId(int maId) {
 		this.maId = maId;
 	}
 

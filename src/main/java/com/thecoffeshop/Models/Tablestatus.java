@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name = "tablestatus", catalog = "luanvan")
 public class Tablestatus implements java.io.Serializable {
 
-	private String tsId;
+	private int tsId;
 	private String tsName;
 	private String createBy;
 	private Date createAt;
@@ -34,11 +36,11 @@ public class Tablestatus implements java.io.Serializable {
 	public Tablestatus() {
 	}
 
-	public Tablestatus(String tsId) {
+	public Tablestatus(int tsId) {
 		this.tsId = tsId;
 	}
 
-	public Tablestatus(String tsId, String tsName, String createBy, Date createAt, String updateBy, Date updateAt,
+	public Tablestatus(int tsId, String tsName, String createBy, Date createAt, String updateBy, Date updateAt,
 			Boolean isDelete, String deleteBy, Date deleteAt, Set<Tablestatusdetail> tablestatusdetails) {
 		this.tsId = tsId;
 		this.tsName = tsName;
@@ -53,13 +55,13 @@ public class Tablestatus implements java.io.Serializable {
 	}
 
 	@Id
-
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "TS_ID", unique = true, nullable = false)
-	public String getTsId() {
+	public int getTsId() {
 		return this.tsId;
 	}
 
-	public void setTsId(String tsId) {
+	public void setTsId(int tsId) {
 		this.tsId = tsId;
 	}
 

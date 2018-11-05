@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name = "position", catalog = "luanvan")
 public class Position implements java.io.Serializable {
 
-	private String poId;
+	private int poId;
 	private String poName;
 	private String createBy;
 	private Date createAt;
@@ -34,11 +36,11 @@ public class Position implements java.io.Serializable {
 	public Position() {
 	}
 
-	public Position(String poId) {
+	public Position(int poId) {
 		this.poId = poId;
 	}
 
-	public Position(String poId, String poName, String createBy, Date createAt, String updateBy, Date updateAt,
+	public Position(int poId, String poName, String createBy, Date createAt, String updateBy, Date updateAt,
 			Boolean isDelete, String deleteBy, Date deleteAt, Set<Atposition> atpositions) {
 		this.poId = poId;
 		this.poName = poName;
@@ -53,13 +55,13 @@ public class Position implements java.io.Serializable {
 	}
 
 	@Id
-
-	@Column(name = "PO_ID", unique = true, nullable = false)
-	public String getPoId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PO_ID",  nullable = false)
+	public int getPoId() {
 		return this.poId;
 	}
 
-	public void setPoId(String poId) {
+	public void setPoId(int poId) {
 		this.poId = poId;
 	}
 

@@ -1,5 +1,8 @@
 package com.thecoffeshop.DAOImp;
 
-public class BillDAOImp {
+import com.thecoffeshop.Models.*;
 
+public interface BillDAOImp extends CommonDAOImp{
+
+	public int addBill(Bill bill);
 }

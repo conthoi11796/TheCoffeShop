@@ -7,6 +7,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,7 +22,7 @@ import javax.persistence.TemporalType;
 @Table(name = "schedule", catalog = "luanvan")
 public class Schedule implements java.io.Serializable {
 
-	private String scId;
+	private int scId;
 	private Date scTimestart;
 	private Date scTimefinish;
 	private Float scPayrate;
@@ -36,11 +38,11 @@ public class Schedule implements java.io.Serializable {
 	public Schedule() {
 	}
 
-	public Schedule(String scId) {
+	public Schedule(int scId) {
 		this.scId = scId;
 	}
 
-	public Schedule(String scId, Date scTimestart, Date scTimefinish, Float scPayrate, String createBy, Date createAt,
+	public Schedule(int scId, Date scTimestart, Date scTimefinish, Float scPayrate, String createBy, Date createAt,
 			String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt, Set<Register> registers) {
 		this.scId = scId;
 		this.scTimestart = scTimestart;
@@ -57,13 +59,13 @@ public class Schedule implements java.io.Serializable {
 	}
 
 	@Id
-
-	@Column(name = "SC_ID", unique = true, nullable = false, length = 7)
-	public String getScId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "SC_ID", unique = true, nullable = false)
+	public int getScId() {
 		return this.scId;
 	}
 
-	public void setScId(String scId) {
+	public void setScId(int scId) {
 		this.scId = scId;
 	}
 

@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @Table(name = "salary", catalog = "luanvan")
 public class Salary implements java.io.Serializable {
 
-	private String saId;
+	private int saId;
 	private Integer saSalarysOnHour;
 	private Date saDatestart;
 	private String createBy;
@@ -35,11 +35,11 @@ public class Salary implements java.io.Serializable {
 	public Salary() {
 	}
 
-	public Salary(String saId) {
+	public Salary(int saId) {
 		this.saId = saId;
 	}
 
-	public Salary(String saId, Integer saSalarysOnHour, Date saDatestart, String createBy, Date createAt,
+	public Salary(int saId, Integer saSalarysOnHour, Date saDatestart, String createBy, Date createAt,
 			String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt, Set<Employee> employees) {
 		this.saId = saId;
 		this.saSalarysOnHour = saSalarysOnHour;
@@ -56,12 +56,12 @@ public class Salary implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "SA_ID", unique = true, nullable = false, length = 7)
-	public String getSaId() {
+	@Column(name = "SA_ID", unique = true, nullable = false)
+	public int getSaId() {
 		return this.saId;
 	}
 
-	public void setSaId(String saId) {
+	public void setSaId(int saId) {
 		this.saId = saId;
 	}
 
