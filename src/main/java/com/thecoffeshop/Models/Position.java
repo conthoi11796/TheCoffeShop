@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,122 +20,122 @@ import javax.persistence.TemporalType;
 @Table(name = "position", catalog = "luanvan")
 public class Position implements java.io.Serializable {
 
-	private int poId;
-	private String poName;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private String positionid;
+	private String name;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 	private Set<Atposition> atpositions = new HashSet<Atposition>(0);
 
 	public Position() {
 	}
 
-	public Position(int poId) {
-		this.poId = poId;
+	public Position(String positionid) {
+		this.positionid = positionid;
 	}
 
-	public Position(int poId, String poName, String createBy, Date createAt, String updateBy, Date updateAt,
-			Boolean isDelete, String deleteBy, Date deleteAt, Set<Atposition> atpositions) {
-		this.poId = poId;
-		this.poName = poName;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+	public Position(String positionid, String name, String createby, Date createat, String updateby, Date updateat,
+			Boolean isdelete, String deleteby, Date deleteat, Set<Atposition> atpositions) {
+		this.positionid = positionid;
+		this.name = name;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 		this.atpositions = atpositions;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PO_ID",  nullable = false)
-	public int getPoId() {
-		return this.poId;
+
+	@Column(name = "POSITIONID", unique = true, nullable = false)
+	public String getPositionid() {
+		return this.positionid;
 	}
 
-	public void setPoId(int poId) {
-		this.poId = poId;
+	public void setPositionid(String positionid) {
+		this.positionid = positionid;
 	}
 
-	@Column(name = "PO_NAME")
-	public String getPoName() {
-		return this.poName;
+	@Column(name = "NAME")
+	public String getName() {
+		return this.name;
 	}
 
-	public void setPoName(String poName) {
-		this.poName = poName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "position")

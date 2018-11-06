@@ -25,8 +25,8 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Categoryproduct> liCategoryproducts = session
-					.createQuery("FROM Categoryproduct c where c.isDelete = :is_delete", Categoryproduct.class)
-					.setParameter("is_delete", this.IS_NOT_DELETE).getResultList();
+					.createQuery("FROM Categoryproduct c where c.isdelete = :isdelete", Categoryproduct.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return liCategoryproducts;
 		} catch (Exception e) {
 			return null;
@@ -46,14 +46,14 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 	}
 
 	@Override
-	public Categoryproduct getInfoById(String cgPrdId) {
+	public Categoryproduct getInfoById(String categoryproductid) {
 		
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 
 			Categoryproduct categoryproduct= session
-					.createQuery("FROM Categoryproduct cp WHERE cp.cgPrdId = :cgPrdId and cp.isDelete =: is_delete", Categoryproduct.class)
-					.setParameter("cgPrdId", cgPrdId).setParameter("is_delete", this.IS_NOT_DELETE).getSingleResult();
+					.createQuery("FROM Categoryproduct cp WHERE cp.categoryproductid = :categoryproductid and cp.isdelete =: isdelete", Categoryproduct.class)
+					.setParameter("categoryproductid", categoryproductid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return categoryproduct;
 		} catch (Exception e) {
 

@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,122 +20,122 @@ import javax.persistence.TemporalType;
 @Table(name = "categoryproduct", catalog = "luanvan")
 public class Categoryproduct implements java.io.Serializable {
 
-	private String cgPrdId;
-	private String cgPrdName;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private String categoryproductid;
+	private String name;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 	private Set<Product> products = new HashSet<Product>(0);
 
 	public Categoryproduct() {
 	}
 
-	public Categoryproduct(String cgPrdId) {
-		this.cgPrdId = cgPrdId;
+	public Categoryproduct(String categoryproductid) {
+		this.categoryproductid = categoryproductid;
 	}
 
-	public Categoryproduct(String cgPrdId, String cgPrdName, String createBy, Date createAt, String updateBy,
-			Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt, Set<Product> products) {
-		this.cgPrdId = cgPrdId;
-		this.cgPrdName = cgPrdName;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+	public Categoryproduct(String categoryproductid, String name, String createby, Date createat, String updateby,
+			Date updateat, Boolean isdelete, String deleteby, Date deleteat, Set<Product> products) {
+		this.categoryproductid = categoryproductid;
+		this.name = name;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 		this.products = products;
 	}
 
 	@Id
 
-	@Column(name = "CG_PRD_ID", unique = true, nullable = false, length = 7)
-	public String getCgPrdId() {
-		return this.cgPrdId;
+	@Column(name = "CATEGORYPRODUCTID", unique = true, nullable = false, length = 7)
+	public String getCategoryproductid() {
+		return this.categoryproductid;
 	}
 
-	public void setCgPrdId(String cgPrdId) {
-		this.cgPrdId = cgPrdId;
+	public void setCategoryproductid(String categoryproductid) {
+		this.categoryproductid = categoryproductid;
 	}
 
-	@Column(name = "CG_PRD_NAME")
-	public String getCgPrdName() {
-		return this.cgPrdName;
+	@Column(name = "NAME")
+	public String getName() {
+		return this.name;
 	}
 
-	public void setCgPrdName(String cgPrdName) {
-		this.cgPrdName = cgPrdName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "categoryproduct")

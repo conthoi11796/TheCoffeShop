@@ -1,6 +1,5 @@
 package com.thecoffeshop.Models;
-
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,33 +10,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class AtpositionId implements java.io.Serializable {
 
-	private String emId;
-	private String poId;
+	private String employeeid;
+	private String positionid;
 
 	public AtpositionId() {
 	}
 
-	public AtpositionId(String emId, String poId) {
-		this.emId = emId;
-		this.poId = poId;
+	public AtpositionId(String employeeid, String positionid) {
+		this.employeeid = employeeid;
+		this.positionid = positionid;
 	}
 
-	@Column(name = "EM_ID", nullable = false, length = 7)
-	public String getEmId() {
-		return this.emId;
+	@Column(name = "EMPLOYEEID", nullable = false, length = 7)
+	public String getEmployeeid() {
+		return this.employeeid;
 	}
 
-	public void setEmId(String emId) {
-		this.emId = emId;
+	public void setEmployeeid(String employeeid) {
+		this.employeeid = employeeid;
 	}
 
-	@Column(name = "PO_ID", nullable = false)
-	public String getPoId() {
-		return this.poId;
+	@Column(name = "POSITIONID", nullable = false)
+	public String getPositionid() {
+		return this.positionid;
 	}
 
-	public void setPoId(String poId) {
-		this.poId = poId;
+	public void setPositionid(String positionid) {
+		this.positionid = positionid;
 	}
 
 	public boolean equals(Object other) {
@@ -49,17 +48,18 @@ public class AtpositionId implements java.io.Serializable {
 			return false;
 		AtpositionId castOther = (AtpositionId) other;
 
-		return ((this.getEmId() == castOther.getEmId()) || (this.getEmId() != null && castOther.getEmId() != null
-				&& this.getEmId().equals(castOther.getEmId())))
-				&& ((this.getPoId() == castOther.getPoId()) || (this.getPoId() != null && castOther.getPoId() != null
-						&& this.getPoId().equals(castOther.getPoId())));
+		return ((this.getEmployeeid() == castOther.getEmployeeid()) || (this.getEmployeeid() != null
+				&& castOther.getEmployeeid() != null && this.getEmployeeid().equals(castOther.getEmployeeid())))
+				&& ((this.getPositionid() == castOther.getPositionid())
+						|| (this.getPositionid() != null && castOther.getPositionid() != null
+								&& this.getPositionid().equals(castOther.getPositionid())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getEmId() == null ? 0 : this.getEmId().hashCode());
-		result = 37 * result + (getPoId() == null ? 0 : this.getPoId().hashCode());
+		result = 37 * result + (getEmployeeid() == null ? 0 : this.getEmployeeid().hashCode());
+		result = 37 * result + (getPositionid() == null ? 0 : this.getPositionid().hashCode());
 		return result;
 	}
 

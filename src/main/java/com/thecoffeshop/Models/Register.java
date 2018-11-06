@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -24,15 +24,15 @@ public class Register implements java.io.Serializable {
 	private RegisterId id;
 	private Employee employee;
 	private Schedule schedule;
-	private Date reDate;
-	private Boolean reResult;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private Date registerid;
+	private Short result;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 
 	public Register() {
 	}
@@ -43,27 +43,27 @@ public class Register implements java.io.Serializable {
 		this.schedule = schedule;
 	}
 
-	public Register(RegisterId id, Employee employee, Schedule schedule, Date reDate, Boolean reResult, String createBy,
-			Date createAt, String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt) {
+	public Register(RegisterId id, Employee employee, Schedule schedule, Date registerid, Short result, String createby,
+			Date createat, String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat) {
 		this.id = id;
 		this.employee = employee;
 		this.schedule = schedule;
-		this.reDate = reDate;
-		this.reResult = reResult;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+		this.registerid = registerid;
+		this.result = result;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 	}
 
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "emId", column = @Column(name = "EM_ID", nullable = false, length = 7)),
-			@AttributeOverride(name = "scId", column = @Column(name = "SC_ID", nullable = false, length = 7)) })
+			@AttributeOverride(name = "employeeid", column = @Column(name = "EMPLOYEEID", nullable = false, length = 7)),
+			@AttributeOverride(name = "scheduleid", column = @Column(name = "SCHEDULEID", nullable = false, length = 7)) })
 	public RegisterId getId() {
 		return this.id;
 	}
@@ -73,7 +73,7 @@ public class Register implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "EM_ID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "EMPLOYEEID", nullable = false, insertable = false, updatable = false)
 	public Employee getEmployee() {
 		return this.employee;
 	}
@@ -83,7 +83,7 @@ public class Register implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SC_ID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "SCHEDULEID", nullable = false, insertable = false, updatable = false)
 	public Schedule getSchedule() {
 		return this.schedule;
 	}
@@ -93,88 +93,88 @@ public class Register implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "RE_DATE", length = 10)
-	public Date getReDate() {
-		return this.reDate;
+	@Column(name = "REGISTERID", length = 10)
+	public Date getRegisterid() {
+		return this.registerid;
 	}
 
-	public void setReDate(Date reDate) {
-		this.reDate = reDate;
+	public void setRegisterid(Date registerid) {
+		this.registerid = registerid;
 	}
 
-	@Column(name = "RE_RESULT")
-	public Boolean getReResult() {
-		return this.reResult;
+	@Column(name = "RESULT", precision = 3, scale = 0)
+	public Short getResult() {
+		return this.result;
 	}
 
-	public void setReResult(Boolean reResult) {
-		this.reResult = reResult;
+	public void setResult(Short result) {
+		this.result = result;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 }

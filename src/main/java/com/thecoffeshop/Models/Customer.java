@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -7,8 +7,6 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,100 +20,100 @@ import javax.persistence.TemporalType;
 @Table(name = "customer", catalog = "luanvan")
 public class Customer implements java.io.Serializable {
 
-	private int cuId;
-	private String cuName;
-	private String cuAddress;
-	private String cuPhoneNumber;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private int customerid;
+	private String name;
+	private String address;
+	private Integer phone;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 	private Set<Bill> bills = new HashSet<Bill>(0);
 	private Set<Booktable> booktables = new HashSet<Booktable>(0);
 
 	public Customer() {
 	}
 
-	public Customer(int cuId) {
-		this.cuId = cuId;
+	public Customer(int customerid) {
+		this.customerid = customerid;
 	}
 
-	public Customer(int cuId, String cuName, String cuAddress, String cuPhoneNumber, Boolean isDelete, String deleteBy, Date deleteAt, Set<Bill> bills,
-			Set<Booktable> booktables) {
-		this.cuId = cuId;
-		this.cuName = cuName;
-		this.cuAddress = cuAddress;
-		this.cuPhoneNumber = cuPhoneNumber;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+	public Customer(int customerid, String name, String address, Integer phone, Boolean isdelete, String deleteby,
+			Date deleteat, Set<Bill> bills, Set<Booktable> booktables) {
+		this.customerid = customerid;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 		this.bills = bills;
 		this.booktables = booktables;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "CU_ID", nullable = false)
-	public int getCuId() {
-		return this.cuId;
+
+	@Column(name = "CUSTOMERID", unique = true, nullable = false)
+	public int getCustomerid() {
+		return this.customerid;
 	}
 
-	public void setCuId(int cuId) {
-		this.cuId = cuId;
+	public void setCustomerid(int customerid) {
+		this.customerid = customerid;
 	}
 
-	@Column(name = "CU_NAME")
-	public String getCuName() {
-		return this.cuName;
+	@Column(name = "NAME")
+	public String getName() {
+		return this.name;
 	}
 
-	public void setCuName(String cuName) {
-		this.cuName = cuName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "CU_ADDRESS")
-	public String getCuAddress() {
-		return this.cuAddress;
+	@Column(name = "ADDRESS")
+	public String getAddress() {
+		return this.address;
 	}
 
-	public void setCuAddress(String cuAddress) {
-		this.cuAddress = cuAddress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	@Column(name = "CU_PHONE_NUMBER", length = 10)
-	public String getCuPhoneNumber() {
-		return this.cuPhoneNumber;
+	@Column(name = "PHONE", precision = 8, scale = 0)
+	public Integer getPhone() {
+		return this.phone;
 	}
 
-	public void setCuPhoneNumber(String cuPhoneNumber) {
-		this.cuPhoneNumber = cuPhoneNumber;
+	public void setPhone(Integer phone) {
+		this.phone = phone;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
 	}
 
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
 	}
 
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")

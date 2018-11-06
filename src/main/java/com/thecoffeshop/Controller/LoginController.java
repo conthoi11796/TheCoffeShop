@@ -36,6 +36,7 @@ public class LoginController {
 
 		String emId = employeeService.logIn(emUsername, emPassword);
 
+		System.out.println(emId);
 		if (emId == null) {
 			model.addAttribute("error", "Sai mật khẩu hoặc tài khoản");
 			return "/admin/login";

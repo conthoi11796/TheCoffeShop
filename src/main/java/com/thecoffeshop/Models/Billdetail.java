@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -24,14 +24,14 @@ public class Billdetail implements java.io.Serializable {
 	private BilldetailId id;
 	private Bill bill;
 	private Product product;
-	private Integer bdQuantity;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private Integer quantity;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 
 	public Billdetail() {
 	}
@@ -42,26 +42,26 @@ public class Billdetail implements java.io.Serializable {
 		this.product = product;
 	}
 
-	public Billdetail(BilldetailId id, Bill bill, Product product, Integer bdQuantity, String createBy, Date createAt,
-			String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt) {
+	public Billdetail(BilldetailId id, Bill bill, Product product, Integer quantity, String createby, Date createat,
+			String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat) {
 		this.id = id;
 		this.bill = bill;
 		this.product = product;
-		this.bdQuantity = bdQuantity;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+		this.quantity = quantity;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 	}
 
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "PId", column = @Column(name = "P_ID", nullable = false, length = 7)),
-			@AttributeOverride(name = "biId", column = @Column(name = "BI_ID", nullable = false)) })
+			@AttributeOverride(name = "productid", column = @Column(name = "PRODUCTID", nullable = false, length = 7)),
+			@AttributeOverride(name = "billid", column = @Column(name = "BILLID", nullable = false)) })
 	public BilldetailId getId() {
 		return this.id;
 	}
@@ -71,7 +71,7 @@ public class Billdetail implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "BI_ID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "BILLID", nullable = false, insertable = false, updatable = false)
 	public Bill getBill() {
 		return this.bill;
 	}
@@ -81,7 +81,7 @@ public class Billdetail implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "P_ID", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "PRODUCTID", nullable = false, insertable = false, updatable = false)
 	public Product getProduct() {
 		return this.product;
 	}
@@ -90,79 +90,79 @@ public class Billdetail implements java.io.Serializable {
 		this.product = product;
 	}
 
-	@Column(name = "BD_QUANTITY")
-	public Integer getBdQuantity() {
-		return this.bdQuantity;
+	@Column(name = "QUANTITY")
+	public Integer getQuantity() {
+		return this.quantity;
 	}
 
-	public void setBdQuantity(Integer bdQuantity) {
-		this.bdQuantity = bdQuantity;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 }

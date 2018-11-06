@@ -24,10 +24,10 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Employee employee = session.createQuery(
-					"FROM Employee e WHERE e.emUsername = :username and e.emPassword = :password and e.isDelete =: is_delete",
+					"FROM Employee e WHERE e.usename = :username AND e.password = :password AND e.isdelete =: isdelete",
 					Employee.class).setParameter("username", username).setParameter("password", password)
-					.setParameter("is_delete", this.IS_NOT_DELETE).getSingleResult();
-			return employee.getEmId();
+					.setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			return employee.getEmployeeid();
 		} catch (Exception e) {
 
 			return null;
@@ -42,8 +42,8 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 		try {
 
 			Employee employee = session
-					.createQuery("FROM Employee e WHERE e.emId = :emId and e.isDelete =: is_delete", Employee.class)
-					.setParameter("emId", emId).setParameter("is_delete", this.IS_NOT_DELETE).getSingleResult();
+					.createQuery("FROM Employee e WHERE e.employeeid = :employeeid and e.isdelete =: isdelete", Employee.class)
+					.setParameter("employeeid", emId).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return employee;
 		} catch (Exception e) {
 
@@ -55,7 +55,7 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 	public List<Employee> findAll(int start, int numberRow) {
 		Session session = this.sessionFactory.getCurrentSession();
 		return session
-				.createQuery("FROM Employee e WHERE e.isDelete =: is_delete LIMIT :start,:numberRow", Employee.class)
+				.createQuery("FROM Employee e WHERE e.isdelete =: isdelete LIMIT :start,:numberRow", Employee.class)
 				.setParameter("is_delete", this.IS_NOT_DELETE).setParameter("start", start)
 				.setParameter("numberRow", numberRow).getResultList();
 	}

@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,44 +10,44 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class BooktableId implements java.io.Serializable {
 
-	private String cuId;
-	private int dnId;
-	private String emId;
+	private int customerid;
+	private int dinnertableid;
+	private String employeeid;
 
 	public BooktableId() {
 	}
 
-	public BooktableId(String cuId, int dnId, String emId) {
-		this.cuId = cuId;
-		this.dnId = dnId;
-		this.emId = emId;
+	public BooktableId(int customerid, int dinnertableid, String employeeid) {
+		this.customerid = customerid;
+		this.dinnertableid = dinnertableid;
+		this.employeeid = employeeid;
 	}
 
-	@Column(name = "CU_ID", nullable = false, length = 7)
-	public String getCuId() {
-		return this.cuId;
+	@Column(name = "CUSTOMERID", nullable = false)
+	public int getCustomerid() {
+		return this.customerid;
 	}
 
-	public void setCuId(String cuId) {
-		this.cuId = cuId;
+	public void setCustomerid(int customerid) {
+		this.customerid = customerid;
 	}
 
-	@Column(name = "DN_ID", nullable = false)
-	public int getDnId() {
-		return this.dnId;
+	@Column(name = "DINNERTABLEID", nullable = false)
+	public int getDinnertableid() {
+		return this.dinnertableid;
 	}
 
-	public void setDnId(int dnId) {
-		this.dnId = dnId;
+	public void setDinnertableid(int dinnertableid) {
+		this.dinnertableid = dinnertableid;
 	}
 
-	@Column(name = "EM_ID", nullable = false, length = 7)
-	public String getEmId() {
-		return this.emId;
+	@Column(name = "EMPLOYEEID", nullable = false, length = 7)
+	public String getEmployeeid() {
+		return this.employeeid;
 	}
 
-	public void setEmId(String emId) {
-		this.emId = emId;
+	public void setEmployeeid(String employeeid) {
+		this.employeeid = employeeid;
 	}
 
 	public boolean equals(Object other) {
@@ -59,18 +59,19 @@ public class BooktableId implements java.io.Serializable {
 			return false;
 		BooktableId castOther = (BooktableId) other;
 
-		return ((this.getCuId() == castOther.getCuId()) || (this.getCuId() != null && castOther.getCuId() != null
-				&& this.getCuId().equals(castOther.getCuId()))) && (this.getDnId() == castOther.getDnId())
-				&& ((this.getEmId() == castOther.getEmId()) || (this.getEmId() != null && castOther.getEmId() != null
-						&& this.getEmId().equals(castOther.getEmId())));
+		return (this.getCustomerid() == castOther.getCustomerid())
+				&& (this.getDinnertableid() == castOther.getDinnertableid())
+				&& ((this.getEmployeeid() == castOther.getEmployeeid())
+						|| (this.getEmployeeid() != null && castOther.getEmployeeid() != null
+								&& this.getEmployeeid().equals(castOther.getEmployeeid())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getCuId() == null ? 0 : this.getCuId().hashCode());
-		result = 37 * result + this.getDnId();
-		result = 37 * result + (getEmId() == null ? 0 : this.getEmId().hashCode());
+		result = 37 * result + this.getCustomerid();
+		result = 37 * result + this.getDinnertableid();
+		result = 37 * result + (getEmployeeid() == null ? 0 : this.getEmployeeid().hashCode());
 		return result;
 	}
 

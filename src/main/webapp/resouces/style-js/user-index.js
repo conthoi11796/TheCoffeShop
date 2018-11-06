@@ -76,9 +76,9 @@ $(function() {
 })
 /* End Box-chat */
 /* View product */
-function viewProduct(PId) {
+function _viewProduct(productid) {
 	 $.post("/infoProduct",{
-		 			PId
+		 			productid
 			    }, function(data, status){
 						$("#detail-product").html(data);
 			    });
@@ -162,7 +162,7 @@ $(function () {
 	$('#btnPay').hide();
 
 	$(".btn-View").click(function() {
-		viewProduct($(this).attr("data-PId"));
+		_viewProduct($(this).attr("data-PId"));
 	});
 
 	$(".btn-add-to-cart").click(function(){

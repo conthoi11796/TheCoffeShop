@@ -1,11 +1,9 @@
 package com.thecoffeshop.DTO;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
-import com.thecoffeshop.Models.Categoryproduct;
 import com.thecoffeshop.Models.Image;
+import com.thecoffeshop.Models.Price;
 import com.thecoffeshop.Models.Product;
 
 public class ProductDTO {
@@ -14,7 +12,28 @@ public class ProductDTO {
 	private List<Image> images;
 	private int number;
 	private int price;
+	private Price newPrice;
+	private int rateOldAndNewPrice;
+	private boolean checkIsNew;
 	
+	public boolean getCheckIsNew() {
+		return checkIsNew;
+	}
+	public void setCheckIsNew(boolean checkIsNew) {
+		this.checkIsNew = checkIsNew;
+	}
+	public Price getNewPrice() {
+		return newPrice;
+	}
+	public void setNewPrice(Price newPrice) {
+		this.newPrice = newPrice;
+	}
+	public int getRateOldAndNewPrice() {
+		return rateOldAndNewPrice;
+	}
+	public void setRateOldAndNewPrice(int rateOldAndNewPrice) {
+		this.rateOldAndNewPrice = rateOldAndNewPrice;
+	}
 	public int getPrice() {
 		return price;
 	}

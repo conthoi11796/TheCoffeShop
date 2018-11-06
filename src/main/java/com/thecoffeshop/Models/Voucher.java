@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -20,160 +20,180 @@ import javax.persistence.TemporalType;
 @Table(name = "voucher", catalog = "luanvan")
 public class Voucher implements java.io.Serializable {
 
-	private String voId;
-	private String voName;
-	private Date voDatestart;
-	private Date voDatefinish;
-	private Integer voSaleoff;
-	private Integer voNumber;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private int voucherid;
+	private String name;
+	private Date startdatetime;
+	private Date enddate;
+	private Integer number;
+	private Integer count;
+	private Integer saleof;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 	private Set<Bill> bills = new HashSet<Bill>(0);
 
 	public Voucher() {
 	}
 
-	public Voucher(String voId) {
-		this.voId = voId;
+	public Voucher(int voucherid) {
+		this.voucherid = voucherid;
 	}
 
-	public Voucher(String voId, String voName, Date voDatestart, Date voDatefinish, Integer voSaleoff, Integer voNumber, String createBy,
-			Date createAt, String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt,
-			Set<Bill> bills) {
-		this.voId = voId;
-		this.voName = voName;
-		this.voDatestart = voDatestart;
-		this.voDatefinish = voDatefinish;
-		this.voSaleoff = voSaleoff;
-		this.voNumber = voNumber;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+	public Voucher(int voucherid, String name, Date startdatetime, Date enddate, Integer number, Integer count,
+			Integer saleof, String createby, Date createat, String updateby, Date updateat, Boolean isdelete,
+			String deleteby, Date deleteat, Set<Bill> bills) {
+		this.voucherid = voucherid;
+		this.name = name;
+		this.startdatetime = startdatetime;
+		this.enddate = enddate;
+		this.number = number;
+		this.count = count;
+		this.saleof = saleof;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 		this.bills = bills;
 	}
 
 	@Id
 
-	@Column(name = "VO_ID", unique = true, nullable = false, length = 7)
-	public String getVoId() {
-		return this.voId;
+	@Column(name = "VOUCHERID", unique = true, nullable = false)
+	public int getVoucherid() {
+		return this.voucherid;
 	}
 
-	public void setVoId(String voId) {
-		this.voId = voId;
+	public void setVoucherid(int voucherid) {
+		this.voucherid = voucherid;
 	}
 
-	@Column(name = "VO_NAME")
-	public String getVoName() {
-		return this.voName;
+	@Column(name = "NAME")
+	public String getName() {
+		return this.name;
 	}
 
-	public void setVoName(String voName) {
-		this.voName = voName;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "STARTDATETIME", length = 19)
+	public Date getStartdatetime() {
+		return this.startdatetime;
+	}
+
+	public void setStartdatetime(Date startdatetime) {
+		this.startdatetime = startdatetime;
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "VO_DATESTART", length = 10)
-	public Date getVoDatestart() {
-		return this.voDatestart;
+	@Column(name = "ENDDATE", length = 10)
+	public Date getEnddate() {
+		return this.enddate;
 	}
 
-	public void setVoDatestart(Date voDatestart) {
-		this.voDatestart = voDatestart;
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "VO_DATEFINISH", length = 10)
-	public Date getVoDatefinish() {
-		return this.voDatefinish;
+	@Column(name = "NUMBER")
+	public Integer getNumber() {
+		return this.number;
 	}
 
-	public void setVoDatefinish(Date voDatefinish) {
-		this.voDatefinish = voDatefinish;
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
 
-	@Column(name = "VO_SALEOFF")
-	public Integer getVoSaleoff() {
-		return this.voSaleoff;
+	@Column(name = "COUNT")
+	public Integer getCount() {
+		return this.count;
 	}
 
-	public void setVoSaleoff(Integer voSaleoff) {
-		this.voSaleoff = voSaleoff;
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "SALEOF")
+	public Integer getSaleof() {
+		return this.saleof;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
+	public void setSaleof(Integer saleof) {
+		this.saleof = saleof;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "voucher")
@@ -184,16 +204,5 @@ public class Voucher implements java.io.Serializable {
 	public void setBills(Set<Bill> bills) {
 		this.bills = bills;
 	}
-
-	@Column(name = "VO_NUMBER", nullable = false)
-	public Integer getVoNumber() {
-		return voNumber;
-	}
-
-	public void setVoNumber(Integer voNumber) {
-		this.voNumber = voNumber;
-	}
-	
-	
 
 }

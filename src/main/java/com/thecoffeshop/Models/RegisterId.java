@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,33 +10,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class RegisterId implements java.io.Serializable {
 
-	private String emId;
-	private String scId;
+	private String employeeid;
+	private String scheduleid;
 
 	public RegisterId() {
 	}
 
-	public RegisterId(String emId, String scId) {
-		this.emId = emId;
-		this.scId = scId;
+	public RegisterId(String employeeid, String scheduleid) {
+		this.employeeid = employeeid;
+		this.scheduleid = scheduleid;
 	}
 
-	@Column(name = "EM_ID", nullable = false, length = 7)
-	public String getEmId() {
-		return this.emId;
+	@Column(name = "EMPLOYEEID", nullable = false, length = 7)
+	public String getEmployeeid() {
+		return this.employeeid;
 	}
 
-	public void setEmId(String emId) {
-		this.emId = emId;
+	public void setEmployeeid(String employeeid) {
+		this.employeeid = employeeid;
 	}
 
-	@Column(name = "SC_ID", nullable = false, length = 7)
-	public String getScId() {
-		return this.scId;
+	@Column(name = "SCHEDULEID", nullable = false, length = 7)
+	public String getScheduleid() {
+		return this.scheduleid;
 	}
 
-	public void setScId(String scId) {
-		this.scId = scId;
+	public void setScheduleid(String scheduleid) {
+		this.scheduleid = scheduleid;
 	}
 
 	public boolean equals(Object other) {
@@ -48,17 +48,18 @@ public class RegisterId implements java.io.Serializable {
 			return false;
 		RegisterId castOther = (RegisterId) other;
 
-		return ((this.getEmId() == castOther.getEmId()) || (this.getEmId() != null && castOther.getEmId() != null
-				&& this.getEmId().equals(castOther.getEmId())))
-				&& ((this.getScId() == castOther.getScId()) || (this.getScId() != null && castOther.getScId() != null
-						&& this.getScId().equals(castOther.getScId())));
+		return ((this.getEmployeeid() == castOther.getEmployeeid()) || (this.getEmployeeid() != null
+				&& castOther.getEmployeeid() != null && this.getEmployeeid().equals(castOther.getEmployeeid())))
+				&& ((this.getScheduleid() == castOther.getScheduleid())
+						|| (this.getScheduleid() != null && castOther.getScheduleid() != null
+								&& this.getScheduleid().equals(castOther.getScheduleid())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getEmId() == null ? 0 : this.getEmId().hashCode());
-		result = 37 * result + (getScId() == null ? 0 : this.getScId().hashCode());
+		result = 37 * result + (getEmployeeid() == null ? 0 : this.getEmployeeid().hashCode());
+		result = 37 * result + (getScheduleid() == null ? 0 : this.getScheduleid().hashCode());
 		return result;
 	}
 

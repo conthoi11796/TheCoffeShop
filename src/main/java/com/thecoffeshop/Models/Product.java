@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,18 +24,18 @@ import javax.persistence.TemporalType;
 @Table(name = "product", catalog = "luanvan")
 public class Product implements java.io.Serializable {
 
-	private String PId;
+	private String productid;
 	private Categoryproduct categoryproduct;
-	private String PName;
-	private String PDescription;
-	private Integer PNumberInventory;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private String name;
+	private String description;
+	private String numberinventory;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 	private Set<Billdetail> billdetails = new HashSet<Billdetail>(0);
 	private Set<Image> images = new HashSet<Image>(0);
 	private Set<Exportbill> exportbills = new HashSet<Exportbill>(0);
@@ -44,26 +44,26 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(String PId) {
-		this.PId = PId;
+	public Product(String productid) {
+		this.productid = productid;
 	}
 
-	public Product(String PId, Categoryproduct categoryproduct, String PName, String PDescription,
-			Integer PNumberInventory, String createBy, Date createAt, String updateBy, Date updateAt, Boolean isDelete,
-			String deleteBy, Date deleteAt, Set<Billdetail> billdetails, Set<Image> images, Set<Exportbill> exportbills,
+	public Product(String productid, Categoryproduct categoryproduct, String name, String description,
+			String numberinventory, String createby, Date createat, String updateby, Date updateat, Boolean isdelete,
+			String deleteby, Date deleteat, Set<Billdetail> billdetails, Set<Image> images, Set<Exportbill> exportbills,
 			Set<Price> prices) {
-		this.PId = PId;
+		this.productid = productid;
 		this.categoryproduct = categoryproduct;
-		this.PName = PName;
-		this.PDescription = PDescription;
-		this.PNumberInventory = PNumberInventory;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+		this.name = name;
+		this.description = description;
+		this.numberinventory = numberinventory;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 		this.billdetails = billdetails;
 		this.images = images;
 		this.exportbills = exportbills;
@@ -72,17 +72,17 @@ public class Product implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "P_ID", unique = true, nullable = false, length = 7)
-	public String getPId() {
-		return this.PId;
+	@Column(name = "PRODUCTID", unique = true, nullable = false, length = 7)
+	public String getProductid() {
+		return this.productid;
 	}
 
-	public void setPId(String PId) {
-		this.PId = PId;
+	public void setProductid(String productid) {
+		this.productid = productid;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CG_PRD_ID")
+	@JoinColumn(name = "CATEGORYPRODUCTID")
 	public Categoryproduct getCategoryproduct() {
 		return this.categoryproduct;
 	}
@@ -91,97 +91,97 @@ public class Product implements java.io.Serializable {
 		this.categoryproduct = categoryproduct;
 	}
 
-	@Column(name = "P_NAME")
-	public String getPName() {
-		return this.PName;
+	@Column(name = "NAME")
+	public String getName() {
+		return this.name;
 	}
 
-	public void setPName(String PName) {
-		this.PName = PName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	@Column(name = "P_DESCRIPTION")
-	public String getPDescription() {
-		return this.PDescription;
+	@Column(name = "DESCRIPTION")
+	public String getDescription() {
+		return this.description;
 	}
 
-	public void setPDescription(String PDescription) {
-		this.PDescription = PDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	@Column(name = "P_NUMBER_INVENTORY")
-	public Integer getPNumberInventory() {
-		return this.PNumberInventory;
+	@Column(name = "NUMBERINVENTORY", length = 10)
+	public String getNumberinventory() {
+		return this.numberinventory;
 	}
 
-	public void setPNumberInventory(Integer PNumberInventory) {
-		this.PNumberInventory = PNumberInventory;
+	public void setNumberinventory(String numberinventory) {
+		this.numberinventory = numberinventory;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
@@ -195,8 +195,8 @@ public class Product implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofproduct", catalog = "luanvan", joinColumns = {
-			@JoinColumn(name = "P_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) })
+			@JoinColumn(name = "PRODUCTID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "IMAGEID", nullable = false, updatable = false) })
 	public Set<Image> getImages() {
 		return this.images;
 	}

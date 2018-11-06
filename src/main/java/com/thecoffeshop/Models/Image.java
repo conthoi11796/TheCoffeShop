@@ -1,13 +1,11 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -21,8 +19,8 @@ import javax.persistence.Table;
 @Table(name = "image", catalog = "luanvan")
 public class Image implements java.io.Serializable {
 
-	private int imgId;
-	private String imgName;
+	private int imageid;
+	private String name;
 	private Set<Employee> employees = new HashSet<Employee>(0);
 	private Set<Dinnertable> dinnertables = new HashSet<Dinnertable>(0);
 	private Set<Product> products = new HashSet<Product>(0);
@@ -31,14 +29,14 @@ public class Image implements java.io.Serializable {
 	public Image() {
 	}
 
-	public Image(int imgId) {
-		this.imgId = imgId;
+	public Image(int imageid) {
+		this.imageid = imageid;
 	}
 
-	public Image(int imgId, String imgName, Set<Employee> employees, Set<Dinnertable> dinnertables,
+	public Image(int imageid, String name, Set<Employee> employees, Set<Dinnertable> dinnertables,
 			Set<Product> products, Set<Material> materials) {
-		this.imgId = imgId;
-		this.imgName = imgName;
+		this.imageid = imageid;
+		this.name = name;
 		this.employees = employees;
 		this.dinnertables = dinnertables;
 		this.products = products;
@@ -46,29 +44,29 @@ public class Image implements java.io.Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "IMG_ID", nullable = false)
-	public int getImgId() {
-		return this.imgId;
+
+	@Column(name = "IMAGEID", unique = true, nullable = false)
+	public int getImageid() {
+		return this.imageid;
 	}
 
-	public void setImgId(int imgId) {
-		this.imgId = imgId;
+	public void setImageid(int imageid) {
+		this.imageid = imageid;
 	}
 
-	@Column(name = "IMG_NAME")
-	public String getImgName() {
-		return this.imgName;
+	@Column(name = "NAME")
+	public String getName() {
+		return this.name;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofemployee", catalog = "luanvan", joinColumns = {
-			@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "EM_ID", nullable = false, updatable = false) })
+			@JoinColumn(name = "IMAGEID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "EMPLOYEEID", nullable = false, updatable = false) })
 	public Set<Employee> getEmployees() {
 		return this.employees;
 	}
@@ -79,8 +77,8 @@ public class Image implements java.io.Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "imageofdinnertable", catalog = "luanvan", joinColumns = {
-			@JoinColumn(name = "IMG_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "DN_ID", nullable = false, updatable = false) })
+			@JoinColumn(name = "IMAGEID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "DINNERTABLEID", nullable = false, updatable = false) })
 	public Set<Dinnertable> getDinnertables() {
 		return this.dinnertables;
 	}

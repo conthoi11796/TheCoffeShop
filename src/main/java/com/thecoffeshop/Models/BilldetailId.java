@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,33 +10,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class BilldetailId implements java.io.Serializable {
 
-	private String PId;
-	private int biId;
+	private String productid;
+	private int billid;
 
 	public BilldetailId() {
 	}
 
-	public BilldetailId(String PId, int biId) {
-		this.PId = PId;
-		this.biId = biId;
+	public BilldetailId(String productid, int billid) {
+		this.productid = productid;
+		this.billid = billid;
 	}
 
-	@Column(name = "P_ID", nullable = false, length = 7)
-	public String getPId() {
-		return this.PId;
+	@Column(name = "PRODUCTID", nullable = false, length = 7)
+	public String getProductid() {
+		return this.productid;
 	}
 
-	public void setPId(String PId) {
-		this.PId = PId;
+	public void setProductid(String productid) {
+		this.productid = productid;
 	}
 
-	@Column(name = "BI_ID", nullable = false)
-	public int getBiId() {
-		return this.biId;
+	@Column(name = "BILLID", nullable = false)
+	public int getBillid() {
+		return this.billid;
 	}
 
-	public void setBiId(int biId) {
-		this.biId = biId;
+	public void setBillid(int billid) {
+		this.billid = billid;
 	}
 
 	public boolean equals(Object other) {
@@ -48,16 +48,16 @@ public class BilldetailId implements java.io.Serializable {
 			return false;
 		BilldetailId castOther = (BilldetailId) other;
 
-		return ((this.getPId() == castOther.getPId())
-				|| (this.getPId() != null && castOther.getPId() != null && this.getPId().equals(castOther.getPId())))
-				&& (this.getBiId() == castOther.getBiId());
+		return ((this.getProductid() == castOther.getProductid()) || (this.getProductid() != null
+				&& castOther.getProductid() != null && this.getProductid().equals(castOther.getProductid())))
+				&& (this.getBillid() == castOther.getBillid());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getPId() == null ? 0 : this.getPId().hashCode());
-		result = 37 * result + this.getBiId();
+		result = 37 * result + (getProductid() == null ? 0 : this.getProductid().hashCode());
+		result = 37 * result + this.getBillid();
 		return result;
 	}
 

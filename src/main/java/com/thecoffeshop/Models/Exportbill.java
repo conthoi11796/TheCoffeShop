@@ -1,10 +1,12 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,58 +21,52 @@ import javax.persistence.TemporalType;
 @Table(name = "exportbill", catalog = "luanvan")
 public class Exportbill implements java.io.Serializable {
 
-	private String ebId;
+	private Integer exportbillid;
 	private Employee employee;
 	private Materialdetail materialdetail;
 	private Product product;
-	private Date ebDateTime;
-	private Integer ebQuantity;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private Integer quantity;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 
 	public Exportbill() {
 	}
 
-	public Exportbill(String ebId) {
-		this.ebId = ebId;
-	}
-
-	public Exportbill(String ebId, Employee employee, Materialdetail materialdetail, Product product, Date ebDateTime,
-			Integer ebQuantity, String createBy, Date createAt, String updateBy, Date updateAt, Boolean isDelete,
-			String deleteBy, Date deleteAt) {
-		this.ebId = ebId;
+	public Exportbill(Employee employee, Materialdetail materialdetail, Product product, Integer quantity,
+			String createby, Date createat, String updateby, Date updateat, Boolean isdelete, String deleteby,
+			Date deleteat) {
 		this.employee = employee;
 		this.materialdetail = materialdetail;
 		this.product = product;
-		this.ebDateTime = ebDateTime;
-		this.ebQuantity = ebQuantity;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+		this.quantity = quantity;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "EB_ID", unique = true, nullable = false, length = 7)
-	public String getEbId() {
-		return this.ebId;
+	@Column(name = "EXPORTBILLID", unique = true, nullable = false)
+	public Integer getExportbillid() {
+		return this.exportbillid;
 	}
 
-	public void setEbId(String ebId) {
-		this.ebId = ebId;
+	public void setExportbillid(Integer exportbillid) {
+		this.exportbillid = exportbillid;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "EM_ID")
+	@JoinColumn(name = "EMPLOYEEID")
 	public Employee getEmployee() {
 		return this.employee;
 	}
@@ -80,7 +76,7 @@ public class Exportbill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "MD_ID")
+	@JoinColumn(name = "MATERIALDETAILID")
 	public Materialdetail getMaterialdetail() {
 		return this.materialdetail;
 	}
@@ -90,7 +86,7 @@ public class Exportbill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "P_ID")
+	@JoinColumn(name = "PRODUCTID")
 	public Product getProduct() {
 		return this.product;
 	}
@@ -99,89 +95,79 @@ public class Exportbill implements java.io.Serializable {
 		this.product = product;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "EB_DATE_TIME", length = 19)
-	public Date getEbDateTime() {
-		return this.ebDateTime;
+	@Column(name = "QUANTITY")
+	public Integer getQuantity() {
+		return this.quantity;
 	}
 
-	public void setEbDateTime(Date ebDateTime) {
-		this.ebDateTime = ebDateTime;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
-	@Column(name = "EB_QUANTITY")
-	public Integer getEbQuantity() {
-		return this.ebQuantity;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setEbQuantity(Integer ebQuantity) {
-		this.ebQuantity = ebQuantity;
-	}
-
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
-	}
-
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
-	}
-
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
-	}
-
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
+	}
+
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 }

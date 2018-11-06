@@ -1,6 +1,5 @@
 package com.thecoffeshop.Models;
-
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -9,7 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,68 +24,65 @@ import javax.persistence.TemporalType;
 @Table(name = "bill", catalog = "luanvan")
 public class Bill implements java.io.Serializable {
 
-	private int biId;
+	private Integer billid;
 	private Billstatus billstatus;
 	private Customer customer;
 	private Dinnertable dinnertable;
 	private Employee employee;
 	private Productstatus productstatus;
 	private Voucher voucher;
-	private Date biDatetimeStart;
-	private Date biDateimeFinish;
-	private String biNotice;
-	private String createBy;
-	private Date createAt;
-	private String updateBy;
-	private Date updateAt;
-	private Boolean isDelete;
-	private String deleteBy;
-	private Date deleteAt;
+	private Date startdatetime;
+	private Date enddate;
+	private String notice;
+	private String createby;
+	private Date createat;
+	private String updateby;
+	private Date updateat;
+	private Boolean isdelete;
+	private String deleteby;
+	private Date deleteat;
 	private Set<Billdetail> billdetails = new HashSet<Billdetail>(0);
 
 	public Bill() {
 	}
 
-	public Bill(int biId) {
-		this.biId = biId;
-	}
-
-	public Bill(int biId, Billstatus billstatus, Customer customer, Dinnertable dinnertable, Employee employee,
-			Productstatus productstatus, Voucher voucher, Date biDatetimeStart, Date biDateimeFinish, String createBy,
-			Date createAt, String updateBy, Date updateAt, Boolean isDelete, String deleteBy, Date deleteAt,
-			Set<Billdetail> billdetails) {
-		this.biId = biId;
+	public Bill(Billstatus billstatus, Customer customer, Dinnertable dinnertable, Employee employee,
+			Productstatus productstatus, Voucher voucher, Date startdatetime, Date enddate, String notice,
+			String createby, Date createat, String updateby, Date updateat, Boolean isdelete, String deleteby,
+			Date deleteat, Set<Billdetail> billdetails) {
 		this.billstatus = billstatus;
 		this.customer = customer;
 		this.dinnertable = dinnertable;
 		this.employee = employee;
 		this.productstatus = productstatus;
 		this.voucher = voucher;
-		this.biDatetimeStart = biDatetimeStart;
-		this.biDateimeFinish = biDateimeFinish;
-		this.createBy = createBy;
-		this.createAt = createAt;
-		this.updateBy = updateBy;
-		this.updateAt = updateAt;
-		this.isDelete = isDelete;
-		this.deleteBy = deleteBy;
-		this.deleteAt = deleteAt;
+		this.startdatetime = startdatetime;
+		this.enddate = enddate;
+		this.notice = notice;
+		this.createby = createby;
+		this.createat = createat;
+		this.updateby = updateby;
+		this.updateat = updateat;
+		this.isdelete = isdelete;
+		this.deleteby = deleteby;
+		this.deleteat = deleteat;
 		this.billdetails = billdetails;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "BI_ID", nullable = false)
-	public int getBiId() {
-		return this.biId;
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "BILLID", unique = true, nullable = false)
+	public Integer getBillid() {
+		return this.billid;
 	}
 
-	public void setBiId(int biId) {
-		this.biId = biId;
+	public void setBillid(Integer billid) {
+		this.billid = billid;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "BT_ID")
+	@JoinColumn(name = "BILLSTATUSID")
 	public Billstatus getBillstatus() {
 		return this.billstatus;
 	}
@@ -96,7 +92,7 @@ public class Bill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "CU_ID")
+	@JoinColumn(name = "CUSTOMERID")
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -106,7 +102,7 @@ public class Bill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "DN_ID")
+	@JoinColumn(name = "DINNERTABLEID")
 	public Dinnertable getDinnertable() {
 		return this.dinnertable;
 	}
@@ -116,7 +112,7 @@ public class Bill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "EM_ID")
+	@JoinColumn(name = "EMPLOYEEID")
 	public Employee getEmployee() {
 		return this.employee;
 	}
@@ -126,7 +122,7 @@ public class Bill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PS_ID")
+	@JoinColumn(name = "PRODUCTSTATUSID")
 	public Productstatus getProductstatus() {
 		return this.productstatus;
 	}
@@ -136,7 +132,7 @@ public class Bill implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "VO_ID")
+	@JoinColumn(name = "VOUCHERID")
 	public Voucher getVoucher() {
 		return this.voucher;
 	}
@@ -146,98 +142,98 @@ public class Bill implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BI_DATETIME_START", length = 19)
-	public Date getBiDatetimeStart() {
-		return this.biDatetimeStart;
+	@Column(name = "STARTDATETIME", length = 19)
+	public Date getStartdatetime() {
+		return this.startdatetime;
 	}
 
-	public void setBiDatetimeStart(Date biDatetimeStart) {
-		this.biDatetimeStart = biDatetimeStart;
+	public void setStartdatetime(Date startdatetime) {
+		this.startdatetime = startdatetime;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BI_DATEIME_FINISH", length = 19)
-	public Date getBiDateimeFinish() {
-		return this.biDateimeFinish;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ENDDATE", length = 10)
+	public Date getEnddate() {
+		return this.enddate;
 	}
 
-	public void setBiDateimeFinish(Date biDateimeFinish) {
-		this.biDateimeFinish = biDateimeFinish;
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
 	}
 
-	@Column(name = "CREATE_BY", length = 7)
-	public String getCreateBy() {
-		return this.createBy;
+	@Column(name = "NOTICE")
+	public String getNotice() {
+		return this.notice;
 	}
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
+	public void setNotice(String notice) {
+		this.notice = notice;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATE_AT", length = 19)
-	public Date getCreateAt() {
-		return this.createAt;
+	@Column(name = "CREATEBY", length = 7)
+	public String getCreateby() {
+		return this.createby;
 	}
 
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	@Column(name = "UPDATE_BY", length = 7)
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
+	public void setCreateby(String createby) {
+		this.createby = createby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATE_AT", length = 19)
-	public Date getUpdateAt() {
-		return this.updateAt;
+	@Column(name = "CREATEAT", length = 19)
+	public Date getCreateat() {
+		return this.createat;
 	}
 
-	public void setUpdateAt(Date updateAt) {
-		this.updateAt = updateAt;
+	public void setCreateat(Date createat) {
+		this.createat = createat;
 	}
 
-	@Column(name = "IS_DELETE")
-	public Boolean getIsDelete() {
-		return this.isDelete;
+	@Column(name = "UPDATEBY", length = 7)
+	public String getUpdateby() {
+		return this.updateby;
 	}
 
-	public void setIsDelete(Boolean isDelete) {
-		this.isDelete = isDelete;
-	}
-
-	@Column(name = "DELETE_BY", length = 7)
-	public String getDeleteBy() {
-		return this.deleteBy;
-	}
-
-	public void setDeleteBy(String deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setUpdateby(String updateby) {
+		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETE_AT", length = 19)
-	public Date getDeleteAt() {
-		return this.deleteAt;
+	@Column(name = "UPDATEAT", length = 19)
+	public Date getUpdateat() {
+		return this.updateat;
 	}
 
-	public void setDeleteAt(Date deleteAt) {
-		this.deleteAt = deleteAt;
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
 	}
 
-	@Column(name = "BI_NOTICE", length = 500)
-	public String getBiNotice() {
-		return biNotice;
+	@Column(name = "ISDELETE")
+	public Boolean getIsdelete() {
+		return this.isdelete;
 	}
 
-	public void setBiNotice(String biNotice) {
-		this.biNotice = biNotice;
+	public void setIsdelete(Boolean isdelete) {
+		this.isdelete = isdelete;
+	}
+
+	@Column(name = "DELETEBY", length = 7)
+	public String getDeleteby() {
+		return this.deleteby;
+	}
+
+	public void setDeleteby(String deleteby) {
+		this.deleteby = deleteby;
+	}
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "DELETEAT", length = 19)
+	public Date getDeleteat() {
+		return this.deleteat;
+	}
+
+	public void setDeleteat(Date deleteat) {
+		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "bill")

@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Oct 26, 2018 8:38:01 PM by Hibernate Tools 5.1.7.Final
+// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -10,33 +10,33 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TablestatusdetailId implements java.io.Serializable {
 
-	private int dnId;
-	private String tsId;
+	private int dinnertableid;
+	private int tablestatusid;
 
 	public TablestatusdetailId() {
 	}
 
-	public TablestatusdetailId(int dnId, String tsId) {
-		this.dnId = dnId;
-		this.tsId = tsId;
+	public TablestatusdetailId(int dinnertableid, int tablestatusid) {
+		this.dinnertableid = dinnertableid;
+		this.tablestatusid = tablestatusid;
 	}
 
-	@Column(name = "DN_ID", nullable = false)
-	public int getDnId() {
-		return this.dnId;
+	@Column(name = "DINNERTABLEID", nullable = false)
+	public int getDinnertableid() {
+		return this.dinnertableid;
 	}
 
-	public void setDnId(int dnId) {
-		this.dnId = dnId;
+	public void setDinnertableid(int dinnertableid) {
+		this.dinnertableid = dinnertableid;
 	}
 
-	@Column(name = "TS_ID", nullable = false)
-	public String getTsId() {
-		return this.tsId;
+	@Column(name = "TABLESTATUSID", nullable = false)
+	public int getTablestatusid() {
+		return this.tablestatusid;
 	}
 
-	public void setTsId(String tsId) {
-		this.tsId = tsId;
+	public void setTablestatusid(int tablestatusid) {
+		this.tablestatusid = tablestatusid;
 	}
 
 	public boolean equals(Object other) {
@@ -48,16 +48,15 @@ public class TablestatusdetailId implements java.io.Serializable {
 			return false;
 		TablestatusdetailId castOther = (TablestatusdetailId) other;
 
-		return (this.getDnId() == castOther.getDnId())
-				&& ((this.getTsId() == castOther.getTsId()) || (this.getTsId() != null && castOther.getTsId() != null
-						&& this.getTsId().equals(castOther.getTsId())));
+		return (this.getDinnertableid() == castOther.getDinnertableid())
+				&& (this.getTablestatusid() == castOther.getTablestatusid());
 	}
 
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getDnId();
-		result = 37 * result + (getTsId() == null ? 0 : this.getTsId().hashCode());
+		result = 37 * result + this.getDinnertableid();
+		result = 37 * result + this.getTablestatusid();
 		return result;
 	}
 

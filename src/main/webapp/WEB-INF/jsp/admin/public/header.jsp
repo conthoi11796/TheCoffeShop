@@ -46,7 +46,7 @@
 				<span class="icon-heart icons"></span>
 				<p class="page-name d-none d-lg-block">
 					Chào,
-					<c:out value="${employee.getEmName()}" />
+					<c:out value="${employee.getName()}" />
 				</p>
 				<ul class="navbar-nav ml-lg-auto">
 					<li class="nav-item">

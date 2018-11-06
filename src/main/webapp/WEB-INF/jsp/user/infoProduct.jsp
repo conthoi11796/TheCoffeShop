@@ -14,14 +14,12 @@
 				data-slide-to="2"></i>
 		</ol>
 		<div class="carousel-inner">
-			<c:set var="i" scope="session" value="${0}" />
 			<c:forEach items="${images}" var="image">
 				<div class="carousel-item 
 				<c:if test='${i==0}'><c:out value="active" /></c:if> 	" 	>
 					<img class="d-block w-100 col-lg-12"
 						src="../resouces/images/my-images/<c:out value="${image.getImgName()}" />">
 				</div>
-				<c:set var="i" scope="session" value="${i+1}" />
 			</c:forEach>
 		</div>
 		<a class="carousel-control-prev" href="#product_details" role="button"
@@ -41,7 +39,7 @@
 				<div class="media">
 					<div class="media-body">
 						<p class="mb-0 text-muted detail-product-name">
-							<c:out value="${product.getPName()}" />
+							<c:out value="${product.getName()}" />
 						</p>
 					</div>
 				</div>
@@ -57,10 +55,10 @@
 						</p>
 						<c:if test="${new_Price != null}">
 							<p class="mb-0 text-muted detail-product-price">
-								<c:out value="${new_Price.getPrPrice()}đ" />
+								<c:out value="${new_Price.getPrice()}đ" />
 							</p>
 							<p class="mb-0 text-muted detail-product-price">
-								<c:out value="Áp dụng ${new_Price.getPrDatestart()}" />
+								<c:out value="Áp dụng ${new_Price.getStartdatetime()}" />
 							</p>
 						</c:if>
 						</p>
@@ -73,7 +71,7 @@
 				<div class="media">
 					<div class="media-body">
 						<p class="mb-0 text-muted">
-							<c:out value="${product.getPDescription()}" />
+							<c:out value="${product.getDescription()}" />
 						</p>
 					</div>
 				</div>

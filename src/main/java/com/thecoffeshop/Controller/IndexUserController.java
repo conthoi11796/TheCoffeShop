@@ -1,6 +1,6 @@
 package com.thecoffeshop.Controller;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,11 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thecoffeshop.Models.Categoryproduct;
 import com.thecoffeshop.Models.Image;
 import com.thecoffeshop.Models.Price;
@@ -26,6 +22,7 @@ import com.thecoffeshop.Service.Common;
 import com.thecoffeshop.Service.ImageService;
 import com.thecoffeshop.Service.PriceService;
 import com.thecoffeshop.Service.ProductService;
+import com.thecoffeshop.DTO.*;
 
 @Controller
 public class IndexUserController extends Common {
@@ -60,9 +57,8 @@ public class IndexUserController extends Common {
 			cgPrdId = null;
 		}
 		if (strSearch == "") {
-			strSearch= null;
+			strSearch = null;
 		}
-		System.out.println(page + cgPrdId + strSearch);
 		pagination(modelMap, httpSession, startPosition, cgPrdId, strSearch);
 
 		return "/user/index";
@@ -71,17 +67,19 @@ public class IndexUserController extends Common {
 
 	/* get info of product */
 	@PostMapping(value = "/infoProduct", produces = "application/x-www-form-urlencoded;charset=UTF-8")
-	public String infoProduct(@RequestParam String PId, ModelMap modelMap) {
+	public String infoProduct(@RequestParam String productid, ModelMap modelMap) {
 
-		Product product = productService.getInfoById(PId);
+		System.out.println(productid);
+		
+		Product product = productService.getInfoById(productid);
 
 		if (product == null) {
 			return "Sản phẩm không tồn tại";
 		}
 
 		modelMap.addAttribute("product", product);
-		modelMap.addAttribute("old_prPrice", priceService.getOldPrice(product.getPId()));
-		Price new_Price = priceService.getNewPrice(product.getPId());
+		modelMap.addAttribute("old_prPrice", priceService.getOldPrice(product.getProductid()));
+		Price new_Price = priceService.getNewPrice(product.getProductid());
 		if (new_Price != null) {
 			modelMap.addAttribute("new_Price", new_Price);
 		}
@@ -94,56 +92,51 @@ public class IndexUserController extends Common {
 	public void pagination(ModelMap modelMap, HttpSession httpSession, int startPosition, String cgPrdId,
 			String strSearch) {
 
-		modelMap.addAttribute("startPosition",startPosition + 1);
+		modelMap.addAttribute("startPosition", startPosition + 1);
 		modelMap.addAttribute("cgPrdId", cgPrdId);
-		
+
 		/* display Categoryproduct on combobox */
 		List<Categoryproduct> categoryProducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryProducts", categoryProducts);
 
 		/* display list product on page */
 		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch);
-		modelMap.addAttribute("products", products);
-		
+
+		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		/* display price product and sale price and new product release */
-		String priceProducts[][] = new String[products.size()][6];
-		int i = 0;
 		for (Product product : products) {
 
-			/* find old price */
-			priceProducts[i][0] = product.getPId();
+			ProductDTO productDTO = new ProductDTO();
 
-			float oldPrice = priceService.getOldPrice(product.getPId());
+			/* find old price */
+			productDTO.setProduct(product);
+
+			float oldPrice = priceService.getOldPrice(product.getProductid());
 			if (oldPrice > 0) {
-				priceProducts[i][1] = String.valueOf((int) oldPrice) + "đ";
+				productDTO.setPrice((int) oldPrice);
 			}
 
 			/* find new price */
-			Price price = priceService.getNewPrice(product.getPId());
-			if (price != null) {
+			Price newPrice = priceService.getNewPrice(product.getProductid());
+			if (newPrice != null) {
 
 				/* new price */
-				priceProducts[i][2] = String.valueOf(price.getPrPrice()) + "đ";
-
-				/* date apply */
-				priceProducts[i][3] = String.valueOf(super.sdf.format(price.getPrDatestart()));
-
+				productDTO.setNewPrice(newPrice);
 				/* rate price between new price to old price */
-				float newPrice = price.getPrPrice();
+				float newPriceValue = newPrice.getPrice();
 
-				int rate = this.rateOldAndNewPrice(oldPrice, newPrice);
-				if (rate > 0) {
-					priceProducts[i][4] = "-" + String.valueOf(rate) + "%";// sale
-				}
+				int rate = this.rateOldAndNewPrice(oldPrice, newPriceValue);
+				productDTO.setRateOldAndNewPrice(rate);
 			}
 
 			/* check is new product */
-			priceProducts[i][5] = "0";// old product
-			if (productService.checkIsNewProduct(product.getPId())) {
-				priceProducts[i][5] = "1";// is new product
+			productDTO.setCheckIsNew(false);
+			if (productService.checkIsNewProduct(product.getProductid())) {
+				productDTO.setCheckIsNew(true);
 			}
-			i++;
+			
+			productDTOs.add(productDTO);
 		}
-		modelMap.addAttribute("priceProducts", priceProducts);
+		modelMap.addAttribute("productDTOs", productDTOs);
 	}
 }
