@@ -8,10 +8,13 @@ public interface ProductDAOImp extends CommonDAOImp {
 
 	public Boolean addProduct(Product product);
 
-	public Product getInfoById(String PId);
-
 	public List<Product> getListProductLimit(int startPosition, String cgPrdId, String strSearch);
 
-	public Boolean checkIsNewProduct(String PId);
+	public Product getInfoById(String productid);
+	
+	public Boolean checkIsNewProduct(String productid);
 
+	public Boolean deleteProduct(String productid);
+
+	public Boolean editProduct(Product product);
 }

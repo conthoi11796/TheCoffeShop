@@ -19,6 +19,27 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 	private SessionFactory sessionFactory;
 
 	@Override
+	public List<Employee> findAll(int start, int numberRow) {
+		Session session = this.sessionFactory.getCurrentSession();
+		return session
+				.createQuery("FROM Employee e WHERE e.isdelete =: isdelete LIMIT :start,:numberRow", Employee.class)
+				.setParameter("is_delete", this.IS_NOT_DELETE).setParameter("start", start)
+				.setParameter("numberRow", numberRow).getResultList();
+	}
+
+	@Override
+	public Boolean addEmployee(Employee employee) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.save(employee);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
 	public String logIn(String username, String password) {
 
 		Session session = this.sessionFactory.getCurrentSession();
@@ -52,13 +73,32 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 	}
 
 	@Override
-	public List<Employee> findAll(int start, int numberRow) {
+	public Boolean deleteEmployee(String employeeid) {
+		
+
 		Session session = this.sessionFactory.getCurrentSession();
-		return session
-				.createQuery("FROM Employee e WHERE e.isdelete =: isdelete LIMIT :start,:numberRow", Employee.class)
-				.setParameter("is_delete", this.IS_NOT_DELETE).setParameter("start", start)
-				.setParameter("numberRow", numberRow).getResultList();
+		try {
+			Employee employee = this.getInfoById(employeeid);
+			session.remove(employee);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
+
+	@Override
+	public Boolean editEmployee(Employee employee) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.update(employee);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	
 
 //public void save(Employee employee) {
 //	Session session = this.sessionFactory.getCurrentSession();

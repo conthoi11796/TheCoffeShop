@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import com.thecoffeshop.DAOImp.CustomerDAOImp;
 import com.thecoffeshop.Models.Customer;
 
@@ -28,6 +30,61 @@ public class CustomerDAO implements CustomerDAOImp {
 
 			return -1;
 		}
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Customer> customers = session
+					.createQuery("FROM Customer c WHERE c.isdelete =: isdelete",
+					Customer.class).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getResultList();
+			return customers;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public Customer getInfoById(int customerid) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Customer customer = session
+					.createQuery("FROM Customer c WHERE c.customerid = :customerid AND c.isdelete =: isdelete",
+					Customer.class).setParameter("customerid", customerid ).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getSingleResult();
+			return customer;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public Boolean deleteCustomer(int customerid) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Customer customer = this.getInfoById(customerid);
+			if(customer != null){
+				if(session.delete(customer)){
+					return true;
+				}
+				return false;
+			}
+			return false;
+		} catch (Exception e) {
+			//TODO: handle exception
+		}
+	}
+
+	@Override
+	public Boolean editCustomer(Customer customer) {
+		return null;
 	}
 
 }

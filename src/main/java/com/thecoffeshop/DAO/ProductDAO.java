@@ -103,4 +103,29 @@ public class ProductDAO implements ProductDAOImp {
 		}
 	}
 
+	@Override
+	public Boolean deleteProduct(String productid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Product product = this.getInfoById(productid);
+			session.remove(product);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean editProduct(Product product) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.update(product);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

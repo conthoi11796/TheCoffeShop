@@ -19,6 +19,19 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+
+	@Override
+	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.save(categoryproduct);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 	@Override
 	public List<Categoryproduct> findAll() {
 
@@ -30,18 +43,6 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 			return liCategoryproducts;
 		} catch (Exception e) {
 			return null;
-		}
-	}
-
-	@Override
-	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
-		
-		Session session = this.sessionFactory.getCurrentSession();
-		try {
-			session.save(categoryproduct);
-			return true;
-		} catch (Exception e) {
-			return false;
 		}
 	}
 
@@ -59,6 +60,29 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 
 			return null;
 		}
+	}
+
+	@Override
+	public Boolean deleteCategoryproduct(String categoryproductid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Categoryproduct categoryproduct = this.getInfoById(categoryproductid);
+			if(categoryproduct != null){
+				if(session.delete(categoryproduct)){
+					return true;
+				}
+				return false;
+			}
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean editCategoryproduct(String cgPrcategoryproductiddId) {
+		return null;
 	}
 
 }

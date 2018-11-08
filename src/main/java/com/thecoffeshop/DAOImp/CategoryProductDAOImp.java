@@ -5,9 +5,14 @@ import com.thecoffeshop.Models.*;
 
 public interface CategoryProductDAOImp extends CommonDAOImp {
 
-	public List<Categoryproduct> findAll();
 
 	public Boolean addCategoryProduct(Categoryproduct categoryproduct);
+
+	public List<Categoryproduct> findAll();
 	
-	public Categoryproduct getInfoById(String cgPrdId);
+	public Categoryproduct getInfoById(String categoryproductid);
+
+	public Boolean deleteCategoryproduct(String categoryproductid);
+
+	public Boolean editCategoryproduct(String cgPrcategoryproductiddId);
 }
