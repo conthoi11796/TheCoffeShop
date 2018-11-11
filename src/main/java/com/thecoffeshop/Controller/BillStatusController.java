@@ -1,5 +1,6 @@
 package com.thecoffeshop.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,18 +24,39 @@ public class BillStatusController extends Common {
 
 	@Autowired
 	BillstatusService billstatusService;
+	@Autowired
+	BillService billService;
 
 	@GetMapping(value = "/admin/bill-status")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
+
+		int totalPage = billstatusService.findAll().size() / super.MAX_RESULTS;
+		if ((billstatusService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
 
 		return "/admin/bill-status";
 	}
 
 	@GetMapping(value = "/admin/bill-status/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Billstatus> ListBillstatus = billstatusService.findAll();
-		modelMap.addAttribute("ListBillstatus", ListBillstatus);
+		List<Billstatus> ListBillstatus = billstatusService.findLimit(Integer.valueOf(startPosition) - 1);
+
+		List<BillStatusDTO> dtos = new ArrayList<BillStatusDTO>();
+		for (Billstatus billstatus : ListBillstatus) {
+			BillStatusDTO billStatusDTO = new BillStatusDTO();
+			billStatusDTO.setBillstatus(billstatus);
+
+			billStatusDTO.setCanDelete(false);
+			if (billService.checkExistBillStatus(billstatus.getBillstatusid())) {
+				billStatusDTO.setCanDelete(true);
+			}
+			dtos.add(billStatusDTO);
+		}
+
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/bill-status/tBody";
 	}
@@ -42,6 +64,19 @@ public class BillStatusController extends Common {
 	@PostMapping(value = "/admin/bill-status/insert")
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid,
 			@RequestParam String name) {
+
+		/*check*/
+		if (billstatusid.length() == 0 || billstatusid.length() > 8) {
+
+			modelMap.addAttribute("result", "Mã phải không được để trống và ít nhất 7 kí tự!");
+			return "/admin/public/Danger";
+		}
+		if (name.length() == 0) {
+
+			modelMap.addAttribute("result", "Tên không được để trống!");
+			return "/admin/public/Danger";
+		}
+		/*check[END]*/
 
 		if (billstatusService.getInfoById(billstatusid.trim()) != null) {
 
@@ -81,7 +116,7 @@ public class BillStatusController extends Common {
 
 	@GetMapping(value = "/admin/bill-status/edit")
 	public String view(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid) {
-
+		
 		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
 		if (billstatus == null) {
 			modelMap.addAttribute("result", "Trạng thái hóa đơn không tồn tại!");
@@ -95,6 +130,19 @@ public class BillStatusController extends Common {
 	@PostMapping(value = "/admin/bill-status/edit")
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid,
 			@RequestParam String name) {
+
+		/*check*/
+		if (billstatusid.length() == 0 || billstatusid.length() > 8) {
+
+			modelMap.addAttribute("result", "Mã phải không được để trống và ít nhất 7 kí tự!");
+			return "/admin/public/Danger";
+		}
+		if (name.length() == 0) {
+
+			modelMap.addAttribute("result", "Tên không được để trống!");
+			return "/admin/public/Danger";
+		}
+		/*check[END]*/
 
 		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
 		if (billstatus == null) {

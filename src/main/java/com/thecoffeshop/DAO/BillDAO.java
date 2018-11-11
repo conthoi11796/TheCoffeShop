@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.thecoffeshop.DAOImp.*;
 import com.thecoffeshop.Models.Bill;
+import com.thecoffeshop.Models.Billstatus;
 
 @Repository()
 @Transactional(rollbackFor = Exception.class)
@@ -51,7 +52,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Bill bill = session
-					.createQuery("FROM Bill b WHERE p.billid = :billid AND p.isdelete =: isdelete", Bill.class)
+					.createQuery("FROM Bill b WHERE b.billid = :billid AND b.isdelete =: isdelete", Bill.class)
 					.setParameter("billid", billid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return bill;
 		} catch (Exception e) {
@@ -81,6 +82,26 @@ public class BillDAO implements BillDAOImp {
 			session.save(bill);
 			return true;
 		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean checkExistBillStatus(String billstatusid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session
+					.createQuery("FROM Bill b WHERE b.billstatus = :billstatus AND b.isdelete =: isdelete", Bill.class)
+					.setParameter("billstatus", new Billstatus(billstatusid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+
+			if (bills.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+
 			return false;
 		}
 	}

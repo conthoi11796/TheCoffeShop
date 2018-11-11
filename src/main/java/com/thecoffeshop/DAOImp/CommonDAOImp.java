@@ -9,4 +9,6 @@ public interface CommonDAOImp {
 	public Boolean IS_NOT_DELETE = false;
 
 	public int NUM_PRODUCT_ONE_PAGE = 15;
+
+	public int MAX_RESULTS = 1;
 }

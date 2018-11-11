@@ -41,7 +41,7 @@
 								<h4 class="font-weight-light">Xin chào! Hãy nhập thông tin</h4>
 								<form method="POST" action="/admin/login" class="pt-5">
 									<div class="form-group">
-										<label for="emUsername">Tài khoản</label> <input type="text"
+										<label for="emUsername">Tài khoản</label> <input type="text" required
 											class="form-control" id="emUsername" name="emUsername"
 											aria-describedby="emailHelp" placeholder="Tài khoản" value="admin">
 										<i class="mdi mdi-account"></i>

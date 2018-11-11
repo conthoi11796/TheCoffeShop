@@ -26,7 +26,7 @@
 				<p id="result-tbody" class="card-description">
 					<code></code>
 				</p>
-				<table class="table table-hover">
+				<table id="order-listing" class="table table-hover">
 					<thead>
 						<tr>
 							<th></th>
@@ -39,6 +39,33 @@
 
 					</tbody>
 				</table>
+				<nav>
+					<ul class="pagination separated pagination-secondary">
+						<li class="page-item"><a class="page-link" href="#"><i
+								class="mdi mdi-chevron-left"></i></a></li>
+						<c:if test="${startPosition == null}">
+							<c:set var="startPosition" scope="session" value="1" />
+						</c:if>
+						<c:set var="temb" scope="session" value="1" />
+						<c:forEach var="i" begin="1" end="5">
+							<c:if test="${temb <= totalPage}">
+								<c:if test="${startPosition == temb}">
+									<li class="page-item active"><a class="page-link" href="#"><c:out
+												value="${temb}" /></a></li>
+								</c:if>
+								<c:if test="${startPosition != temb}">
+									<li class="page-item "><a class="page-link" href="#"><c:out
+												value="${temb}" /></a></li>
+								</c:if>
+								<c:set var="temb" scope="session" value="${temb = temb + 1}" />
+							</c:if>
+						</c:forEach>
+
+
+						<li class="page-item"><a class="page-link" href="#"><i
+								class="mdi mdi-chevron-right"></i></a></li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>

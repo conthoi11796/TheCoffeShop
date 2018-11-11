@@ -22,6 +22,9 @@
 		src="../resouces/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<!-- endinject -->
 	<!-- Plugin js for this page-->
+	
+  <script src="../resouces/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="../resouces/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
 	<!-- End plugin js for this page-->
 	<!-- inject:js -->
 	<script src="../resouces/js/off-canvas.js"></script>

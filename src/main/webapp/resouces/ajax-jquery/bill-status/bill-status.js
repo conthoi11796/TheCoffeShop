@@ -16,12 +16,5 @@ $(function(){
         document.getElementById("billStatus_form").reset();
     });
 
-    function _list() {
-        $.get("/admin/bill-status/table",{
-       }, function(data, status){
-           $("tbody").html(data);
-       });
-    };
-
-    _list();
+    _list(1);// at loadTable.js
 });

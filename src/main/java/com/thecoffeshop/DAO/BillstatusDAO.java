@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import com.thecoffeshop.DAOImp.*;
-import com.thecoffeshop.Models.Bill;
-import com.thecoffeshop.Models.Billstatus;
+import com.thecoffeshop.Models.*;
 
 @Repository()
 @Transactional(rollbackFor = Exception.class)
@@ -76,13 +75,27 @@ public class BillstatusDAO implements BillstatusDAOImp {
 
 	@Override
 	public Boolean editBilldetail(Billstatus billstatus) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(billstatus);
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public List<Billstatus> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Billstatus> billstatus = session
+					.createQuery("FROM Billstatus b WHERE b.isdelete =: isdelete", Billstatus.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition*this.MAX_RESULTS).setMaxResults(this.MAX_RESULTS).getResultList();
+			return billstatus;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 }

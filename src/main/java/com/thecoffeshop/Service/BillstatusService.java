@@ -46,4 +46,10 @@ public class BillstatusService implements BillstatusDAOImp {
 		// TODO Auto-generated method stub
 		return billstatusDAO.editBilldetail(billstatus);
 	}
+
+	@Override
+	public List<Billstatus> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return billstatusDAO.findLimit(startPosition);
+	}
 }

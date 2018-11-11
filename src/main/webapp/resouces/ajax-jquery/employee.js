@@ -15,7 +15,7 @@ $(function(){
             usename : $("#usename").val(),
             password : $("#password").val(),
             position : $("#position").val(),
-            salaryonhour : $("#salaryonhour"),
+            salaryonhour : $("#salaryonhour").val(),
             startdate : $("#startdate").val()
        }, function(data, status){
            $("#result-form").html(data);

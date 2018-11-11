@@ -30,8 +30,6 @@
 <link rel="stylesheet" href="../resouces/css/my-style-v2.css">
 <!-- plugins:js -->
 <script src="../resouces/node_modules/jquery/dist/jquery.min.js"></script>
-<!-- <script
-	src="../resouces/node_modules/jquery-validate/1.16.0/jquery.validate.min.js"></script> -->
 </head>
 
 <body>

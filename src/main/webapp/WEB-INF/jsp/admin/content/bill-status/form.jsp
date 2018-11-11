@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<fieldset>
+
 	<div class="form-group row">
 		<label for="billstatusid" class="col-sm-3 col-form-label">Mã số</label>
 		<div class="col-sm-9">
@@ -32,6 +32,6 @@
 			Cập nhật</button>
 	</c:if>
 	<button id="btnClear" class="btn btn-light">Làm mới</button>
-</fieldset>
-<script src="../resouces/validation-jquery/bill-status-validation.js"></script>
-<script src="../resouces/ajax-jquery/bill-status-edit.js"></script> 
+
+<script src="../resouces/ajax-jquery/bill-status/loadTable.js"></script>
+<script src="../resouces/ajax-jquery/bill-status/bill-status-edit.js"></script> 

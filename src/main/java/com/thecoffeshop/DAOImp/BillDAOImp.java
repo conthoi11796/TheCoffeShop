@@ -15,4 +15,6 @@ public interface BillDAOImp extends CommonDAOImp{
 	public Boolean deleteBill(int billid);
 
 	public Boolean editBill(Bill bill);
+	
+	public Boolean checkExistBillStatus(String billstatusid);
 }

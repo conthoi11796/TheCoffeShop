@@ -50,4 +50,10 @@ public class BillService implements BillDAOImp {
 		return billDAO.editBill(bill);
 	}
 
+	@Override
+	public Boolean checkExistBillStatus(String billstatusid) {
+		// TODO Auto-generated method stub
+		return billDAO.checkExistBillStatus(billstatusid);
+	}
+
 }
