@@ -21,7 +21,7 @@ public class VoucherDAO implements VoucherDAOImp {
 
 	@Override
 	public Boolean addVoucher(Voucher voucher) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(voucher);
@@ -30,17 +30,14 @@ public class VoucherDAO implements VoucherDAOImp {
 			return false;
 		}
 	}
-	}
 
 	@Override
 	public List<Voucher> findAll() {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			List<Voucher> vouchers = session
-					.createQuery("FROM Voucher v WHERE  v.isdelete =: isdelete",
-					Voucher.class).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getResultList();
+			List<Voucher> vouchers = session.createQuery("FROM Voucher v WHERE  v.isdelete =: isdelete", Voucher.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return vouchers;
 		} catch (Exception e) {
 
@@ -50,12 +47,12 @@ public class VoucherDAO implements VoucherDAOImp {
 
 	@Override
 	public Voucher findById(int voucherid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Voucher voucher = session
 					.createQuery("FROM Voucher v WHERE v.voucherid = :voucherid AND v.isdelete =: isdelete",
-					Voucher.class)
+							Voucher.class)
 					.setParameter("voucherid", voucherid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getSingleResult();
 			return voucher;
@@ -66,13 +63,28 @@ public class VoucherDAO implements VoucherDAOImp {
 	}
 
 	@Override
-	public Boolean checkVoucher(String voId) {
+	public Voucher findByName(String name) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			Voucher voucher= session
-					.createQuery("FROM Voucher v WHERE v.voId = :voId AND v.isDelete =: is_delete", Voucher.class)
-					.setParameter("voId", voId).setParameter("is_delete", this.IS_NOT_DELETE).getSingleResult();
+			Voucher voucher = session
+					.createQuery("FROM Voucher v WHERE v.name = :name AND v.isdelete =: isdelete", Voucher.class)
+					.setParameter("name", name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			
+			return voucher;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public Boolean checkVoucher(String name) {
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Voucher voucher = session
+					.createQuery("FROM Voucher v WHERE v.name = :name AND v.isdelete =: isdelete", Voucher.class)
+					.setParameter("name", name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return true;
 		} catch (Exception e) {
 
@@ -82,21 +94,20 @@ public class VoucherDAO implements VoucherDAOImp {
 
 	@Override
 	public Boolean deleteVoucher(int voucherid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			Voucher voucher =this.findById(voucherid);
+			Voucher voucher = this.findById(voucherid);
 			session.remove(voucher);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
-	}
 
 	@Override
 	public Boolean editVoucher(Voucher voucher) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(voucher);
@@ -105,6 +116,4 @@ public class VoucherDAO implements VoucherDAOImp {
 			return false;
 		}
 	}
-	}
-
 }

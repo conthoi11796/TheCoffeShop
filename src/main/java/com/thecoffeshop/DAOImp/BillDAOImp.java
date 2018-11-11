@@ -6,9 +6,9 @@ import com.thecoffeshop.Models.*;
 
 public interface BillDAOImp extends CommonDAOImp{
 
-	public Boolean addBill(Bill bill);
+	public int addBill(Bill bill);
 
-	public List<Bill> findAllBill();
+	public List<Bill> findAll();
 
 	public Bill getInfoById(int billid);
 

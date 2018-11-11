@@ -34,13 +34,12 @@ public class CustomerDAO implements CustomerDAOImp {
 
 	@Override
 	public List<Customer> findAll() {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Customer> customers = session
-					.createQuery("FROM Customer c WHERE c.isdelete =: isdelete",
-					Customer.class).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getResultList();
+					.createQuery("FROM Customer c WHERE c.isdelete =: isdelete", Customer.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return customers;
 		} catch (Exception e) {
 
@@ -50,12 +49,13 @@ public class CustomerDAO implements CustomerDAOImp {
 
 	@Override
 	public Customer getInfoById(int customerid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Customer customer = session
 					.createQuery("FROM Customer c WHERE c.customerid = :customerid AND c.isdelete =: isdelete",
-					Customer.class).setParameter("customerid", customerid ).setParameter("isdelete", this.IS_NOT_DELETE)
+							Customer.class)
+					.setParameter("customerid", customerid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getSingleResult();
 			return customer;
 		} catch (Exception e) {
@@ -66,19 +66,14 @@ public class CustomerDAO implements CustomerDAOImp {
 
 	@Override
 	public Boolean deleteCustomer(int customerid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Customer customer = this.getInfoById(customerid);
-			if(customer != null){
-				if(session.delete(customer)){
-					return true;
-				}
-				return false;
-			}
-			return false;
+			session.delete(customer);
+			return true;
 		} catch (Exception e) {
-			//TODO: handle exception
+			return false;
 		}
 	}
 

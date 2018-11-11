@@ -9,13 +9,10 @@ import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
-import com.thecoffeshop.Models.Bill;
-import com.thecoffeshop.Models.Categoryproduct;
-import com.thecoffeshop.Models.Customer;
-import com.thecoffeshop.Models.Image;
-import com.thecoffeshop.Models.Product;
-import com.thecoffeshop.Models.Voucher;
+import com.thecoffeshop.Models.*;
 import com.thecoffeshop.Service.*;
+
+import net.bytebuddy.implementation.bind.annotation.This;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,22 +37,34 @@ public class UserOrderProductController extends Common {
 	CustomerService customerService;
 	@Autowired
 	BillService billService;
+	@Autowired
+	BilldetailService billdetailService;
 
 	@GetMapping(value = "/order-product", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String index(ModelMap modelMap, HttpSession httpSession) {
+
+		return "/user/orderProduct";
+	}
+
+	@PostMapping(value = "/order-product", produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String index(ModelMap modelMap, HttpSession httpSession, @RequestParam String listCart,
 			@RequestParam String listNumberProduct) {
+
+		modelMap.addAttribute("listCart", listCart);
+		modelMap.addAttribute("listNumberProduct", listNumberProduct);
 
 		/* display Categoryproduct on combobox */
 		List<Categoryproduct> categoryProducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryProducts", categoryProducts);
 
-		String listPId = listCart;
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
-		while ((listPId.indexOf(",") != -1) && (listNumberProduct.indexOf(",") != -1)) {
-			String PId = listPId.substring(0, listPId.indexOf(","));
-			int number = Integer.valueOf(listNumberProduct.substring(0, listNumberProduct.indexOf(",")));
+		List<String> listProductId = this.listProductCart(listCart);
+		List<Integer> listNumber = this.listNumberCart(listNumberProduct);
 
-			Product product = productService.getInfoById(PId);
+		int i = 0;
+		for (String productid : listProductId) {
+
+			Product product = productService.getInfoById(productid);
 			if (product != null) {
 				try {
 					ProductDTO productDTO = new ProductDTO();
@@ -68,8 +77,8 @@ public class UserOrderProductController extends Common {
 						}
 						productDTO.setImages(images);
 					}
-					productDTO.setNumber(number);
-					productDTO.setPrice(priceService.getOldPrice(product.getPId()));
+					productDTO.setNumber(listNumber.get(i));
+					productDTO.setPrice(priceService.getOldPrice(product.getProductid()));
 
 					productDTOs.add(productDTO);
 				} catch (Exception e) {
@@ -77,46 +86,66 @@ public class UserOrderProductController extends Common {
 				}
 			}
 
-			listPId = listPId.substring(listPId.indexOf(",") + 1, listPId.length());
-			listNumberProduct = listNumberProduct.substring(listNumberProduct.indexOf(",") + 1,
-					listNumberProduct.length());
+			i++;
 		}
 		modelMap.addAttribute("productDTOs", productDTOs);
 
 		return "/user/orderProduct";
 	}
 
-	@PostMapping(value = "/order-product", produces = "application/x-www-form-urlencoded;charset=UTF-8")
-	public String orderProduct(ModelMap modelMap, HttpSession httpSession, @RequestParam String cuName,
-			@RequestParam String cuAddress, @RequestParam String cuPhoneNumber, @RequestParam String biDatetimeStart,
-			@RequestParam String biNotice, @RequestParam String voId) {
-
-		if (voId != null && !voucherService.checkVoucher(voId)) {
-
-		}
+	@PostMapping(value = "/pay-cart", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String orderProduct(ModelMap modelMap, HttpSession httpSession, @RequestParam String name,
+			@RequestParam String address, @RequestParam String phone, @RequestParam String startdatetime,
+			@RequestParam String notice, @RequestParam String voucherName, @RequestParam String listCart,
+			@RequestParam String listNumberProduct2) {
 
 		Customer customer = new Customer();
-		customer.setCuName(cuName);
-		customer.setCuAddress(cuAddress);
-		customer.setCuPhoneNumber(cuPhoneNumber);
-		customer.setIsDelete(super.IS_NOT_DELETE);
+		customer.setName(name);
+		customer.setAddress(address);
+		customer.setPhone(Integer.valueOf(phone));
+		customer.setIsdelete(super.IS_NOT_DELETE);
 
-		int cuId = customerService.addCustomer(customer);
-		if (cuId != -1) { /* customer has inserted */
+		int lastCustomerID = customerService.addCustomer(customer);
+		if (lastCustomerID != -1) { /* customer has inserted */
 
 			Bill bill = new Bill();
 			Date DatetimeStart = null;
 			try {
-				DatetimeStart = super.sdf.parse(biDatetimeStart);
+				DatetimeStart = super.sdf.parse(startdatetime);
 			} catch (Exception e) {
 			}
-			bill.setBiDatetimeStart(DatetimeStart);
-			bill.setBiNotice(biNotice);
-			bill.setVoucher(new Voucher(voId));
+			bill.setStartdatetime(DatetimeStart);
+			bill.setNotice(notice);
+			if (voucherName != null && voucherService.checkVoucher(voucherName.trim())) {
+				Voucher voucher = voucherService.findByName(voucherName);
+				bill.setVoucher(voucher);
+			}
 
-			int biId = billService.addBill(bill);
-			if (biId != -1) {
-				
+			int billid = billService.addBill(bill);
+			if (billid != -1) { /* bill has inserted */
+
+				List<String> listProductId = this.listProductCart(listCart);
+				List<Integer> listNumber = this.listNumberCart(listNumberProduct2);
+
+				int i = 0;
+				for (String productid : listProductId) {
+
+					if (productService.getInfoById(productid) != null) {//product is exist
+						Billdetail billdetail = new Billdetail();
+
+						BilldetailId billdetailId = new BilldetailId(productid, billid);
+						billdetail.setId(billdetailId);
+						billdetail.setBill(bill);
+						billdetail.setProduct(new Product(productid));
+						billdetail.setQuantity(listNumber.get(i));
+						billdetail.setIsdelete(super.IS_NOT_DELETE);
+						billdetail.setCreateat(new Date());
+						
+						billdetailService.addBilldetail(billdetail);
+					}
+					i++;
+				}
+
 			}
 
 		}

@@ -24,7 +24,7 @@ public class PositionDAO implements PositionDAOImp {
         
         Session session = this.sessionFactory.getCurrentSession();
         try {
-            session.add(position);
+            session.save(position);
             return true;
         } catch (Exception e) {
             return false;
@@ -87,5 +87,21 @@ public class PositionDAO implements PositionDAOImp {
             return false;
         }
     }
+
+	@Override
+	public Position getInfoByName(String name) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+
+			Position position = session
+                    .createQuery("FROM Position p WHERE p.name =:name AND p.isdelete =: isdelete", Position.class)
+                    .setParameter("name",name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			return position;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
 
 }

@@ -11,6 +11,8 @@ public interface TablestatusDAOImp extends CommonDAOImp {
     public List<Tablestatus> findAll();
 
     public Tablestatus getInfoById(int tablestatusid);
+    
+    public Boolean checkExist(String name); 
 
 	public Boolean deleteTablestatus(int tablestatusid);
 

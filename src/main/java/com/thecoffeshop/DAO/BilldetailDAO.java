@@ -10,80 +10,82 @@ import java.util.List;
 
 import com.thecoffeshop.DAOImp.*;
 import com.thecoffeshop.Models.*;
+
 @Repository()
 @Transactional(rollbackFor = Exception.class)
 public class BilldetailDAO implements BilldetailDAOImp {
 
 	@Autowired
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-    @Override
-    public Boolean addBilldetail(Billdetail billdetail) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean addBilldetail(Billdetail billdetail) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
-            if(session.save(billdetail)){
-
-                return true;
-            }
-            return false
+			session.save(billdetail);
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public List<Billdetail> getInfoBilldetailByBillId(int billid) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public List<Billdetail> getInfoBilldetailByBillId(int billid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Billdetail> billdetails = session
 					.createQuery("FROM Billdetail b WHERE b.BilldetailId =:billdetailId AND b.isdelete =: isdelete",
-					Billdetail.class).setParameter("billdetailId", new BilldetailId( null, billid)).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getResultList();
+							Billdetail.class)
+					.setParameter("billdetailId", new BilldetailId(null, billid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return billdetails;
 		} catch (Exception e) {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Billdetail getInfoBilldetailByBilldetailId(BilldetailId billdetailId) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
-        try {
-            Billdetail billdetail =  session.createQuery("FROM Billdetail b WHERE b.BilldetailId =:billdetailId AND b.isdelete =: isdelete",
-            Billdetail.class).setParameter("billdetailId", billdetailId).setParameter("isdelete", this.IS_NOT_DELETE)
-            .getSingleList();
-            return billdetail;
-        } catch (Exception e) {
-            return null;
-        }
-    }
+	@Override
+	public Billdetail getInfoBilldetailByBilldetailId(BilldetailId billdetailId) {
 
-    @Override
-    public Boolean deleteBilldetail(BilldetailId billdetailId) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
-            Billdetail billdetail = this.getInfoBilldetailByBilldetailId(billdetailId);
-            if(billdetail!=null){
-                if(session.delete(billdetail)){
-                    return true;
-                }
-                return false;
-            }
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+			Billdetail billdetail = session
+					.createQuery("FROM Billdetail b WHERE b.BilldetailId =:billdetailId AND b.isdelete =: isdelete",
+							Billdetail.class)
+					.setParameter("billdetailId", billdetailId).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getSingleResult();
+			return billdetail;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 
-    @Override
-    public Boolean editBilldetail(Billdetail billdetail) {
-        return null;
-    }
+	@Override
+	public Boolean deleteBilldetail(BilldetailId billdetailId) {
 
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Billdetail billdetail = this.getInfoBilldetailByBilldetailId(billdetailId);
+			session.delete(billdetail);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean editBilldetail(Billdetail billdetail) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.save(billdetail);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 }

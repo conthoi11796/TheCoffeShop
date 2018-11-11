@@ -10,35 +10,34 @@ import java.util.List;
 
 import com.thecoffeshop.DAOImp.*;
 import com.thecoffeshop.Models.Bill;
+
 @Repository()
 @Transactional(rollbackFor = Exception.class)
 public class BillDAO implements BillDAOImp {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	@Override
 	public int addBill(Bill bill) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			int lastId = (Integer)session.save(bill);
+			int lastId = (Integer) session.save(bill);
 			return lastId;
 		} catch (Exception e) {
 			return -1;
 		}
 
-	
 	}
+
 	@Override
-	public List<Bill> findAllBill() {
+	public List<Bill> findAll() {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			List<Bill> bills = session
-					.createQuery("FROM Bill b WHERE b.isdelete =: isdelete",
-					Bill.class).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getResultList();
+			List<Bill> bills = session.createQuery("FROM Bill b WHERE b.isdelete =: isdelete", Bill.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return bills;
 		} catch (Exception e) {
 
@@ -48,13 +47,12 @@ public class BillDAO implements BillDAOImp {
 
 	@Override
 	public Bill getInfoById(int billid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Bill bill = session
-					.createQuery("FROM Bill b WHERE p.billid = :billid AND p.isdelete =: isdelete",
-					Bill.class).setParameter("billid", billid).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getSingleResult();
+					.createQuery("FROM Bill b WHERE p.billid = :billid AND p.isdelete =: isdelete", Bill.class)
+					.setParameter("billid", billid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return bill;
 		} catch (Exception e) {
 
@@ -64,18 +62,12 @@ public class BillDAO implements BillDAOImp {
 
 	@Override
 	public Boolean deleteBill(int billid) {
-				
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			Bill bill = this.findInfoById(billid);
-
-			if(bill!=null){
-				if(session.remove(bill)){
-					return true;
-				}
-				return false;
-			}
-			return false;	
+			Bill bill = this.getInfoById(billid);
+			session.remove(bill);
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
@@ -86,16 +78,10 @@ public class BillDAO implements BillDAOImp {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			if(session.save(bill)){
-				return true;
-			}
-			else{
-				return false;
-			}
+			session.save(bill);
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
-
 	}
-
 }

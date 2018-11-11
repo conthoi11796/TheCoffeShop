@@ -858,3 +858,13 @@ div{
     color: white;
 }
 /*end vage-statistics*/
+.checkBox-search{
+	margin: 0 0;
+}
+.checkBox-search label{
+	margin: 0 0;
+	margin-bottom: 0;
+}
+.checkBox-search i:before{
+	margin-bottom: 0;
+}

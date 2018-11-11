@@ -14,9 +14,15 @@ import com.thecoffeshop.Models.Categoryproduct;
 @Transactional
 public class CategoryProductService implements CategoryProductDAOImp {
 
-	@Autowired 
+	@Autowired
 	private CategoryProductDAO categoryProductDAO;
-	
+
+	@Override
+	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
+		// TODO Auto-generated method stub
+		return categoryProductDAO.addCategoryProduct(categoryproduct);
+	}
+
 	@Override
 	public List<Categoryproduct> findAll() {
 
@@ -24,15 +30,21 @@ public class CategoryProductService implements CategoryProductDAOImp {
 	}
 
 	@Override
-	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
-		// TODO Auto-generated method stub
-		return null;
+	public Categoryproduct getInfoById(String categoryproductid) {
+
+		return categoryProductDAO.getInfoById(categoryproductid);
 	}
 
 	@Override
-	public Categoryproduct getInfoById(String cgPrdId) {
-		
-		return categoryProductDAO.getInfoById(cgPrdId);
+	public Boolean deleteCategoryproduct(String categoryproductid) {
+		// TODO Auto-generated method stub
+		return categoryProductDAO.deleteCategoryproduct(categoryproductid);
+	}
+
+	@Override
+	public Boolean editCategoryproduct(Categoryproduct categoryproduct) {
+		// TODO Auto-generated method stub
+		return categoryProductDAO.editCategoryproduct(categoryproduct);
 	}
 
 }

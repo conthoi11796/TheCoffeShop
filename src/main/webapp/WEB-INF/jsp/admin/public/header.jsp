@@ -30,6 +30,8 @@
 <link rel="stylesheet" href="../resouces/css/my-style-v2.css">
 <!-- plugins:js -->
 <script src="../resouces/node_modules/jquery/dist/jquery.min.js"></script>
+<!-- <script
+	src="../resouces/node_modules/jquery-validate/1.16.0/jquery.validate.min.js"></script> -->
 </head>
 
 <body>
@@ -255,45 +257,41 @@
 										href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Bàn</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
+									<li class="nav-item"><a href="/admin/employee"
+										class="nav-link" href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Nhân viên</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
+									<li class="nav-item"><a href="/admin/position"
+										class="nav-link" href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Chức vụ</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
+									<li class="nav-item"><a href="/admin/schedule"
+										class="nav-link" href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Lịch làm</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="./add-product"> <span class="menu-title">Thức
-												ăn- Đồ uống</span>
+									<li class="nav-item"><a href="/admin/product"
+										class="nav-link" href="./add-product"> <span
+											class="menu-title">Thức ăn- Đồ uống</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
+									<li class="nav-item"><a href="/admin/category-product"
+										class="nav-link" href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Loại thức ăn</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
+									<li class="nav-item"><a href="/admin/voucher"
+										class="nav-link" href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Voucher</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
 										href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Khách hàng</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Trạng thái chế biến</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
+									<li class="nav-item"><a href="/admin/bill-status"
+										class="nav-link" href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Trạng thái hóa đơn</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Trạng thái bàn</span>
+									<li class="nav-item"><a href="/admin/table-status"
+										class="nav-link"> <span class="menu-title">Trạng
+												thái bàn</span>
 									</a></li>
 								</ul>
 							</div></li>

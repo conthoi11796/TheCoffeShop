@@ -22,7 +22,7 @@ public class MaterialDAO implements MaterialDAOImp {
 
         Session session = this.sessionFactory.getCurrentSession();
         try {
-            session.add(material);
+            session.save(material);
             return true;
         } catch (Exception e) {
             return false;

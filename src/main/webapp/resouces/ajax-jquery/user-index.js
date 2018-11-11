@@ -121,8 +121,8 @@ function addToCart(PId) {
 				+ 	'</div>';
 		$(".cart-list").prepend(data);
 		/* add idProduct to href thanh toan */
-		var listCard = $("#btnPay").attr("href") + PId + "," ;
-		$("#btnPay").attr("href", listCard);
+		var listCart = $("#listCart").val() ;
+		$("#listCart").val(listCart + PId + "~");
 		
 		sumPriceProduct(0, 1, priceValue);
 		showNumberProductInCart();
@@ -156,6 +156,30 @@ function changeTolalPrice(PId){
 	/* set value attribute old-value of input */
 	$("#number-product-"+PId).attr("old-value" , new_number);
 }
+
+function _searchPage(page) {
+	var cgPrdId = $("#selectCategoryProduct").val();
+	var strSearch = $("#inputSearch").val();
+	var isHotDeal = $("#isHotDeal").val();
+	var priceAZ = $("#priceAZ").val();
+	var priceZA = $("#priceZA").val();
+
+	 $.post("/index/search",{
+		page,
+		cgPrdId,
+		strSearch,
+		isHotDeal,
+		priceAZ,
+		priceZA
+		}, function(data, status){
+			// if(data==null){
+				$("#content-index").html(data);
+			// }
+			// else{
+			// 	$("#content-index").prepend(data);
+			// }
+	});
+}
 /* Toal price product [END] */
 $(function () {
 	
@@ -177,20 +201,42 @@ $(function () {
 		showNumberProductInCart();
 	});
 	
-	$("#selectCategoryProduct").change(function() {
-		window.location.href = "../index/search?page=0&cgPrdId="+ $(this).val() +"&strSearch=null" ;
-	});
-	
 	$("#btnPay").click(function() {
 
 		var listNumberProduct="";
 		var num = $(".cart-list input[type=number]").length;
 		var input = $(".cart-list input[type=number]");
 		for (var i = 0; i < num; i++) {
-			listNumberProduct += input.eq(i).val()+",";
+			listNumberProduct += input.eq(i).val()+"~";
 		}
-		var link =$(this).attr("href");
-		$(this).attr("href",link+"&listNumberProduct="+listNumberProduct);
-		
+
+		$("#listNumberProduct").val(listNumberProduct);
 	});
+	
+
+	/*page seacrch*/
+	$("#selectCategoryProduct").change(function() {
+		$("#cgPrdId").val($(this).val());
+	});
+	
+	$("#inputIsHotDeal").click(function() {
+		$("#isHotDeal").val("true");
+	});
+	
+	$("#inputPriceAZ").change(function() {
+		$("#priceAZ").val("true");
+	});
+	
+	$("#inputPriceZA").change(function() {
+		$("#priceZA").val("true");
+	});
+	
+	$("#viewMore").click(function() {
+		_searchPage($("#page").val().trim());
+	});
+	
+	$("#btnSearch").click(function() {
+		_searchPage("0");
+	});
+	/*page seacrch[END]*/
 })

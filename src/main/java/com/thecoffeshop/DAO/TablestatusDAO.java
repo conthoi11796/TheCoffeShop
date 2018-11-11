@@ -68,7 +68,7 @@ public class TablestatusDAO implements TablestatusDAOImp {
         Session session = this.sessionFactory.getCurrentSession();
         try {
             Tablestatus tablestatus = this.getInfoById(tablestatusid);
-			session.save(tablestatus);
+			session.remove(tablestatus);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -80,11 +80,26 @@ public class TablestatusDAO implements TablestatusDAOImp {
         
         Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.remove(tablestatus);
+			session.update(tablestatus);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
     }
+
+	@Override
+	public Boolean checkExist(String name) {
+		
+		 Session session = this.sessionFactory.getCurrentSession();
+			try {
+				Tablestatus tablestatus = session
+						.createQuery("FROM Tablestatus tb WHERE tb.name =: name AND tb.isdelete =: isdelete", Tablestatus.class)
+						.setParameter("name",name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+				return true;
+			} catch (Exception e) {
+
+				return false;
+			}
+	}
 
 }

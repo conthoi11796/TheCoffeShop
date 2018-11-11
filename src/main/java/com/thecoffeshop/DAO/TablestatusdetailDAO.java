@@ -16,24 +16,24 @@ import com.thecoffeshop.Models.*;
 public class TablestatusdetailDAO implements TablestatusdetailDAOImp {
 
 	@Autowired
-    private SessionFactory sessionFactory;
- 
-    @Override
-    public Boolean addTablestatusdetail(Tablestatusdetail tablestatusdetail) {
-       
-        Session session = this.sessionFactory.getCurrentSession();
+	private SessionFactory sessionFactory;
+
+	@Override
+	public Boolean addTablestatusdetail(Tablestatusdetail tablestatusdetail) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(tablestatusdetail);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public List<Tablestatusdetail> findAll() {
-       
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public List<Tablestatusdetail> findAll() {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Tablestatusdetail> tablestatusdetails = session
 					.createQuery("FROM Tablestatusdetail tsd WHERE tsd.isdelete =: isdelete", Tablestatusdetail.class)
@@ -42,43 +42,46 @@ public class TablestatusdetailDAO implements TablestatusdetailDAOImp {
 		} catch (Exception e) {
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Tablestatusdetail getInfoById(TablestatusdetailId tablestatusdetailId) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Tablestatusdetail getInfoById(int dinnertableidId) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			Tablestatusdetail tablestatusdetail = session
-					.createQuery("FROM Tablestatusdetail tsd WHERE tsd.TablestatusdetailId =: tablestatusdetailId AND tsd.isdelete =: isdelete", Tablestatusdetail.class)
-					.setParameter("tablestatusdetailId",tablestatusdetailId).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
-			return tablestatusdetail;
+			List<Tablestatusdetail> tablestatusdetails = session
+					.createQuery("FROM Tablestatusdetail tsd WHERE tsd.TablestatusdetailId =: id AND tsd.isdelete =: isdelete", Tablestatusdetail.class)
+					.setParameter("id", new TablestatusdetailId(dinnertableidId, 1))
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			System.out.println(tablestatusdetails.size());
+			
+			return null;
 		} catch (Exception e) {
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Boolean deleteTablestatusdetail(TablestatusdetailId tablestatusdetailId) {
-       
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean deleteTablestatusdetail(TablestatusdetailId tablestatusdetailId) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.remove(tablestatusdetailId);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public Boolean editTablestatusdetail(Tablestatusdetail tablestatusdetail) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean editTablestatusdetail(Tablestatusdetail tablestatusdetail) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(tablestatusdetail);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 }

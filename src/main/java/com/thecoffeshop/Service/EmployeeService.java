@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thecoffeshop.Models.*;
 import com.thecoffeshop.DAO.*;
-import com.thecoffeshop.DAOImp.EmployeeDAOImp;
+import com.thecoffeshop.DAOImp.*;
 
 @Service
 @Transactional
@@ -31,9 +31,33 @@ public class EmployeeService implements EmployeeDAOImp {
 	}
 
 	@Override
-	public List<Employee> findAll(int start, int numberRow) {
+	public List<Employee> findAll() {
 		
-		return emloyeeDAO.findAll(start, numberRow);
+		return emloyeeDAO.findAll();
+	}
+
+	@Override
+	public Boolean addEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return emloyeeDAO.addEmployee(employee);
+	}
+
+	@Override
+	public Boolean deleteEmployee(String employeeid) {
+		// TODO Auto-generated method stub
+		return emloyeeDAO.deleteEmployee(employeeid);
+	}
+
+	@Override
+	public Boolean editEmployee(Employee employee) {
+		// TODO Auto-generated method stub
+		return emloyeeDAO.editEmployee(employee);
+	}
+
+	@Override
+	public Boolean checkExistUseName(String usename) {
+		// TODO Auto-generated method stub
+		return emloyeeDAO.checkExistUseName(usename);
 	}
 
 //	public Customer findById(final int id) {

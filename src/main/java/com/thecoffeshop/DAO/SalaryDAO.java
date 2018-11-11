@@ -8,33 +8,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thecoffeshop.DAOImp.*;
 import com.thecoffeshop.Models.*;
+
 @Repository()
 @Transactional(rollbackFor = Exception.class)
 public class SalaryDAO implements SalaryDAOImp {
 
-    @Autowired 
-    private SessionFactory sessionFactory;
-    
-    @Override
-    public Boolean addSalary(Salary salary) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	@Override
+	public Boolean addSalary(Salary salary) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(salary);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public Salary getInfoById(int dinnertableid) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Salary getInfoById(int dinnertableid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Salary salary = session
 					.createQuery("FROM Salary s WHERE s.dinnertableid = :dinnertableid and s.isdelete =: isdelete",
-                    Register.class)
+							Salary.class)
 					.setParameter("dinnertableid", dinnertableid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getSingleResult();
 			return salary;
@@ -42,31 +43,31 @@ public class SalaryDAO implements SalaryDAOImp {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Boolean deleteSalary(int dinnertableid) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean deleteSalary(int dinnertableid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
-            Salary salary = this.getInfoById(dinnertableid);
+			Salary salary = this.getInfoById(dinnertableid);
 			session.remove(salary);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public Boolean editSalary(Salary salary) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean editSalary(Salary salary) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(salary);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
 }

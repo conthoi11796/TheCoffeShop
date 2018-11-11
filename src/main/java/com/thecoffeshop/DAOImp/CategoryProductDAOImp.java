@@ -14,5 +14,5 @@ public interface CategoryProductDAOImp extends CommonDAOImp {
 
 	public Boolean deleteCategoryproduct(String categoryproductid);
 
-	public Boolean editCategoryproduct(String cgPrcategoryproductiddId);
+	public Boolean editCategoryproduct(Categoryproduct categoryproduct);
 }

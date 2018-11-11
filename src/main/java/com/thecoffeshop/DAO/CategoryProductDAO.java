@@ -19,10 +19,9 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-
 	@Override
 	public Boolean addCategoryProduct(Categoryproduct categoryproduct) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(categoryproduct);
@@ -38,7 +37,7 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Categoryproduct> liCategoryproducts = session
-					.createQuery("FROM Categoryproduct c where c.isdelete = :isdelete", Categoryproduct.class)
+					.createQuery("FROM Categoryproduct c WHERE c.isdelete = :isdelete", Categoryproduct.class)
 					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return liCategoryproducts;
 		} catch (Exception e) {
@@ -48,13 +47,14 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 
 	@Override
 	public Categoryproduct getInfoById(String categoryproductid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 
-			Categoryproduct categoryproduct= session
-					.createQuery("FROM Categoryproduct cp WHERE cp.categoryproductid = :categoryproductid and cp.isdelete =: isdelete", Categoryproduct.class)
-					.setParameter("categoryproductid", categoryproductid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			Categoryproduct categoryproduct = session.createQuery(
+					"FROM Categoryproduct cp WHERE cp.categoryproductid = :categoryproductid and cp.isdelete =: isdelete",
+					Categoryproduct.class).setParameter("categoryproductid", categoryproductid)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return categoryproduct;
 		} catch (Exception e) {
 
@@ -68,21 +68,23 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Categoryproduct categoryproduct = this.getInfoById(categoryproductid);
-			if(categoryproduct != null){
-				if(session.delete(categoryproduct)){
-					return true;
-				}
-				return false;
-			}
-			return false;
+			session.delete(categoryproduct);
+			return true;
 		} catch (Exception e) {
 			return false;
 		}
 	}
 
 	@Override
-	public Boolean editCategoryproduct(String cgPrcategoryproductiddId) {
-		return null;
+	public Boolean editCategoryproduct(Categoryproduct categoryproduct) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.update(categoryproduct);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 }

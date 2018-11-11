@@ -19,6 +19,33 @@
 			<li class="nav-item">
 				<div class="row">
 					<div class="header-search">
+						<div class='form-check form-check-flat nav-search checkBox-search' >
+							<label class='form-check-label' >
+								<input id='inputIsHotDeal' type='checkbox' class='form-check-input'  >
+									Bán chạy nhất
+								<i class='input-helper'></i>
+							</label>
+						</div>
+					</div>
+					<div class="header-search">
+						<div class='form-check form-check-flat nav-search checkBox-search' >
+							<label class='form-check-label'>
+								<input id='inputPriceAZ' type='checkbox' class='form-check-input'  >
+									Sắp xếp giá tăng
+								<i class='input-helper'></i>
+							</label>
+						</div>
+					</div>
+					<div class="header-search">
+						<div class='form-check form-check-flat nav-search checkBox-search' >
+							<label class='form-check-label'>
+									<input id='inputPriceZA' type='checkbox' class='form-check-input'  >
+										Sắp xếp giá giảm
+									<i class='input-helper'></i>
+							</label>
+						</div>
+					</div>
+					<div class="header-search">
 						<select class="form-control form-control-sm nav-search"
 							id="selectCategoryProduct">
 							<option>Phân loại</option>
@@ -34,18 +61,13 @@
 						</select>
 					</div>
 					<div class="header-search">
-						<form id="formSearch" method="GET" action="../index/search"
+						<div
 							class="nav-search">
-							<input class="input" placeholder="Từ khóa ..."> <i
-								id="boloc" class="fa fa-sliders" data-toggle="popover"
-								data-placement="bottom" data-title="Bộ lọc"
-								data-content="
-<div class='form-check form-check-flat'><label class='form-check-label'><input type='checkbox' class='form-check-input'  >Bán chạy nhất<i class='input-helper'></i></label></div><div class='form-check form-check-flat'><label class='form-check-label'><input type='checkbox' class='form-check-input'  >Đánh giá cao<i class='input-helper'></i></label></div><div class='form-check form-check-flat'><label class='form-check-label'><input type='checkbox' class='form-check-input'  >Sắp xếp giá tăng<i class='input-helper'></i></label></div><div class='form-check form-check-flat'><label class='form-check-label'><input type='checkbox' class='form-check-input'  >Sắp xếp giá giảm<i class='input-helper'></i></label></div><button class='btn btn-success nav-tooltip-btn'>Tìm kiếm</button><button class='btn btn-outline-danger nav-tooltip-btn'>Xóa bộ lọc</button>"
-								data-html="true"></i>
-							<button class="search-btn">
+							<input id="inputSearch" class="input" placeholder="Từ khóa ..."> 
+							<button id="btnSearch" type="button" class="search-btn">
 								<i class="icon-magnifier icons"></i>
 							</button>
-						</form>
+						</div>
 					</div>
 					<div class="header-ctn">
 						<!-- Cart -->
@@ -63,10 +85,14 @@
 									<h5>0</h5>
 								</div>
 								<div class="cart-btns row">
-									<a id="btnClean">Làm mới</a> <a id="btnPay"
-										href="/order-product?listCart=" listNumberProduct="">Thanh
-										toán <i class="fa fa-arrow-circle-right"></i>
-									</a>
+									<form method="post" action="/order-product">					
+										<input id="listCart" name="listCart" value="" type="hidden"/>
+										<input id="listNumberProduct" name="listNumberProduct" value="" type="hidden"/>
+										<a id="btnClean" type="submit">Làm mới</a> 
+										<button id="btnPay">Thanh
+											toán <i class="fa fa-arrow-circle-right"></i>
+										</button>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -77,5 +103,20 @@
 			</li>
 		</ul>
 	</div>
+	
+<!-- form hidden -->
+<input id="page" value='
+<c:if test="${startPosition!=null}">
+	<c:out value="${startPosition}" />
+</c:if>
+<c:if test="${startPosition==null}">
+	<c:out value="0" />
+</c:if>' type="hidden"/>
+<input id="cgPrdId" value='<c:out value="${cgPrdId}" />' type="hidden"/>
+<input id="strSearch" value='<c:out value="${strSearch}" />' type="hidden"/>
+<input id="isHotDeal" value='<c:out value="${isHotDeal}" />' type="hidden"/>
+<input id="priceAZ" value='<c:out value="${priceAZ}" />' type="hidden"/>
+<input id="priceZA" value='<c:out value="${priceZA}" />' type="hidden"/>
+<!-- form hidden [END]-->
 </nav>
 <!-- partial ends -->

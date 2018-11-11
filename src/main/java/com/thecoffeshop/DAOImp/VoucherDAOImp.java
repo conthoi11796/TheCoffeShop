@@ -12,9 +12,11 @@ public interface VoucherDAOImp extends CommonDAOImp{
 	public List<Voucher> findAll();
 
 	public Voucher findById(int voucherid);
+	
+	public Voucher findByName(String name);
 
 	/*check voucher date start<now<= date finish, voucher number > 0*/
-	public Boolean checkVoucher(String voId); 
+	public Boolean checkVoucher(String name); 
 
 	public Boolean deleteVoucher(int voucherid);
 

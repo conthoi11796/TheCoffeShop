@@ -19,17 +19,15 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public List<Employee> findAll(int start, int numberRow) {
+	public List<Employee> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-		return session
-				.createQuery("FROM Employee e WHERE e.isdelete =: isdelete LIMIT :start,:numberRow", Employee.class)
-				.setParameter("is_delete", this.IS_NOT_DELETE).setParameter("start", start)
-				.setParameter("numberRow", numberRow).getResultList();
+		return session.createQuery("FROM Employee e WHERE e.isdelete =: isdelete", Employee.class)
+				.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 	}
 
 	@Override
 	public Boolean addEmployee(Employee employee) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(employee);
@@ -63,7 +61,8 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 		try {
 
 			Employee employee = session
-					.createQuery("FROM Employee e WHERE e.employeeid = :employeeid and e.isdelete =: isdelete", Employee.class)
+					.createQuery("FROM Employee e WHERE e.employeeid = :employeeid and e.isdelete =: isdelete",
+							Employee.class)
 					.setParameter("employeeid", emId).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return employee;
 		} catch (Exception e) {
@@ -74,7 +73,6 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 
 	@Override
 	public Boolean deleteEmployee(String employeeid) {
-		
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
@@ -88,7 +86,7 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 
 	@Override
 	public Boolean editEmployee(Employee employee) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(employee);
@@ -98,7 +96,21 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 		}
 	}
 
-	
+	@Override
+	public Boolean checkExistUseName(String usename) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Employee employee = session
+					.createQuery("FROM Employee e WHERE e.usename = :usename AND e.isdelete =: isdelete",
+							Employee.class)
+					.setParameter("usename", usename).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			return true;
+		} catch (Exception e) {
+
+			return false;
+		}
+	}
 
 //public void save(Employee employee) {
 //	Session session = this.sessionFactory.getCurrentSession();

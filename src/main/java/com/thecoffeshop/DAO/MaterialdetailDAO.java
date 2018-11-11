@@ -16,75 +16,76 @@ import com.thecoffeshop.DAOImp.*;
 public class MaterialdetailDAO implements MaterialdetailDAOImp {
 
 	@Autowired
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-    @Override
-    public int addMaterialdetail(Materialdetail materialdetail) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
-        try {
-            session.add(materialdetail);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+	@Override
+	public Boolean addMaterialdetail(Materialdetail materialdetail) {
 
-    @Override
-    public List<Materialdetail> findAll() {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.save(materialdetail);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public List<Materialdetail> findAll() {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 
 			List<Materialdetail> materialdetails = session
-                    .createQuery("FROM Materialdetail m WHERE m.isdelete =: isdelete", Materialdetailid.class)
-                    .setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+					.createQuery("FROM Materialdetail m WHERE m.isdelete =: isdelete", Materialdetail.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return materialdetails;
 		} catch (Exception e) {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Materialdetail getInfoById(int materialdetailid) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Materialdetail getInfoById(int materialdetailid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 
-			Materialdetail materialdetail = session
-                    .createQuery("FROM Materialdetail m WHERE m.materialdetailid =: materialdetailid AND m.isdelete =: isdelete", Materialdetailid.class)
-                    .setParameter("materialdetailid", materialdetailid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			Materialdetail materialdetail = session.createQuery(
+					"FROM Materialdetail m WHERE m.materialdetailid =: materialdetailid AND m.isdelete =: isdelete",
+					Materialdetail.class).setParameter("materialdetailid", materialdetailid)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return materialdetail;
 		} catch (Exception e) {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Boolean deleteMaterialdetail(int customerid) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
-		try {
-            Materialdetail materialdetail = this.getInfoById(materialdetailid);
-            session.remove(materialdetail);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+	@Override
+	public Boolean deleteMaterialdetail(int materialdetailid) {
 
-    @Override
-    public Boolean editMaterialdetail(Materialdetail materialdetail) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
-            session.update(materialdetail);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
+			Materialdetail materialdetail = this.getInfoById(materialdetailid);
+			session.remove(materialdetail);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean editMaterialdetail(Materialdetail materialdetail) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.update(materialdetail);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 }

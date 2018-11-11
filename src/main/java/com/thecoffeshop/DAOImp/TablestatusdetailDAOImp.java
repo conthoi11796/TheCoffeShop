@@ -10,7 +10,7 @@ public interface TablestatusdetailDAOImp extends CommonDAOImp{
 
 	public List<Tablestatusdetail> findAll();
 
-	public Tablestatusdetail getInfoById(TablestatusdetailId tablestatusdetailId);
+	public Tablestatusdetail getInfoById(int dinnertableid );
 
 	public Boolean deleteTablestatusdetail(TablestatusdetailId tablestatusdetailId);
 

@@ -6,7 +6,7 @@ import com.thecoffeshop.Models.*;
 
 public interface BilldetailDAOImp extends CommonDAOImp{
 
-	public int addBilldetail(Billdetail billdetail);
+	public Boolean addBilldetail(Billdetail billdetail);
 
 	public List<Billdetail> getInfoBilldetailByBillId(int billid);
 

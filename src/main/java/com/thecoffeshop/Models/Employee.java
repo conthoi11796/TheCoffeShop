@@ -27,7 +27,7 @@ public class Employee implements java.io.Serializable {
 	private Salary salary;
 	private String name;
 	private Boolean sex;
-	private Integer phone;
+	private String phone;
 	private String address;
 	private String usename;
 	private String password;
@@ -52,7 +52,7 @@ public class Employee implements java.io.Serializable {
 		this.employeeid = employeeid;
 	}
 
-	public Employee(String employeeid, Salary salary, String name, Boolean sex, Integer phone, String address,
+	public Employee(String employeeid, Salary salary, String name, Boolean sex, String phone, String address,
 			String usename, String password, String createby, Date createat, String updateby, Date updateat,
 			Boolean isdelete, String deleteby, Date deleteat, Set<Bill> bills, Set<Atposition> atpositions,
 			Set<Exportbill> exportbills, Set<Register> registers, Set<Image> images, Set<Booktable> booktables) {
@@ -118,12 +118,12 @@ public class Employee implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	@Column(name = "PHONE", precision = 8, scale = 0)
-	public Integer getPhone() {
+	@Column(name = "PHONE", length = 10)
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 

@@ -26,9 +26,6 @@
 	<!-- inject:js -->
 	<script src="../resouces/js/off-canvas.js"></script>
 	<script src="../resouces/js/misc.js"></script>
-	<!-- Modal -->
-	<script src="../resouces/style-js/my-style.js"></script>
-	<!-- End Modal -->
 	<!-- endinject -->
 	<!-- Custom js for this page-->
 	<!-- End custom js for this page-->

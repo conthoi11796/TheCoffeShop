@@ -11,7 +11,9 @@ public interface PositionDAOImp extends CommonDAOImp{
     public List<Position> findAll();
 
 	public Position getInfoById(String positionid);
-
+	
+	public Position getInfoByName(String name);
+	
 	public Boolean deletePosition(String positionid);
 
 	public Boolean editPosition(Position position);

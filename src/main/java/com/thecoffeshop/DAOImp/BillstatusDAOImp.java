@@ -10,7 +10,7 @@ public interface BillstatusDAOImp extends CommonDAOImp{
 
 	public List<Billstatus> findAll();
 
-	public Billstatus getInfoBillstatusById(String billstatusid);
+	public Billstatus getInfoById(String billstatusid);
 
 	public Boolean deleteBillstatus(String billstatusid);
 

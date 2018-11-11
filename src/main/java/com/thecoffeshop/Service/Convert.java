@@ -1,15 +1,11 @@
 package com.thecoffeshop.Service;
 
-import java.sql.Array;
-import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
-
+import com.fasterxml.jackson.core.JsonParser;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.thecoffeshop.Models.*;
+import com.thecoffeshop.Models.Image;
 
 public class Convert {
 

@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thecoffeshop.Models.Categoryproduct;
 import com.thecoffeshop.Models.Image;
@@ -39,29 +40,21 @@ public class IndexUserController extends Common {
 	@GetMapping(value = "/index", produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
 
-		pagination(modelMap, httpSession, 0, null, null);
+		pagination(modelMap, httpSession, 0, null, null, null, null, null);
 
 		return "/user/index";
 
 	}
 
-	@GetMapping(value = "/index/search", produces = "application/x-www-form-urlencoded;charset=UTF-8")
-	public String index2(ModelMap modelMap, HttpSession httpSession, @RequestParam String page,
-			@RequestParam String cgPrdId, @RequestParam String strSearch) {
+	@PostMapping(value = "/index/search", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	public String index(ModelMap modelMap, HttpSession httpSession, @RequestParam String page,
+			@RequestParam String cgPrdId, @RequestParam String strSearch, @RequestParam String isHotDeal,
+			@RequestParam String priceAZ, @RequestParam String priceZA) {
 
 		int startPosition = 0;
-		if (page != "") {
-			startPosition = Integer.valueOf(page);
-		}
-		if (cgPrdId == "") {
-			cgPrdId = null;
-		}
-		if (strSearch == "") {
-			strSearch = null;
-		}
-		pagination(modelMap, httpSession, startPosition, cgPrdId, strSearch);
+		pagination(modelMap, httpSession, startPosition, cgPrdId, strSearch, isHotDeal, priceAZ, priceZA);
 
-		return "/user/index";
+		return "/user/content-index";
 
 	}
 
@@ -69,8 +62,6 @@ public class IndexUserController extends Common {
 	@PostMapping(value = "/infoProduct", produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String infoProduct(@RequestParam String productid, ModelMap modelMap) {
 
-		System.out.println(productid);
-		
 		Product product = productService.getInfoById(productid);
 
 		if (product == null) {
@@ -90,18 +81,22 @@ public class IndexUserController extends Common {
 	}
 
 	public void pagination(ModelMap modelMap, HttpSession httpSession, int startPosition, String cgPrdId,
-			String strSearch) {
+			String strSearch, String isHotDeal, String priceAZ, String priceZA) {
 
 		modelMap.addAttribute("startPosition", startPosition + 1);
 		modelMap.addAttribute("cgPrdId", cgPrdId);
+		modelMap.addAttribute("strSearch", strSearch);
+		modelMap.addAttribute("isHotDeal", isHotDeal);
+		modelMap.addAttribute("priceAZ", priceAZ);
+		modelMap.addAttribute("priceZA", priceZA);
 
 		/* display Categoryproduct on combobox */
 		List<Categoryproduct> categoryProducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryProducts", categoryProducts);
 
 		/* display list product on page */
-		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch);
-
+		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal, priceAZ, priceZA);
+		
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		/* display price product and sale price and new product release */
 		for (Product product : products) {
@@ -134,9 +129,10 @@ public class IndexUserController extends Common {
 			if (productService.checkIsNewProduct(product.getProductid())) {
 				productDTO.setCheckIsNew(true);
 			}
-			
+
 			productDTOs.add(productDTO);
 		}
+
 		modelMap.addAttribute("productDTOs", productDTOs);
 	}
 }

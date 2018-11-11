@@ -51,20 +51,36 @@ public class ProductDAO implements ProductDAOImp {
 	}
 
 	@Override
-	public List<Product> getListProductLimit(int startPosition, String categoryproductid, String strSearch) {
+	public List<Product> getListProductLimit(int startPosition, String categoryproductid, String strSearch,
+			String isHotDeal, String priceAZ, String priceZA) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 
 			String hql = "FROM Product p WHERE p.isdelete =: isdelete";
 			if (categoryproductid != null) {
-				hql = hql + " AND p.categoryproduct =:categoryproduct ";
+				hql = hql + " AND p.categoryproduct =: categoryproduct ";
 			}
+//			if (strSearch != null) {
+//				hql = hql + " AND p.name LIKE: name ";
+//			}
+//			if (isHotDeal) {
+//				hql = hql + " AND p.categoryproduct =: categoryproduct ";
+//			}
+//			if (priceAZ) {
+//				hql = hql + " ORDER BY ASC ";
+//			}
+//			if (priceZA) {
+//				hql = hql + " ORDER BY DESC ";
+//			}
 			Query query = session.createQuery(hql, Product.class);
 			query.setParameter("isdelete", this.IS_NOT_DELETE);
 			if (categoryproductid != null) {
 				query.setParameter("categoryproduct", new Categoryproduct(categoryproductid));
 			}
+//			if (strSearch != null) {
+//				query.setParameter("name", "%" + strSearch + "%");
+//			}
 			query.setFirstResult(startPosition * NUM_PRODUCT_ONE_PAGE);
 			query.setMaxResults(NUM_PRODUCT_ONE_PAGE);
 			List<Product> products = query.getResultList();
@@ -85,7 +101,7 @@ public class ProductDAO implements ProductDAOImp {
 							Product.class)
 					.setParameter("productid", productid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getSingleResult();
-			
+
 			Calendar c1 = Calendar.getInstance();
 			Calendar c2 = Calendar.getInstance();
 			c1.setTime(product.getCreateat());
@@ -128,4 +144,30 @@ public class ProductDAO implements ProductDAOImp {
 		}
 	}
 
+	@Override
+	public List<Product> findAll() {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Product> products = session.createQuery("FROM Product p WHERE p.isdelete =: isdelete", Product.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			return products;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public Boolean checkExistNameProduct(String name) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Product products = session
+					.createQuery("FROM Product p WHERE p.name =: name AND p.isdelete =: isdelete", Product.class)
+					.setParameter("name", name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

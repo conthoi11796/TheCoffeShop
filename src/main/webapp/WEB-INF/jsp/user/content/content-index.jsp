@@ -3,8 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="content-wrapper dislpay-product"
-	style="width: 100%; margin-left: 0;">
+
 	<div class="row section social-section">
 		<div class="row">
 			<!-- Display Product -->
@@ -93,11 +92,11 @@
 									<!-- new price -->
 									<c:out value="${productDTO.getNewPrice().getPrice()}" />
 									<del class="product-old-price">
-										<c:out value="${productDTO.getPrice()}" />
+										<c:out value="${productDTO.getPrice()}đ" />
 									</del>
 								</c:if>
 								<c:if test="${productDTO.getNewPrice()==null}">
-									<c:out value="${productDTO.getPrice()}" />
+									<c:out value="${productDTO.getPrice()}đ" />
 								</c:if>
 							</h4>
 							<div class="product-rating">
@@ -148,23 +147,3 @@
 			<!-- End Detail Product -->
 		</div>
 	</div>
-	<div
-		class="align-items-center justify-content-between flex-wrap container"
-		style="text-align: center;">
-		<a
-			href='../index/search?page=
-							<c:if test="${startPosition!=null}">
-								<c:out value="${startPosition}" />
-							</c:if>
-							<c:if test="${startPosition==null}">
-								<c:out value="0" />
-							</c:if>
-							&cgPrdId=
-							<c:if test="${cgPrdId!=null}">
-								<c:out value="${cgPrdId}" />
-							</c:if>
-							&strSearch=null'
-			class="btn btn-inverse-light btn-rounded btn-fw btn-see-more">Xem
-			thêm</a>
-	</div>
-</div>

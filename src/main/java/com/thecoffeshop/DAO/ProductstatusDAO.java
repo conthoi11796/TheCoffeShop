@@ -26,7 +26,7 @@ public class ProductstatusDAO implements ProductstatusDAOImp {
         
         Session session = this.sessionFactory.getCurrentSession();
         try {
-            session.add(productstatus);
+            session.save(productstatus);
             return true;
         } catch (Exception e) {
             return false;

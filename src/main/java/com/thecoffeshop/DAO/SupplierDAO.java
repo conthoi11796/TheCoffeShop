@@ -52,7 +52,7 @@ public class SupplierDAO implements SupplierDAOImp {
 			Supplier supplier = session
 					.createQuery("FROM Supplier s WHERE s.supplierid =: supplierid AND p.isdelete =: isdelete", Supplier.class)
 					.setParameter("supplierid", supplierid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
-			return price;
+			return supplier;
 		} catch (Exception e) {
 
 			return null;

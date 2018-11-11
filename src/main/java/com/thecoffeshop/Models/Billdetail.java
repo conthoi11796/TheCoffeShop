@@ -48,7 +48,7 @@ public class Billdetail implements java.io.Serializable {
 		this.bill = bill;
 		this.product = product;
 		this.quantity = quantity;
-		this.createby = createby;
+		this.createby = createby; // must add when employee approve
 		this.createat = createat;
 		this.updateby = updateby;
 		this.updateat = updateat;

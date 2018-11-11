@@ -13,7 +13,8 @@
 <body class="">
 	<div class="container-scroller">
 
-		<!-- nav -->
+		<!-- nav -->0
+		
 		<%@ include file="./common/nav.jsp"%>
 		<!-- nav [END] -->
 
@@ -21,7 +22,13 @@
 		<div class="container-fluid page-body-wrapper"
 			style="background: url(../resouces/images/background.jpg); background-size: cover;">
 			<!-- content -->
-				<%@ include file="content-index.jsp"%>
+			<div id="content-index" class="content-wrapper dislpay-product" style="width: 100%; margin-left: 0;">
+				<%@ include file="./content/content-index.jsp"%>
+				<div class="align-items-center justify-content-between flex-wrap container"
+					style="text-align: center;">
+					<a id="viewMore" class="btn btn-inverse-light btn-rounded btn-fw btn-see-more">Xem thêm</a>
+				</div>
+			</div>
 			<!-- content [END] -->
 			<!-- content-wrapper ends -->
 			<!-- messenger -->
@@ -79,9 +86,9 @@
 	<%@ include file="./common/jsLibary.jsp"%>
 	<!-- js libary [END] -->
 
-	<!-- Modal -->
-	<script src="../resouces/style-js/user-index.js"></script>
-	<!-- End Modal -->
+	<!-- my-js -->
+	<script src="../resouces/ajax-jquery/user-index.js"></script>
+	<!-- my-js[END] -->
 
 </body>
 
