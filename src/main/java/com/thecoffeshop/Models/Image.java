@@ -22,7 +22,6 @@ public class Image implements java.io.Serializable {
 	private int imageid;
 	private String name;
 	private Set<Employee> employees = new HashSet<Employee>(0);
-	private Set<Dinnertable> dinnertables = new HashSet<Dinnertable>(0);
 	private Set<Product> products = new HashSet<Product>(0);
 	private Set<Material> materials = new HashSet<Material>(0);
 
@@ -33,12 +32,10 @@ public class Image implements java.io.Serializable {
 		this.imageid = imageid;
 	}
 
-	public Image(int imageid, String name, Set<Employee> employees, Set<Dinnertable> dinnertables,
-			Set<Product> products, Set<Material> materials) {
+	public Image(int imageid, String name, Set<Employee> employees, Set<Product> products, Set<Material> materials) {
 		this.imageid = imageid;
 		this.name = name;
 		this.employees = employees;
-		this.dinnertables = dinnertables;
 		this.products = products;
 		this.materials = materials;
 	}
@@ -73,18 +70,6 @@ public class Image implements java.io.Serializable {
 
 	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
-	}
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "imageofdinnertable", catalog = "luanvan", joinColumns = {
-			@JoinColumn(name = "IMAGEID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "DINNERTABLEID", nullable = false, updatable = false) })
-	public Set<Dinnertable> getDinnertables() {
-		return this.dinnertables;
-	}
-
-	public void setDinnertables(Set<Dinnertable> dinnertables) {
-		this.dinnertables = dinnertables;
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "images")

@@ -10,6 +10,8 @@ public interface SalaryDAOImp extends CommonDAOImp{
 
 	public Salary getInfoById(int dinnertableid);
 
+	public int getSalaryByEmployeeid(String employeeid);
+	
 	public Boolean deleteSalary(int dinnertableid);
 
 	public Boolean editSalary(Salary salary);

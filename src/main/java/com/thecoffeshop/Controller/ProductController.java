@@ -1,5 +1,6 @@
 package com.thecoffeshop.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,14 +33,37 @@ public class ProductController extends Common {
 		List<Categoryproduct> categoryproducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryproducts", categoryproducts);
 
+		int totalPage = productService.findAll().size() / super.MAX_RESULTS;
+		if ((productService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
+
 		return "/admin/product";
 	}
 
 	@GetMapping(value = "/admin/product/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Product> products = productService.findAll();
-		modelMap.addAttribute("products", products);
+		List<Product> products = productService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
+
+		List<ProductDTO> dtos = new ArrayList<ProductDTO>();
+		for (Product product : products) {
+			
+			ProductDTO productDTO = new ProductDTO();
+			productDTO.setCanDelete(true);
+			if(product.getBilldetails().size() > 0) {
+				productDTO.setCanDelete(false);
+			}
+			if(product.getExportbills().size() > 0) {
+				productDTO.setCanDelete(false);
+			}
+			productDTO.setProduct(product);
+
+			dtos.add(productDTO);
+		}
+
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/product/tBody";
 	}
@@ -50,17 +74,17 @@ public class ProductController extends Common {
 
 		if (productService.getInfoById(productid.trim()) != null) {
 
-			modelMap.addAttribute("result", "Mã sản phẩm bị trùng!");
+			modelMap.addAttribute("results", "Mã sản phẩm bị trùng!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		if (productService.checkExistNameProduct(name.trim())) {
 
-			modelMap.addAttribute("result", "Tên sản phẩm bị trùng!");
+			modelMap.addAttribute("results", "Tên sản phẩm bị trùng!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		if (categoryproductid == "-1") {
 
-			modelMap.addAttribute("result", "Chưa chọn loại sản phẩm!");
+			modelMap.addAttribute("results", "Chưa chọn loại sản phẩm!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -73,6 +97,7 @@ public class ProductController extends Common {
 		product.setCreateat(new Date());
 //		product.setCreateby(createby);
 		product.setUpdateat(new Date());
+		product.setIsdelete(IS_NOT_DELETE);
 		productService.addProduct(product);
 
 		List<Categoryproduct> categoryproducts = categoryProductService.findAll();
@@ -87,7 +112,7 @@ public class ProductController extends Common {
 
 		Product product = productService.getInfoById(productid.trim());
 		if (product == null) {
-			modelMap.addAttribute("result", "Sản phẩm không tồn tại!");
+			modelMap.addAttribute("results", "Sản phẩm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		product.setIsdelete(this.IS_DELETE);
@@ -103,10 +128,10 @@ public class ProductController extends Common {
 
 		List<Categoryproduct> categoryproducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryproducts", categoryproducts);
-		
+
 		Product product = productService.getInfoById(productid.trim());
 		if (product == null) {
-			modelMap.addAttribute("result", "Sản phẩm không tồn tại!");
+			modelMap.addAttribute("results", "Sản phẩm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -120,12 +145,12 @@ public class ProductController extends Common {
 
 		Product product = productService.getInfoById(productid.trim());
 		if (product == null) {
-			modelMap.addAttribute("result", "Sản phẩm không tồn tại!");
+			modelMap.addAttribute("results", "Sản phẩm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		if (productService.checkExistNameProduct(name.trim())) {
 
-			modelMap.addAttribute("result", "Tên sản phẩm bị trùng!");
+			modelMap.addAttribute("results", "Tên sản phẩm bị trùng!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 

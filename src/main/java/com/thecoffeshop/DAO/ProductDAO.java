@@ -56,14 +56,13 @@ public class ProductDAO implements ProductDAOImp {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-
 			String hql = "FROM Product p WHERE p.isdelete =: isdelete";
 			if (categoryproductid != null) {
 				hql = hql + " AND p.categoryproduct =: categoryproduct ";
 			}
-//			if (strSearch != null) {
-//				hql = hql + " AND p.name LIKE: name ";
-//			}
+			if (strSearch != null) {
+				hql = hql + " AND p.name = :name ";
+			}
 //			if (isHotDeal) {
 //				hql = hql + " AND p.categoryproduct =: categoryproduct ";
 //			}
@@ -75,12 +74,12 @@ public class ProductDAO implements ProductDAOImp {
 //			}
 			Query query = session.createQuery(hql, Product.class);
 			query.setParameter("isdelete", this.IS_NOT_DELETE);
-			if (categoryproductid != null) {
+			if (categoryproductid != null && categoryproductid != "-1") {
 				query.setParameter("categoryproduct", new Categoryproduct(categoryproductid));
 			}
-//			if (strSearch != null) {
-//				query.setParameter("name", "%" + strSearch + "%");
-//			}
+			if (strSearch != null) {
+				query.setParameter("name", strSearch);
+			}
 			query.setFirstResult(startPosition * NUM_PRODUCT_ONE_PAGE);
 			query.setMaxResults(NUM_PRODUCT_ONE_PAGE);
 			List<Product> products = query.getResultList();
@@ -168,6 +167,40 @@ public class ProductDAO implements ProductDAOImp {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public Boolean checkExistCategoryProduct(String categoryproductid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Product> products = session
+					.createQuery("FROM Product p WHERE p.categoryproduct = :categoryproduct and p.isdelete =: isdelete",
+							Product.class)
+					.setParameter("categoryproduct", new Categoryproduct(categoryproductid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			if (products.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public List<Product> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Product> products = session.createQuery("FROM Product p WHERE p.isdelete =: isdelete", Product.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition * MAX_RESULTS)
+					.setMaxResults(MAX_RESULTS).getResultList();
+			return products;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 }

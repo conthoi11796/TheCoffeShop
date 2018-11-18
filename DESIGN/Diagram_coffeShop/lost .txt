@@ -1,0 +1,11 @@
+not error syntax mysql
+not error syntax hibernate
+may be config file
+notthing
+
+test customer -> OK
+ clone customer -> NOT ->OK: ten file phai giong ten bang
+ it thuoc tinh -> OK
+ 
+ unit -> model cau hinh thieu -> k phai
+ -> mysql sai

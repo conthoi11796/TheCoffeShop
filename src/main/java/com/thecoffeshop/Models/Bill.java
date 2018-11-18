@@ -29,7 +29,6 @@ public class Bill implements java.io.Serializable {
 	private Customer customer;
 	private Dinnertable dinnertable;
 	private Employee employee;
-	private Productstatus productstatus;
 	private Voucher voucher;
 	private Date startdatetime;
 	private Date enddate;
@@ -47,14 +46,13 @@ public class Bill implements java.io.Serializable {
 	}
 
 	public Bill(Billstatus billstatus, Customer customer, Dinnertable dinnertable, Employee employee,
-			Productstatus productstatus, Voucher voucher, Date startdatetime, Date enddate, String notice,
+			 Voucher voucher, Date startdatetime, Date enddate, String notice,
 			String createby, Date createat, String updateby, Date updateat, Boolean isdelete, String deleteby,
 			Date deleteat, Set<Billdetail> billdetails) {
 		this.billstatus = billstatus;
 		this.customer = customer;
 		this.dinnertable = dinnertable;
 		this.employee = employee;
-		this.productstatus = productstatus;
 		this.voucher = voucher;
 		this.startdatetime = startdatetime;
 		this.enddate = enddate;
@@ -119,16 +117,6 @@ public class Bill implements java.io.Serializable {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PRODUCTSTATUSID")
-	public Productstatus getProductstatus() {
-		return this.productstatus;
-	}
-
-	public void setProductstatus(Productstatus productstatus) {
-		this.productstatus = productstatus;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)

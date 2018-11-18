@@ -70,7 +70,7 @@ public class VoucherDAO implements VoucherDAOImp {
 			Voucher voucher = session
 					.createQuery("FROM Voucher v WHERE v.name = :name AND v.isdelete =: isdelete", Voucher.class)
 					.setParameter("name", name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
-			
+
 			return voucher;
 		} catch (Exception e) {
 
@@ -114,6 +114,21 @@ public class VoucherDAO implements VoucherDAOImp {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	@Override
+	public List<Voucher> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Voucher> vouchers = session.createQuery("FROM Voucher v WHERE  v.isdelete =: isdelete", Voucher.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition * MAX_RESULTS)
+					.setMaxResults(MAX_RESULTS).getResultList();
+			return vouchers;
+		} catch (Exception e) {
+
+			return null;
 		}
 	}
 }

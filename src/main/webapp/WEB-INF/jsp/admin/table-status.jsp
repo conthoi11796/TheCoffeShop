@@ -11,7 +11,8 @@
 </div>
 <!-- content-wrapper ends -->
 <!-- my-js -->
-<script src="../resouces/ajax-jquery/table-status.js"></script>
+<script src="../resouces/ajax-jquery/loadTable.js"></script>
+<script src="../resouces/ajax-jquery/table-status/table-status.js"></script>
 <!-- my-js[END] -->
 <!-- FOOTER -->
 <%@ include file="./public/footer.jsp"%>

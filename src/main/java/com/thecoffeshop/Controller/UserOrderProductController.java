@@ -116,6 +116,7 @@ public class UserOrderProductController extends Common {
 			}
 			bill.setStartdatetime(DatetimeStart);
 			bill.setNotice(notice);
+			bill.setBillstatus(new Billstatus("1"));
 			if (voucherName != null && voucherService.checkVoucher(voucherName.trim())) {
 				Voucher voucher = voucherService.findByName(voucherName);
 				bill.setVoucher(voucher);

@@ -20,6 +20,7 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 
 	@Override
 	public List<Employee> findAll() {
+		
 		Session session = this.sessionFactory.getCurrentSession();
 		return session.createQuery("FROM Employee e WHERE e.isdelete =: isdelete", Employee.class)
 				.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
@@ -109,6 +110,19 @@ public class EmloyeeDAO implements EmployeeDAOImp {
 		} catch (Exception e) {
 
 			return false;
+		}
+	}
+
+	@Override
+	public List<Employee> findLimit(int startPosition) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Employee> employees =  session.createQuery("FROM Employee e WHERE e.isdelete =: isdelete", Employee.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition*this.MAX_RESULTS).setMaxResults(this.MAX_RESULTS).getResultList();
+			return employees;
+		} catch (Exception e) {
+			return null;
 		}
 	}
 

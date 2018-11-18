@@ -70,4 +70,21 @@ public class SalaryDAO implements SalaryDAOImp {
 		}
 	}
 
+	@Override
+	public int getSalaryByEmployeeid(String employeeid) {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Salary salary = session
+					.createQuery("FROM Salary s WHERE s.employees = :employees AND s.isdelete =: isdelete ORDER BY s.createat DESC",
+							Salary.class)
+					.setParameter("employees", new Employee(employeeid)).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getSingleResult();
+			return salary.getSalaryonhour();
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
 }

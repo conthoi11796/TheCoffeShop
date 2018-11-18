@@ -118,7 +118,7 @@ public class Employee implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	@Column(name = "PHONE", length = 10)
+	@Column(name = "PHONE", length = 11)
 	public String getPhone() {
 		return this.phone;
 	}

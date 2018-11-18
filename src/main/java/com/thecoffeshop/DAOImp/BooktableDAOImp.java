@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.thecoffeshop.Models.*;
 
-public interface BooktableDAOImp extends CommonDAOImp{
+public interface BooktableDAOImp extends CommonDAOImp {
 
 	public Boolean addBooktable(Booktable booktable);
 
@@ -15,4 +15,6 @@ public interface BooktableDAOImp extends CommonDAOImp{
 	public Boolean deleteBooktable(BooktableId booktableId);
 
 	public Boolean editBooktable(Booktable booktable);
+
+	public Boolean checkExistDinnerTable(int dinnertableid);
 }

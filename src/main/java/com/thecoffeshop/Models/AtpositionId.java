@@ -16,6 +16,10 @@ public class AtpositionId implements java.io.Serializable {
 	public AtpositionId() {
 	}
 
+	public AtpositionId(String positionid) {
+		this.positionid = positionid;
+	}
+	
 	public AtpositionId(String employeeid, String positionid) {
 		this.employeeid = employeeid;
 		this.positionid = positionid;

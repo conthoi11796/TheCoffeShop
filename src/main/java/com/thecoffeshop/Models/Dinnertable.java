@@ -34,8 +34,7 @@ public class Dinnertable implements java.io.Serializable {
 	private Set<Booktable> booktables = new HashSet<Booktable>(0);
 	private Set<Bill> bills = new HashSet<Bill>(0);
 	private Set<Tablestatusdetail> tablestatusdetails = new HashSet<Tablestatusdetail>(0);
-	private Set<Image> images = new HashSet<Image>(0);
-
+	
 	public Dinnertable() {
 	}
 
@@ -45,7 +44,7 @@ public class Dinnertable implements java.io.Serializable {
 
 	public Dinnertable(int dinnertableid, String name, Integer countchair, String createby, Date createat,
 			String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat, Set<Booktable> booktables,
-			Set<Bill> bills, Set<Tablestatusdetail> tablestatusdetails, Set<Image> images) {
+			Set<Bill> bills, Set<Tablestatusdetail> tablestatusdetails) {
 		this.dinnertableid = dinnertableid;
 		this.name = name;
 		this.countchair = countchair;
@@ -59,7 +58,6 @@ public class Dinnertable implements java.io.Serializable {
 		this.booktables = booktables;
 		this.bills = bills;
 		this.tablestatusdetails = tablestatusdetails;
-		this.images = images;
 	}
 
 	@Id
@@ -182,15 +180,6 @@ public class Dinnertable implements java.io.Serializable {
 
 	public void setTablestatusdetails(Set<Tablestatusdetail> tablestatusdetails) {
 		this.tablestatusdetails = tablestatusdetails;
-	}
-
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "dinnertables")
-	public Set<Image> getImages() {
-		return this.images;
-	}
-
-	public void setImages(Set<Image> images) {
-		this.images = images;
 	}
 
 }

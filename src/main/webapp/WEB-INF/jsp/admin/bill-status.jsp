@@ -11,7 +11,7 @@
 </div>
 <!-- content-wrapper ends -->
 <!-- my-js -->
-<script src="../resouces/ajax-jquery/bill-status/loadTable.js"></script>
+<script src="../resouces/ajax-jquery/loadTable.js"></script>
 <script src="../resouces/ajax-jquery/bill-status/bill-status.js"></script>
 <!-- my-js[END] -->
 <!-- FOOTER -->

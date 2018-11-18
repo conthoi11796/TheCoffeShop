@@ -84,4 +84,19 @@ public class ScheduleDAO implements ScheduleDAOImp {
 			return false;
 		}
 	}
+
+	@Override
+	public List<Schedule> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Schedule> schedules = session
+					.createQuery("FROM Schedule s WHERE s.isdelete =: isdelete", Schedule.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition * MAX_RESULTS)
+					.setMaxResults(MAX_RESULTS).getResultList();
+			return schedules;
+		} catch (Exception e) {
+			return null;
+		}
+	}
 }

@@ -47,4 +47,10 @@ public class TablestatusdetailService implements TablestatusdetailDAOImp {
 		return tablestatusdetailDAO.editTablestatusdetail(tablestatusdetail);
 	}
 
+	@Override
+	public Boolean checkExitsDinnerTable(int dinnertableid) {
+		// TODO Auto-generated method stub
+		return tablestatusdetailDAO.checkExitsDinnerTable(dinnertableid);
+	}
+
 }

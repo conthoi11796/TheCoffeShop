@@ -19,28 +19,28 @@ import com.thecoffeshop.Models.*;
 public class RegisterDAO implements RegisterDAOImp {
 
 	@Autowired
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-    @Override
-    public Boolean addRegister(Register register) {
-       
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean addRegister(Register register) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(register);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public Register getInfoById(RegisterId registerId) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Register getInfoById(RegisterId registerId) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Register register = session
 					.createQuery("FROM Register r WHERE r.registerId = :registerId and r.isdelete =: isdelete",
-                    Register.class)
+							Register.class)
 					.setParameter("registerId", registerId).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getSingleResult();
 			return register;
@@ -48,35 +48,47 @@ public class RegisterDAO implements RegisterDAOImp {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public List<Register> getListRegisterOnWeek(int moth) {
+	@Override
+	public List<Register> getListRegisterOnWeek(int moth) {
 
-        return null;
-    }
+		return null;
+	}
 
-    @Override
-    public Boolean deleteRegister(RegisterId registerId) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean deleteRegister(RegisterId registerId) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.remove(registerId);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public Boolean editRegister(Register register) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean editRegister(Register register) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(register);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
+
+	@Override
+	public Boolean checkExistSchedule(String scheduleid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			return true;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
 }

@@ -49,12 +49,12 @@ public class TablestatusdetailDAO implements TablestatusdetailDAOImp {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			List<Tablestatusdetail> tablestatusdetails = session
-					.createQuery("FROM Tablestatusdetail tsd WHERE tsd.TablestatusdetailId =: id AND tsd.isdelete =: isdelete", Tablestatusdetail.class)
-					.setParameter("id", new TablestatusdetailId(dinnertableidId, 1))
+			List<Tablestatusdetail> tablestatusdetails = session.createQuery(
+					"FROM Tablestatusdetail tsd WHERE tsd.TablestatusdetailId =: id AND tsd.isdelete =: isdelete",
+					Tablestatusdetail.class).setParameter("id", new TablestatusdetailId(dinnertableidId, 1))
 					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			System.out.println(tablestatusdetails.size());
-			
+
 			return null;
 		} catch (Exception e) {
 			return null;
@@ -80,6 +80,24 @@ public class TablestatusdetailDAO implements TablestatusdetailDAOImp {
 		try {
 			session.update(tablestatusdetail);
 			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean checkExitsDinnerTable(int dinnertableid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Tablestatusdetail> tablestatusdetails = session.createQuery(
+					"FROM Tablestatusdetail tsd WHERE tsd.id.dinnertableid = :dinnertableid AND tsd.isdelete =: isdelete",
+					Tablestatusdetail.class).setParameter("dinnertableid", dinnertableid)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			if (tablestatusdetails.size() > 0) {
+				return true;
+			}
+			return false;
 		} catch (Exception e) {
 			return false;
 		}

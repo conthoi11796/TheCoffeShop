@@ -52,4 +52,10 @@ public class TablestatusService implements TablestatusDAOImp {
 		// TODO Auto-generated method stub
 		return tablestatusDAO.checkExist(name);
 	}
+
+	@Override
+	public List<Tablestatus> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return tablestatusDAO.findLimit(startPosition);
+	}
 }

@@ -8,9 +8,11 @@ public interface RegisterDAOImp extends CommonDAOImp {
 
 	public Boolean addRegister(Register register);
 
-    public Register getInfoById(RegisterId registerId);
-    
-    public List<Register> getListRegisterOnWeek(int moth);
+	public Register getInfoById(RegisterId registerId);
+
+	public List<Register> getListRegisterOnWeek(int moth);
+
+	public Boolean checkExistSchedule(String scheduleid);
 
 	public Boolean deleteRegister(RegisterId registerId);
 

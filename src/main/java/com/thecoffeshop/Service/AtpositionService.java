@@ -39,4 +39,16 @@ public class AtpositionService implements AtpositionDAOImp {
 		return atpositionDAO.editAtposition(atposition);
 	}
 
+	@Override
+	public Boolean checkExistPosition(String positionid) {
+		// TODO Auto-generated method stub
+		return atpositionDAO.checkExistPosition(positionid);
+	}
+
+//	@Override
+//	public Atposition getInfoByEmployeeId(String employeeid) {
+//		// TODO Auto-generated method stub
+//		return atpositionDAO.getInfoByEmployeeId(employeeid);
+//	}
+
 }

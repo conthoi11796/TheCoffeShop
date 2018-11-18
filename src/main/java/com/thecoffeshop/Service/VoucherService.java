@@ -59,4 +59,10 @@ public class VoucherService implements VoucherDAOImp {
 		// TODO Auto-generated method stub
 		return voucherDAO.editVoucher(voucher);
 	}
+
+	@Override
+	public List<Voucher> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return voucherDAO.findLimit(startPosition);
+	}
 }

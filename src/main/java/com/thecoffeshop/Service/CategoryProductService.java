@@ -47,4 +47,10 @@ public class CategoryProductService implements CategoryProductDAOImp {
 		return categoryProductDAO.editCategoryproduct(categoryproduct);
 	}
 
+	@Override
+	public List<Categoryproduct> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return categoryProductDAO.findLimit(startPosition);
+	}
+
 }

@@ -60,6 +60,12 @@ public class EmployeeService implements EmployeeDAOImp {
 		return emloyeeDAO.checkExistUseName(usename);
 	}
 
+	@Override
+	public List<Employee> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return emloyeeDAO.findLimit(startPosition);
+	}
+
 //	public Customer findById(final int id) {
 //		return customerDAO.findById(id);
 //	}

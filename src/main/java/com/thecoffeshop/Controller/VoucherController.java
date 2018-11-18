@@ -2,6 +2,7 @@ package com.thecoffeshop.Controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.thecoffeshop.DTO.VoucherDTO;
 import com.thecoffeshop.Models.Voucher;
+import com.thecoffeshop.Service.BillService;
 import com.thecoffeshop.Service.Common;
 import com.thecoffeshop.Service.VoucherService;
 
@@ -23,18 +26,38 @@ public class VoucherController extends Common {
 
 	@Autowired
 	VoucherService voucherService;
+	@Autowired
+	BillService billService;
 
 	@GetMapping(value = "/admin/voucher")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
+
+		int totalPage = voucherService.findAll().size() / super.MAX_RESULTS;
+		if ((voucherService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
 
 		return "/admin/voucher";
 	}
 
 	@GetMapping(value = "/admin/voucher/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Voucher> vouchers = voucherService.findAll();
-		modelMap.addAttribute("vouchers", vouchers);
+		List<Voucher> vouchers = voucherService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
+		List<VoucherDTO> dtos = new ArrayList<VoucherDTO>();
+		for (Voucher voucher : vouchers) {
+			VoucherDTO voucherDTO = new VoucherDTO();
+			voucherDTO.setVoucher(voucher);
+
+			voucherDTO.setCanDelete(false);
+			if (billService.checkExistVoucher(voucher.getVoucherid())) {
+				voucherDTO.setCanDelete(true);
+			}
+
+			dtos.add(voucherDTO);
+		}
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/voucher/tBody";
 	}
@@ -43,10 +66,18 @@ public class VoucherController extends Common {
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String name,
 			@RequestParam String startdatetime, @RequestParam String enddate, @RequestParam String number,
 			@RequestParam String saleof) throws ParseException {
-
+		
+		/* check */
+		List<String> results = checkForm(name, startdatetime, enddate, number, saleof);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+		/* check[END] */
+		
 		if (voucherService.findByName(name.trim()) != null) {
 
-			modelMap.addAttribute("result", "Voucher đã tồn tại!");
+			modelMap.addAttribute("results", "Voucher đã tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -75,7 +106,7 @@ public class VoucherController extends Common {
 
 		Voucher voucher = voucherService.findById(Integer.valueOf(voucherid.trim()));
 		if (voucher == null) {
-			modelMap.addAttribute("result", "Voucher không tồn tại!");
+			modelMap.addAttribute("results", "Voucher không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		voucher.setIsdelete(this.IS_DELETE);
@@ -90,12 +121,12 @@ public class VoucherController extends Common {
 
 		Voucher voucher = voucherService.findById(Integer.valueOf(voucherid.trim()));
 		if (voucher == null) {
-			modelMap.addAttribute("result", "Voucher không tồn tại!");
+			modelMap.addAttribute("results", "Voucher không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
-		
-		/*start rồi: không cho sửa saleof, không cho sửa ngày start.*/
-		if(voucher.getStartdatetime().before(new Date())) {
+
+		/* start rồi: không cho sửa saleof, không cho sửa ngày start. */
+		if (voucher.getStartdatetime().before(new Date())) {
 			modelMap.addAttribute("temb", true);
 		}
 
@@ -104,13 +135,21 @@ public class VoucherController extends Common {
 	}
 
 	@PostMapping(value = "/admin/voucher/edit")
-	public String edit(ModelMap modelMap, HttpSession httpSession,  @RequestParam String voucherid, @RequestParam String name,
-			@RequestParam String startdatetime, @RequestParam String enddate, @RequestParam String number,
-			@RequestParam String saleof) throws ParseException {
+	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String voucherid,
+			@RequestParam String name, @RequestParam String startdatetime, @RequestParam String enddate,
+			@RequestParam String number, @RequestParam String saleof) throws ParseException {
 
+		/* check */
+		List<String> results = checkForm(name, startdatetime, enddate, number, saleof);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+		/* check[END] */
+		
 		Voucher voucher = voucherService.findById(Integer.valueOf(voucherid.trim()));
 		if (voucher == null) {
-			modelMap.addAttribute("result", "Voucher không tồn tại!");
+			modelMap.addAttribute("results", "Voucher không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		voucher.setName(name.trim());
@@ -120,26 +159,48 @@ public class VoucherController extends Common {
 //		voucher.setUpdateby(updateby);
 		voucher.setUpdateat(new Date());
 		voucher.setIsdelete(super.IS_NOT_DELETE);
-		
-		/*nếu mà voucher chưa start thì sửa thoải mái*/
-		if(voucher.getStartdatetime().after(new Date())) {
+
+		/* nếu mà voucher chưa start thì sửa thoải mái */
+		if (voucher.getStartdatetime().after(new Date())) {
 			voucher.setEnddate(super.sdfDateField.parse(enddate));
 			voucher.setNumber(Integer.valueOf(number));
 			voucher.setSaleof(Integer.valueOf(saleof));
 		}
-		/*start rồi: không cho sửa saleof, không cho sửa ngày start, nếu số voucher nhỏ hơn voucher tồn thì lỗi.*/
-		else
-		{
-			if(Integer.valueOf(number) < voucher.getCount()) {
-				modelMap.addAttribute("result", "Số không thể nhỏ hơn voucher tồn "+ voucher.getCount() +"!");
+		/*
+		 * start rồi: không cho sửa saleof, không cho sửa ngày start, nếu số voucher nhỏ
+		 * hơn voucher tồn thì lỗi.
+		 */
+		else {
+			if (Integer.valueOf(number) < voucher.getCount()) {
+				modelMap.addAttribute("results", "Số không thể nhỏ hơn voucher tồn " + voucher.getCount() + "!");
 				return "/admin/public/Danger";// đã tồn tại
 			}
 			voucher.setNumber(Integer.valueOf(number));
 		}
-		
+
 		voucherService.editVoucher(voucher);
 
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";
+	}
+
+	public List<String> checkForm(String name, String startdatetime, String enddate, String number, String saleof) {
+		List<String> results = new ArrayList<String>();
+		if (name.trim().length() <= 0 || name.trim().length() > 255) {
+			results.add("Tên không thể để trống và tối đa 255 ký tự!");
+		}
+		if (startdatetime.trim().length() <= 0) {
+			results.add("Ngày bắt đầu không thể để trống!");
+		}
+		if (enddate.trim().length() <= 0) {
+			results.add("Ngày kết thúc không thể để trống!");
+		}
+		if (number.trim().length() <= 0) {
+			results.add("Số voucher không thể để trống!");
+		}
+		if (saleof.trim().length() <= 0 || Integer.valueOf(saleof.trim()) > 0) {
+			results.add("Giảm giá không thể để trống và phải lớn hơn 0!");
+		}
+		return results;
 	}
 }

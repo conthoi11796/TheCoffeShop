@@ -34,10 +34,8 @@ public class IndexUserController extends Common {
 	private ProductService productService;
 	@Autowired
 	private PriceService priceService;
-	@Autowired
-	private ImageService imageService;
 
-	@GetMapping(value = "/index", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	@GetMapping(value = "/index")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
 
 		pagination(modelMap, httpSession, 0, null, null, null, null, null);
@@ -46,20 +44,21 @@ public class IndexUserController extends Common {
 
 	}
 
-	@PostMapping(value = "/index/search", produces = "application/x-www-form-urlencoded;charset=UTF-8")
-	public String index(ModelMap modelMap, HttpSession httpSession, @RequestParam String page,
+	@PostMapping(value = "/index/search")
+	public String search(ModelMap modelMap, HttpSession httpSession, @RequestParam String page,
 			@RequestParam String cgPrdId, @RequestParam String strSearch, @RequestParam String isHotDeal,
 			@RequestParam String priceAZ, @RequestParam String priceZA) {
 
-		int startPosition = 0;
-		pagination(modelMap, httpSession, startPosition, cgPrdId, strSearch, isHotDeal, priceAZ, priceZA);
-
-		return "/user/content-index";
+		int startPosition = Integer.valueOf(page.trim());
+		// pagination(modelMap, httpSession, startPosition, cgPrdId, strSearch,
+		// isHotDeal, priceAZ, priceZA);
+		pagination(modelMap, httpSession, startPosition, cgPrdId, strSearch.trim(), null, null, null);
+		return "user/content/content-index";
 
 	}
 
 	/* get info of product */
-	@PostMapping(value = "/infoProduct", produces = "application/x-www-form-urlencoded;charset=UTF-8")
+	@PostMapping(value = "/infoProduct")
 	public String infoProduct(@RequestParam String productid, ModelMap modelMap) {
 
 		Product product = productService.getInfoById(productid);
@@ -77,7 +76,7 @@ public class IndexUserController extends Common {
 		Set<Image> images = product.getImages();
 		modelMap.addAttribute("images", images);
 
-		return "/user/infoProduct";
+		return "/user/content/infoProduct";
 	}
 
 	public void pagination(ModelMap modelMap, HttpSession httpSession, int startPosition, String cgPrdId,
@@ -95,13 +94,26 @@ public class IndexUserController extends Common {
 		modelMap.addAttribute("categoryProducts", categoryProducts);
 
 		/* display list product on page */
-		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal, priceAZ, priceZA);
 		
+		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal,
+				priceAZ, priceZA);
+
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		/* display price product and sale price and new product release */
 		for (Product product : products) {
-
 			ProductDTO productDTO = new ProductDTO();
+
+			/* image */
+			Set<Image> setImages = product.getImages();
+			List<Image> images = new ArrayList<Image>();
+			int size = setImages.size() - 1;
+			for (Image image : setImages) {
+				if (size <= 3) {
+					images.add(image);
+				}
+				size--;
+			}
+			productDTO.setImages(images);
 
 			/* find old price */
 			productDTO.setProduct(product);

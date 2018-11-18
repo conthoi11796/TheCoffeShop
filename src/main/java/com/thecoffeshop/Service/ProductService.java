@@ -68,4 +68,16 @@ public class ProductService implements ProductDAOImp {
 		return productDAO.checkExistNameProduct(name);
 	}
 
+	@Override
+	public Boolean checkExistCategoryProduct(String categoryproductid) {
+		// TODO Auto-generated method stub
+		return productDAO.checkExistCategoryProduct(categoryproductid);
+	}
+
+	@Override
+	public List<Product> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return productDAO.findLimit(startPosition);
+	}
+
 }

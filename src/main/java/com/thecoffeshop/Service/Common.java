@@ -3,14 +3,12 @@ package com.thecoffeshop.Service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.thecoffeshop.Models.Price;
-import com.thecoffeshop.Models.Product;
-import com.thecoffeshop.DAOImp.*;
+import com.thecoffeshop.DAOImp.CommonDAOImp;
 
 public class Common implements CommonDAOImp {
 
@@ -19,6 +17,8 @@ public class Common implements CommonDAOImp {
 	public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static SimpleDateFormat sdfDateField = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public static SimpleDateFormat sdfDateTimeField = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public static SimpleDateFormat sdfTimeField = new SimpleDateFormat("hh:mm");
 
@@ -63,6 +63,29 @@ public class Common implements CommonDAOImp {
 
 		return list;
 	}
+	
+	public Boolean checkNumberPhone(String number) {
+        Pattern pattern = Pattern.compile("^[0-9]*$");
+        Matcher matcher = pattern.matcher(number);
+        if (!matcher.matches()) {
+            return false;
+        } else if (number.length() == 10 || number.length() == 11) {
+            if (number.length() == 10) {
+                if (number.substring(0, 2).equals("09") || number.substring(0, 2).equals("01")) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else if (number.substring(0, 2).equals("09") || number.substring(0, 2).equals("01")) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
 
 	public List<Integer> listNumberCart(String listNumberProduct) {
 

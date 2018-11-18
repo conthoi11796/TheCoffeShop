@@ -27,6 +27,8 @@ public class Booktable implements java.io.Serializable {
 	private Employee employee;
 	private Date startdatetime;
 	private Boolean status;
+	private String notice;
+	private int countpeople;
 	private String createby;
 	private Date createat;
 	private String updateby;
@@ -124,6 +126,24 @@ public class Booktable implements java.io.Serializable {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
+	}
+	
+	@Column(name = "NOTICE", length = 7)
+	public String getNotice() {
+		return this.createby;
+	}
+
+	public void setNotice(String notice) {
+		this.notice = notice;
+	}
+	
+	@Column(name = "COUNTPEOPLE", nullable = false, length = 7)
+	public int getCountpeople() {
+		return this.countpeople;
+	}
+
+	public void setCountpeople(int countpeople) {
+		this.countpeople = countpeople;
 	}
 
 	@Column(name = "CREATEBY", length = 7)

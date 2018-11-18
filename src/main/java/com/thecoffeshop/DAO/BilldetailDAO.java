@@ -36,9 +36,9 @@ public class BilldetailDAO implements BilldetailDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Billdetail> billdetails = session
-					.createQuery("FROM Billdetail b WHERE b.BilldetailId =:billdetailId AND b.isdelete =: isdelete",
+					.createQuery("FROM Billdetail b WHERE b.id.billid =:billid AND b.isdelete =: isdelete",
 							Billdetail.class)
-					.setParameter("billdetailId", new BilldetailId(null, billid))
+					.setParameter("billid", billid)
 					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return billdetails;
 		} catch (Exception e) {

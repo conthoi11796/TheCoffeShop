@@ -1,5 +1,6 @@
 package com.thecoffeshop.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,18 +24,36 @@ public class PositionController extends Common {
 
 	@Autowired
 	PositionService positionService;
+	@Autowired
+	AtpositionService atpositionService;
 
 	@GetMapping(value = "/admin/position")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
 
+		int totalPage = positionService.findAll().size() / super.MAX_RESULTS;
+		if ((positionService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
 		return "/admin/position";
 	}
 
 	@GetMapping(value = "/admin/position/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @Autowired String startPosition) {
 
-		List<Position> positions = positionService.findAll();
-		modelMap.addAttribute("positions", positions);
+		List<Position> positions = positionService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
+		List<PositionDTO> dtos = new ArrayList<PositionDTO>();
+		for (Position position : positions) {
+			PositionDTO positionDTO = new PositionDTO();
+			positionDTO.setPosition(position);
+
+			positionDTO.setCanDelete(false);
+			if (atpositionService.checkExistPosition(position.getPositionid())) {
+				positionDTO.setCanDelete(true);
+			}
+			dtos.add(positionDTO);
+		}
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/position/tBody";
 	}
@@ -42,18 +61,13 @@ public class PositionController extends Common {
 	@PostMapping(value = "/admin/position/insert")
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String positionid,
 			@RequestParam String name) {
-
-		if (positionService.getInfoById(positionid.trim()) != null) {
-
-			modelMap.addAttribute("result", "Mã đã tồn tại!");
-			return "/admin/public/Danger";// đã tồn tại
-		}
-		if (positionService.getInfoByName(name.trim()) != null) {
-
-			modelMap.addAttribute("result", "Lỗi trùng tên!");
-			return "/admin/public/Danger";// đã tồn tại
-		}
 		
+		List<String> results = checkForm(positionid, name);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+
 		Position position = new Position();
 		position.setPositionid(positionid.trim());
 		position.setName(name.trim());
@@ -75,7 +89,7 @@ public class PositionController extends Common {
 
 		Position position = positionService.getInfoById(positionid);
 		if (position == null) {
-			modelMap.addAttribute("result", "Chức vụ không tồn tại!");
+			modelMap.addAttribute("results", "Chức vụ không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		position.setIsdelete(super.IS_DELETE);
@@ -92,7 +106,7 @@ public class PositionController extends Common {
 
 		Position position = positionService.getInfoById(positionid);
 		if (position == null) {
-			modelMap.addAttribute("result", "Chức vụ không tồn tại!");
+			modelMap.addAttribute("results", "Chức vụ không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -104,14 +118,20 @@ public class PositionController extends Common {
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String positionid,
 			@RequestParam String name) {
 
+		List<String> results = checkForm(positionid, name);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+		
 		Position position = positionService.getInfoById(positionid);
 		if (position == null) {
-			modelMap.addAttribute("result", "Chức vụ không tồn tại!");
+			modelMap.addAttribute("results", "Chức vụ không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		if (positionService.getInfoByName(name.trim()) != null) {
 
-			modelMap.addAttribute("result", "Lỗi trùng tên!");
+			modelMap.addAttribute("results", "Lỗi trùng tên!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -122,5 +142,26 @@ public class PositionController extends Common {
 
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";
+	}
+
+	public List<String> checkForm(String positionid, String name) {
+		List<String> results = new ArrayList<String>();
+		if (positionid.length() <= 0 || positionid.length() > 255) {
+			results.add("Mã không được để trống và tối đa 255 ký tự!");
+		}
+
+		if (name.length() <= 0 || name.length() > 255) {
+			results.add("Tên không được để trống và tối đa 255 ký tự!");
+		}
+
+		if (positionService.getInfoById(positionid.trim()) != null) {
+
+			results.add("Mã đã tồn tại!");
+		}
+		if (positionService.getInfoByName(name.trim()) != null) {
+
+			results.add("Lỗi trùng tên!");
+		}
+		return results;
 	}
 }

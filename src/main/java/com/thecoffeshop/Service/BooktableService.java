@@ -46,4 +46,10 @@ public class BooktableService implements BooktableDAOImp {
 		// TODO Auto-generated method stub
 		return booktableDAO.editBooktable(booktable);
 	}
+
+	@Override
+	public Boolean checkExistDinnerTable(int dinnertableid) {
+		// TODO Auto-generated method stub
+		return booktableDAO.checkExistDinnerTable(dinnertableid);
+	}
 }

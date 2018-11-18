@@ -1,6 +1,7 @@
 package com.thecoffeshop.Controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,14 +29,27 @@ public class ScheduleController extends Common {
 	@GetMapping(value = "/admin/schedule")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
 
+		int totalPage = scheduleService.findAll().size() / super.MAX_RESULTS;
+		if ((scheduleService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
+
 		return "/admin/schedule";
 	}
 
 	@GetMapping(value = "/admin/schedule/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Schedule> schedules = scheduleService.findAll();
-		modelMap.addAttribute("schedules", schedules);
+		List<Schedule> schedules = scheduleService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
+		List<ScheduleDTO> dtos = new ArrayList<ScheduleDTO>();
+		for (Schedule schedule : schedules) {
+			ScheduleDTO scheduleDTO = new ScheduleDTO();
+			scheduleDTO.setSchedule(schedule);
+
+			dtos.add(scheduleDTO);
+		}
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/schedule/tBody";
 	}
@@ -45,9 +59,15 @@ public class ScheduleController extends Common {
 			@RequestParam String starttime, @RequestParam String endtime, @RequestParam String payrate)
 			throws ParseException {
 
+		List<String> results = checkForm(scheduleid, starttime, endtime, payrate);
+		if (results.size() > 0) {
+			modelMap.addAllAttributes(results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+
 		if (scheduleService.getInfoById(scheduleid.trim()) != null) {
 
-			modelMap.addAttribute("result", "Mã đã tồn tại!");
+			modelMap.addAttribute("results", "Mã đã tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -74,7 +94,7 @@ public class ScheduleController extends Common {
 
 		Schedule schedule = scheduleService.getInfoById(scheduleid);
 		if (schedule == null) {
-			modelMap.addAttribute("result", "Ca làm không tồn tại!");
+			modelMap.addAttribute("results", "Ca làm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		schedule.setIsdelete(this.IS_DELETE);
@@ -89,7 +109,7 @@ public class ScheduleController extends Common {
 
 		Schedule schedule = scheduleService.getInfoById(scheduleid);
 		if (schedule == null) {
-			modelMap.addAttribute("result", "Ca làm không tồn tại!");
+			modelMap.addAttribute("results", "Ca làm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -101,10 +121,16 @@ public class ScheduleController extends Common {
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String scheduleid,
 			@RequestParam String starttime, @RequestParam String endtime, @RequestParam String payrate)
 			throws ParseException {
+		
+		List<String> results = checkForm(scheduleid, starttime, endtime, payrate);
+		if (results.size() > 0) {
+			modelMap.addAllAttributes(results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
 
 		Schedule schedule = scheduleService.getInfoById(scheduleid);
 		if (schedule == null) {
-			modelMap.addAttribute("result", "Ca làm không tồn tại!");
+			modelMap.addAttribute("results", "Ca làm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -117,5 +143,23 @@ public class ScheduleController extends Common {
 
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";
+	}
+
+	public List<String> checkForm(String scheduleid, String starttime, String endtime, String payrate) {
+
+		List<String> results = new ArrayList<String>();
+		if (scheduleid.trim().length() <= 0 || scheduleid.trim().length() > 8) {
+			results.add("Mã không thể để trống và tối đa 7 ký tự!");
+		}
+		if (starttime.trim().length() <= 0) {
+			results.add("Giờ bắt đầu không thể để trống!");
+		}
+		if (endtime.trim().length() <= 0) {
+			results.add("Giờ kết thúc không thể để trống!");
+		}
+		if (payrate.trim().length() <= 0) {
+			results.add("Giờ bắt đầu không thể để trống!");
+		}
+		return results;
 	}
 }

@@ -46,4 +46,10 @@ public class ScheduleService implements ScheduleDAOImp {
 		// TODO Auto-generated method stub
 		return scheduleDAO.editSchedule(schedule);
 	}
+
+	@Override
+	public List<Schedule> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return scheduleDAO.findLimit(startPosition);
+	}
 }

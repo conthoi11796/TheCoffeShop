@@ -83,7 +83,7 @@ public class Customer implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "PHONE", precision = 8, scale = 0)
+	@Column(name = "PHONE", precision = 11, scale = 0)
 	public Integer getPhone() {
 		return this.phone;
 	}

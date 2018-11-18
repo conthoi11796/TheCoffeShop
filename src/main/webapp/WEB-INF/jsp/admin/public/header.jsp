@@ -241,51 +241,62 @@
 								</ul>
 							</div></li>
 						<li class="nav-item"><a class="nav-link collapsed"
+							data-toggle="collapse" href="#ui-basic3" aria-expanded="false"
+							aria-controls="ui-basic3"> <i class="icon-handbag menu-icon"></i>
+								<span class="menu-title">QUẢN LÝ NHÂN VIÊN </span>
+						</a>
+							<div class="collapse" id="ui-basic3" style="">
+								<ul class="nav flex-column sub-menu">
+									<li class="nav-item"><a href="/admin/employee"
+										class="nav-link"> <span class="menu-title">Nhân
+												viên</span>
+									</a></li>
+									<li class="nav-item"><a href="/admin/employee"
+										class="nav-link"> <span class="menu-title">Xếp ca làm</span>
+									</a></li>
+									<li class="nav-item"><a href="/admin/employee"
+										class="nav-link"> <span class="menu-title">Thống kê lương</span>
+									</a></li>
+								</ul>
+							</div></li>
+						<li class="nav-item"><a class="nav-link collapsed"
 							data-toggle="collapse" href="#ui-basic2" aria-expanded="false"
 							aria-controls="ui-basic2"> <i class="icon-layers menu-icon"></i>
 								<span class="menu-title">HỆ THỐNG QUẢN LÝ</span>
 						</a>
 							<div class="collapse" id="ui-basic2" style="">
 								<ul class="nav flex-column sub-menu">
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Hóa đơn</span>
+									<li class="nav-item"><a href="/admin/bill"
+										class="nav-link"> <span class="menu-title">Hóa đơn</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Bàn</span>
-									</a></li>
-									<li class="nav-item"><a href="/admin/employee"
-										class="nav-link" href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Nhân viên</span>
+									<li class="nav-item"><a href="/admin/dinner-table"
+										class="nav-link"> <span class="menu-title">Bàn</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/position"
-										class="nav-link" href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Chức vụ</span>
+										class="nav-link"> <span class="menu-title">Chức vụ</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/schedule"
-										class="nav-link" href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Lịch làm</span>
+										class="nav-link"> <span class="menu-title">Lịch
+												làm</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/product"
-										class="nav-link" href="./add-product"> <span
-											class="menu-title">Thức ăn- Đồ uống</span>
+										class="nav-link"> <span class="menu-title">Thức
+												ăn- Đồ uống</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/category-product"
-										class="nav-link" href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Loại thức ăn</span>
+										class="nav-link"> <span class="menu-title">Loại
+												thức ăn</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/voucher"
-										class="nav-link" href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Voucher</span>
+										class="nav-link"> <span class="menu-title">Voucher</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
 										href="pages/charts/flot-chart.html"> <span
 											class="menu-title">Khách hàng</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/bill-status"
-										class="nav-link" href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Trạng thái hóa đơn</span>
+										class="nav-link"> <span class="menu-title">Trạng
+												thái hóa đơn</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/table-status"
 										class="nav-link"> <span class="menu-title">Trạng

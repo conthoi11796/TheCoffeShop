@@ -52,4 +52,10 @@ public class PositionService implements PositionDAOImp {
 		// TODO Auto-generated method stub
 		return positionDAO.getInfoByName(name);
 	}
+
+	@Override
+	public List<Position> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return positionDAO.findLimit(startPosition);
+	}
 }

@@ -10,6 +10,8 @@ public interface CategoryProductDAOImp extends CommonDAOImp {
 
 	public List<Categoryproduct> findAll();
 	
+	public List<Categoryproduct> findLimit(int startPosition);
+	
 	public Categoryproduct getInfoById(String categoryproductid);
 
 	public Boolean deleteCategoryproduct(String categoryproductid);

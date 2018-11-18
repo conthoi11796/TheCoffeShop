@@ -11,6 +11,8 @@ import java.util.List;
 import com.thecoffeshop.DAOImp.*;
 import com.thecoffeshop.Models.Bill;
 import com.thecoffeshop.Models.Billstatus;
+import com.thecoffeshop.Models.Dinnertable;
+import com.thecoffeshop.Models.Voucher;
 
 @Repository()
 @Transactional(rollbackFor = Exception.class)
@@ -103,6 +105,62 @@ public class BillDAO implements BillDAOImp {
 		} catch (Exception e) {
 
 			return false;
+		}
+	}
+
+	@Override
+	public Boolean checkExistVoucher(int voucherid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session
+					.createQuery("FROM Bill b WHERE b.voucher = :voucher AND b.isdelete =: isdelete", Bill.class)
+					.setParameter("voucher", new Voucher(voucherid)).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getResultList();
+
+			if (bills.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean checkExistDinnerTable(int dinnertableid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session
+					.createQuery("FROM Bill b WHERE b.dinnertable = :dinnertable AND b.isdelete =: isdelete",
+							Bill.class)
+					.setParameter("dinnertable", new Dinnertable(dinnertableid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+
+			if (bills.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+
+			return false;
+		}
+	}
+
+	@Override
+	public List<Bill> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery("FROM Bill b WHERE b.isdelete =: isdelete", Bill.class)
+					.setFirstResult(startPosition * MAX_RESULTS).setMaxResults(MAX_RESULTS)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			return bills;
+		} catch (Exception e) {
+
+			return null;
 		}
 	}
 }

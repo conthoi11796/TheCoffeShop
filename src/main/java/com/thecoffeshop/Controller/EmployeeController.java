@@ -1,8 +1,10 @@
 package com.thecoffeshop.Controller;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,6 +36,12 @@ public class EmployeeController extends Common {
 	@GetMapping(value = "/admin/employee")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
 
+		int totalPage = employeeService.findAll().size() / super.MAX_RESULTS;
+		if ((employeeService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
+
 		List<Position> positions = positionService.findAll();
 		modelMap.addAttribute("positions", positions);
 
@@ -41,10 +49,18 @@ public class EmployeeController extends Common {
 	}
 
 	@GetMapping(value = "/admin/employee/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Employee> employees = employeeService.findAll();
-		modelMap.addAttribute("employees", employees);
+		List<Employee> employees = employeeService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
+		
+		List<EmployeeDTO> dtos = new ArrayList<EmployeeDTO>();
+		for (Employee employee : employees) {
+			EmployeeDTO employeeDTO = new EmployeeDTO();
+			employeeDTO.setEmployee(employee);
+
+			dtos.add(employeeDTO);
+		}
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/employee/tBody";
 	}
@@ -56,20 +72,29 @@ public class EmployeeController extends Common {
 			@RequestParam String position, @RequestParam String salaryonhour, @RequestParam String startdate)
 			throws ParseException {
 
+		/* check */
+		List<String> results = checkForm(employeeid, name, phone, address, usename, password, position, salaryonhour,
+				startdate);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+		/* check[END] */
+
 		if (employeeService.getInfoById(employeeid.trim()) != null) {
 
-			modelMap.addAttribute("result", "Mã đã tồn tại!");
+			modelMap.addAttribute("results", "Mã đã tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		if (employeeService.checkExistUseName(usename.trim())) {
 
-			modelMap.addAttribute("result", "Tài khoản đã tồn tại!");
+			modelMap.addAttribute("results", "Tài khoản đã tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
 		Employee employee = new Employee();
 		employee.setEmployeeid(employeeid.trim());
-		employee.setName(usename);
+		employee.setName(name);
 		if (sex != "Male") {
 			employee.setSex(true);
 		}
@@ -80,6 +105,10 @@ public class EmployeeController extends Common {
 		employee.setAddress(address);
 		employee.setUsename(usename);
 		employee.setPassword(password);
+//		employee.setCreateat(createat);
+		employee.setCreateat(new Date());
+		employee.setUpdateat(new Date());
+		employee.setIsdelete(IS_NOT_DELETE);
 		employeeService.addEmployee(employee);
 
 		Atposition atposition = new Atposition();
@@ -104,49 +133,127 @@ public class EmployeeController extends Common {
 		return "/admin/public/Success"; // thành công
 	}
 
-//
-//	@PostMapping(value = "/admin/bill-status/remove")
-//	public String remove(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid) {
-//
-//		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
-//		if (billstatus == null) {
-//			modelMap.addAttribute("result", "Trạng thái hóa đơn không tồn tại!");
-//			return "/admin/public/Danger";// đã tồn tại
-//		}
-//		billstatus.setIsdelete(this.IS_DELETE);
-//		billstatusService.editBilldetail(billstatus);
-//
-//		modelMap.addAttribute("result", "Xóa thành công!");
-//		return "/admin/public/Success";// đã tồn tại
-//	}
-//
-	@GetMapping(value = "/admin/employee/edit")
-	public String view(ModelMap modelMap, HttpSession httpSession, @RequestParam String employeeid) {
+	@PostMapping(value = "/admin/employee/remove")
+	public String remove(ModelMap modelMap, HttpSession httpSession, @RequestParam String employeeid) {
 
 		Employee employee = employeeService.getInfoById(employeeid.trim());
 		if (employee == null) {
-			modelMap.addAttribute("result", "Nhân viên không tồn tại!");
+			modelMap.addAttribute("results", "Nhân viên không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
+		employee.setIsdelete(this.IS_DELETE);
+		employeeService.editEmployee(employee);
+
+		modelMap.addAttribute("result", "Xóa thành công!");
+		return "/admin/public/Success";// đã tồn tại
+	}
+
+	@GetMapping(value = "/admin/employee/edit")
+	public String view(ModelMap modelMap, HttpSession httpSession, @RequestParam String employeeid) {
+
+		List<Position> positions = positionService.findAll();
+		modelMap.addAttribute("positions", positions);
+
+		Employee employee = employeeService.getInfoById(employeeid.trim());
+		if (employee == null) {
+			modelMap.addAttribute("results", "Nhân viên không tồn tại!");
+			return "/admin/public/Danger";// đã tồn tại
+		}
+
 		modelMap.addAttribute("employee", employee);
 
 		return "/admin/content/employee/form";
 	}
-//
-//	@PostMapping(value = "/admin/bill-status/edit")
-//	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid,
-//			@RequestParam String name) {
-//
-//		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
-//		if (billstatus == null) {
-//			modelMap.addAttribute("result", "Trạng thái hóa đơn không tồn tại!");
-//			return "/admin/public/Danger";// đã tồn tại
-//		}
-//
-//		billstatus.setName(name);
-//		billstatusService.editBilldetail(billstatus);
-//
-//		modelMap.addAttribute("result", "Cập nhật thành công!");
-//		return "/admin/public/Success";
-//	}
+
+	@PostMapping(value = "/admin/employee/edit")
+	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String employeeid,
+			@RequestParam String name, @RequestParam String sex, @RequestParam String phone,
+			@RequestParam String address, @RequestParam String position, @RequestParam String salaryonhour,
+			@RequestParam String startdate) throws ParseException {
+
+		/* check */
+		List<String> results = checkForm(employeeid, name, phone, address, null, null, position, salaryonhour, startdate);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+		/* check[END] */
+
+		Employee employee = employeeService.getInfoById(employeeid.trim());
+		if (employee == null) {
+			results.add("Nhân viên không tồn tại!");
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
+		}
+
+		employee.setName(name);
+		if (sex != "Male") {
+			employee.setSex(true);
+		}
+		if (sex != "FeMale") {
+			employee.setSex(false);
+		}
+		employee.setPhone(phone);
+		employee.setAddress(address);
+//		employee.setCreateat(createat);
+		employee.setCreateat(new Date());
+		employee.setUpdateat(new Date());
+		employee.setIsdelete(IS_NOT_DELETE);
+		employeeService.editEmployee(employee);
+
+		Atposition atposition = new Atposition();
+		atposition.setEmployee(employee);
+		atposition.setCreateat(new Date());
+//		atposition.setCreateby(createby);
+		atposition.setUpdateat(new Date());
+		atposition.setStartdate(super.sdfDateField.parse(startdate));
+		atposition.setIsdelete(super.IS_NOT_DELETE);
+		atpositionService.addAtposition(atposition);
+
+		Salary salary = new Salary();
+		salary.setSalaryonhour(Integer.valueOf(salaryonhour.trim()));
+		salary.setCreateat(new Date());
+		salary.setStartdate(super.sdfDateField.parse(startdate));
+//		salary.setCreateby(createby);
+		salary.setUpdateat(new Date());
+		salary.setIsdelete(super.IS_NOT_DELETE);
+		salaryService.addSalary(salary);
+
+		modelMap.addAttribute("result", "Cập nhật thành công!");
+		return "/admin/public/Success";
+	}
+
+	public List<String> checkForm(String employeeid, String name, String phone, String address, String usename,
+			String password, String position, String salaryonhour, String startdate) {
+		
+		List<String> results = new ArrayList<String>();
+		if (employeeid.length() <= 0 || employeeid.length() > 7) {
+			results.add("Mã không được để trống và tối đa 7 kí tự!");
+		}
+		if (name.length() <= 0) {
+			results.add("Tên không được để trống!");
+		}
+		if (!this.checkNumberPhone(phone)) {
+			results.add("Số điện thoại không đúng!");
+		}
+		if (address.length() <= 0) {
+			results.add("Địa chỉ không được để trống!");
+		}
+		if (usename != null && usename.length() <= 0) {
+			results.add("Tài khoản không được để trống!");
+		}
+		if (password != null && password.length() <= 0) {
+			results.add("Mật khẩu không được để trống!");
+		}
+		if (position == "-1") {
+			results.add("Vui lòng chọn chức vụ!");
+		}
+		if (salaryonhour.length() <= 0) {
+			results.add("Lương trên giờ không được để trống!");
+		}
+		if (startdate.length() <= 0) {
+			results.add("Ngày bắt đầu làm việc không được để trống!");
+		}
+		return results;
+	}
 }

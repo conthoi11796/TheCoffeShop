@@ -26,11 +26,6 @@ public class Tablestatusdetail implements java.io.Serializable {
 	private Tablestatus tablestatus;
 	private String createby;
 	private Date createat;
-	private String updateby;
-	private Date updateat;
-	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 
 	public Tablestatusdetail() {
 	}
@@ -42,17 +37,12 @@ public class Tablestatusdetail implements java.io.Serializable {
 	}
 
 	public Tablestatusdetail(TablestatusdetailId id, Dinnertable dinnertable, Tablestatus tablestatus, String createby,
-			Date createat, String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat) {
+			Date createat) {
 		this.id = id;
 		this.dinnertable = dinnertable;
 		this.tablestatus = tablestatus;
 		this.createby = createby;
 		this.createat = createat;
-		this.updateby = updateby;
-		this.updateat = updateat;
-		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 	}
 
 	@EmbeddedId
@@ -105,53 +95,6 @@ public class Tablestatusdetail implements java.io.Serializable {
 
 	public void setCreateat(Date createat) {
 		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "UPDATEAT", length = 19)
-	public Date getUpdateat() {
-		return this.updateat;
-	}
-
-	public void setUpdateat(Date updateat) {
-		this.updateat = updateat;
-	}
-
-	@Column(name = "ISDELETE")
-	public Boolean getIsdelete() {
-		return this.isdelete;
-	}
-
-	public void setIsdelete(Boolean isdelete) {
-		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 }

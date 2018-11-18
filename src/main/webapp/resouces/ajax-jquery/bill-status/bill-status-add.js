@@ -1,10 +1,11 @@
 $(function() {
+	
 	$(".remove").click(function() {
 		$.post("/admin/bill-status/remove", {
 			billstatusid : $(this).attr("data-billstatusid")
 		}, function(data, status) {
 			$("#result-tbody").html(data);
-			_list();// at loadTable.js
+			_list(link,1);// at loadTable.js
 		});
 	});
 

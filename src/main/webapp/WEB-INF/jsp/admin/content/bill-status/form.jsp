@@ -4,8 +4,7 @@
 
 
 	<div class="form-group row">
-		<label for="billstatusid" class="col-sm-3 col-form-label">Mã số</label>
-		<div class="col-sm-9">
+		<label for="billstatusid" class="col-sm-3 col-form-label">Mã số(*)</label>
 			<input id="billstatusid" name="billstatusid" type="text" required
 				minlength="1" maxlength="7"
 				<c:if test = "${billstatus.getBillstatusid()!=null}">
@@ -13,15 +12,12 @@
           </c:if>
 				value='<c:out value="${billstatus.getBillstatusid()}" />'
 				class="form-control" placeholder="Mã trạng thái" />
-		</div>
 	</div>
 	<div class="form-group row">
-		<label class="col-sm-3 col-form-label">Tên</label>
-		<div class="col-sm-9">
+		<label class="col-sm-3 col-form-label">Tên(*)</label>
 			<input id="name" name="name" type="text" required
 				value='<c:out value="${billstatus.getName()}" />'
 				class="form-control" placeholder="Tên trạng thái" />
-		</div>
 	</div>
 	<c:if test="${billstatus.getBillstatusid()==null}">
 		<button id="btnSave" type="button" class="btn btn-success mr-2">
@@ -33,5 +29,4 @@
 	</c:if>
 	<button id="btnClear" class="btn btn-light">Làm mới</button>
 
-<script src="../resouces/ajax-jquery/bill-status/loadTable.js"></script>
 <script src="../resouces/ajax-jquery/bill-status/bill-status-edit.js"></script> 

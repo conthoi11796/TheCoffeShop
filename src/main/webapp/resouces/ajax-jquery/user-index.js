@@ -155,31 +155,8 @@ function changeTolalPrice(PId){
 	sumPriceProduct( old_number, new_number, strPrice);
 	/* set value attribute old-value of input */
 	$("#number-product-"+PId).attr("old-value" , new_number);
-}
+};
 
-function _searchPage(page) {
-	var cgPrdId = $("#selectCategoryProduct").val();
-	var strSearch = $("#inputSearch").val();
-	var isHotDeal = $("#isHotDeal").val();
-	var priceAZ = $("#priceAZ").val();
-	var priceZA = $("#priceZA").val();
-
-	 $.post("/index/search",{
-		page,
-		cgPrdId,
-		strSearch,
-		isHotDeal,
-		priceAZ,
-		priceZA
-		}, function(data, status){
-			// if(data==null){
-				$("#content-index").html(data);
-			// }
-			// else{
-			// 	$("#content-index").prepend(data);
-			// }
-	});
-}
 /* Toal price product [END] */
 $(function () {
 	
@@ -212,31 +189,4 @@ $(function () {
 
 		$("#listNumberProduct").val(listNumberProduct);
 	});
-	
-
-	/*page seacrch*/
-	$("#selectCategoryProduct").change(function() {
-		$("#cgPrdId").val($(this).val());
-	});
-	
-	$("#inputIsHotDeal").click(function() {
-		$("#isHotDeal").val("true");
-	});
-	
-	$("#inputPriceAZ").change(function() {
-		$("#priceAZ").val("true");
-	});
-	
-	$("#inputPriceZA").change(function() {
-		$("#priceZA").val("true");
-	});
-	
-	$("#viewMore").click(function() {
-		_searchPage($("#page").val().trim());
-	});
-	
-	$("#btnSearch").click(function() {
-		_searchPage("0");
-	});
-	/*page seacrch[END]*/
-})
+});

@@ -40,5 +40,11 @@ public class SalaryService implements SalaryDAOImp {
 		// TODO Auto-generated method stub
 		return salaryDAO.editSalary(salary);
 	}
+
+	@Override
+	public int getSalaryByEmployeeid(String employeeid) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

@@ -1,5 +1,6 @@
 package com.thecoffeshop.Controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.thecoffeshop.DTO.BillStatusDTO;
 import com.thecoffeshop.DTO.TableStatusDTO;
+import com.thecoffeshop.Models.Billstatus;
 import com.thecoffeshop.Models.Tablestatus;
 import com.thecoffeshop.Service.Common;
 import com.thecoffeshop.Service.TablestatusService;
@@ -28,14 +31,32 @@ public class TableStatusController extends Common {
 	@GetMapping(value = "/admin/table-status")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
 
+		int totalPage = tablestatusService.findAll().size() / super.MAX_RESULTS;
+		if ((tablestatusService.findAll().size() % super.MAX_RESULTS) > 0) {
+			totalPage++;
+		}
+		modelMap.addAttribute("totalPage", totalPage);
+		
 		return "/admin/table-status";
 	}
 
 	@GetMapping(value = "/admin/table-status/table")
-	public String tbody(ModelMap modelMap, HttpSession httpSession) {
+	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Tablestatus> listTablestatus = tablestatusService.findAll();
-		modelMap.addAttribute("listTablestatus", listTablestatus);
+		List<Tablestatus> tablestatuses= tablestatusService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
+
+		List<TableStatusDTO> dtos = new ArrayList<TableStatusDTO>();
+		for (Tablestatus tablestatus : tablestatuses) {
+			TableStatusDTO tableStatusDTO = new TableStatusDTO();
+			tableStatusDTO.setTablestatus(tablestatus);
+
+			tableStatusDTO.setCanDelete(false);
+//			if (tablestatusService.checkExistBillStatus(tablestatus.getTablestatusid())) {
+//				tableStatusDTO.setCanDelete(true);
+//			}
+			dtos.add(tableStatusDTO);
+		}
+		modelMap.addAttribute("dtos", dtos);
 
 		return "/admin/content/table-status/tBody";
 	}
@@ -43,9 +64,14 @@ public class TableStatusController extends Common {
 	@PostMapping(value = "/admin/table-status/insert")
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String name) {
 
+		if (name.trim().length() <= 0 || name.trim().length() >255 ) {
+
+			modelMap.addAttribute("results", "Tên không được để trống và tối đa 255 ký tự!");
+			return "/admin/public/Danger";// đã tồn tại
+		}
 		if (tablestatusService.checkExist(name.trim())) {
 
-			modelMap.addAttribute("result", "Trạng thái bàn đã tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái bàn đã tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -69,14 +95,14 @@ public class TableStatusController extends Common {
 
 		Tablestatus tablestatus = tablestatusService.getInfoById(Integer.valueOf(tablestatusid.trim()));
 		if (tablestatus == null) {
-			modelMap.addAttribute("result", "Trạng thái bàn không tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái bàn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
 		tablestatus.setIsdelete(IS_DELETE);
 		tablestatusService.editTablestatus(tablestatus);
 
-		modelMap.addAttribute("result", "Xóa thành công!");
+		modelMap.addAttribute("results", "Xóa thành công!");
 		return "/admin/public/Success";// đã tồn tại
 	}
 
@@ -85,7 +111,7 @@ public class TableStatusController extends Common {
 
 		Tablestatus tablestatus = tablestatusService.getInfoById(Integer.valueOf(tablestatusid.trim()));
 		if (tablestatus == null) {
-			modelMap.addAttribute("result", "Trạng thái bàn không tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái bàn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		
@@ -98,10 +124,16 @@ public class TableStatusController extends Common {
 	@PostMapping(value = "/admin/table-status/edit")
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String tablestatusid,
 			@RequestParam String name) {
+		
+		if (name.trim().length() > 0 || name.trim().length() >255 ) {
+
+			modelMap.addAttribute("resulst", "Tên không được để trống và tối đa 255 ký tự!");
+			return "/admin/public/Danger";// đã tồn tại
+		}
 
 		Tablestatus tablestatus = tablestatusService.getInfoById(Integer.valueOf(tablestatusid.trim()));
 		if (tablestatus == null) {
-			modelMap.addAttribute("result", "Trạng thái bàn không tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái bàn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 

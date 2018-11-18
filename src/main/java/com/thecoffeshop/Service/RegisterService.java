@@ -46,4 +46,10 @@ public class RegisterService implements RegisterDAOImp {
 		// TODO Auto-generated method stub
 		return registerDAO.editRegister(register);
 	}
+
+	@Override
+	public Boolean checkExistSchedule(String scheduleid) {
+		// TODO Auto-generated method stub
+		return registerDAO.checkExistSchedule(scheduleid);
+	}
 }

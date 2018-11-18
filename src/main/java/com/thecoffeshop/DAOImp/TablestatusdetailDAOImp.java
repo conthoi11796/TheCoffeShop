@@ -4,15 +4,17 @@ import java.util.List;
 
 import com.thecoffeshop.Models.*;
 
-public interface TablestatusdetailDAOImp extends CommonDAOImp{
+public interface TablestatusdetailDAOImp extends CommonDAOImp {
 
 	public Boolean addTablestatusdetail(Tablestatusdetail tablestatusdetail);
 
 	public List<Tablestatusdetail> findAll();
 
-	public Tablestatusdetail getInfoById(int dinnertableid );
+	public Tablestatusdetail getInfoById(int dinnertableid);
 
 	public Boolean deleteTablestatusdetail(TablestatusdetailId tablestatusdetailId);
 
 	public Boolean editTablestatusdetail(Tablestatusdetail tablestatusdetail);
+
+	public Boolean checkExitsDinnerTable(int dinnertableid);
 }

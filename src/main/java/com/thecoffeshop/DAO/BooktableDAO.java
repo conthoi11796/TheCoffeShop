@@ -82,4 +82,24 @@ public class BooktableDAO implements BooktableDAOImp {
 		return null;
 	}
 
+	@Override
+	public Boolean checkExistDinnerTable(int dinnertableid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Booktable> booktables = session
+					.createQuery(
+							"FROM Booktable b WHERE b.id.dinnertableid =: dinnertableid AND b.isdelete =: isdelete",
+							Booktable.class)
+					.setParameter("dinnertableid", dinnertableid).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getResultList();
+			if (booktables.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 }

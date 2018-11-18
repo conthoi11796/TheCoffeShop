@@ -47,4 +47,22 @@ public class DinnertableService implements DinnertableDAOImp {
 		return dinnertableDAO.editDinnertable(dinnertable);
 	}
 
+	@Override
+	public List<Dinnertable> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return dinnertableDAO.findLimit(startPosition);
+	}
+
+	@Override
+	public Boolean checkExistDinnerTable(String name) {
+		// TODO Auto-generated method stub
+		return dinnertableDAO.checkExistDinnerTable(name);
+	}
+
+	@Override
+	public List<Integer> getListCountChair() {
+		// TODO Auto-generated method stub
+		return dinnertableDAO.getListCountChair();
+	}
+
 }

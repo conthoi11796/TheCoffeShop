@@ -56,4 +56,22 @@ public class BillService implements BillDAOImp {
 		return billDAO.checkExistBillStatus(billstatusid);
 	}
 
+	@Override
+	public Boolean checkExistVoucher(int voucherid) {
+		// TODO Auto-generated method stub
+		return billDAO.checkExistVoucher(voucherid);
+	}
+
+	@Override
+	public Boolean checkExistDinnerTable(int dinnertableid) {
+		// TODO Auto-generated method stub
+		return billDAO.checkExistDinnerTable(dinnertableid);
+	}
+
+	@Override
+	public List<Bill> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return billDAO.findLimit(startPosition);
+	}
+
 }

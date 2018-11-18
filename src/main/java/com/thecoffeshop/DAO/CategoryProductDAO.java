@@ -87,4 +87,20 @@ public class CategoryProductDAO implements CategoryProductDAOImp {
 		}
 	}
 
+	@Override
+	public List<Categoryproduct> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Categoryproduct> liCategoryproducts = session
+					.createQuery("FROM Categoryproduct c WHERE c.isdelete = :isdelete", Categoryproduct.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE)
+					.setFirstResult(startPosition * this.MAX_RESULTS).setMaxResults(this.MAX_RESULTS)
+					.getResultList();
+			return liCategoryproducts;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
 }

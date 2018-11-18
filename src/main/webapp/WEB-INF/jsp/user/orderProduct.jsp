@@ -23,11 +23,9 @@ pageEncoding="UTF-8"%>
 		style="background: url(../resouces/images/background.jpg); background-size: cover;">
 		<!-- content -->
 		<div id="content-index" class="content-wrapper dislpay-product" style="width: 100%; margin-left: 0;">
+		
 			<%@ include file="./content/content-orderProduct.jsp"%>
-			<div class="align-items-center justify-content-between flex-wrap container"
-				style="text-align: center;">
-				<a id="viewMore" class="btn btn-inverse-light btn-rounded btn-fw btn-see-more">Xem thêm</a>
-			</div>
+
 		</div>
 		<!-- content [END] -->
 		<!-- content-wrapper ends -->

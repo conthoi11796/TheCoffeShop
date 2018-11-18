@@ -42,7 +42,7 @@ public class BillStatusController extends Common {
 	@GetMapping(value = "/admin/bill-status/table")
 	public String tbody(ModelMap modelMap, HttpSession httpSession, @RequestParam String startPosition) {
 
-		List<Billstatus> ListBillstatus = billstatusService.findLimit(Integer.valueOf(startPosition) - 1);
+		List<Billstatus> ListBillstatus = billstatusService.findLimit(Integer.valueOf(startPosition.trim()) - 1);
 
 		List<BillStatusDTO> dtos = new ArrayList<BillStatusDTO>();
 		for (Billstatus billstatus : ListBillstatus) {
@@ -65,22 +65,17 @@ public class BillStatusController extends Common {
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid,
 			@RequestParam String name) {
 
-		/*check*/
-		if (billstatusid.length() == 0 || billstatusid.length() > 8) {
-
-			modelMap.addAttribute("result", "Mã phải không được để trống và ít nhất 7 kí tự!");
-			return "/admin/public/Danger";
+		/* check */
+		List<String> results = checkForm(billstatusid, name);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
 		}
-		if (name.length() == 0) {
-
-			modelMap.addAttribute("result", "Tên không được để trống!");
-			return "/admin/public/Danger";
-		}
-		/*check[END]*/
+		/* check[END] */
 
 		if (billstatusService.getInfoById(billstatusid.trim()) != null) {
 
-			modelMap.addAttribute("result", "Mã đã tồn tại!");
+			modelMap.addAttribute("results", "Mã đã tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -104,7 +99,7 @@ public class BillStatusController extends Common {
 
 		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
 		if (billstatus == null) {
-			modelMap.addAttribute("result", "Trạng thái hóa đơn không tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái hóa đơn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		billstatus.setIsdelete(this.IS_DELETE);
@@ -116,10 +111,10 @@ public class BillStatusController extends Common {
 
 	@GetMapping(value = "/admin/bill-status/edit")
 	public String view(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid) {
-		
+
 		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
 		if (billstatus == null) {
-			modelMap.addAttribute("result", "Trạng thái hóa đơn không tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái hóa đơn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -131,22 +126,17 @@ public class BillStatusController extends Common {
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid,
 			@RequestParam String name) {
 
-		/*check*/
-		if (billstatusid.length() == 0 || billstatusid.length() > 8) {
-
-			modelMap.addAttribute("result", "Mã phải không được để trống và ít nhất 7 kí tự!");
-			return "/admin/public/Danger";
+		/* check */
+		List<String> results = checkForm(billstatusid, name);
+		if (results.size() > 0) {
+			modelMap.addAttribute("results", results);
+			return "/admin/public/Danger";// đã tồn tại
 		}
-		if (name.length() == 0) {
-
-			modelMap.addAttribute("result", "Tên không được để trống!");
-			return "/admin/public/Danger";
-		}
-		/*check[END]*/
+		/* check[END] */
 
 		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
 		if (billstatus == null) {
-			modelMap.addAttribute("result", "Trạng thái hóa đơn không tồn tại!");
+			modelMap.addAttribute("results", "Trạng thái hóa đơn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -155,5 +145,18 @@ public class BillStatusController extends Common {
 
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";
+	}
+
+	public List<String> checkForm(String billstatusid, String name) {
+		List<String> results = new ArrayList<String>();
+		if (billstatusid.length() == 0 || billstatusid.length() > 8) {
+
+			results.add("Mã phải không được để trống và tối đa 7 kí tự!");
+		}
+		if (name.length() == 0) {
+
+			results.add("Tên không được để trống!");
+		}
+		return results;
 	}
 }

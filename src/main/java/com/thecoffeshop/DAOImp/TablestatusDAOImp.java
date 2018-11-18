@@ -10,6 +10,8 @@ public interface TablestatusDAOImp extends CommonDAOImp {
     
     public List<Tablestatus> findAll();
 
+    public List<Tablestatus> findLimit(int startPosition);
+    
     public Tablestatus getInfoById(int tablestatusid);
     
     public Boolean checkExist(String name); 

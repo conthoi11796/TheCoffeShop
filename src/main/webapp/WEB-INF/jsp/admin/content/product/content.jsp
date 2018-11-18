@@ -40,6 +40,20 @@
                            
                         </tbody>
                       </table>
+                      <nav>
+					<input id="totalPage"
+					value="
+						<c:if test="${totalPage == null}">
+							1
+						</c:if>
+						<c:if test="${totalPage != null}">
+							<c:out value="${totalPage}" />
+						</c:if>"
+						type="hidden">
+					<ul class="pagination separated pagination-secondary">
+						
+					</ul>
+				</nav>
                     </div>
                   </div>
       </div>
