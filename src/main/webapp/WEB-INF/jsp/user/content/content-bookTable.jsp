@@ -38,6 +38,7 @@
 							<c:set var="i" scope="session" value="${ i + 1}" />
 						</c:forEach>
 					</div>
+					<br>
 					<div class="row">
 						<div class="form-group">
 							<label for="tablestatusid" class="col-sm-12 col-form-label">Số

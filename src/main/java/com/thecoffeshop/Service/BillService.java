@@ -74,4 +74,10 @@ public class BillService implements BillDAOImp {
 		return billDAO.findLimit(startPosition);
 	}
 
+	@Override
+	public int getTotalPriceOfBill(int billid) {
+		// TODO Auto-generated method stub
+		return billDAO.getTotalPriceOfBill(billid);
+	}
+
 }

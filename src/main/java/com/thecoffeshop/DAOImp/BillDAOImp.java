@@ -23,4 +23,6 @@ public interface BillDAOImp extends CommonDAOImp {
 	public Boolean checkExistVoucher(int voucherid);
 
 	public Boolean checkExistDinnerTable(int dinnertableid);
+
+	public int getTotalPriceOfBill(int billid);
 }

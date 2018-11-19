@@ -61,6 +61,7 @@ public class ProductDAO implements ProductDAOImp {
 				hql = hql + " AND p.categoryproduct =: categoryproduct ";
 			}
 			if (strSearch != null) {
+				System.out.println("xxx");
 				hql = hql + " AND p.name = :name ";
 			}
 //			if (isHotDeal) {
@@ -74,11 +75,11 @@ public class ProductDAO implements ProductDAOImp {
 //			}
 			Query query = session.createQuery(hql, Product.class);
 			query.setParameter("isdelete", this.IS_NOT_DELETE);
-			if (categoryproductid != null && categoryproductid != "-1") {
+			if (categoryproductid != null) {
 				query.setParameter("categoryproduct", new Categoryproduct(categoryproductid));
 			}
 			if (strSearch != null) {
-				query.setParameter("name", strSearch);
+				query.setParameter("name", "%" + strSearch + "%");
 			}
 			query.setFirstResult(startPosition * NUM_PRODUCT_ONE_PAGE);
 			query.setMaxResults(NUM_PRODUCT_ONE_PAGE);

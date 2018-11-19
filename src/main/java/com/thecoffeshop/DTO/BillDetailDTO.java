@@ -5,7 +5,9 @@ public class BillDetailDTO {
 
 	private Billdetail billdetail; 
 	
-	private int price;
+	private int singlePrice;
+	
+	private int totalPrice;
 
 	public Billdetail getBilldetail() {
 		return billdetail;
@@ -15,13 +17,23 @@ public class BillDetailDTO {
 		this.billdetail = billdetail;
 	}
 
-	public int getPrice() {
-		return price;
+	public int getSinglePrice() {
+		return singlePrice;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setSinglePrice(int singlePrice) {
+		this.singlePrice = singlePrice;
 	}
+
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	
 	
 	
 }

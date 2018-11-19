@@ -1,4 +1,6 @@
 $(function() {
+
+	var link = "/admin/bill/table";
 	
 	$(".remove").click(function() {
 		$.post("/admin/bill/remove", {
@@ -13,7 +15,7 @@ $(function() {
 		$.get("/admin/bill/edit", {
 			billid : $(this).attr("data-billid")
 		}, function(data, status) {
-			$("#tBodyDetail").append("x");
+			$("#tBodyDetail").html(data);
 		});
 	});
 });

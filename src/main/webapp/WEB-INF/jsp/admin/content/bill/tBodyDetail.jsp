@@ -2,20 +2,33 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:forEach items="${dtos}" var="dto">
+<thead>
 	<tr>
-		<td><label
-			data-billid='<c:out value="${dto.getBilldetail().getProduct().getProductid()}" />'
-			class="badge badge-info edit"><i class="fa fa-wrench"></i></label> <c:if
-				test="">
-				<label
-					data-billid='<c:out value="${dto.getBilldetail().getProduct().getProductid()}" />'
-					class="badge badge-danger remove"><i class="fa fa-times"></i></label>
-			</c:if></td>
-		<td><c:out value="${dto.getBilldetail().getProduct().getName()}" /></td>
-		<td class="text-danger"></td>
-		<td></td>
-		<td></td>
+		<th></th>
+		<th>Sản phẩm</th>
+		<th>Số lượng</th>
+		<th>Đơn giá</th>
+		<th>Tổng tiền</th>
 	</tr>
-</c:forEach>
-<script src="../resouces/ajax-jquery/bill/bill-add.js"></script>
+</thead>
+<tbody>
+	<c:forEach items="${dtos}" var="dto">
+		<tr>
+			<td><label
+				data-billId='<c:out value="${dto.getBilldetail().getId().getBillid()}" />'
+				data-productId='<c:out value="${dto.getBilldetail().getId().getProductid()}" />'
+				class="badge badge-info edit-billDetail"><i
+					class="fa fa-wrench"></i></label> <label
+				data-billId='<c:out value="${dto.getBilldetail().getId().getBillid()}" />'
+				data-productId='<c:out value="${dto.getBilldetail().getProduct().getProductid()}" />'
+				class="badge badge-danger remove-billDetail"><i
+					class="fa fa-times"></i></label></td>
+			<td><c:out value="${dto.getBilldetail().getProduct().getName()}" /></td>
+			<td class="text-danger"><c:out
+					value="${dto.getBilldetail().getQuantity()}" /></td>
+			<td><c:out value="${dto.getSinglePrice()}" /></td>
+			<td><c:out value="${dto.getTotalPrice()}" /></td>
+		</tr>
+	</c:forEach>
+</tbody>
+<script src="../resouces/ajax-jquery/bill/bill-detail-edit-get.js"></script>

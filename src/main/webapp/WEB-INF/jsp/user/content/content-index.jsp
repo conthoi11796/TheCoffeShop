@@ -45,10 +45,7 @@
 										</c:if>
 									">
 										<img
-											class="d-block w-100 col-lg-12 img-
-												<c:if test="${i == 1}">
-													<c:out value="${productDTO.getProduct().getProductid()}" />
-												</c:if>"
+											class="d-block w-100 col-lg-12 img-<c:if test="${i == 1}"><c:out value="${productDTO.getProduct().getProductid()}" /></c:if>"
 											src='../resouces/images/my-images/<c:out value="${image.getName()}" />'
 											alt='<c:out value="${alt}" />'>
 									</div>

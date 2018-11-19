@@ -2,20 +2,6 @@ $(function() {
 	
 	var link = "/admin/bill/table";
 
-	$("#btnSave").click(function() {
-		$.post("/admin/bill-status/insert", {
-			billstatusid : $("#billstatusid").val(),
-			name : $("#name").val()
-		}, function(data, status) {
-			$("#result-form").html(data);
-			//Pagination không tự load được nên phải tặng thêm 1 khi thêm thành công
-			if(data.indexOf("success") != -1){
-				$("totalPage").val($("totalPage").val() + 1);
-			}
-//			_list(link, 1);// at loadTable.js
-		});
-	});
-
 	$("#btnClear").click(function() {
 		document.getElementById("billStatus_form").reset();
 	});

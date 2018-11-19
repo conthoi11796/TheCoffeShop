@@ -50,5 +50,17 @@ public class BilldetailService implements BilldetailDAOImp {
 		return billdetailDAO.editBilldetail(billdetail);
 	}
 
+	@Override
+	public int getPriceOfBillDetail(BilldetailId billdetailId) {
+		// TODO Auto-generated method stub
+		return billdetailDAO.getPriceOfBillDetail(billdetailId);
+	}
+
+	@Override
+	public int getSinglePriceOfBillDetail(String productid, Date startdatetime) {
+		// TODO Auto-generated method stub
+		return billdetailDAO.getSinglePriceOfBillDetail(productid, startdatetime);
+	}
+
 
 }

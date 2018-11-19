@@ -5,4 +5,5 @@
 	<div class="badge badge-danger">
 		<c:out value="${result}" />
 	</div>
+	<br>
 </c:forEach>

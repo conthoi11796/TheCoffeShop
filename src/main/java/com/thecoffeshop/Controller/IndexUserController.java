@@ -94,7 +94,13 @@ public class IndexUserController extends Common {
 		modelMap.addAttribute("categoryProducts", categoryProducts);
 
 		/* display list product on page */
-		
+		if (cgPrdId != null && cgPrdId.equals("-1")) {
+			cgPrdId = null;
+		}
+		if(strSearch == "") {
+			strSearch = null;
+		}
+
 		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal,
 				priceAZ, priceZA);
 

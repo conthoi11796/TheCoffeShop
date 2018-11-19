@@ -8,22 +8,13 @@
 			<div class="col-12 grid-margin">
 				<div class="card">
 					<div class="card-body">
-						<h4 class="card-title">Hóa đơn</h4>
+						<h4 class="card-title">Hóa đơn chi tiết</h4>
 						<p id="result-form" class="card-description"></p>
-						<form id="bill_form" class="forms-sample">
-							<%@ include file="./form.jsp"%>
+						<form id="billDetail_form" class="forms-sample">
 						</form>
 						<br>
-						<table id="order-listing" class="table table-striped">
-							<thead id="tBodyDetail">
-								<tr>
-									<th></th>
-									<th>Sản phẩm</th>
-									<th>Số lượng</th>
-									<th>Đơn giá</th>
-									<th>Tổng tiền</th>
-								</tr>
-							</thead>
+						<table  id="tBodyDetail" class="table table-striped">
+							
 						</table>
 					</div>
 				</div>

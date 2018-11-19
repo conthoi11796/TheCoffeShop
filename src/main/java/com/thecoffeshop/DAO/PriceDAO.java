@@ -1,5 +1,6 @@
 package com.thecoffeshop.DAO;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -69,8 +70,8 @@ public class PriceDAO implements PriceDAOImp {
 		try {
 			Price price = session.createQuery(
 					"FROM Price p WHERE p.product = :product AND p.isdelete =: isdelete AND p.startdatetime > now()",
-					Price.class).setParameter("product", new Product(productid)).setParameter("isdelete", this.IS_NOT_DELETE)
-					.setMaxResults(1).getSingleResult();
+					Price.class).setParameter("product", new Product(productid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).setMaxResults(1).getSingleResult();
 			return price;
 		} catch (Exception e) {
 			return null;
@@ -84,8 +85,8 @@ public class PriceDAO implements PriceDAOImp {
 		try {
 			Price price = session.createQuery(
 					"FROM Price p WHERE p.product = :product AND p.isdelete =: isdelete AND p.startdatetime <= now() ORDER BY p.startdatetime DESC",
-					Price.class).setParameter("product", new Product(productid)).setParameter("isdelete", this.IS_NOT_DELETE)
-					.setMaxResults(1).getSingleResult();
+					Price.class).setParameter("product", new Product(productid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).setMaxResults(1).getSingleResult();
 			return price.getPrice();
 		} catch (Exception e) {
 			return 0;

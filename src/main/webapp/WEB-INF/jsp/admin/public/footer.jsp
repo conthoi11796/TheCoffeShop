@@ -25,6 +25,7 @@
 	
   <script src="../resouces/node_modules/datatables.net/js/jquery.dataTables.js"></script>
   <script src="../resouces/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js"></script>
+  <script src="../resouces/node_modules/chart.js/dist/Chart.min.js"></script>
 	<!-- End plugin js for this page-->
 	<!-- inject:js -->
 	<script src="../resouces/js/off-canvas.js"></script>
