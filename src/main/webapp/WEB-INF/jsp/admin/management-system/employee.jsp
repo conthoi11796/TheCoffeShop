@@ -3,16 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- HEADER -->
-<%@ include file="./public/header.jsp"%>
+<%@ include file="../public/header.jsp"%>
 <!-- HEADER [END] -->
 <!-- content-wrapper -->
 <div id="content-index" class="content-wrapper">
-	<%@ include file="./content/product-status/content.jsp"%>
+	<%@ include file="./content/employee/content.jsp"%>
 </div>
 <!-- content-wrapper ends -->
 <!-- my-js -->
-<script src="../resouces/ajax-jquery/product-status.js"></script>
+<script src="../resouces/ajax-jquery/loadTable.js"></script>
+<script src="../resouces/ajax-jquery/employee/employee.js"></script>
 <!-- my-js[END] -->
 <!-- FOOTER -->
-<%@ include file="./public/footer.jsp"%>
+<%@ include file="../public/footer.jsp"%>
 <!-- FOOTER [END]-->

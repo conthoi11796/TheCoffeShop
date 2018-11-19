@@ -5,6 +5,7 @@ $(function(){
             productid : $(this).attr("data-productid")
         }, function(data, status){
             $("#result-tbody").html(data);
+			$("#result-tbody").fadeOut(3000);
 			_list(link,1);// at loadTable.js
         });
     });

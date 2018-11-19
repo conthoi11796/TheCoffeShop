@@ -191,15 +191,15 @@
 								<ul class="nav flex-column sub-menu">
 									<li class="nav-item"><a class="nav-link"
 										href="pages/tables/basic-table.html"> <span
-											class="menu-title">Danh thu theo ngày</span>
+											class="menu-title">Thu chi</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
 										href="pages/icons/font-awesome.html"> <span
-											class="menu-title">Danh thu theo tuần</span>
+											class="menu-title">Sản phẩm bán ra</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
 										href="pages/icons/font-awesome.html"> <span
-											class="menu-title">Danh thu theo tháng</span>
+											class="menu-title">Hóa đơn</span>
 									</a></li>
 								</ul>
 							</div></li>
@@ -230,29 +230,21 @@
 										href="pages/tables/basic-table.html"> <span
 											class="menu-title">Nhà cung cấp nguyên liệu</span>
 									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
-											class="menu-title">Nguyên liệu</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
-											class="menu-title">Đơn vị</span>
-									</a></li>
 								</ul>
 							</div></li>
 						<li class="nav-item"><a class="nav-link collapsed"
-							data-toggle="collapse" href="#ui-basic3" aria-expanded="false"
-							aria-controls="ui-basic3"> <i class="icon-handbag menu-icon"></i>
+							data-toggle="collapse" href="#ui-basic4" aria-expanded="false"
+							aria-controls="ui-basic4"> <i class="icon-handbag menu-icon"></i>
 								<span class="menu-title">QUẢN LÝ NHÂN VIÊN </span>
 						</a>
-							<div class="collapse" id="ui-basic3" style="">
+							<div class="collapse" id="ui-basic4" style="">
 								<ul class="nav flex-column sub-menu">
 									<li class="nav-item"><a href="/admin/employee"
 										class="nav-link"> <span class="menu-title">Nhân
 												viên</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/employee"
-										class="nav-link"> <span class="menu-title">Xếp ca làm</span>
+										class="nav-link"> <span class="menu-title">Duyệt ca làm</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/employee"
 										class="nav-link"> <span class="menu-title">Thống kê lương</span>
@@ -283,16 +275,16 @@
 										class="nav-link"> <span class="menu-title">Thức
 												ăn- Đồ uống</span>
 									</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="pages/tables/basic-table.html"> <span
+											class="menu-title">Nguyên liệu</span>
+									</a></li>
 									<li class="nav-item"><a href="/admin/category-product"
 										class="nav-link"> <span class="menu-title">Loại
 												thức ăn</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/voucher"
 										class="nav-link"> <span class="menu-title">Voucher</span>
-									</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="pages/charts/flot-chart.html"> <span
-											class="menu-title">Khách hàng</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/bill-status"
 										class="nav-link"> <span class="menu-title">Trạng

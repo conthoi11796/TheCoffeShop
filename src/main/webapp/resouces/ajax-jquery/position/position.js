@@ -8,6 +8,7 @@ $(function() {
 			name : $("#name").val()
 		}, function(data, status) {
 			$("#result-form").html(data);
+			$("#result-form").fadeOut(3000);
 			// Pagination không tự load được nên phải tặng thêm 1 khi thêm thành
 			// công
 			if (data.indexOf("success") != -1) {

@@ -45,7 +45,7 @@ public class DinnerTableController extends Common {
 			totalPage++;
 		}
 		modelMap.addAttribute("totalPage", totalPage);
-		return "/admin/dinner-table";
+		return "/admin/management-system/dinner-table";
 
 	}
 
@@ -75,7 +75,7 @@ public class DinnerTableController extends Common {
 
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/dinner-table/tBody";
+		return "/admin/management-system/content/dinner-table/tBody";
 	}
 
 	@PostMapping(value = "/admin/dinner-table/insert")
@@ -132,7 +132,7 @@ public class DinnerTableController extends Common {
 		}
 
 		modelMap.addAttribute("dinnertable", dinnertable);
-		return "/admin/content/dinner-table/form";
+		return "/admin/management-system/content/dinner-table/form";
 	}
 
 	@PostMapping(value = "/admin/dinner-table/edit")

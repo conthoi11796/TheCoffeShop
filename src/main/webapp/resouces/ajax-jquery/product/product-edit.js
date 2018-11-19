@@ -8,7 +8,8 @@
             description : $("#description").val(),
             categoryproductid : $("#categoryproductid").val()
          }, function(data, status){
-             $("#result-tbody").html(data);
+             $("#result-form").html(data);
+ 			$("#result-form").fadeOut(3000);
 //             _list(link, 1);
          });
       });

@@ -36,7 +36,7 @@ public class BillStatusController extends Common {
 		}
 		modelMap.addAttribute("totalPage", totalPage);
 
-		return "/admin/bill-status";
+		return "/admin/management-system/bill-status";
 	}
 
 	@GetMapping(value = "/admin/bill-status/table")
@@ -58,7 +58,7 @@ public class BillStatusController extends Common {
 
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/bill-status/tBody";
+		return "/admin/management-system/content/bill-status/tBody";
 	}
 
 	@PostMapping(value = "/admin/bill-status/insert")
@@ -119,7 +119,7 @@ public class BillStatusController extends Common {
 		}
 
 		modelMap.addAttribute("billstatus", billstatus);
-		return "/admin/content/bill-status/form";
+		return "/admin/management-system/content/bill-status/form";
 	}
 
 	@PostMapping(value = "/admin/bill-status/edit")

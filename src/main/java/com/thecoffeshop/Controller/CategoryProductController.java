@@ -36,7 +36,7 @@ public class CategoryProductController extends Common {
 		}
 		modelMap.addAttribute("totalPage", totalPage);
 
-		return "/admin/category-product";
+		return "/admin/management-system/category-product";
 	}
 
 	@GetMapping(value = "/admin/category-product/table")
@@ -57,7 +57,7 @@ public class CategoryProductController extends Common {
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/category-product/tBody";
+		return "/admin/management-system/content/category-product/tBody";
 	}
 
 	@PostMapping(value = "/admin/category-product/insert")
@@ -119,7 +119,7 @@ public class CategoryProductController extends Common {
 		}
 
 		modelMap.addAttribute("categoryproduct", categoryproduct);
-		return "/admin/content/category-product/form";
+		return "/admin/management-system/content/category-product/form";
 	}
 
 	@PostMapping(value = "/admin/category-product/edit")

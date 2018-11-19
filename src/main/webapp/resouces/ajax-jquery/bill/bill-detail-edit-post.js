@@ -9,6 +9,7 @@ $("#btnUpdate").click(function() {
 		quantity : $("#quantity").val()
 	}, function(data, status) {
 		$("#result-form").html(data);
+		$("#result-form").fadeOut(3000);
 		$.get("/admin/bill/edit", {
 			billid : billid
 		}, function(data, status) {

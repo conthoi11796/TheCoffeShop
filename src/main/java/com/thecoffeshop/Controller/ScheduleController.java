@@ -35,7 +35,7 @@ public class ScheduleController extends Common {
 		}
 		modelMap.addAttribute("totalPage", totalPage);
 
-		return "/admin/schedule";
+		return "/admin/management-system/schedule";
 	}
 
 	@GetMapping(value = "/admin/schedule/table")
@@ -51,7 +51,7 @@ public class ScheduleController extends Common {
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/schedule/tBody";
+		return "/admin/management-system/content/schedule/tBody";
 	}
 
 	@PostMapping(value = "/admin/schedule/insert")
@@ -114,7 +114,7 @@ public class ScheduleController extends Common {
 		}
 
 		modelMap.addAttribute("schedule", schedule);
-		return "/admin/content/schedule/form";
+		return "/admin/management-system/content/schedule/form";
 	}
 
 	@PostMapping(value = "/admin/schedule/edit")

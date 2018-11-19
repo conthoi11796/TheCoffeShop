@@ -37,7 +37,7 @@ public class TableStatusController extends Common {
 		}
 		modelMap.addAttribute("totalPage", totalPage);
 		
-		return "/admin/table-status";
+		return "/admin/management-system/table-status";
 	}
 
 	@GetMapping(value = "/admin/table-status/table")
@@ -58,7 +58,7 @@ public class TableStatusController extends Common {
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/table-status/tBody";
+		return "/admin/management-system/content/table-status/tBody";
 	}
 
 	@PostMapping(value = "/admin/table-status/insert")
@@ -118,7 +118,7 @@ public class TableStatusController extends Common {
 		tablestatus.setTablestatusdetails(null);
 
 		modelMap.addAttribute("tablestatus", tablestatus);
-		return "/admin/content/table-status/form";
+		return "/admin/management-system/content/table-status/form";
 	}
 
 	@PostMapping(value = "/admin/table-status/edit")

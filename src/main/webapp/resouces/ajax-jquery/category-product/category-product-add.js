@@ -4,6 +4,7 @@ $(function() {
 			categoryproductid : $(this).attr("data-categoryproductid")
 		}, function(data, status) {
 			$("#result-tbody").html(data);
+			$("#result-tbody").fadeOut(3000);
 			_list(link, 1);
 		});
 	});

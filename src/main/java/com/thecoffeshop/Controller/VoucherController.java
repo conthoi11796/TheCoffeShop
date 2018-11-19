@@ -38,7 +38,7 @@ public class VoucherController extends Common {
 		}
 		modelMap.addAttribute("totalPage", totalPage);
 
-		return "/admin/voucher";
+		return "/admin/management-system/voucher";
 	}
 
 	@GetMapping(value = "/admin/voucher/table")
@@ -59,7 +59,7 @@ public class VoucherController extends Common {
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/voucher/tBody";
+		return "/admin/management-system/content/voucher/tBody";
 	}
 
 	@PostMapping(value = "/admin/voucher/insert")
@@ -131,7 +131,7 @@ public class VoucherController extends Common {
 		}
 
 		modelMap.addAttribute("voucher", voucher);
-		return "/admin/content/voucher/form";
+		return "/admin/management-system/content/voucher/form";
 	}
 
 	@PostMapping(value = "/admin/voucher/edit")

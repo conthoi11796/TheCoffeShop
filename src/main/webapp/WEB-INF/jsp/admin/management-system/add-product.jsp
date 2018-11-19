@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- HEADER -->
-<%@ include file="./public/header.jsp"%>
+<%@ include file="../public/header.jsp"%>
 <!-- HEADER [END] -->
 <div class="content-wrapper">
 	<div class="row user-profile">
@@ -161,5 +161,5 @@
 <!-- Include JS [END] -->
 
 <!-- FOOTER -->
-<%@ include file="./public/footer.jsp"%>
+<%@ include file="../public/footer.jsp"%>
 <!-- FOOTER [END] -->

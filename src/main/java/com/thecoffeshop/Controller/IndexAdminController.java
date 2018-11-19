@@ -47,7 +47,7 @@ public class IndexAdminController {
 			indexAdminDTOs.add(indexAdminDTO);
 		}
 
-		return "/admin/index";
+		return "/admin/management-system/index";
 
 	}
 

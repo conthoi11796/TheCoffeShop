@@ -35,7 +35,7 @@ public class PositionController extends Common {
 			totalPage++;
 		}
 		modelMap.addAttribute("totalPage", totalPage);
-		return "/admin/position";
+		return "/admin/management-system/position";
 	}
 
 	@GetMapping(value = "/admin/position/table")
@@ -55,7 +55,7 @@ public class PositionController extends Common {
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/position/tBody";
+		return "/admin/management-system/content/position/tBody";
 	}
 
 	@PostMapping(value = "/admin/position/insert")
@@ -111,7 +111,7 @@ public class PositionController extends Common {
 		}
 
 		modelMap.addAttribute("position", position);
-		return "/admin/content/position/form";
+		return "/admin/management-system/content/position/form";
 	}
 
 	@PostMapping(value = "/admin/position/edit")

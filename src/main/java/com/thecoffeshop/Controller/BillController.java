@@ -43,7 +43,7 @@ public class BillController extends Common {
 		}
 		modelMap.addAttribute("totalPage", totalPage);
 
-		return "/admin/bill";
+		return "/admin/management-system/bill";
 	}
 
 	@GetMapping(value = "/admin/bill/table")
@@ -63,7 +63,7 @@ public class BillController extends Common {
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/bill/tBody";
+		return "/admin/management-system/content/bill/tBody";
 	}
 
 	@PostMapping(value = "/admin/bill/remove")
@@ -120,7 +120,7 @@ public class BillController extends Common {
 
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/content/bill/tBodyDetail";
+		return "/admin/management-system/content/bill/tBodyDetail";
 	}
 
 	@PostMapping(value = "/admin/billDetail/remove")
@@ -157,7 +157,7 @@ public class BillController extends Common {
 		}
 
 		modelMap.addAttribute("billdetail", billdetail);
-		return "/admin/content/bill/form";
+		return "/admin/management-system/content/bill/form";
 	}
 
 	@PostMapping(value = "/admin/billDetail/edit")
@@ -187,33 +187,7 @@ public class BillController extends Common {
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";
 	}
-
-//
-//	@PostMapping(value = "/admin/bill/edit")
-//	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String billstatusid,
-//			@RequestParam String name) {
-//
-//		/* check */
-//		List<String> results = checkForm(billstatusid, name);
-//		if (results.size() > 0) {
-//			modelMap.addAttribute("results", results);
-//			return "/admin/public/Danger";// đã tồn tại
-//		}
-//		/* check[END] */
-//
-//		Billstatus billstatus = billstatusService.getInfoById(billstatusid.trim());
-//		if (billstatus == null) {
-//			modelMap.addAttribute("results", "Trạng thái hóa đơn không tồn tại!");
-//			return "/admin/public/Danger";// đã tồn tại
-//		}
-//
-//		billstatus.setName(name);
-//		billstatusService.editBilldetail(billstatus);
-//
-//		modelMap.addAttribute("result", "Cập nhật thành công!");
-//		return "/admin/public/Success";
-//	}
-//
+	
 	public List<String> checkForm(String quantity) {
 		List<String> results = new ArrayList<String>();
 		if (quantity.trim().length() == 0 || Integer.valueOf(quantity.trim()) <= 0) {
