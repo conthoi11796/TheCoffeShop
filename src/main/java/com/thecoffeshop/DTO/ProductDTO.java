@@ -16,6 +16,15 @@ public class ProductDTO {
 	private Price newPrice;
 	private int rateOldAndNewPrice;
 	private boolean checkIsNew;
+	private int quantity;
+	
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
 	public Boolean getCanDelete() {
 		return canDelete;

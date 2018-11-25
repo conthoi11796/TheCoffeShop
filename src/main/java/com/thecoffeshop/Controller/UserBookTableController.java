@@ -76,7 +76,6 @@ public class UserBookTableController extends Common {
 		booktable.setStatus(super.STATUS_NOT_CONFIRM);
 		booktable.setCountpeople(Integer.valueOf(countpeople.trim()));
 		booktable.setNotice(notice.trim());
-		booktable.setCreateat(new Date());
 		booktable.setUpdateat(new Date());
 		booktable.setIsdelete(IS_NOT_DELETE);
 		if (!booktableService.addBooktable(booktable)) {

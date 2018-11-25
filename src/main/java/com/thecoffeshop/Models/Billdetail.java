@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import javax.persistence.AttributeOverride;
@@ -25,13 +25,8 @@ public class Billdetail implements java.io.Serializable {
 	private Bill bill;
 	private Product product;
 	private Integer quantity;
-	private String createby;
-	private Date createat;
-	private String updateby;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 
 	public Billdetail() {
 	}
@@ -42,19 +37,13 @@ public class Billdetail implements java.io.Serializable {
 		this.product = product;
 	}
 
-	public Billdetail(BilldetailId id, Bill bill, Product product, Integer quantity, String createby, Date createat,
-			String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat) {
+	public Billdetail(BilldetailId id, Bill bill, Product product, Integer quantity, Date updateat, Boolean isdelete) {
 		this.id = id;
 		this.bill = bill;
 		this.product = product;
 		this.quantity = quantity;
-		this.createby = createby; // must add when employee approve
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 	}
 
 	@EmbeddedId
@@ -99,34 +88,6 @@ public class Billdetail implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATEAT", length = 19)
 	public Date getUpdateat() {
@@ -144,25 +105,6 @@ public class Billdetail implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 }

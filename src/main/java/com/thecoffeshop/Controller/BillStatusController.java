@@ -82,8 +82,7 @@ public class BillStatusController extends Common {
 		Billstatus billstatus = new Billstatus();
 		billstatus.setBillstatusid(billstatusid);
 		billstatus.setName(name.trim());
-//		billstatus.setCreateby(createby);
-		billstatus.setCreateat(new Date());
+		billstatus.setUpdateat(new Date());
 		billstatus.setIsdelete(this.IS_NOT_DELETE);
 		billstatusService.addBillstatus(billstatus);
 

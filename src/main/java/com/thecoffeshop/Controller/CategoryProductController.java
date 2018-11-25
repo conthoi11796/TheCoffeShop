@@ -81,9 +81,6 @@ public class CategoryProductController extends Common {
 		Categoryproduct categoryproduct = new Categoryproduct();
 		categoryproduct.setCategoryproductid(categoryproductid);
 		categoryproduct.setName(name);
-//		categoryproduct.setCreateby(createby);
-		categoryproduct.setCreateat(new Date());
-		categoryproduct.setUpdateat(new Date());
 		categoryproduct.setIsdelete(super.IS_NOT_DELETE);
 		categoryProductService.addCategoryProduct(categoryproduct);
 

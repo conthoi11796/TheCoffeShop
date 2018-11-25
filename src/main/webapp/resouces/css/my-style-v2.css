@@ -868,3 +868,10 @@ div{
 .checkBox-search i:before{
 	margin-bottom: 0;
 }
+.soluong1 button{
+	margin: 0;
+	padding: 7px;
+}
+.soluong1 input{
+	width: 100%;
+}

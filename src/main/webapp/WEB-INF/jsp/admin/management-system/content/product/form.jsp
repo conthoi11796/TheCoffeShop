@@ -25,7 +25,13 @@
                 <c:out value="${product.getDescription()}" />
           </textarea>
 </div>
-
+<div class="form-group">
+	<label for="price" class="col-sm-12 col-form-label">Đơn giá</label>
+	<input id="price" class="form-control" type="number"
+		placeholder="0"
+                value ='<c:out value="${price}"/>'
+          />
+</div>
 <div class="form-group">
 	<label for="billstatusid" class="col-sm-12 col-form-label">Loại
 		sản phẩm</label> <select class="form-control" id="categoryproductid">

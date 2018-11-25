@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -8,9 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,26 +22,22 @@ import javax.persistence.TemporalType;
 public class Employee implements java.io.Serializable {
 
 	private String employeeid;
-	private Salary salary;
 	private String name;
 	private Boolean sex;
 	private String phone;
 	private String address;
 	private String usename;
 	private String password;
-	private String createby;
-	private Date createat;
-	private String updateby;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 	private Set<Bill> bills = new HashSet<Bill>(0);
 	private Set<Atposition> atpositions = new HashSet<Atposition>(0);
 	private Set<Exportbill> exportbills = new HashSet<Exportbill>(0);
 	private Set<Register> registers = new HashSet<Register>(0);
+	private Set<Importbill> importbills = new HashSet<Importbill>(0);
 	private Set<Image> images = new HashSet<Image>(0);
 	private Set<Booktable> booktables = new HashSet<Booktable>(0);
+	private Set<Salary> salaries = new HashSet<Salary>(0);
 
 	public Employee() {
 	}
@@ -52,31 +46,27 @@ public class Employee implements java.io.Serializable {
 		this.employeeid = employeeid;
 	}
 
-	public Employee(String employeeid, Salary salary, String name, Boolean sex, String phone, String address,
-			String usename, String password, String createby, Date createat, String updateby, Date updateat,
-			Boolean isdelete, String deleteby, Date deleteat, Set<Bill> bills, Set<Atposition> atpositions,
-			Set<Exportbill> exportbills, Set<Register> registers, Set<Image> images, Set<Booktable> booktables) {
+	public Employee(String employeeid, String name, Boolean sex, String phone, String address, String usename,
+			String password, Date updateat, Boolean isdelete, Set<Bill> bills, Set<Atposition> atpositions,
+			Set<Exportbill> exportbills, Set<Register> registers, Set<Importbill> importbills, Set<Image> images,
+			Set<Booktable> booktables, Set<Salary> salaries) {
 		this.employeeid = employeeid;
-		this.salary = salary;
 		this.name = name;
 		this.sex = sex;
 		this.phone = phone;
 		this.address = address;
 		this.usename = usename;
 		this.password = password;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 		this.bills = bills;
 		this.atpositions = atpositions;
 		this.exportbills = exportbills;
 		this.registers = registers;
+		this.importbills = importbills;
 		this.images = images;
 		this.booktables = booktables;
+		this.salaries = salaries;
 	}
 
 	@Id
@@ -88,16 +78,6 @@ public class Employee implements java.io.Serializable {
 
 	public void setEmployeeid(String employeeid) {
 		this.employeeid = employeeid;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "SALARYID")
-	public Salary getSalary() {
-		return this.salary;
-	}
-
-	public void setSalary(Salary salary) {
-		this.salary = salary;
 	}
 
 	@Column(name = "NAME")
@@ -118,7 +98,7 @@ public class Employee implements java.io.Serializable {
 		this.sex = sex;
 	}
 
-	@Column(name = "PHONE", length = 11)
+	@Column(name = "PHONE", unique = true, length = 11)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -154,34 +134,6 @@ public class Employee implements java.io.Serializable {
 		this.password = password;
 	}
 
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATEAT", length = 19)
 	public Date getUpdateat() {
@@ -199,25 +151,6 @@ public class Employee implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
@@ -256,6 +189,15 @@ public class Employee implements java.io.Serializable {
 		this.registers = registers;
 	}
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
+	public Set<Importbill> getImportbills() {
+		return this.importbills;
+	}
+
+	public void setImportbills(Set<Importbill> importbills) {
+		this.importbills = importbills;
+	}
+
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "employees")
 	public Set<Image> getImages() {
 		return this.images;
@@ -272,6 +214,15 @@ public class Employee implements java.io.Serializable {
 
 	public void setBooktables(Set<Booktable> booktables) {
 		this.booktables = booktables;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
+	public Set<Salary> getSalaries() {
+		return this.salaries;
+	}
+
+	public void setSalaries(Set<Salary> salaries) {
+		this.salaries = salaries;
 	}
 
 }

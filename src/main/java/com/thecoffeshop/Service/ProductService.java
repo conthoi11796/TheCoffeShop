@@ -33,9 +33,10 @@ public class ProductService implements ProductDAOImp {
 
 	@Override
 	public List<Product> getListProductLimit(int startPosition, String cgPrdId, String strSearch, String isHotDeal,
-			String priceAZ, String priceZA) {
+			String priceAZ, String priceZA, String productid) {
 
-		return productDAO.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal, priceAZ, priceZA);
+		return productDAO.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal, priceAZ, priceZA,
+				productid);
 	}
 
 	@Override

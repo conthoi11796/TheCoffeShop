@@ -19,14 +19,14 @@ public class MaterialdetailDAO implements MaterialdetailDAOImp {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Boolean addMaterialdetail(Materialdetail materialdetail) {
+	public int addMaterialdetail(Materialdetail materialdetail) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.save(materialdetail);
-			return true;
+			int lastId = (Integer)session.save(materialdetail);
+			return lastId;
 		} catch (Exception e) {
-			return false;
+			return -1;
 		}
 	}
 
@@ -84,6 +84,26 @@ public class MaterialdetailDAO implements MaterialdetailDAOImp {
 			session.update(materialdetail);
 			return true;
 		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean checkExistMaterial(int materialid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+
+			List<Materialdetail> materialdetails = session.createQuery(
+					"FROM Materialdetail m WHERE m.material.materialid =: materialid AND m.isdelete =: isdelete",
+					Materialdetail.class).setParameter("materialid", materialid)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			if (materialdetails.size() > 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+
 			return false;
 		}
 	}

@@ -1,7 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
-
-import static javax.persistence.GenerationType.IDENTITY;
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -29,14 +28,9 @@ public class Voucher implements java.io.Serializable {
 	private Date enddate;
 	private Integer number;
 	private Integer count;
-	private Integer saleof;
-	private String createby;
-	private Date createat;
-	private String updateby;
+	private Integer saleoff;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 	private Set<Bill> bills = new HashSet<Bill>(0);
 
 	public Voucher() {
@@ -47,28 +41,21 @@ public class Voucher implements java.io.Serializable {
 	}
 
 	public Voucher(int voucherid, String name, Date startdatetime, Date enddate, Integer number, Integer count,
-			Integer saleof, String createby, Date createat, String updateby, Date updateat, Boolean isdelete,
-			String deleteby, Date deleteat, Set<Bill> bills) {
+			Integer saleoff, Date updateat, Boolean isdelete, Set<Bill> bills) {
 		this.voucherid = voucherid;
 		this.name = name;
 		this.startdatetime = startdatetime;
 		this.enddate = enddate;
 		this.number = number;
 		this.count = count;
-		this.saleof = saleof;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
+		this.saleoff = saleoff;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 		this.bills = bills;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	
 	@Column(name = "VOUCHERID", unique = true, nullable = false)
 	public int getVoucherid() {
 		return this.voucherid;
@@ -87,7 +74,7 @@ public class Voucher implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "STARTDATETIME", length = 19)
 	public Date getStartdatetime() {
 		return this.startdatetime;
@@ -125,41 +112,13 @@ public class Voucher implements java.io.Serializable {
 		this.count = count;
 	}
 
-	@Column(name = "SALEOF")
-	public Integer getSaleof() {
-		return this.saleof;
+	@Column(name = "SALEOFF")
+	public Integer getSaleoff() {
+		return this.saleoff;
 	}
 
-	public void setSaleof(Integer saleof) {
-		this.saleof = saleof;
-	}
-
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
+	public void setSaleoff(Integer saleoff) {
+		this.saleoff = saleoff;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -179,25 +138,6 @@ public class Voucher implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "voucher")

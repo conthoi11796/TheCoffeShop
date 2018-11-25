@@ -87,9 +87,7 @@ public class VoucherController extends Common {
 		voucher.setEnddate(super.sdfDateField.parse(enddate));
 		voucher.setNumber(Integer.valueOf(number));
 		voucher.setCount(Integer.valueOf(number));
-		voucher.setSaleof(Integer.valueOf(saleof));
-//		voucher.setCreateby(createby);
-		voucher.setCreateat(new Date());
+		voucher.setSaleoff(Integer.valueOf(saleof));
 		voucher.setUpdateat(new Date());
 		voucher.setIsdelete(super.IS_NOT_DELETE);
 		voucherService.addVoucher(voucher);
@@ -154,9 +152,6 @@ public class VoucherController extends Common {
 		}
 		voucher.setName(name.trim());
 		voucher.setStartdatetime(super.sdfDateField.parse(startdatetime));
-//		voucher.setCreateby(createby);
-		voucher.setCreateat(new Date());
-//		voucher.setUpdateby(updateby);
 		voucher.setUpdateat(new Date());
 		voucher.setIsdelete(super.IS_NOT_DELETE);
 
@@ -164,7 +159,7 @@ public class VoucherController extends Common {
 		if (voucher.getStartdatetime().after(new Date())) {
 			voucher.setEnddate(super.sdfDateField.parse(enddate));
 			voucher.setNumber(Integer.valueOf(number));
-			voucher.setSaleof(Integer.valueOf(saleof));
+			voucher.setSaleoff(Integer.valueOf(saleof));
 		}
 		/*
 		 * start rồi: không cho sửa saleof, không cho sửa ngày start, nếu số voucher nhỏ

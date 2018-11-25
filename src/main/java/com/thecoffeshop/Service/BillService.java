@@ -20,8 +20,6 @@ public class BillService implements BillDAOImp {
 
 	@Override
 	public int addBill(Bill bill) {
-
-		bill.setCreateat(new Date());
 		bill.setIsdelete(this.IS_NOT_DELETE);
 		return billDAO.addBill(bill);
 	}
@@ -78,6 +76,48 @@ public class BillService implements BillDAOImp {
 	public int getTotalPriceOfBill(int billid) {
 		// TODO Auto-generated method stub
 		return billDAO.getTotalPriceOfBill(billid);
+	}
+
+	@Override
+	public Bill getInfoLastBill(int dinnertableid) {
+		// TODO Auto-generated method stub
+		return billDAO.getInfoLastBill(dinnertableid);
+	}
+
+	@Override
+	public int thongkeTongTienTrongNgay(Date date) {
+		// TODO Auto-generated method stub
+		return billDAO.thongkeTongTienTrongNgay(date);
+	}
+
+	@Override
+	public int thongkeSoHoaDonTrongNgay(Date date) {
+		// TODO Auto-generated method stub
+		return billDAO.thongkeSoHoaDonTrongNgay(date);
+	}
+
+	@Override
+	public int thongkeTongTienTrongTuan(int tuan) {
+		// TODO Auto-generated method stub
+		return billDAO.thongkeTongTienTrongTuan(tuan);
+	}
+
+	@Override
+	public int thongkeSoHoaDonTrongTuan(int tuan) {
+		// TODO Auto-generated method stub
+		return billDAO.thongkeSoHoaDonTrongTuan(tuan);
+	}
+
+	@Override
+	public int thongkeTongTienTrongThang(int thang) {
+		// TODO Auto-generated method stub
+		return billDAO.thongkeTongTienTrongThang(thang);
+	}
+
+	@Override
+	public int thongkeSoHoaDonTrongThang(int thang) {
+		// TODO Auto-generated method stub
+		return billDAO.thongkeSoHoaDonTrongThang(thang);
 	}
 
 }

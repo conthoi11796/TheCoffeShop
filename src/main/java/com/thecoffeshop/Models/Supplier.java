@@ -1,12 +1,15 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,14 +26,9 @@ public class Supplier implements java.io.Serializable {
 	private int supplierid;
 	private String name;
 	private String address;
-	private Integer phone;
-	private String createby;
-	private Date createat;
-	private String updateby;
+	private String phone;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 	private Set<Importbill> importbills = new HashSet<Importbill>(0);
 
 	public Supplier() {
@@ -40,24 +38,19 @@ public class Supplier implements java.io.Serializable {
 		this.supplierid = supplierid;
 	}
 
-	public Supplier(int supplierid, String name, String address, Integer phone, String createby, Date createat,
-			String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat,
+	public Supplier(int supplierid, String name, String address, String phone, Date updateat, Boolean isdelete,
 			Set<Importbill> importbills) {
 		this.supplierid = supplierid;
 		this.name = name;
 		this.address = address;
 		this.phone = phone;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 		this.importbills = importbills;
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "SUPPLIERID", unique = true, nullable = false)
 	public int getSupplierid() {
@@ -86,41 +79,13 @@ public class Supplier implements java.io.Serializable {
 		this.address = address;
 	}
 
-	@Column(name = "PHONE", precision = 8, scale = 0)
-	public Integer getPhone() {
+	@Column(name = "PHONE", length = 7)
+	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(Integer phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -140,25 +105,6 @@ public class Supplier implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "supplier")

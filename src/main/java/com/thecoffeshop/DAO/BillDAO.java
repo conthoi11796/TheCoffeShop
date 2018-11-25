@@ -28,7 +28,7 @@ public class BillDAO implements BillDAOImp {
 	@Autowired
 	private PriceService priceService;
 	@Autowired
-	private BilldetailService billdetailService; 
+	private BilldetailService billdetailService;
 
 	@Override
 	public int addBill(Bill bill) {
@@ -189,11 +189,133 @@ public class BillDAO implements BillDAOImp {
 			for (Billdetail billdetail : billdetails) {
 				String productId = billdetail.getProduct().getProductid();
 				int price = billdetailService.getPriceOfBillDetail(new BilldetailId(productId, billid));
+				
 				totalPrice += price;
 			}
 
 			return totalPrice;
 
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
+	@Override
+	public Bill getInfoLastBill(int dinnertableid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Bill bill = session.createQuery(
+					"FROM Bill b WHERE b.isdelete =: isdelete AND b.billstatus.billstatusid = 'CTT' AND b.dinnertable.dinnertableid =: dinnertableid AND b.startdatetime <= now() ORDER BY b.startdatetime DESC",
+					Bill.class).setParameter("dinnertableid", dinnertableid)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(0).setMaxResults(1).getSingleResult();
+			return bill;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public int thongkeTongTienTrongNgay(Date date) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery(
+					"FROM Bill b WHERE b.startdatetime = DATE(:date) AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					Bill.class).setParameter("date", date).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+		
+			int total = 0;
+			for (Bill bill : bills) {
+				total += getTotalPriceOfBill(bill.getBillid());
+			}
+			return total;
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
+	@Override
+	public int thongkeSoHoaDonTrongNgay(Date date) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery(
+					"FROM Bill b WHERE b.startdatetime = DATE(:date) AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					Bill.class).setParameter("date", date).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			return bills.size();
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
+	@Override
+	public int thongkeTongTienTrongTuan(int tuan) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery(
+					"FROM Bill b WHERE  WEEK(b.enddate) =: tuan AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					Bill.class).setParameter("tuan", tuan).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+		
+			int total = 0;
+			for (Bill bill : bills) {
+				total += getTotalPriceOfBill(bill.getBillid());
+			}
+			return total;
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
+	@Override
+	public int thongkeSoHoaDonTrongTuan(int tuan) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery(
+					"FROM Bill b WHERE  WEEK(b.enddate) =: tuan AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					Bill.class).setParameter("tuan", tuan).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			return bills.size();
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
+	@Override
+	public int thongkeTongTienTrongThang(int thang) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery(
+					"FROM Bill b WHERE  MONTH(b.enddate) =: thang AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					Bill.class).setParameter("thang", thang).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			
+			int total = 0;
+			for (Bill bill : bills) {
+				total += getTotalPriceOfBill(bill.getBillid());
+			}
+			return total;
+		} catch (Exception e) {
+
+			return 0;
+		}
+	}
+
+	@Override
+	public int thongkeSoHoaDonTrongThang(int thang) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Bill> bills = session.createQuery(
+					"FROM Bill b WHERE  MONTH(b.enddate) =: thang AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					Bill.class).setParameter("thang", thang).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			return bills.size();
 		} catch (Exception e) {
 
 			return 0;

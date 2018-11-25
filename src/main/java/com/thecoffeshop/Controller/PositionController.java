@@ -71,8 +71,6 @@ public class PositionController extends Common {
 		Position position = new Position();
 		position.setPositionid(positionid.trim());
 		position.setName(name.trim());
-//		position.setCreateby(createby);
-		position.setCreateat(new Date());
 		position.setUpdateat(new Date());
 		position.setIsdelete(super.IS_NOT_DELETE);
 		positionService.addPosition(position);

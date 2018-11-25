@@ -82,7 +82,7 @@ public class AtpositionDAO implements AtpositionDAOImp {
 			List<Atposition> atpositions = session
 					.createQuery("FROM Atposition a WHERE a.id = :id AND e.isdelete =: isdelete",
 							Atposition.class)
-					.setParameter("id", new AtpositionId("1")).setParameter("isdelete", this.IS_NOT_DELETE)
+					.setParameter("id", positionid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getResultList();
 			if(atpositions.size()>0) {
 				return true;

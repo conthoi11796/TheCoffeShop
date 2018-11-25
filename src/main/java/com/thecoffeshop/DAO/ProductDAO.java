@@ -52,7 +52,7 @@ public class ProductDAO implements ProductDAOImp {
 
 	@Override
 	public List<Product> getListProductLimit(int startPosition, String categoryproductid, String strSearch,
-			String isHotDeal, String priceAZ, String priceZA) {
+			String isHotDeal, String priceAZ, String priceZA, String productid) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
@@ -61,8 +61,10 @@ public class ProductDAO implements ProductDAOImp {
 				hql = hql + " AND p.categoryproduct =: categoryproduct ";
 			}
 			if (strSearch != null) {
-				System.out.println("xxx");
 				hql = hql + " AND p.name = :name ";
+			}
+			if (productid != null) {
+				hql = hql + " AND p.productid = :productid ";
 			}
 //			if (isHotDeal) {
 //				hql = hql + " AND p.categoryproduct =: categoryproduct ";
@@ -79,7 +81,10 @@ public class ProductDAO implements ProductDAOImp {
 				query.setParameter("categoryproduct", new Categoryproduct(categoryproductid));
 			}
 			if (strSearch != null) {
-				query.setParameter("name", "%" + strSearch + "%");
+				query.setParameter("name", strSearch);
+			}
+			if (productid != null) {
+				query.setParameter("productid", productid);
 			}
 			query.setFirstResult(startPosition * NUM_PRODUCT_ONE_PAGE);
 			query.setMaxResults(NUM_PRODUCT_ONE_PAGE);
@@ -104,7 +109,7 @@ public class ProductDAO implements ProductDAOImp {
 
 			Calendar c1 = Calendar.getInstance();
 			Calendar c2 = Calendar.getInstance();
-			c1.setTime(product.getCreateat());
+			c1.setTime(product.getUpdateat());
 			c2.setTime(new Date());
 
 			long numDay = (c2.getTime().getTime() - c1.getTime().getTime()) / (24 * 3600 * 1000);

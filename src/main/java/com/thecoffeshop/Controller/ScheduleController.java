@@ -76,8 +76,6 @@ public class ScheduleController extends Common {
 		schedule.setStarttime(super.sdfTimeField.parse(starttime.trim()));
 		schedule.setEndtime(super.sdfTimeField.parse(endtime.trim()));
 		schedule.setPayrate(Float.valueOf(payrate.trim()));
-		schedule.setCreateat(new Date());
-//		schedule.setCreateby(createby);
 		schedule.setUpdateat(new Date());
 		schedule.setIsdelete(super.IS_NOT_DELETE);
 		scheduleService.addSchedule(schedule);

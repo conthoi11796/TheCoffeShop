@@ -13,7 +13,7 @@ public interface ProductDAOImp extends CommonDAOImp {
 	public List<Product> findLimit(int startPosition);
 	
 	public List<Product> getListProductLimit(int startPosition, String cgPrdId, String strSearch, String isHotDeal,
-			String priceAZ, String priceZA);
+			String priceAZ, String priceZA, String productid);
 
 	public Boolean checkExistCategoryProduct(String categoryproductid);
 

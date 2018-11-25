@@ -1,7 +1,8 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,44 +22,41 @@ import javax.persistence.TemporalType;
 @Table(name = "price", catalog = "luanvan")
 public class Price implements java.io.Serializable {
 
-	private Integer priceid;
+	private int priceid;
 	private Product product;
 	private Date startdatetime;
+	private Date enddatetime;
 	private Integer price;
-	private String createby;
-	private Date createat;
-	private String updateby;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 
 	public Price() {
 	}
 
-	public Price(Product product, Date startdatetime, Integer price, String createby, Date createat, String updateby,
-			Date updateat, Boolean isdelete, String deleteby, Date deleteat) {
+	public Price(int priceid) {
+		this.priceid = priceid;
+	}
+
+	public Price(int priceid, Product product, Date startdatetime, Date enddatetime, Integer price, Date updateat,
+			Boolean isdelete) {
+		this.priceid = priceid;
 		this.product = product;
 		this.startdatetime = startdatetime;
+		this.enddatetime = enddatetime;
 		this.price = price;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "PRICEID", unique = true, nullable = false)
-	public Integer getPriceid() {
+	public int getPriceid() {
 		return this.priceid;
 	}
 
-	public void setPriceid(Integer priceid) {
+	public void setPriceid(int priceid) {
 		this.priceid = priceid;
 	}
 
@@ -82,6 +80,16 @@ public class Price implements java.io.Serializable {
 		this.startdatetime = startdatetime;
 	}
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "ENDDATETIME", length = 19)
+	public Date getEnddatetime() {
+		return this.enddatetime;
+	}
+
+	public void setEnddatetime(Date enddatetime) {
+		this.enddatetime = enddatetime;
+	}
+
 	@Column(name = "PRICE")
 	public Integer getPrice() {
 		return this.price;
@@ -89,34 +97,6 @@ public class Price implements java.io.Serializable {
 
 	public void setPrice(Integer price) {
 		this.price = price;
-	}
-
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -136,25 +116,6 @@ public class Price implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 }

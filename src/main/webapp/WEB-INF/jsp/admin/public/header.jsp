@@ -9,7 +9,9 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Stellar Admin</title>
+<title>The Coffe Shop || </title>
+
+
 <!-- plugins:css -->
 <link rel="stylesheet"
 	href="../resouces/node_modules/mdi/css/materialdesignicons.min.css">
@@ -17,22 +19,25 @@
 	href="../resouces/node_modules/simple-line-icons/css/simple-line-icons.css">
 <link rel="stylesheet"
 	href="../resouces/node_modules/flag-icon-css/css/flag-icon.min.css">
+<link rel="stylesheet" href="../resouces/node_modules/perfect-scrollbar/css/perfect-scrollbar.css">
 <!-- endinject -->
 <!-- plugin css for this page -->
 <link rel="stylesheet"
 	href="../resouces/node_modules/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="../resouces/node_modules/jvectormap/jquery-jvectormap.css" />
 <!-- End plugin css for this page -->
 <!-- inject:css -->
 <link rel="stylesheet" href="../resouces/css/style.css">
 <!-- endinject -->
 <link rel="shortcut icon" href="../resouces/images/favicon.png" />
+
 <!-- my-style-css -->
 <link rel="stylesheet" href="../resouces/css/my-style-v2.css">
 <!-- plugins:js -->
 <script src="../resouces/node_modules/jquery/dist/jquery.min.js"></script>
 </head>
 
-<body>
+<body class="horizontal-menu">
 	<div class="container-scroller">
 		<!-- partial:../resouces/partials/_navbar.html -->
 		<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -170,15 +175,15 @@
 				</button>
 			</div>
 		</nav>
+		
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<div class="row row-offcanvas row-offcanvas-right">
 				<!-- partial:../resouces/partials/_sidebar.html -->
-				<nav class="sidebar sidebar-offcanvas" id="sidebar"
-					style="min-height: 500px;">
+				<nav class="sidebar sidebar-offcanvas" id="sidebar">
 					<ul class="nav">
 						<li class="nav-item"><a class="nav-link collapsed"
-							href="pages/forms/basic_elements.html"> <i
+							href="/admin/index"> <i
 								class="icon-home menu-icon"></i> <span class="menu-title">TRANG
 									CHỦ</span>
 						</a></li>
@@ -190,7 +195,7 @@
 							<div class="collapse" id="ui-basic" style="">
 								<ul class="nav flex-column sub-menu">
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/statistic-profit"> <span
 											class="menu-title">Thu chi</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
@@ -211,15 +216,15 @@
 							<div class="collapse" id="ui-basic1" style="">
 								<ul class="nav flex-column sub-menu">
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/warehouse-product"> <span
 											class="menu-title">Thức ăn- Đồ uống tồn kho</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/warehouse/material"> <span
 											class="menu-title">Nguyên liệu tồn kho</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/warehouse-import-material"> <span
 											class="menu-title">Phiếu nhập nguyên liệu</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
@@ -227,7 +232,7 @@
 											class="menu-title">Phiếu xuất nguyên liệu</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/warehouse-supplier"> <span
 											class="menu-title">Nhà cung cấp nguyên liệu</span>
 									</a></li>
 								</ul>
@@ -276,7 +281,7 @@
 												ăn- Đồ uống</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/material"> <span
 											class="menu-title">Nguyên liệu</span>
 									</a></li>
 									<li class="nav-item"><a href="/admin/category-product"

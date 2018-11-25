@@ -45,4 +45,10 @@ public class PriceService implements PriceDAOImp {
 
 		return priceDAO.getOldPrice(PId);
 	}
+
+	@Override
+	public Boolean editPrice(Price price) {
+		// TODO Auto-generated method stub
+		return priceDAO.editPrice(price);
+	}
 }

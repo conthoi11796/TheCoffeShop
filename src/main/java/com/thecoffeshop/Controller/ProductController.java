@@ -3,6 +3,7 @@ package com.thecoffeshop.Controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +27,8 @@ public class ProductController extends Common {
 	ProductService productService;
 	@Autowired
 	CategoryProductService categoryProductService;
+	@Autowired
+	PriceService priceService;
 
 	@GetMapping(value = "/admin/product")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
@@ -49,13 +52,13 @@ public class ProductController extends Common {
 
 		List<ProductDTO> dtos = new ArrayList<ProductDTO>();
 		for (Product product : products) {
-			
+
 			ProductDTO productDTO = new ProductDTO();
 			productDTO.setCanDelete(true);
-			if(product.getBilldetails().size() > 0) {
+			if (product.getBilldetails().size() > 0) {
 				productDTO.setCanDelete(false);
 			}
-			if(product.getExportbills().size() > 0) {
+			if (product.getExportbills().size() > 0) {
 				productDTO.setCanDelete(false);
 			}
 			productDTO.setProduct(product);
@@ -70,7 +73,8 @@ public class ProductController extends Common {
 
 	@PostMapping(value = "/admin/product/insert")
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String productid,
-			@RequestParam String name, @RequestParam String description, @RequestParam String categoryproductid) {
+			@RequestParam String name, @RequestParam String description, @RequestParam String categoryproductid,
+			@RequestParam String price) {
 
 		if (productService.getInfoById(productid.trim()) != null) {
 
@@ -87,6 +91,10 @@ public class ProductController extends Common {
 			modelMap.addAttribute("results", "Chưa chọn loại sản phẩm!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
+		if (Integer.valueOf(price.trim()) <= 0) {
+			modelMap.addAttribute("results", "Đơn giá không được để trống và > 0!");
+			return "/admin/public/Danger";// đã tồn tại
+		}
 
 		Product product = new Product();
 		product.setProductid(productid.trim());
@@ -94,11 +102,17 @@ public class ProductController extends Common {
 		product.setDescription(description);
 		Categoryproduct categoryproduct = categoryProductService.getInfoById(categoryproductid);
 		product.setCategoryproduct(categoryproduct);
-		product.setCreateat(new Date());
-//		product.setCreateby(createby);
 		product.setUpdateat(new Date());
 		product.setIsdelete(IS_NOT_DELETE);
 		productService.addProduct(product);
+
+		Price price2 = new Price();
+		price2.setPrice(Integer.valueOf(price));
+		price2.setStartdatetime(new Date());
+		price2.setProduct(product);
+		price2.setUpdateat(new Date());
+		price2.setIsdelete(IS_NOT_DELETE);
+		priceService.addPrice(price2);
 
 		List<Categoryproduct> categoryproducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryproducts", categoryproducts);
@@ -117,7 +131,14 @@ public class ProductController extends Common {
 		}
 		product.setIsdelete(this.IS_DELETE);
 		product.setUpdateat(new Date());
-		productService.editProduct(product);
+
+		if (productService.editProduct(product)) {
+			Set<Price> prices = product.getPrices();
+			for (Price price : prices) {
+				price.setIsdelete(IS_DELETE);
+				priceService.editPrice(price);
+			}
+		}
 
 		modelMap.addAttribute("result", "Xóa thành công!");
 		return "/admin/public/Success";// đã tồn tại
@@ -136,21 +157,30 @@ public class ProductController extends Common {
 		}
 
 		modelMap.addAttribute("product", product);
+		
+		int price = priceService.getOldPrice(productid.trim());
+		modelMap.addAttribute("price", price);
+
 		return "/admin/management-system/content/product/form";
 	}
 
 	@PostMapping(value = "/admin/product/edit")
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String productid,
-			@RequestParam String name, @RequestParam String description, @RequestParam String categoryproductid) {
+			@RequestParam String name, @RequestParam String description, @RequestParam String categoryproductid,
+			@RequestParam String price) {
 
 		Product product = productService.getInfoById(productid.trim());
 		if (product == null) {
 			modelMap.addAttribute("results", "Sản phẩm không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
-		if (productService.checkExistNameProduct(name.trim())) {
+		if (productService.checkExistNameProduct(name.trim()) && !product.getName().equals(name.trim())) {
 
 			modelMap.addAttribute("results", "Tên sản phẩm bị trùng!");
+			return "/admin/public/Danger";// đã tồn tại
+		}
+		if (Integer.valueOf(price.trim()) <= 0) {
+			modelMap.addAttribute("results", "Đơn giá không được để trống và > 0!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
 
@@ -160,7 +190,27 @@ public class ProductController extends Common {
 		product.setCategoryproduct(categoryproduct);
 //		product.setUpdateby(updateby);
 		product.setUpdateat(new Date());
-		productService.editProduct(product);
+		if (productService.editProduct(product)) {
+			if (priceService.getOldPrice(productid.trim()) != Integer.valueOf(price.trim())) {
+
+				Set<Price> prices = product.getPrices();
+				for (Price price2 : prices) {
+					if (price2.getIsdelete() == IS_NOT_DELETE) {
+						price2.setIsdelete(IS_DELETE);
+						price2.setEnddatetime(new Date());
+						priceService.editPrice(price2);
+					}
+				}
+
+				Price price3 = new Price();
+				price3.setPrice(Integer.valueOf(price.trim()));
+				price3.setProduct(product);
+				price3.setStartdatetime(new Date());
+				price3.setUpdateat(new Date());
+				price3.setIsdelete(IS_NOT_DELETE);
+				priceService.addPrice(price3);
+			}
+		}
 
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";

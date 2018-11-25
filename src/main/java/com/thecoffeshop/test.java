@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class test {
 	@GetMapping(value = { "/test" })
 	public String index() {
-		return "index";
+		return "admin/public/xxx";
 	}
 }

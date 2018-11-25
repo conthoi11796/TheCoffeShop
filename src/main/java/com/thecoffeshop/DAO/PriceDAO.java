@@ -92,4 +92,16 @@ public class PriceDAO implements PriceDAOImp {
 			return 0;
 		}
 	}
+
+	@Override
+	public Boolean editPrice(Price price) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			session.update(price);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

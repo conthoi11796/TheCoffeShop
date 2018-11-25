@@ -18,12 +18,10 @@ import com.thecoffeshop.DTO.BillStatusDTO;
 import com.thecoffeshop.DTO.DinnerTableDTO;
 import com.thecoffeshop.Models.Billstatus;
 import com.thecoffeshop.Models.Dinnertable;
-import com.thecoffeshop.Models.Tablestatusdetail;
 import com.thecoffeshop.Service.BillService;
 import com.thecoffeshop.Service.BooktableService;
 import com.thecoffeshop.Service.Common;
 import com.thecoffeshop.Service.DinnertableService;
-import com.thecoffeshop.Service.TablestatusdetailService;
 
 @Controller
 public class DinnerTableController extends Common {
@@ -34,8 +32,6 @@ public class DinnerTableController extends Common {
 	BooktableService booktableService;
 	@Autowired
 	BillService billService;
-	@Autowired
-	TablestatusdetailService tablestatusdetailService;
 
 	@GetMapping(value = "/admin/dinner-table")
 	public String index(ModelMap modelMap, HttpSession httpSession) {
@@ -64,9 +60,6 @@ public class DinnerTableController extends Common {
 				dinnerTableDTO.setCanDelete(true);
 			}
 			if (billService.checkExistDinnerTable(dinnertable.getDinnertableid())) {
-				dinnerTableDTO.setCanDelete(true);
-			}
-			if (tablestatusdetailService.checkExitsDinnerTable(dinnertable.getDinnertableid())) {
 				dinnerTableDTO.setCanDelete(true);
 			}
 
@@ -114,8 +107,7 @@ public class DinnerTableController extends Common {
 			return "/admin/public/Danger";// đã tồn tại
 		}
 		dinnertable.setIsdelete(IS_DELETE);
-		// dinnertable.setDeleteby(deleteby);
-		dinnertable.setDeleteat(new Date());
+		dinnertable.setUpdateat(new Date());
 		dinnertableService.editDinnertable(dinnertable);
 
 		modelMap.addAttribute("result", "Xóa thành công!");

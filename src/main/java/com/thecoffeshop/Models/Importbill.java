@@ -1,9 +1,10 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,43 +25,50 @@ import javax.persistence.TemporalType;
 @Table(name = "importbill", catalog = "luanvan")
 public class Importbill implements java.io.Serializable {
 
-	private Integer importbillid;
+	private int importbillid;
+	private Employee employee;
 	private Supplier supplier;
-	private String createby;
-	private Date createat;
-	private String updateby;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
-	private Set<Materialdetail> materialdetails = new HashSet<Materialdetail>(0);
+	private Set<Importbilldetail> importbilldetails = new HashSet<Importbilldetail>(0);
 
 	public Importbill() {
 	}
 
-	public Importbill(Supplier supplier, String createby, Date createat, String updateby, Date updateat,
-			Boolean isdelete, String deleteby, Date deleteat, Set<Materialdetail> materialdetails) {
+	public Importbill(int importbillid) {
+		this.importbillid = importbillid;
+	}
+
+	public Importbill(int importbillid, Employee employee, Supplier supplier, Date updateat, Boolean isdelete,
+			Set<Importbilldetail> importbilldetails) {
+		this.importbillid = importbillid;
+		this.employee = employee;
 		this.supplier = supplier;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
-		this.materialdetails = materialdetails;
+		this.importbilldetails = importbilldetails;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "IMPORTBILLID", unique = true, nullable = false)
-	public Integer getImportbillid() {
+	public int getImportbillid() {
 		return this.importbillid;
 	}
 
-	public void setImportbillid(Integer importbillid) {
+	public void setImportbillid(int importbillid) {
 		this.importbillid = importbillid;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "EMPLOYEEID")
+	public Employee getEmployee() {
+		return this.employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -71,34 +79,6 @@ public class Importbill implements java.io.Serializable {
 
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
-	}
-
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -120,32 +100,13 @@ public class Importbill implements java.io.Serializable {
 		this.isdelete = isdelete;
 	}
 
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
-	}
-
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "importbill")
-	public Set<Materialdetail> getMaterialdetails() {
-		return this.materialdetails;
+	public Set<Importbilldetail> getImportbilldetails() {
+		return this.importbilldetails;
 	}
 
-	public void setMaterialdetails(Set<Materialdetail> materialdetails) {
-		this.materialdetails = materialdetails;
+	public void setImportbilldetails(Set<Importbilldetail> importbilldetails) {
+		this.importbilldetails = importbilldetails;
 	}
 
 }

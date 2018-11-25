@@ -1,5 +1,5 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -24,13 +24,8 @@ public class Schedule implements java.io.Serializable {
 	private Date starttime;
 	private Date endtime;
 	private Float payrate;
-	private String createby;
-	private Date createat;
-	private String updateby;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 	private Set<Register> registers = new HashSet<Register>(0);
 
 	public Schedule() {
@@ -40,19 +35,14 @@ public class Schedule implements java.io.Serializable {
 		this.scheduleid = scheduleid;
 	}
 
-	public Schedule(String scheduleid, Date starttime, Date endtime, Float payrate, String createby, Date createat,
-			String updateby, Date updateat, Boolean isdelete, String deleteby, Date deleteat, Set<Register> registers) {
+	public Schedule(String scheduleid, Date starttime, Date endtime, Float payrate, Date updateat, Boolean isdelete,
+			Set<Register> registers) {
 		this.scheduleid = scheduleid;
 		this.starttime = starttime;
 		this.endtime = endtime;
 		this.payrate = payrate;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 		this.registers = registers;
 	}
 
@@ -96,34 +86,6 @@ public class Schedule implements java.io.Serializable {
 		this.payrate = payrate;
 	}
 
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATEAT", length = 19)
 	public Date getUpdateat() {
@@ -141,25 +103,6 @@ public class Schedule implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "schedule")

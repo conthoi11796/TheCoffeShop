@@ -10,78 +10,114 @@ import java.util.List;
 
 import com.thecoffeshop.DAOImp.*;
 import com.thecoffeshop.Models.*;
+
 @Repository()
 @Transactional(rollbackFor = Exception.class)
 public class SupplierDAO implements SupplierDAOImp {
 
-	@Autowired 
-    private SessionFactory sessionFactory;
+	@Autowired
+	private SessionFactory sessionFactory;
 
-    @Override
-    public Boolean addSupplier(Supplier supplier) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean addSupplier(Supplier supplier) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.save(supplier);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public List<Supplier> findAll() {
+	@Override
+	public List<Supplier> findAll() {
 
-        Session session = this.sessionFactory.getCurrentSession();
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Supplier> suppliers = session
-                    .createQuery("FROM Supplier s WHERE s.isdelete =: isdelete", Supplier.class)
-                    .setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+					.createQuery("FROM Supplier s WHERE s.isdelete =: isdelete", Supplier.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return suppliers;
 		} catch (Exception e) {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Supplier getInfoById(int supplierid) {
-       
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Supplier getInfoById(int supplierid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Supplier supplier = session
-					.createQuery("FROM Supplier s WHERE s.supplierid =: supplierid AND p.isdelete =: isdelete", Supplier.class)
-					.setParameter("supplierid", supplierid).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+					.createQuery("FROM Supplier s WHERE s.supplierid =: supplierid AND s.isdelete =: isdelete",
+							Supplier.class)
+					.setParameter("supplierid", supplierid).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getSingleResult();
 			return supplier;
 		} catch (Exception e) {
 
 			return null;
 		}
-    }
+	}
 
-    @Override
-    public Boolean deleteSupplier(int supplierid) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean deleteSupplier(int supplierid) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
-            Supplier supplier = this.getInfoById(supplierid);
+			Supplier supplier = this.getInfoById(supplierid);
 			session.remove(supplier);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
 
-    @Override
-    public Boolean editSupplier(Supplier supplier) {
-        
-        Session session = this.sessionFactory.getCurrentSession();
+	@Override
+	public Boolean editSupplier(Supplier supplier) {
+
+		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			session.update(supplier);
 			return true;
 		} catch (Exception e) {
 			return false;
 		}
-    }
+	}
+
+	@Override
+	public List<Supplier> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Supplier> suppliers = session
+					.createQuery("FROM Supplier s WHERE s.isdelete =: isdelete", Supplier.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition * MAX_RESULTS)
+					.setMaxResults(MAX_RESULTS).getResultList();
+			return suppliers;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public Boolean checkExistByName(String name) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			Supplier supplier = session
+					.createQuery("FROM Supplier s WHERE s.name =: name AND s.isdelete =: isdelete",
+							Supplier.class)
+					.setParameter("name", name).setParameter("isdelete", this.IS_NOT_DELETE)
+					.getSingleResult();
+			return true;
+		} catch (Exception e) {
+
+			return false;
+		}
+	}
 
 }

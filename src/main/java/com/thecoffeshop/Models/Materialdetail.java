@@ -1,9 +1,10 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,62 +25,49 @@ import javax.persistence.TemporalType;
 @Table(name = "materialdetail", catalog = "luanvan")
 public class Materialdetail implements java.io.Serializable {
 
-	private Integer materialdetailid;
-	private Importbill importbill;
+	private int materialdetailid;
 	private Material material;
 	private Date dateofmanufacture;
 	private Date expirationdate;
 	private Integer quantity;
-	private String createby;
-	private Date createat;
-	private String updateby;
+	private Integer price;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
-	private Set<Exportbill> exportbills = new HashSet<Exportbill>(0);
+	private Set<Importbilldetail> importbilldetails = new HashSet<Importbilldetail>(0);
+	private Set<Exportbilldetail> exportbilldetails = new HashSet<Exportbilldetail>(0);
 
 	public Materialdetail() {
 	}
 
-	public Materialdetail(Importbill importbill, Material material, Date dateofmanufacture, Date expirationdate,
-			Integer quantity, String createby, Date createat, String updateby, Date updateat, Boolean isdelete,
-			String deleteby, Date deleteat, Set<Exportbill> exportbills) {
-		this.importbill = importbill;
+	public Materialdetail(int materialdetailid) {
+		this.materialdetailid = materialdetailid;
+	}
+
+	public Materialdetail(int materialdetailid, Material material, Date dateofmanufacture, Date expirationdate,
+			Integer quantity, Date updateat, Boolean isdelete, Set<Importbilldetail> importbilldetails,
+			Set<Exportbilldetail> exportbilldetails, Integer price) {
+		this.materialdetailid = materialdetailid;
 		this.material = material;
 		this.dateofmanufacture = dateofmanufacture;
 		this.expirationdate = expirationdate;
 		this.quantity = quantity;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
+		this.price = price;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
-		this.exportbills = exportbills;
+		this.importbilldetails = importbilldetails;
+		this.exportbilldetails = exportbilldetails;
 	}
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "MATERIALDETAILID", unique = true, nullable = false)
-	public Integer getMaterialdetailid() {
+	public int getMaterialdetailid() {
 		return this.materialdetailid;
 	}
 
-	public void setMaterialdetailid(Integer materialdetailid) {
+	public void setMaterialdetailid(int materialdetailid) {
 		this.materialdetailid = materialdetailid;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "IMPORTBILLID")
-	public Importbill getImportbill() {
-		return this.importbill;
-	}
-
-	public void setImportbill(Importbill importbill) {
-		this.importbill = importbill;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -120,33 +108,14 @@ public class Materialdetail implements java.io.Serializable {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
+	
+	@Column(name = "PRICE")
+	public Integer getPrice() {
+		return this.price;
 	}
 
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -168,32 +137,22 @@ public class Materialdetail implements java.io.Serializable {
 		this.isdelete = isdelete;
 	}
 
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "materialdetail")
+	public Set<Importbilldetail> getImportbilldetails() {
+		return this.importbilldetails;
 	}
 
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
+	public void setImportbilldetails(Set<Importbilldetail> importbilldetails) {
+		this.importbilldetails = importbilldetails;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "materialdetail")
-	public Set<Exportbill> getExportbills() {
-		return this.exportbills;
+	public Set<Exportbilldetail> getExportbilldetails() {
+		return this.exportbilldetails;
 	}
 
-	public void setExportbills(Set<Exportbill> exportbills) {
-		this.exportbills = exportbills;
+	public void setExportbilldetails(Set<Exportbilldetail> exportbilldetails) {
+		this.exportbilldetails = exportbilldetails;
 	}
 
 }

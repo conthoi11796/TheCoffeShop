@@ -18,7 +18,7 @@ public class MaterialdetailService implements MaterialdetailDAOImp {
 	MaterialdetailDAO materialdetailDAO;
 
 	@Override
-	public Boolean addMaterialdetail(Materialdetail materialdetail) {
+	public int addMaterialdetail(Materialdetail materialdetail) {
 		// TODO Auto-generated method stub
 		return materialdetailDAO.addMaterialdetail(materialdetail);
 	}
@@ -45,5 +45,11 @@ public class MaterialdetailService implements MaterialdetailDAOImp {
 	public Boolean editMaterialdetail(Materialdetail materialdetail) {
 		// TODO Auto-generated method stub
 		return materialdetailDAO.editMaterialdetail(materialdetail);
+	}
+
+	@Override
+	public Boolean checkExistMaterial(int materialid) {
+		// TODO Auto-generated method stub
+		return materialdetailDAO.checkExistMaterial(materialid);
 	}
 }

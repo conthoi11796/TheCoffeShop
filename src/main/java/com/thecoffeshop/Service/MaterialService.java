@@ -18,9 +18,9 @@ public class MaterialService implements MaterialDAOImp {
 	MaterialDAO materialDAO;
 
 	@Override
-	public Boolean addAtposition(Material material) {
+	public Boolean addMaterial(Material material) {
 		// TODO Auto-generated method stub
-		return materialDAO.addAtposition(material);
+		return materialDAO.addMaterial(material);
 	}
 
 	@Override
@@ -42,9 +42,21 @@ public class MaterialService implements MaterialDAOImp {
 	}
 
 	@Override
-	public Boolean editAtposition(Material material) {
+	public Boolean editMaterial(Material material) {
 		// TODO Auto-generated method stub
-		return materialDAO.editAtposition(material);
+		return materialDAO.editMaterial(material);
+	}
+
+	@Override
+	public List<Material> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return materialDAO.findLimit(startPosition);
+	}
+
+	@Override
+	public Boolean checkExistNameMaterial(String name) {
+		// TODO Auto-generated method stub
+		return materialDAO.checkExistNameMaterial(name);
 	}
 	
 	

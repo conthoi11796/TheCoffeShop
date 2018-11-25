@@ -1,1302 +1,515 @@
-/*==============================================================*/
-/* DBMS name:      Sybase SQL Anywhere 12                       */
-/* Created on:     19/11/2018 19:41:51                          */
-/*==============================================================*/
-
-
-if exists(select 1 from sys.sysforeignkey where role='FK_ATPOSITI_ATPOSITIO_EMPLOYEE') then
-    alter table ATPOSITION
-       delete foreign key FK_ATPOSITI_ATPOSITIO_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_ATPOSITI_ATPOSITIO_POSITION') then
-    alter table ATPOSITION
-       delete foreign key FK_ATPOSITI_ATPOSITIO_POSITION
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILL_RELATIONS_VOUCHER') then
-    alter table BILL
-       delete foreign key FK_BILL_RELATIONS_VOUCHER
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILL_RELATIONS_BILLSTAT') then
-    alter table BILL
-       delete foreign key FK_BILL_RELATIONS_BILLSTAT
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILL_RELATIONS_CUSTOMER') then
-    alter table BILL
-       delete foreign key FK_BILL_RELATIONS_CUSTOMER
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILL_RELATIONS_DINNERTA') then
-    alter table BILL
-       delete foreign key FK_BILL_RELATIONS_DINNERTA
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILL_RELATIONS_EMPLOYEE') then
-    alter table BILL
-       delete foreign key FK_BILL_RELATIONS_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILLDETA_BILLDETAI_PRODUCT') then
-    alter table BILLDETAIL
-       delete foreign key FK_BILLDETA_BILLDETAI_PRODUCT
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BILLDETA_BILLDETAI_BILL') then
-    alter table BILLDETAIL
-       delete foreign key FK_BILLDETA_BILLDETAI_BILL
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BOOKTABL_BOOKTABLE_CUSTOMER') then
-    alter table BOOKTABLE
-       delete foreign key FK_BOOKTABL_BOOKTABLE_CUSTOMER
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BOOKTABL_BOOKTABLE_DINNERTA') then
-    alter table BOOKTABLE
-       delete foreign key FK_BOOKTABL_BOOKTABLE_DINNERTA
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_BOOKTABL_BOOKTABLE_EMPLOYEE') then
-    alter table BOOKTABLE
-       delete foreign key FK_BOOKTABL_BOOKTABLE_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_DINNERTA_RELATIONS_TABLESTA') then
-    alter table DINNERTABLE
-       delete foreign key FK_DINNERTA_RELATIONS_TABLESTA
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_EXPORTBI_RELATIONS_PRODUCT') then
-    alter table EXPORTBILL
-       delete foreign key FK_EXPORTBI_RELATIONS_PRODUCT
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_EXPORTBI_RELATIONS_EMPLOYEE') then
-    alter table EXPORTBILL
-       delete foreign key FK_EXPORTBI_RELATIONS_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_EXPORTBI_EXPORTBIL_EXPORTBI') then
-    alter table EXPORTBILLDETAIL
-       delete foreign key FK_EXPORTBI_EXPORTBIL_EXPORTBI
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_EXPORTBI_EXPORTBIL_MATERIAL') then
-    alter table EXPORTBILLDETAIL
-       delete foreign key FK_EXPORTBI_EXPORTBIL_MATERIAL
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMAGEOFE_IMAGEOFEM_IMAGE') then
-    alter table IMAGEOFEMPLOYEE
-       delete foreign key FK_IMAGEOFE_IMAGEOFEM_IMAGE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMAGEOFE_IMAGEOFEM_EMPLOYEE') then
-    alter table IMAGEOFEMPLOYEE
-       delete foreign key FK_IMAGEOFE_IMAGEOFEM_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMAGEOFP_IMAGEOFPR_PRODUCT') then
-    alter table IMAGEOFPRODUCT
-       delete foreign key FK_IMAGEOFP_IMAGEOFPR_PRODUCT
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMAGEOFP_IMAGEOFPR_IMAGE') then
-    alter table IMAGEOFPRODUCT
-       delete foreign key FK_IMAGEOFP_IMAGEOFPR_IMAGE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMPORTBI_RELATIONS_SUPPLIER') then
-    alter table IMPORTBILL
-       delete foreign key FK_IMPORTBI_RELATIONS_SUPPLIER
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMPORTBI_RELATIONS_EMPLOYEE') then
-    alter table IMPORTBILL
-       delete foreign key FK_IMPORTBI_RELATIONS_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMPORTBI_IMPORTBIL_MATERIAL') then
-    alter table IMPORTBILLDETAIL
-       delete foreign key FK_IMPORTBI_IMPORTBIL_MATERIAL
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_IMPORTBI_IMPORTBIL_IMPORTBI') then
-    alter table IMPORTBILLDETAIL
-       delete foreign key FK_IMPORTBI_IMPORTBIL_IMPORTBI
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_MATERIAL_RELATIONS_MATERIAL') then
-    alter table MATERIALDETAIL
-       delete foreign key FK_MATERIAL_RELATIONS_MATERIAL
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_PRICE_RELATIONS_PRODUCT') then
-    alter table PRICE
-       delete foreign key FK_PRICE_RELATIONS_PRODUCT
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_PRODUCT_RELATIONS_CATEGORY') then
-    alter table PRODUCT
-       delete foreign key FK_PRODUCT_RELATIONS_CATEGORY
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_REGISTER_REGISTER_EMPLOYEE') then
-    alter table REGISTER
-       delete foreign key FK_REGISTER_REGISTER_EMPLOYEE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_REGISTER_REGISTER2_SCHEDULE') then
-    alter table REGISTER
-       delete foreign key FK_REGISTER_REGISTER2_SCHEDULE
-end if;
-
-if exists(select 1 from sys.sysforeignkey where role='FK_SALARY_RELATIONS_EMPLOYEE') then
-    alter table SALARY
-       delete foreign key FK_SALARY_RELATIONS_EMPLOYEE
-end if;
-
-drop index if exists ATPOSITION.ATPOSITION2_FK;
-
-drop index if exists ATPOSITION.ATPOSITION_FK;
-
-drop index if exists ATPOSITION.ATPOSITION_PK;
-
 drop table if exists ATPOSITION;
-
-drop index if exists BILL.RELATIONSHIP_8_FK;
-
-drop index if exists BILL.RELATIONSHIP_7_FK;
-
-drop index if exists BILL.RELATIONSHIP_6_FK;
-
-drop index if exists BILL.RELATIONSHIP_5_FK;
-
-drop index if exists BILL.RELATIONSHIP_3_FK;
-
-drop index if exists BILL.BILL_PK;
 
 drop table if exists BILL;
 
-drop index if exists BILLDETAIL.BILLDETAIL2_FK;
-
-drop index if exists BILLDETAIL.BILLDETAIL_FK;
-
-drop index if exists BILLDETAIL.BILLDETAIL_PK;
-
 drop table if exists BILLDETAIL;
-
-drop index if exists BILLSTATUS.BILLSTATUS_PK;
 
 drop table if exists BILLSTATUS;
 
-drop index if exists BOOKTABLE.BOOKTABLE3_FK;
-
-drop index if exists BOOKTABLE.BOOKTABLE2_FK;
-
-drop index if exists BOOKTABLE.BOOKTABLE_FK;
-
-drop index if exists BOOKTABLE.BOOKTABLE_PK;
-
 drop table if exists BOOKTABLE;
-
-drop index if exists CATEGORYPRODUCT.CATEGORYPRODUCT_PK;
 
 drop table if exists CATEGORYPRODUCT;
 
-drop index if exists CUSTOMER.CUSTOMER_PK;
-
 drop table if exists CUSTOMER;
-
-drop index if exists DINNERTABLE.RELATIONSHIP_14_FK;
-
-drop index if exists DINNERTABLE.DINNERTABLE_PK;
 
 drop table if exists DINNERTABLE;
 
-drop index if exists EMPLOYEE.EMPLOYEE_PK;
-
 drop table if exists EMPLOYEE;
-
-drop index if exists EXPORTBILL.RELATIONSHIP_17_FK;
-
-drop index if exists EXPORTBILL.RELATIONSHIP_16_FK;
-
-drop index if exists EXPORTBILL.EXPORTBILL_PK;
 
 drop table if exists EXPORTBILL;
 
-drop index if exists EXPORTBILLDETAIL.EXPORTBILLDETAIL2_FK;
-
-drop index if exists EXPORTBILLDETAIL.EXPORTBILLDETAIL_FK;
-
-drop index if exists EXPORTBILLDETAIL.EXPORTBILLDETAIL_PK;
-
 drop table if exists EXPORTBILLDETAIL;
-
-drop index if exists IMAGE.IMAGE_PK;
 
 drop table if exists IMAGE;
 
-drop index if exists IMAGEOFEMPLOYEE.IMAGEOFEMPLOYEE2_FK;
-
-drop index if exists IMAGEOFEMPLOYEE.IMAGEOFEMPLOYEE_FK;
-
-drop index if exists IMAGEOFEMPLOYEE.IMAGEOFEMPLOYEE_PK;
-
 drop table if exists IMAGEOFEMPLOYEE;
-
-drop index if exists IMAGEOFPRODUCT.IMAGEOFPRODUCT2_FK;
-
-drop index if exists IMAGEOFPRODUCT.IMAGEOFPRODUCT_FK;
-
-drop index if exists IMAGEOFPRODUCT.IMAGEOFPRODUCT_PK;
 
 drop table if exists IMAGEOFPRODUCT;
 
-drop index if exists IMPORTBILL.RELATIONSHIP_15_FK;
-
-drop index if exists IMPORTBILL.RELATIONSHIP_13_FK;
-
-drop index if exists IMPORTBILL.IMPORTBILL_PK;
-
 drop table if exists IMPORTBILL;
-
-drop index if exists IMPORTBILLDETAIL.IMPORTBILLDETAIL2_FK;
-
-drop index if exists IMPORTBILLDETAIL.IMPORTBILLDETAIL_FK;
-
-drop index if exists IMPORTBILLDETAIL.IMPORTBILLDETAIL_PK;
 
 drop table if exists IMPORTBILLDETAIL;
 
-drop index if exists MATERIAL.MATERIAL_PK;
-
 drop table if exists MATERIAL;
-
-drop index if exists MATERIALDETAIL.RELATIONSHIP_11_FK;
-
-drop index if exists MATERIALDETAIL.MATERIALDETAIL_PK;
 
 drop table if exists MATERIALDETAIL;
 
-drop index if exists POSITION.POSITION_PK;
-
 drop table if exists POSITION;
-
-drop index if exists PRICE.RELATIONSHIP_1_FK;
-
-drop index if exists PRICE.PRICE_PK;
 
 drop table if exists PRICE;
 
-drop index if exists PRODUCT.RELATIONSHIP_2_FK;
-
-drop index if exists PRODUCT.PRODUCT_PK;
-
 drop table if exists PRODUCT;
-
-drop index if exists REGISTER.REGISTER2_FK;
-
-drop index if exists REGISTER.REGISTER_FK;
-
-drop index if exists REGISTER.REGISTER_PK;
 
 drop table if exists REGISTER;
 
-drop index if exists SALARY.RELATIONSHIP_18_FK;
-
-drop index if exists SALARY.SALARY_PK;
-
 drop table if exists SALARY;
-
-drop index if exists SCHEDULE.SCHEDULE_PK;
 
 drop table if exists SCHEDULE;
 
-drop index if exists SUPPLIER.SUPPLIER_PK;
-
 drop table if exists SUPPLIER;
 
-drop index if exists TABLESTATUS.TABLESTATUS_PK;
-
 drop table if exists TABLESTATUS;
-
-drop index if exists VOUCHER.VOUCHER_PK;
 
 drop table if exists VOUCHER;
 
 /*==============================================================*/
 /* Table: ATPOSITION                                            */
 /*==============================================================*/
-create table ATPOSITION 
+create table ATPOSITION
 (
-   EMPLOYEEID           varchar(7)                     not null,
-   POSITIONID           varchar(255)                   not null,
-   STARTDATE            date                           null,
-   ENDDATE              date                           null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_ATPOSITION primary key clustered (EMPLOYEEID, POSITIONID)
-);
-
-/*==============================================================*/
-/* Index: ATPOSITION_PK                                         */
-/*==============================================================*/
-create unique clustered index ATPOSITION_PK on ATPOSITION (
-EMPLOYEEID ASC,
-POSITIONID ASC
-);
-
-/*==============================================================*/
-/* Index: ATPOSITION_FK                                         */
-/*==============================================================*/
-create index ATPOSITION_FK on ATPOSITION (
-EMPLOYEEID ASC
-);
-
-/*==============================================================*/
-/* Index: ATPOSITION2_FK                                        */
-/*==============================================================*/
-create index ATPOSITION2_FK on ATPOSITION (
-POSITIONID ASC
+   EMPLOYEEID           national varchar(7) not null,
+   POSITIONID           national varchar(255) not null,
+   STARTDATE            date,
+   ENDDATE              date,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (EMPLOYEEID, POSITIONID)
 );
 
 /*==============================================================*/
 /* Table: BILL                                                  */
 /*==============================================================*/
-create table BILL 
+create table BILL
 (
-   BILLID               integer                        not null,
-   BILLSTATUSID         varchar(7)                     null,
-   DINNERTABLEID        integer                        null,
-   CUSTOMERID           integer                        null,
-   EMPLOYEEID           varchar(7)                     null,
-   VOUCHERID            integer                        null,
-   STARTDATETIME        timestamp                      null,
-   ENDDATE              date                           null,
-   NOTICE               varchar(255)                   null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_BILL primary key (BILLID)
-);
-
-/*==============================================================*/
-/* Index: BILL_PK                                               */
-/*==============================================================*/
-create unique index BILL_PK on BILL (
-BILLID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_3_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_3_FK on BILL (
-VOUCHERID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_5_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_5_FK on BILL (
-BILLSTATUSID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_6_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_6_FK on BILL (
-CUSTOMERID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_7_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_7_FK on BILL (
-DINNERTABLEID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_8_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_8_FK on BILL (
-EMPLOYEEID ASC
+   BILLID               int not null AUTO_INCREMENT,
+   BILLSTATUSID         national varchar(7),
+   DINNERTABLEID        int,
+   CUSTOMERID           int,
+   EMPLOYEEID           national varchar(7),
+   VOUCHERID            int,
+   STARTDATETIME        datetime,
+   ENDDATE              date,
+   NOTICE               national varchar(255),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (BILLID)
 );
 
 /*==============================================================*/
 /* Table: BILLDETAIL                                            */
 /*==============================================================*/
-create table BILLDETAIL 
+create table BILLDETAIL
 (
-   PRODUCTID            varchar(7)                     not null,
-   BILLID               integer                        not null,
-   QUANTITY             integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_BILLDETAIL primary key clustered (PRODUCTID, BILLID)
-);
-
-/*==============================================================*/
-/* Index: BILLDETAIL_PK                                         */
-/*==============================================================*/
-create unique clustered index BILLDETAIL_PK on BILLDETAIL (
-PRODUCTID ASC,
-BILLID ASC
-);
-
-/*==============================================================*/
-/* Index: BILLDETAIL_FK                                         */
-/*==============================================================*/
-create index BILLDETAIL_FK on BILLDETAIL (
-PRODUCTID ASC
-);
-
-/*==============================================================*/
-/* Index: BILLDETAIL2_FK                                        */
-/*==============================================================*/
-create index BILLDETAIL2_FK on BILLDETAIL (
-BILLID ASC
+   PRODUCTID            national varchar(7) not null,
+   BILLID               int not null,
+   QUANTITY             int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (PRODUCTID, BILLID)
 );
 
 /*==============================================================*/
 /* Table: BILLSTATUS                                            */
 /*==============================================================*/
-create table BILLSTATUS 
+create table BILLSTATUS
 (
-   BILLSTATUSID         varchar(7)                     not null,
-   NAME                 varchar(255)                   null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_BILLSTATUS primary key (BILLSTATUSID)
-);
-
-/*==============================================================*/
-/* Index: BILLSTATUS_PK                                         */
-/*==============================================================*/
-create unique index BILLSTATUS_PK on BILLSTATUS (
-BILLSTATUSID ASC
+   BILLSTATUSID         national varchar(7) not null,
+   NAME                 national varchar(255),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (BILLSTATUSID)
 );
 
 /*==============================================================*/
 /* Table: BOOKTABLE                                             */
 /*==============================================================*/
-create table BOOKTABLE 
+create table BOOKTABLE
 (
-   CUSTOMERID           integer                        not null,
-   DINNERTABLEID        integer                        not null,
-   EMPLOYEEID           varchar(7)                     not null,
-   STARTDATETIME        timestamp                      null,
-   STATUS               smallint                       null,
-   COUNTPEOPLE          integer                        null,
-   NOTICE               varchar(255)                   null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_BOOKTABLE primary key clustered (CUSTOMERID, DINNERTABLEID, EMPLOYEEID)
-);
-
-/*==============================================================*/
-/* Index: BOOKTABLE_PK                                          */
-/*==============================================================*/
-create unique clustered index BOOKTABLE_PK on BOOKTABLE (
-CUSTOMERID ASC,
-DINNERTABLEID ASC,
-EMPLOYEEID ASC
-);
-
-/*==============================================================*/
-/* Index: BOOKTABLE_FK                                          */
-/*==============================================================*/
-create index BOOKTABLE_FK on BOOKTABLE (
-CUSTOMERID ASC
-);
-
-/*==============================================================*/
-/* Index: BOOKTABLE2_FK                                         */
-/*==============================================================*/
-create index BOOKTABLE2_FK on BOOKTABLE (
-DINNERTABLEID ASC
-);
-
-/*==============================================================*/
-/* Index: BOOKTABLE3_FK                                         */
-/*==============================================================*/
-create index BOOKTABLE3_FK on BOOKTABLE (
-EMPLOYEEID ASC
+   CUSTOMERID           int not null AUTO_INCREMENT,
+   DINNERTABLEID        int not null,
+   EMPLOYEEID           national varchar(7) not null,
+   STARTDATETIME        datetime,
+   STATUS               bool,
+   COUNTPEOPLE          int,
+   NOTICE               national varchar(255),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (CUSTOMERID, DINNERTABLEID, EMPLOYEEID)
 );
 
 /*==============================================================*/
 /* Table: CATEGORYPRODUCT                                       */
 /*==============================================================*/
-create table CATEGORYPRODUCT 
+create table CATEGORYPRODUCT
 (
-   CATEGORYPRODUCTID    varchar(7)                     not null,
-   NAME                 varchar(255)                   null,
-   ISDELETE             smallint                       null,
-   constraint PK_CATEGORYPRODUCT primary key (CATEGORYPRODUCTID)
-);
-
-/*==============================================================*/
-/* Index: CATEGORYPRODUCT_PK                                    */
-/*==============================================================*/
-create unique index CATEGORYPRODUCT_PK on CATEGORYPRODUCT (
-CATEGORYPRODUCTID ASC
+   CATEGORYPRODUCTID    national varchar(7) not null,
+   NAME                 national varchar(255),
+   ISDELETE             bool,
+   primary key (CATEGORYPRODUCTID)
 );
 
 /*==============================================================*/
 /* Table: CUSTOMER                                              */
 /*==============================================================*/
-create table CUSTOMER 
+create table CUSTOMER
 (
-   CUSTOMERID           integer                        not null,
-   NAME                 varchar(255)                   null,
-   ADDRESS              varchar(255)                   null,
-   PHONE                numeric                        null,
-   ISDELETE             smallint                       null,
-   constraint PK_CUSTOMER primary key (CUSTOMERID)
-);
-
-/*==============================================================*/
-/* Index: CUSTOMER_PK                                           */
-/*==============================================================*/
-create unique index CUSTOMER_PK on CUSTOMER (
-CUSTOMERID ASC
+   CUSTOMERID           int not null AUTO_INCREMENT,
+   NAME                 national varchar(255),
+   ADDRESS              national varchar(255),
+   PHONE                numeric(8,0),
+   ISDELETE             bool,
+   primary key (CUSTOMERID)
 );
 
 /*==============================================================*/
 /* Table: DINNERTABLE                                           */
 /*==============================================================*/
-create table DINNERTABLE 
+create table DINNERTABLE
 (
-   DINNERTABLEID        integer                        not null,
-   TABLESTATUSID        integer                        null,
-   NAME                 varchar(255)                   null,
-   COUNTCHAIR           integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_DINNERTABLE primary key (DINNERTABLEID)
-);
-
-/*==============================================================*/
-/* Index: DINNERTABLE_PK                                        */
-/*==============================================================*/
-create unique index DINNERTABLE_PK on DINNERTABLE (
-DINNERTABLEID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_14_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_14_FK on DINNERTABLE (
-TABLESTATUSID ASC
+   DINNERTABLEID        int not null AUTO_INCREMENT,
+   TABLESTATUSID        int,
+   NAME                 national varchar(255),
+   COUNTCHAIR           int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (DINNERTABLEID)
 );
 
 /*==============================================================*/
 /* Table: EMPLOYEE                                              */
 /*==============================================================*/
-create table EMPLOYEE 
+create table EMPLOYEE
 (
-   EMPLOYEEID           varchar(7)                     not null,
-   NAME                 varchar(255)                   null,
-   SEX                  smallint                       null,
-   PHONE                numeric                        null,
-   ADDRESS              varchar(255)                   null,
-   USENAME              varchar(255)                   null,
-   PASSWORD             varchar(255)                   null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_EMPLOYEE primary key (EMPLOYEEID)
-);
-
-/*==============================================================*/
-/* Index: EMPLOYEE_PK                                           */
-/*==============================================================*/
-create unique index EMPLOYEE_PK on EMPLOYEE (
-EMPLOYEEID ASC
+   EMPLOYEEID           national varchar(7) not null,
+   NAME                 national varchar(255),
+   SEX                  bool,
+   PHONE                numeric(8,0),
+   ADDRESS              national varchar(255),
+   USENAME              national varchar(255),
+   PASSWORD             national varchar(255),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (EMPLOYEEID)
 );
 
 /*==============================================================*/
 /* Table: EXPORTBILL                                            */
 /*==============================================================*/
-create table EXPORTBILL 
+create table EXPORTBILL
 (
-   EXPORTBILLID         integer                        not null,
-   PRODUCTID            varchar(7)                     null,
-   EMPLOYEEID           varchar(7)                     null,
-   QUANTITY             integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_EXPORTBILL primary key (EXPORTBILLID)
-);
-
-/*==============================================================*/
-/* Index: EXPORTBILL_PK                                         */
-/*==============================================================*/
-create unique index EXPORTBILL_PK on EXPORTBILL (
-EXPORTBILLID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_16_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_16_FK on EXPORTBILL (
-PRODUCTID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_17_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_17_FK on EXPORTBILL (
-EMPLOYEEID ASC
+   EXPORTBILLID         int not null AUTO_INCREMENT,
+   PRODUCTID            national varchar(7),
+   EMPLOYEEID           national varchar(7),
+   QUANTITY             int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (EXPORTBILLID)
 );
 
 /*==============================================================*/
 /* Table: EXPORTBILLDETAIL                                      */
 /*==============================================================*/
-create table EXPORTBILLDETAIL 
+create table EXPORTBILLDETAIL
 (
-   EXPORTBILLID         integer                        not null,
-   MATERIALDETAILID     integer                        not null,
-   QUANTITY             integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   ISDELTE              smallint                       null,
-   constraint PK_EXPORTBILLDETAIL primary key clustered (EXPORTBILLID, MATERIALDETAILID)
-);
-
-/*==============================================================*/
-/* Index: EXPORTBILLDETAIL_PK                                   */
-/*==============================================================*/
-create unique clustered index EXPORTBILLDETAIL_PK on EXPORTBILLDETAIL (
-EXPORTBILLID ASC,
-MATERIALDETAILID ASC
-);
-
-/*==============================================================*/
-/* Index: EXPORTBILLDETAIL_FK                                   */
-/*==============================================================*/
-create index EXPORTBILLDETAIL_FK on EXPORTBILLDETAIL (
-EXPORTBILLID ASC
-);
-
-/*==============================================================*/
-/* Index: EXPORTBILLDETAIL2_FK                                  */
-/*==============================================================*/
-create index EXPORTBILLDETAIL2_FK on EXPORTBILLDETAIL (
-MATERIALDETAILID ASC
+   EXPORTBILLID         int not null,
+   MATERIALDETAILID     int not null,
+   QUANTITY             int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (EXPORTBILLID, MATERIALDETAILID)
 );
 
 /*==============================================================*/
 /* Table: IMAGE                                                 */
 /*==============================================================*/
-create table IMAGE 
+create table IMAGE
 (
-   IMAGEID              integer                        not null,
-   NAME                 varchar(255)                   null,
-   constraint PK_IMAGE primary key (IMAGEID)
-);
-
-/*==============================================================*/
-/* Index: IMAGE_PK                                              */
-/*==============================================================*/
-create unique index IMAGE_PK on IMAGE (
-IMAGEID ASC
+   IMAGEID              int not null AUTO_INCREMENT,
+   NAME                 national varchar(255),
+   primary key (IMAGEID)
 );
 
 /*==============================================================*/
 /* Table: IMAGEOFEMPLOYEE                                       */
 /*==============================================================*/
-create table IMAGEOFEMPLOYEE 
+create table IMAGEOFEMPLOYEE
 (
-   IMAGEID              integer                        not null,
-   EMPLOYEEID           varchar(7)                     not null,
-   constraint PK_IMAGEOFEMPLOYEE primary key clustered (IMAGEID, EMPLOYEEID)
-);
-
-/*==============================================================*/
-/* Index: IMAGEOFEMPLOYEE_PK                                    */
-/*==============================================================*/
-create unique clustered index IMAGEOFEMPLOYEE_PK on IMAGEOFEMPLOYEE (
-IMAGEID ASC,
-EMPLOYEEID ASC
-);
-
-/*==============================================================*/
-/* Index: IMAGEOFEMPLOYEE_FK                                    */
-/*==============================================================*/
-create index IMAGEOFEMPLOYEE_FK on IMAGEOFEMPLOYEE (
-IMAGEID ASC
-);
-
-/*==============================================================*/
-/* Index: IMAGEOFEMPLOYEE2_FK                                   */
-/*==============================================================*/
-create index IMAGEOFEMPLOYEE2_FK on IMAGEOFEMPLOYEE (
-EMPLOYEEID ASC
+   IMAGEID              int not null,
+   EMPLOYEEID           national varchar(7) not null,
+   primary key (IMAGEID, EMPLOYEEID)
 );
 
 /*==============================================================*/
 /* Table: IMAGEOFPRODUCT                                        */
 /*==============================================================*/
-create table IMAGEOFPRODUCT 
+create table IMAGEOFPRODUCT
 (
-   PRODUCTID            varchar(7)                     not null,
-   IMAGEID              integer                        not null,
-   constraint PK_IMAGEOFPRODUCT primary key clustered (PRODUCTID, IMAGEID)
-);
-
-/*==============================================================*/
-/* Index: IMAGEOFPRODUCT_PK                                     */
-/*==============================================================*/
-create unique clustered index IMAGEOFPRODUCT_PK on IMAGEOFPRODUCT (
-PRODUCTID ASC,
-IMAGEID ASC
-);
-
-/*==============================================================*/
-/* Index: IMAGEOFPRODUCT_FK                                     */
-/*==============================================================*/
-create index IMAGEOFPRODUCT_FK on IMAGEOFPRODUCT (
-PRODUCTID ASC
-);
-
-/*==============================================================*/
-/* Index: IMAGEOFPRODUCT2_FK                                    */
-/*==============================================================*/
-create index IMAGEOFPRODUCT2_FK on IMAGEOFPRODUCT (
-IMAGEID ASC
+   PRODUCTID            national varchar(7) not null,
+   IMAGEID              int not null,
+   primary key (PRODUCTID, IMAGEID)
 );
 
 /*==============================================================*/
 /* Table: IMPORTBILL                                            */
 /*==============================================================*/
-create table IMPORTBILL 
+create table IMPORTBILL
 (
-   IMPORTBILLID         integer                        not null,
-   SUPPLIERID           integer                        null,
-   EMPLOYEEID           varchar(7)                     null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_IMPORTBILL primary key (IMPORTBILLID)
-);
-
-/*==============================================================*/
-/* Index: IMPORTBILL_PK                                         */
-/*==============================================================*/
-create unique index IMPORTBILL_PK on IMPORTBILL (
-IMPORTBILLID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_13_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_13_FK on IMPORTBILL (
-SUPPLIERID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_15_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_15_FK on IMPORTBILL (
-EMPLOYEEID ASC
+   IMPORTBILLID         int not null AUTO_INCREMENT,
+   SUPPLIERID           int,
+   EMPLOYEEID           national varchar(7),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (IMPORTBILLID)
 );
 
 /*==============================================================*/
 /* Table: IMPORTBILLDETAIL                                      */
 /*==============================================================*/
-create table IMPORTBILLDETAIL 
+create table IMPORTBILLDETAIL
 (
-   MATERIALDETAILID     integer                        not null,
-   IMPORTBILLID         integer                        not null,
-   QUANTITY             integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_IMPORTBILLDETAIL primary key clustered (MATERIALDETAILID, IMPORTBILLID)
-);
-
-/*==============================================================*/
-/* Index: IMPORTBILLDETAIL_PK                                   */
-/*==============================================================*/
-create unique clustered index IMPORTBILLDETAIL_PK on IMPORTBILLDETAIL (
-MATERIALDETAILID ASC,
-IMPORTBILLID ASC
-);
-
-/*==============================================================*/
-/* Index: IMPORTBILLDETAIL_FK                                   */
-/*==============================================================*/
-create index IMPORTBILLDETAIL_FK on IMPORTBILLDETAIL (
-MATERIALDETAILID ASC
-);
-
-/*==============================================================*/
-/* Index: IMPORTBILLDETAIL2_FK                                  */
-/*==============================================================*/
-create index IMPORTBILLDETAIL2_FK on IMPORTBILLDETAIL (
-IMPORTBILLID ASC
+   MATERIALDETAILID     int not null,
+   IMPORTBILLID         int not null,
+   QUANTITY             int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (MATERIALDETAILID, IMPORTBILLID)
 );
 
 /*==============================================================*/
 /* Table: MATERIAL                                              */
 /*==============================================================*/
-create table MATERIAL 
+create table MATERIAL
 (
-   MATERIALID           integer                        not null,
-   NAME                 varchar(255)                   null,
-   UNIT                 varchar(50)                    null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_MATERIAL primary key (MATERIALID)
-);
-
-/*==============================================================*/
-/* Index: MATERIAL_PK                                           */
-/*==============================================================*/
-create unique index MATERIAL_PK on MATERIAL (
-MATERIALID ASC
+   MATERIALID           int not null AUTO_INCREMENT,
+   NAME                 national varchar(255),
+   UNIT                 national varchar(50),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (MATERIALID)
 );
 
 /*==============================================================*/
 /* Table: MATERIALDETAIL                                        */
 /*==============================================================*/
-create table MATERIALDETAIL 
+create table MATERIALDETAIL
 (
-   MATERIALDETAILID     integer                        not null,
-   MATERIALID           integer                        null,
-   DATEOFMANUFACTURE    date                           null,
-   EXPIRATIONDATE       date                           null,
-   QUANTITY             integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_MATERIALDETAIL primary key (MATERIALDETAILID)
-);
-
-/*==============================================================*/
-/* Index: MATERIALDETAIL_PK                                     */
-/*==============================================================*/
-create unique index MATERIALDETAIL_PK on MATERIALDETAIL (
-MATERIALDETAILID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_11_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_11_FK on MATERIALDETAIL (
-MATERIALID ASC
+   MATERIALDETAILID     int not null AUTO_INCREMENT,
+   MATERIALID           int,
+   DATEOFMANUFACTURE    date,
+   EXPIRATIONDATE       date,
+   QUANTITY             int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (MATERIALDETAILID)
 );
 
 /*==============================================================*/
 /* Table: POSITION                                              */
 /*==============================================================*/
-create table POSITION 
+create table POSITION
 (
-   POSITIONID           varchar(255)                   not null,
-   NAME                 varchar(255)                   null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_POSITION primary key (POSITIONID)
-);
-
-/*==============================================================*/
-/* Index: POSITION_PK                                           */
-/*==============================================================*/
-create unique index POSITION_PK on POSITION (
-POSITIONID ASC
+   POSITIONID           national varchar(255) not null,
+   NAME                 national varchar(255),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (POSITIONID)
 );
 
 /*==============================================================*/
 /* Table: PRICE                                                 */
 /*==============================================================*/
-create table PRICE 
+create table PRICE
 (
-   PRICEID              integer                        not null,
-   PRODUCTID            varchar(7)                     null,
-   STARTDATETIME        timestamp                      null,
-   ENDDATETIME          timestamp                      null,
-   PRICE                integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_PRICE primary key (PRICEID)
-);
-
-/*==============================================================*/
-/* Index: PRICE_PK                                              */
-/*==============================================================*/
-create unique index PRICE_PK on PRICE (
-PRICEID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_1_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_1_FK on PRICE (
-PRODUCTID ASC
+   PRICEID              int not null AUTO_INCREMENT,
+   PRODUCTID            national varchar(7),
+   STARTDATETIME        datetime,
+   ENDDATETIME          datetime,
+   PRICE                int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (PRICEID)
 );
 
 /*==============================================================*/
 /* Table: PRODUCT                                               */
 /*==============================================================*/
-create table PRODUCT 
+create table PRODUCT
 (
-   PRODUCTID            varchar(7)                     not null,
-   CATEGORYPRODUCTID    varchar(7)                     null,
-   NAME                 varchar(255)                   null,
-   DESCRIPTION          varchar(255)                   null,
-   NUMBERINVENTORY      char(10)                       null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_PRODUCT primary key (PRODUCTID)
-);
-
-/*==============================================================*/
-/* Index: PRODUCT_PK                                            */
-/*==============================================================*/
-create unique index PRODUCT_PK on PRODUCT (
-PRODUCTID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_2_FK                                     */
-/*==============================================================*/
-create index RELATIONSHIP_2_FK on PRODUCT (
-CATEGORYPRODUCTID ASC
+   PRODUCTID            national varchar(7) not null,
+   CATEGORYPRODUCTID    national varchar(7),
+   NAME                 national varchar(255),
+   DESCRIPTION          national varchar(255),
+   NUMBERINVENTORY      char(10),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (PRODUCTID)
 );
 
 /*==============================================================*/
 /* Table: REGISTER                                              */
 /*==============================================================*/
-create table REGISTER 
+create table REGISTER
 (
-   EMPLOYEEID           varchar(7)                     not null,
-   SCHEDULEID           varchar(7)                     not null,
-   REGISTERID           date                           null,
-   RESULT               numeric(3)                     null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_REGISTER primary key clustered (EMPLOYEEID, SCHEDULEID)
-);
-
-/*==============================================================*/
-/* Index: REGISTER_PK                                           */
-/*==============================================================*/
-create unique clustered index REGISTER_PK on REGISTER (
-EMPLOYEEID ASC,
-SCHEDULEID ASC
-);
-
-/*==============================================================*/
-/* Index: REGISTER_FK                                           */
-/*==============================================================*/
-create index REGISTER_FK on REGISTER (
-EMPLOYEEID ASC
-);
-
-/*==============================================================*/
-/* Index: REGISTER2_FK                                          */
-/*==============================================================*/
-create index REGISTER2_FK on REGISTER (
-SCHEDULEID ASC
+   EMPLOYEEID           national varchar(7) not null,
+   SCHEDULEID           national varchar(7) not null,
+   REGISTERID           date,
+   RESULT               numeric(3,0),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (EMPLOYEEID, SCHEDULEID)
 );
 
 /*==============================================================*/
 /* Table: SALARY                                                */
 /*==============================================================*/
-create table SALARY 
+create table SALARY
 (
-   SALARYID             integer                        not null,
-   EMPLOYEEID           varchar(7)                     null,
-   SALARYONHOUR         integer                        null,
-   STARTDATE            date                           null,
-   ENDDATE              date                           null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_SALARY primary key (SALARYID)
-);
-
-/*==============================================================*/
-/* Index: SALARY_PK                                             */
-/*==============================================================*/
-create unique index SALARY_PK on SALARY (
-SALARYID ASC
-);
-
-/*==============================================================*/
-/* Index: RELATIONSHIP_18_FK                                    */
-/*==============================================================*/
-create index RELATIONSHIP_18_FK on SALARY (
-EMPLOYEEID ASC
+   SALARYID             int not null AUTO_INCREMENT,
+   EMPLOYEEID           national varchar(7),
+   SALARYONHOUR         int,
+   STARTDATE            date,
+   ENDDATE              date,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (SALARYID)
 );
 
 /*==============================================================*/
 /* Table: SCHEDULE                                              */
 /*==============================================================*/
-create table SCHEDULE 
+create table SCHEDULE
 (
-   SCHEDULEID           varchar(7)                     not null,
-   STARTTIME            time                           null,
-   ENDTIME              time                           null,
-   PAYRATE              float                          null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_SCHEDULE primary key (SCHEDULEID)
-);
-
-/*==============================================================*/
-/* Index: SCHEDULE_PK                                           */
-/*==============================================================*/
-create unique index SCHEDULE_PK on SCHEDULE (
-SCHEDULEID ASC
+   SCHEDULEID           national varchar(7) not null,
+   STARTTIME            time,
+   ENDTIME              time,
+   PAYRATE              float,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (SCHEDULEID)
 );
 
 /*==============================================================*/
 /* Table: SUPPLIER                                              */
 /*==============================================================*/
-create table SUPPLIER 
+create table SUPPLIER
 (
-   SUPPLIERID           integer                        not null,
-   NAME                 varchar(255)                   null,
-   ADDRESS              varchar(255)                   null,
-   PHONE                numeric                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_SUPPLIER primary key (SUPPLIERID)
-);
-
-/*==============================================================*/
-/* Index: SUPPLIER_PK                                           */
-/*==============================================================*/
-create unique index SUPPLIER_PK on SUPPLIER (
-SUPPLIERID ASC
+   SUPPLIERID           int not null AUTO_INCREMENT,
+   NAME                 national varchar(255),
+   ADDRESS              national varchar(255),
+   PHONE                numeric(8,0),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (SUPPLIERID)
 );
 
 /*==============================================================*/
 /* Table: TABLESTATUS                                           */
 /*==============================================================*/
-create table TABLESTATUS 
+create table TABLESTATUS
 (
-   TABLESTATUSID        integer                        not null,
-   NAME                 varchar(255)                   null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_TABLESTATUS primary key (TABLESTATUSID)
-);
-
-/*==============================================================*/
-/* Index: TABLESTATUS_PK                                        */
-/*==============================================================*/
-create unique index TABLESTATUS_PK on TABLESTATUS (
-TABLESTATUSID ASC
+   TABLESTATUSID        int not null AUTO_INCREMENT,
+   NAME                 national varchar(255),
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (TABLESTATUSID)
 );
 
 /*==============================================================*/
 /* Table: VOUCHER                                               */
 /*==============================================================*/
-create table VOUCHER 
+create table VOUCHER
 (
-   VOUCHERID            integer                        not null,
-   NAME                 varchar(255)                   null,
-   STARTDATETIME        timestamp                      null,
-   ENDDATE              date                           null,
-   NUMBER               integer                        null,
-   COUNT                integer                        null,
-   SALEOFF              integer                        null,
-   UPDATEAT             timestamp                      null,
-   ISDELETE             smallint                       null,
-   constraint PK_VOUCHER primary key (VOUCHERID)
+   VOUCHERID            int not null AUTO_INCREMENT,
+   NAME                 national varchar(255),
+   STARTDATETIME        datetime,
+   ENDDATE              date,
+   NUMBER               int,
+   COUNT                int,
+   SALEOFF              int,
+   UPDATEAT             datetime,
+   ISDELETE             bool,
+   primary key (VOUCHERID)
 );
 
-/*==============================================================*/
-/* Index: VOUCHER_PK                                            */
-/*==============================================================*/
-create unique index VOUCHER_PK on VOUCHER (
-VOUCHERID ASC
-);
+alter table ATPOSITION add constraint FK_ATPOSITION foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table ATPOSITION
-   add constraint FK_ATPOSITI_ATPOSITIO_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table ATPOSITION add constraint FK_ATPOSITION2 foreign key (POSITIONID)
+      references POSITION (POSITIONID) on delete restrict on update restrict;
 
-alter table ATPOSITION
-   add constraint FK_ATPOSITI_ATPOSITIO_POSITION foreign key (POSITIONID)
-      references POSITION (POSITIONID)
-      on update restrict
-      on delete restrict;
+alter table BILL add constraint FK_RELATIONSHIP_3 foreign key (VOUCHERID)
+      references VOUCHER (VOUCHERID) on delete restrict on update restrict;
 
-alter table BILL
-   add constraint FK_BILL_RELATIONS_VOUCHER foreign key (VOUCHERID)
-      references VOUCHER (VOUCHERID)
-      on update restrict
-      on delete restrict;
+alter table BILL add constraint FK_RELATIONSHIP_5 foreign key (BILLSTATUSID)
+      references BILLSTATUS (BILLSTATUSID) on delete restrict on update restrict;
 
-alter table BILL
-   add constraint FK_BILL_RELATIONS_BILLSTAT foreign key (BILLSTATUSID)
-      references BILLSTATUS (BILLSTATUSID)
-      on update restrict
-      on delete restrict;
+alter table BILL add constraint FK_RELATIONSHIP_6 foreign key (CUSTOMERID)
+      references CUSTOMER (CUSTOMERID) on delete restrict on update restrict;
 
-alter table BILL
-   add constraint FK_BILL_RELATIONS_CUSTOMER foreign key (CUSTOMERID)
-      references CUSTOMER (CUSTOMERID)
-      on update restrict
-      on delete restrict;
+alter table BILL add constraint FK_RELATIONSHIP_7 foreign key (DINNERTABLEID)
+      references DINNERTABLE (DINNERTABLEID) on delete restrict on update restrict;
 
-alter table BILL
-   add constraint FK_BILL_RELATIONS_DINNERTA foreign key (DINNERTABLEID)
-      references DINNERTABLE (DINNERTABLEID)
-      on update restrict
-      on delete restrict;
+alter table BILL add constraint FK_RELATIONSHIP_8 foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table BILL
-   add constraint FK_BILL_RELATIONS_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table BILLDETAIL add constraint FK_BILLDETAIL foreign key (PRODUCTID)
+      references PRODUCT (PRODUCTID) on delete restrict on update restrict;
 
-alter table BILLDETAIL
-   add constraint FK_BILLDETA_BILLDETAI_PRODUCT foreign key (PRODUCTID)
-      references PRODUCT (PRODUCTID)
-      on update restrict
-      on delete restrict;
+alter table BILLDETAIL add constraint FK_BILLDETAIL2 foreign key (BILLID)
+      references BILL (BILLID) on delete restrict on update restrict;
 
-alter table BILLDETAIL
-   add constraint FK_BILLDETA_BILLDETAI_BILL foreign key (BILLID)
-      references BILL (BILLID)
-      on update restrict
-      on delete restrict;
+alter table BOOKTABLE add constraint FK_BOOKTABLE foreign key (CUSTOMERID)
+      references CUSTOMER (CUSTOMERID) on delete restrict on update restrict;
 
-alter table BOOKTABLE
-   add constraint FK_BOOKTABL_BOOKTABLE_CUSTOMER foreign key (CUSTOMERID)
-      references CUSTOMER (CUSTOMERID)
-      on update restrict
-      on delete restrict;
+alter table BOOKTABLE add constraint FK_BOOKTABLE2 foreign key (DINNERTABLEID)
+      references DINNERTABLE (DINNERTABLEID) on delete restrict on update restrict;
 
-alter table BOOKTABLE
-   add constraint FK_BOOKTABL_BOOKTABLE_DINNERTA foreign key (DINNERTABLEID)
-      references DINNERTABLE (DINNERTABLEID)
-      on update restrict
-      on delete restrict;
+alter table BOOKTABLE add constraint FK_BOOKTABLE3 foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table BOOKTABLE
-   add constraint FK_BOOKTABL_BOOKTABLE_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table DINNERTABLE add constraint FK_RELATIONSHIP_14 foreign key (TABLESTATUSID)
+      references TABLESTATUS (TABLESTATUSID) on delete restrict on update restrict;
 
-alter table DINNERTABLE
-   add constraint FK_DINNERTA_RELATIONS_TABLESTA foreign key (TABLESTATUSID)
-      references TABLESTATUS (TABLESTATUSID)
-      on update restrict
-      on delete restrict;
+alter table EXPORTBILL add constraint FK_RELATIONSHIP_16 foreign key (PRODUCTID)
+      references PRODUCT (PRODUCTID) on delete restrict on update restrict;
 
-alter table EXPORTBILL
-   add constraint FK_EXPORTBI_RELATIONS_PRODUCT foreign key (PRODUCTID)
-      references PRODUCT (PRODUCTID)
-      on update restrict
-      on delete restrict;
+alter table EXPORTBILL add constraint FK_RELATIONSHIP_17 foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table EXPORTBILL
-   add constraint FK_EXPORTBI_RELATIONS_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table EXPORTBILLDETAIL add constraint FK_EXPORTBILLDETAIL foreign key (EXPORTBILLID)
+      references EXPORTBILL (EXPORTBILLID) on delete restrict on update restrict;
 
-alter table EXPORTBILLDETAIL
-   add constraint FK_EXPORTBI_EXPORTBIL_EXPORTBI foreign key (EXPORTBILLID)
-      references EXPORTBILL (EXPORTBILLID)
-      on update restrict
-      on delete restrict;
+alter table EXPORTBILLDETAIL add constraint FK_EXPORTBILLDETAIL2 foreign key (MATERIALDETAILID)
+      references MATERIALDETAIL (MATERIALDETAILID) on delete restrict on update restrict;
 
-alter table EXPORTBILLDETAIL
-   add constraint FK_EXPORTBI_EXPORTBIL_MATERIAL foreign key (MATERIALDETAILID)
-      references MATERIALDETAIL (MATERIALDETAILID)
-      on update restrict
-      on delete restrict;
+alter table IMAGEOFEMPLOYEE add constraint FK_IMAGEOFEMPLOYEE foreign key (IMAGEID)
+      references IMAGE (IMAGEID) on delete restrict on update restrict;
 
-alter table IMAGEOFEMPLOYEE
-   add constraint FK_IMAGEOFE_IMAGEOFEM_IMAGE foreign key (IMAGEID)
-      references IMAGE (IMAGEID)
-      on update restrict
-      on delete restrict;
+alter table IMAGEOFEMPLOYEE add constraint FK_IMAGEOFEMPLOYEE2 foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table IMAGEOFEMPLOYEE
-   add constraint FK_IMAGEOFE_IMAGEOFEM_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table IMAGEOFPRODUCT add constraint FK_IMAGEOFPRODUCT foreign key (PRODUCTID)
+      references PRODUCT (PRODUCTID) on delete restrict on update restrict;
 
-alter table IMAGEOFPRODUCT
-   add constraint FK_IMAGEOFP_IMAGEOFPR_PRODUCT foreign key (PRODUCTID)
-      references PRODUCT (PRODUCTID)
-      on update restrict
-      on delete restrict;
+alter table IMAGEOFPRODUCT add constraint FK_IMAGEOFPRODUCT2 foreign key (IMAGEID)
+      references IMAGE (IMAGEID) on delete restrict on update restrict;
 
-alter table IMAGEOFPRODUCT
-   add constraint FK_IMAGEOFP_IMAGEOFPR_IMAGE foreign key (IMAGEID)
-      references IMAGE (IMAGEID)
-      on update restrict
-      on delete restrict;
+alter table IMPORTBILL add constraint FK_RELATIONSHIP_13 foreign key (SUPPLIERID)
+      references SUPPLIER (SUPPLIERID) on delete restrict on update restrict;
 
-alter table IMPORTBILL
-   add constraint FK_IMPORTBI_RELATIONS_SUPPLIER foreign key (SUPPLIERID)
-      references SUPPLIER (SUPPLIERID)
-      on update restrict
-      on delete restrict;
+alter table IMPORTBILL add constraint FK_RELATIONSHIP_15 foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table IMPORTBILL
-   add constraint FK_IMPORTBI_RELATIONS_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table IMPORTBILLDETAIL add constraint FK_IMPORTBILLDETAIL foreign key (MATERIALDETAILID)
+      references MATERIALDETAIL (MATERIALDETAILID) on delete restrict on update restrict;
 
-alter table IMPORTBILLDETAIL
-   add constraint FK_IMPORTBI_IMPORTBIL_MATERIAL foreign key (MATERIALDETAILID)
-      references MATERIALDETAIL (MATERIALDETAILID)
-      on update restrict
-      on delete restrict;
+alter table IMPORTBILLDETAIL add constraint FK_IMPORTBILLDETAIL2 foreign key (IMPORTBILLID)
+      references IMPORTBILL (IMPORTBILLID) on delete restrict on update restrict;
 
-alter table IMPORTBILLDETAIL
-   add constraint FK_IMPORTBI_IMPORTBIL_IMPORTBI foreign key (IMPORTBILLID)
-      references IMPORTBILL (IMPORTBILLID)
-      on update restrict
-      on delete restrict;
+alter table MATERIALDETAIL add constraint FK_RELATIONSHIP_11 foreign key (MATERIALID)
+      references MATERIAL (MATERIALID) on delete restrict on update restrict;
 
-alter table MATERIALDETAIL
-   add constraint FK_MATERIAL_RELATIONS_MATERIAL foreign key (MATERIALID)
-      references MATERIAL (MATERIALID)
-      on update restrict
-      on delete restrict;
+alter table PRICE add constraint FK_RELATIONSHIP_1 foreign key (PRODUCTID)
+      references PRODUCT (PRODUCTID) on delete restrict on update restrict;
 
-alter table PRICE
-   add constraint FK_PRICE_RELATIONS_PRODUCT foreign key (PRODUCTID)
-      references PRODUCT (PRODUCTID)
-      on update restrict
-      on delete restrict;
+alter table PRODUCT add constraint FK_RELATIONSHIP_2 foreign key (CATEGORYPRODUCTID)
+      references CATEGORYPRODUCT (CATEGORYPRODUCTID) on delete restrict on update restrict;
 
-alter table PRODUCT
-   add constraint FK_PRODUCT_RELATIONS_CATEGORY foreign key (CATEGORYPRODUCTID)
-      references CATEGORYPRODUCT (CATEGORYPRODUCTID)
-      on update restrict
-      on delete restrict;
+alter table REGISTER add constraint FK_REGISTER foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;
 
-alter table REGISTER
-   add constraint FK_REGISTER_REGISTER_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
+alter table REGISTER add constraint FK_REGISTER2 foreign key (SCHEDULEID)
+      references SCHEDULE (SCHEDULEID) on delete restrict on update restrict;
 
-alter table REGISTER
-   add constraint FK_REGISTER_REGISTER2_SCHEDULE foreign key (SCHEDULEID)
-      references SCHEDULE (SCHEDULEID)
-      on update restrict
-      on delete restrict;
-
-alter table SALARY
-   add constraint FK_SALARY_RELATIONS_EMPLOYEE foreign key (EMPLOYEEID)
-      references EMPLOYEE (EMPLOYEEID)
-      on update restrict
-      on delete restrict;
-
+alter table SALARY add constraint FK_RELATIONSHIP_18 foreign key (EMPLOYEEID)
+      references EMPLOYEE (EMPLOYEEID) on delete restrict on update restrict;

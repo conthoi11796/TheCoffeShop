@@ -106,14 +106,13 @@ public class EmployeeController extends Common {
 		employee.setUsename(usename);
 		employee.setPassword(password);
 //		employee.setCreateat(createat);
-		employee.setCreateat(new Date());
 		employee.setUpdateat(new Date());
 		employee.setIsdelete(IS_NOT_DELETE);
 		employeeService.addEmployee(employee);
 
 		Atposition atposition = new Atposition();
 		atposition.setEmployee(employee);
-		atposition.setCreateat(new Date());
+		atposition.setUpdateat(new Date());
 //		atposition.setCreateby(createby);
 		atposition.setUpdateat(new Date());
 		atposition.setStartdate(super.sdfDateField.parse(startdate));
@@ -122,9 +121,8 @@ public class EmployeeController extends Common {
 
 		Salary salary = new Salary();
 		salary.setSalaryonhour(Integer.valueOf(salaryonhour.trim()));
-		salary.setCreateat(new Date());
+		salary.setUpdateat(new Date());
 		salary.setStartdate(super.sdfDateField.parse(startdate));
-//		salary.setCreateby(createby);
 		salary.setUpdateat(new Date());
 		salary.setIsdelete(super.IS_NOT_DELETE);
 		salaryService.addSalary(salary);
@@ -195,16 +193,12 @@ public class EmployeeController extends Common {
 		}
 		employee.setPhone(phone);
 		employee.setAddress(address);
-//		employee.setCreateat(createat);
-		employee.setCreateat(new Date());
 		employee.setUpdateat(new Date());
 		employee.setIsdelete(IS_NOT_DELETE);
 		employeeService.editEmployee(employee);
 
 		Atposition atposition = new Atposition();
 		atposition.setEmployee(employee);
-		atposition.setCreateat(new Date());
-//		atposition.setCreateby(createby);
 		atposition.setUpdateat(new Date());
 		atposition.setStartdate(super.sdfDateField.parse(startdate));
 		atposition.setIsdelete(super.IS_NOT_DELETE);
@@ -212,9 +206,7 @@ public class EmployeeController extends Common {
 
 		Salary salary = new Salary();
 		salary.setSalaryonhour(Integer.valueOf(salaryonhour.trim()));
-		salary.setCreateat(new Date());
 		salary.setStartdate(super.sdfDateField.parse(startdate));
-//		salary.setCreateby(createby);
 		salary.setUpdateat(new Date());
 		salary.setIsdelete(super.IS_NOT_DELETE);
 		salaryService.addSalary(salary);

@@ -1,9 +1,10 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,7 +25,7 @@ import javax.persistence.TemporalType;
 @Table(name = "bill", catalog = "luanvan")
 public class Bill implements java.io.Serializable {
 
-	private Integer billid;
+	private int billid;
 	private Billstatus billstatus;
 	private Customer customer;
 	private Dinnertable dinnertable;
@@ -33,22 +34,21 @@ public class Bill implements java.io.Serializable {
 	private Date startdatetime;
 	private Date enddate;
 	private String notice;
-	private String createby;
-	private Date createat;
-	private String updateby;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
 	private Set<Billdetail> billdetails = new HashSet<Billdetail>(0);
 
 	public Bill() {
 	}
 
-	public Bill(Billstatus billstatus, Customer customer, Dinnertable dinnertable, Employee employee,
-			 Voucher voucher, Date startdatetime, Date enddate, String notice,
-			String createby, Date createat, String updateby, Date updateat, Boolean isdelete, String deleteby,
-			Date deleteat, Set<Billdetail> billdetails) {
+	public Bill(int billid) {
+		this.billid = billid;
+	}
+
+	public Bill(int billid, Billstatus billstatus, Customer customer, Dinnertable dinnertable, Employee employee,
+			Voucher voucher, Date startdatetime, Date enddate, String notice, Date updateat, Boolean isdelete,
+			Set<Billdetail> billdetails) {
+		this.billid = billid;
 		this.billstatus = billstatus;
 		this.customer = customer;
 		this.dinnertable = dinnertable;
@@ -57,13 +57,8 @@ public class Bill implements java.io.Serializable {
 		this.startdatetime = startdatetime;
 		this.enddate = enddate;
 		this.notice = notice;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
 		this.billdetails = billdetails;
 	}
 
@@ -71,11 +66,11 @@ public class Bill implements java.io.Serializable {
 	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "BILLID", unique = true, nullable = false)
-	public Integer getBillid() {
+	public int getBillid() {
 		return this.billid;
 	}
 
-	public void setBillid(Integer billid) {
+	public void setBillid(int billid) {
 		this.billid = billid;
 	}
 
@@ -158,34 +153,6 @@ public class Bill implements java.io.Serializable {
 		this.notice = notice;
 	}
 
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
-	}
-
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATEAT", length = 19)
 	public Date getUpdateat() {
@@ -203,25 +170,6 @@ public class Bill implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "bill")

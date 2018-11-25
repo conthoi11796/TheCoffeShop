@@ -20,8 +20,6 @@ public class BilldetailService implements BilldetailDAOImp {
 
 	@Override
 	public Boolean addBilldetail(Billdetail billdetail) {
-
-		billdetail.setCreateat(new Date());
 		billdetail.setIsdelete(this.IS_NOT_DELETE);
 		return billdetailDAO.addBilldetail(billdetail);
 	}

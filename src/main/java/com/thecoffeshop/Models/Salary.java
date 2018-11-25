@@ -1,14 +1,16 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,16 +23,12 @@ import javax.persistence.TemporalType;
 public class Salary implements java.io.Serializable {
 
 	private int salaryid;
+	private Employee employee;
 	private Integer salaryonhour;
 	private Date startdate;
-	private String createby;
-	private Date createat;
-	private String updateby;
+	private Date enddate;
 	private Date updateat;
 	private Boolean isdelete;
-	private String deleteby;
-	private Date deleteat;
-	private Set<Employee> employees = new HashSet<Employee>(0);
 
 	public Salary() {
 	}
@@ -39,22 +37,19 @@ public class Salary implements java.io.Serializable {
 		this.salaryid = salaryid;
 	}
 
-	public Salary(int salaryid, Integer salaryonhour, Date startdate, String createby, Date createat, String updateby,
-			Date updateat, Boolean isdelete, String deleteby, Date deleteat, Set<Employee> employees) {
+	public Salary(int salaryid, Employee employee, Integer salaryonhour, Date startdate, Date enddate, Date updateat,
+			Boolean isdelete) {
 		this.salaryid = salaryid;
+		this.employee = employee;
 		this.salaryonhour = salaryonhour;
 		this.startdate = startdate;
-		this.createby = createby;
-		this.createat = createat;
-		this.updateby = updateby;
+		this.enddate = enddate;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
-		this.deleteby = deleteby;
-		this.deleteat = deleteat;
-		this.employees = employees;
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "SALARYID", unique = true, nullable = false)
 	public int getSalaryid() {
@@ -63,6 +58,16 @@ public class Salary implements java.io.Serializable {
 
 	public void setSalaryid(int salaryid) {
 		this.salaryid = salaryid;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "EMPLOYEEID")
+	public Employee getEmployee() {
+		return this.employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	@Column(name = "SALARYONHOUR")
@@ -84,32 +89,14 @@ public class Salary implements java.io.Serializable {
 		this.startdate = startdate;
 	}
 
-	@Column(name = "CREATEBY", length = 7)
-	public String getCreateby() {
-		return this.createby;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "ENDDATE", length = 10)
+	public Date getEnddate() {
+		return this.enddate;
 	}
 
-	public void setCreateby(String createby) {
-		this.createby = createby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEAT", length = 19)
-	public Date getCreateat() {
-		return this.createat;
-	}
-
-	public void setCreateat(Date createat) {
-		this.createat = createat;
-	}
-
-	@Column(name = "UPDATEBY", length = 7)
-	public String getUpdateby() {
-		return this.updateby;
-	}
-
-	public void setUpdateby(String updateby) {
-		this.updateby = updateby;
+	public void setEnddate(Date enddate) {
+		this.enddate = enddate;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -129,34 +116,6 @@ public class Salary implements java.io.Serializable {
 
 	public void setIsdelete(Boolean isdelete) {
 		this.isdelete = isdelete;
-	}
-
-	@Column(name = "DELETEBY", length = 7)
-	public String getDeleteby() {
-		return this.deleteby;
-	}
-
-	public void setDeleteby(String deleteby) {
-		this.deleteby = deleteby;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "DELETEAT", length = 19)
-	public Date getDeleteat() {
-		return this.deleteat;
-	}
-
-	public void setDeleteat(Date deleteat) {
-		this.deleteat = deleteat;
-	}
-
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "salary")
-	public Set<Employee> getEmployees() {
-		return this.employees;
-	}
-
-	public void setEmployees(Set<Employee> employees) {
-		this.employees = employees;
 	}
 
 }

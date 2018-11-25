@@ -77,8 +77,6 @@ public class TableStatusController extends Common {
 
 		Tablestatus tablestatus = new Tablestatus();
 		tablestatus.setName(name.trim());
-//		tablestatus.setCreateby(createby);
-		tablestatus.setCreateat(new Date());
 		tablestatus.setUpdateat(new Date());
 		tablestatus.setIsdelete(this.IS_NOT_DELETE);
 		tablestatusService.addTablestatus(tablestatus);
@@ -114,8 +112,6 @@ public class TableStatusController extends Common {
 			modelMap.addAttribute("results", "Trạng thái bàn không tồn tại!");
 			return "/admin/public/Danger";// đã tồn tại
 		}
-		
-		tablestatus.setTablestatusdetails(null);
 
 		modelMap.addAttribute("tablestatus", tablestatus);
 		return "/admin/management-system/content/table-status/form";

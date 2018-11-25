@@ -1,5 +1,6 @@
 package com.thecoffeshop.DAOImp;
 
+import java.util.Date;
 import java.util.List;
 
 import com.thecoffeshop.Models.*;
@@ -25,4 +26,21 @@ public interface BillDAOImp extends CommonDAOImp {
 	public Boolean checkExistDinnerTable(int dinnertableid);
 
 	public int getTotalPriceOfBill(int billid);
+
+	public Bill getInfoLastBill(int dinnertableid);
+
+	// thống kê tổng tiền thu vào trong ngày, tổng hóa đơn trong ngày
+	public int thongkeTongTienTrongNgay(Date date);
+
+	public int thongkeSoHoaDonTrongNgay(Date date);
+
+	// thống kê tổng tiền thu vào trong tuần, tổng hóa đơn trong tuần
+	public int thongkeTongTienTrongTuan(int tuan);
+
+	public int thongkeSoHoaDonTrongTuan(int tuan);
+
+	// thống kê tổng tiền thu vào trong tuần, tổng hóa đơn trong năm
+	public int thongkeTongTienTrongThang(int thang);
+
+	public int thongkeSoHoaDonTrongThang(int thang);
 }

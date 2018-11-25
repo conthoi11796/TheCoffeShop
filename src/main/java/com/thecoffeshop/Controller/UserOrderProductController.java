@@ -140,7 +140,7 @@ public class UserOrderProductController extends Common {
 						billdetail.setProduct(new Product(productid));
 						billdetail.setQuantity(listNumber.get(i));
 						billdetail.setIsdelete(super.IS_NOT_DELETE);
-						billdetail.setCreateat(new Date());
+						billdetail.setUpdateat(new Date());
 						
 						billdetailService.addBilldetail(billdetail);
 					}

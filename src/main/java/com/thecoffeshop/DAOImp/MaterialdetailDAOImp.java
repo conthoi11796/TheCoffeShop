@@ -6,7 +6,7 @@ import com.thecoffeshop.Models.*;
 
 public interface MaterialdetailDAOImp extends CommonDAOImp{
 	
-	public Boolean addMaterialdetail(Materialdetail materialdetail);
+	public int addMaterialdetail(Materialdetail materialdetail);
 
 	public List<Materialdetail> findAll();
 
@@ -15,4 +15,6 @@ public interface MaterialdetailDAOImp extends CommonDAOImp{
 	public Boolean deleteMaterialdetail(int materialdetailid);
 
 	public Boolean editMaterialdetail(Materialdetail materialdetail);
+	
+	public Boolean checkExistMaterial(int materialid);
 }

@@ -1,11 +1,14 @@
 package com.thecoffeshop.Models;
-// Generated Nov 6, 2018 1:02:23 AM by Hibernate Tools 5.1.7.Final
+// Generated Nov 20, 2018 8:44:18 AM by Hibernate Tools 5.1.7.Final
 
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -23,7 +26,6 @@ public class Image implements java.io.Serializable {
 	private String name;
 	private Set<Employee> employees = new HashSet<Employee>(0);
 	private Set<Product> products = new HashSet<Product>(0);
-	private Set<Material> materials = new HashSet<Material>(0);
 
 	public Image() {
 	}
@@ -32,15 +34,15 @@ public class Image implements java.io.Serializable {
 		this.imageid = imageid;
 	}
 
-	public Image(int imageid, String name, Set<Employee> employees, Set<Product> products, Set<Material> materials) {
+	public Image(int imageid, String name, Set<Employee> employees, Set<Product> products) {
 		this.imageid = imageid;
 		this.name = name;
 		this.employees = employees;
 		this.products = products;
-		this.materials = materials;
 	}
 
 	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
 	@Column(name = "IMAGEID", unique = true, nullable = false)
 	public int getImageid() {
@@ -79,15 +81,6 @@ public class Image implements java.io.Serializable {
 
 	public void setProducts(Set<Product> products) {
 		this.products = products;
-	}
-
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "images")
-	public Set<Material> getMaterials() {
-		return this.materials;
-	}
-
-	public void setMaterials(Set<Material> materials) {
-		this.materials = materials;
 	}
 
 }

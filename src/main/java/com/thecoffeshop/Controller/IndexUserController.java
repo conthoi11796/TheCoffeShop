@@ -102,7 +102,7 @@ public class IndexUserController extends Common {
 		}
 
 		List<Product> products = productService.getListProductLimit(startPosition, cgPrdId, strSearch, isHotDeal,
-				priceAZ, priceZA);
+				priceAZ, priceZA, null);
 
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		/* display price product and sale price and new product release */

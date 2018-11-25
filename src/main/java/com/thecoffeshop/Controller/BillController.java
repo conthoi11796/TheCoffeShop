@@ -55,7 +55,7 @@ public class BillController extends Common {
 		for (Bill bill : bills) {
 			BillDTO billDTO = new BillDTO();
 			billDTO.setBill(bill);
-			billDTO.setTableName(bill.getDinnertable().getName());
+//			billDTO.setTableName(bill.getDinnertable().getName());
 			billDTO.setTotalPrice(billService.getTotalPriceOfBill(bill.getBillid()));
 			billDTO.setBillstatus(bill.getBillstatus());
 
@@ -78,14 +78,11 @@ public class BillController extends Common {
 		Set<Billdetail> billdetails = bill.getBilldetails();
 		for (Billdetail billdetail : billdetails) {
 			billdetail.setIsdelete(IS_DELETE);
-			billdetail.setDeleteat(new Date());
-//			billdetail.setDeleteby(deleteby);
 			billdetailService.editBilldetail(billdetail);
 		}
 
 		bill.setIsdelete(this.IS_DELETE);
-//		bill.setDeleteby(deleteby);
-		bill.setDeleteat(new Date());
+		bill.setUpdateat(new Date());
 		billService.editBill(bill);
 
 		modelMap.addAttribute("result", "Xóa thành công!");
@@ -136,8 +133,7 @@ public class BillController extends Common {
 		}
 
 		billdetail.setIsdelete(this.IS_DELETE);
-//		billdetail.setDeleteby(deleteby);
-		billdetail.setDeleteat(new Date());
+		billdetail.setUpdateat(new Date());
 		billdetailService.editBilldetail(billdetail);
 
 		modelMap.addAttribute("result", "Xóa thành công!");

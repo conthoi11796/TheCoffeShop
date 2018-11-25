@@ -46,4 +46,16 @@ public class SupplierService implements SupplierDAOImp {
 		// TODO Auto-generated method stub
 		return supplierDAO.editSupplier(supplier);
 	}
+
+	@Override
+	public List<Supplier> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return supplierDAO.findLimit(startPosition);
+	}
+
+	@Override
+	public Boolean checkExistByName(String name) {
+		// TODO Auto-generated method stub
+		return supplierDAO.checkExistByName(name);
+	}
 }
