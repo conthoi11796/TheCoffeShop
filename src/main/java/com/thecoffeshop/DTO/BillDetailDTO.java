@@ -1,20 +1,51 @@
 package com.thecoffeshop.DTO;
 
 import com.thecoffeshop.Models.*;
+
 public class BillDetailDTO {
 
-	private Billdetail billdetail; 
-	
+	private int billid;
+
+	private String productid;
+
+	private String name;
+
 	private int singlePrice;
-	
+
 	private int totalPrice;
 
-	public Billdetail getBilldetail() {
-		return billdetail;
+	private int quantity;
+
+	public int getBillid() {
+		return billid;
 	}
 
-	public void setBilldetail(Billdetail billdetail) {
-		this.billdetail = billdetail;
+	public void setBillid(int billid) {
+		this.billid = billid;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public String getProductid() {
+		return productid;
+	}
+
+	public void setProductid(String productid) {
+		this.productid = productid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getSinglePrice() {
@@ -33,7 +64,4 @@ public class BillDetailDTO {
 		this.totalPrice = totalPrice;
 	}
 
-	
-	
-	
 }

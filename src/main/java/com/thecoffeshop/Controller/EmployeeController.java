@@ -45,7 +45,7 @@ public class EmployeeController extends Common {
 		List<Position> positions = positionService.findAll();
 		modelMap.addAttribute("positions", positions);
 
-		return "/admin/management-system/employee";
+		return "/admin/management-employee/employee";
 	}
 
 	@GetMapping(value = "/admin/employee/table")
@@ -57,12 +57,13 @@ public class EmployeeController extends Common {
 		for (Employee employee : employees) {
 			EmployeeDTO employeeDTO = new EmployeeDTO();
 			employeeDTO.setEmployee(employee);
-
+			employeeDTO.setSalary(salaryService.getSalaryByEmployeeid(employee.getEmployeeid()));
+			
 			dtos.add(employeeDTO);
 		}
 		modelMap.addAttribute("dtos", dtos);
 
-		return "/admin/management-system/content/employee/tBody";
+		return "/admin/management-employee/content/employee/tBody";
 	}
 
 	@PostMapping(value = "/admin/employee/insert")
@@ -160,7 +161,7 @@ public class EmployeeController extends Common {
 
 		modelMap.addAttribute("employee", employee);
 
-		return "/admin/management-system/content/employee/form";
+		return "/admin/management-employee/content/employee/form";
 	}
 
 	@PostMapping(value = "/admin/employee/edit")

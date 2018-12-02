@@ -223,7 +223,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Bill> bills = session.createQuery(
-					"FROM Bill b WHERE b.startdatetime = DATE(:date) AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					"FROM Bill b WHERE  DATE(b.startdatetime) = DATE(:date) AND b.billstatus.billstatusid = 'DTT' AND b.isdelete =: isdelete",
 					Bill.class).setParameter("date", date).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 		
 			int total = 0;
@@ -243,7 +243,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Bill> bills = session.createQuery(
-					"FROM Bill b WHERE b.startdatetime = DATE(:date) AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					"FROM Bill b WHERE  DATE(b.startdatetime) = DATE(:date) AND b.billstatus.billstatusid = 'DTT' AND b.isdelete =: isdelete",
 					Bill.class).setParameter("date", date).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return bills.size();
 		} catch (Exception e) {
@@ -258,7 +258,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Bill> bills = session.createQuery(
-					"FROM Bill b WHERE  WEEK(b.enddate) =: tuan AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					"FROM Bill b WHERE  WEEK(b.enddate) =: tuan AND b.billstatus.billstatusid = 'DTT' AND b.isdelete =: isdelete",
 					Bill.class).setParameter("tuan", tuan).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 		
 			int total = 0;
@@ -278,7 +278,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Bill> bills = session.createQuery(
-					"FROM Bill b WHERE  WEEK(b.enddate) =: tuan AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					"FROM Bill b WHERE  WEEK(b.enddate) =: tuan AND b.billstatus.billstatusid = 'DTT' AND b.isdelete =: isdelete",
 					Bill.class).setParameter("tuan", tuan).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return bills.size();
 		} catch (Exception e) {
@@ -293,7 +293,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Bill> bills = session.createQuery(
-					"FROM Bill b WHERE  MONTH(b.enddate) =: thang AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					"FROM Bill b WHERE  MONTH(b.enddate) =: thang AND b.billstatus.billstatusid = 'DTT' AND b.isdelete =: isdelete",
 					Bill.class).setParameter("thang", thang).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			
 			int total = 0;
@@ -313,7 +313,7 @@ public class BillDAO implements BillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Bill> bills = session.createQuery(
-					"FROM Bill b WHERE  MONTH(b.enddate) =: thang AND b.billstatus.billstatusid = 'CTT' AND b.isdelete =: isdelete",
+					"FROM Bill b WHERE  MONTH(b.enddate) =: thang AND b.billstatus.billstatusid = 'DTT' AND b.isdelete =: isdelete",
 					Bill.class).setParameter("thang", thang).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			return bills.size();
 		} catch (Exception e) {

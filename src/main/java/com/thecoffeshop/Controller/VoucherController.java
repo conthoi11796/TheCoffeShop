@@ -65,10 +65,10 @@ public class VoucherController extends Common {
 	@PostMapping(value = "/admin/voucher/insert")
 	public String insert(ModelMap modelMap, HttpSession httpSession, @RequestParam String name,
 			@RequestParam String startdatetime, @RequestParam String enddate, @RequestParam String number,
-			@RequestParam String saleof) throws ParseException {
+			@RequestParam String discount) throws ParseException {
 		
 		/* check */
-		List<String> results = checkForm(name, startdatetime, enddate, number, saleof);
+		List<String> results = checkForm(name, startdatetime, enddate, number, discount);
 		if (results.size() > 0) {
 			modelMap.addAttribute("results", results);
 			return "/admin/public/Danger";// đã tồn tại
@@ -87,7 +87,7 @@ public class VoucherController extends Common {
 		voucher.setEnddate(super.sdfDateField.parse(enddate));
 		voucher.setNumber(Integer.valueOf(number));
 		voucher.setCount(Integer.valueOf(number));
-		voucher.setSaleoff(Integer.valueOf(saleof));
+		voucher.setDiscount(Float.valueOf(discount));
 		voucher.setUpdateat(new Date());
 		voucher.setIsdelete(super.IS_NOT_DELETE);
 		voucherService.addVoucher(voucher);
@@ -135,10 +135,10 @@ public class VoucherController extends Common {
 	@PostMapping(value = "/admin/voucher/edit")
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String voucherid,
 			@RequestParam String name, @RequestParam String startdatetime, @RequestParam String enddate,
-			@RequestParam String number, @RequestParam String saleof) throws ParseException {
+			@RequestParam String number, @RequestParam String discount) throws ParseException {
 
 		/* check */
-		List<String> results = checkForm(name, startdatetime, enddate, number, saleof);
+		List<String> results = checkForm(name, startdatetime, enddate, number, discount);
 		if (results.size() > 0) {
 			modelMap.addAttribute("results", results);
 			return "/admin/public/Danger";// đã tồn tại
@@ -159,7 +159,7 @@ public class VoucherController extends Common {
 		if (voucher.getStartdatetime().after(new Date())) {
 			voucher.setEnddate(super.sdfDateField.parse(enddate));
 			voucher.setNumber(Integer.valueOf(number));
-			voucher.setSaleoff(Integer.valueOf(saleof));
+			voucher.setDiscount(Float.valueOf(discount));
 		}
 		/*
 		 * start rồi: không cho sửa saleof, không cho sửa ngày start, nếu số voucher nhỏ
@@ -179,7 +179,7 @@ public class VoucherController extends Common {
 		return "/admin/public/Success";
 	}
 
-	public List<String> checkForm(String name, String startdatetime, String enddate, String number, String saleof) {
+	public List<String> checkForm(String name, String startdatetime, String enddate, String number, String discount) {
 		List<String> results = new ArrayList<String>();
 		if (name.trim().length() <= 0 || name.trim().length() > 255) {
 			results.add("Tên không thể để trống và tối đa 255 ký tự!");
@@ -193,7 +193,8 @@ public class VoucherController extends Common {
 		if (number.trim().length() <= 0) {
 			results.add("Số voucher không thể để trống!");
 		}
-		if (saleof.trim().length() <= 0 || Integer.valueOf(saleof.trim()) > 0) {
+		float temp = 0.0f;
+		if (discount.trim().length() <= 0 /*|| Float.valueOf(discount) > temp*/) {
 			results.add("Giảm giá không thể để trống và phải lớn hơn 0!");
 		}
 		return results;

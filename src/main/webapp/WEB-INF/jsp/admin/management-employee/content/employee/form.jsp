@@ -21,12 +21,12 @@
 	<div class="row">
 		<div class="form-radio form-radio-flat">
 			<label class="form-check-label"> <input type="radio"
-				class="form-check-input" name="sex" id="sex" value="Male"
-				checked=""> Nam <i class="input-helper"></i></label>
+				class="form-check-input sex" name="sex"  value="Male"
+				checked="checked"> Nam <i class="input-helper"></i></label>
 		</div>
 		<div class="form-radio form-radio-flat">
 			<label class="form-check-label"> <input type="radio"
-				class="form-check-input" name="sex" id="sex" value="FeMale">
+				class="form-check-input sex" name="sex"  value="FeMale">
 				Nữ <i class="input-helper"></i></label>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 <div class="form-group row">
 	<label for="salaryonhour" class="  col-form-label">Lương /
 		giờ(*)</label> <input id="salaryonhour" type="number"
-		value='<c:out value="${ employee.getSalary().getSalaryonhour()}" />'
+		value='<c:out value="${ dto.getSalary()}" />'
 		class="form-control" placeholder="Lương / giờ" />
 
 

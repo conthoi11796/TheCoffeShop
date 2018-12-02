@@ -24,6 +24,8 @@ public class BilldetailDAO implements BilldetailDAOImp {
 	private PriceService priceService;
 	@Autowired
 	private BillService billService;
+	@Autowired
+	private VoucherDAO voucherDAO;
 
 	@Override
 	public Boolean addBilldetail(Billdetail billdetail) {
@@ -59,10 +61,8 @@ public class BilldetailDAO implements BilldetailDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Billdetail billdetail = session
-					.createQuery("FROM Billdetail b WHERE b.id =:id AND b.isdelete =: isdelete",
-							Billdetail.class)
-					.setParameter("id", billdetailId).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getSingleResult();
+					.createQuery("FROM Billdetail b WHERE b.id =:id AND b.isdelete =: isdelete", Billdetail.class)
+					.setParameter("id", billdetailId).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return billdetail;
 		} catch (Exception e) {
 			return null;

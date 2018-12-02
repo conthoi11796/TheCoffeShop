@@ -13,7 +13,7 @@
 				<c:set var="background" scope="session"
 					value="social-card w-100 free-table-status" />
 				<c:set var="icon" scope="session" value="icon-status-table-ghetrong" />
-			<%-- <c:if
+			<c:if
 				test="${dto.getDinnertable().getTablestatus().getTablestatusid() == 1}">
 				<c:set var="background" scope="session"
 					value="social-card w-100 none-table-status" />
@@ -55,9 +55,10 @@
 				<c:set var="background" scope="session"
 					value="social-card w-100 full-table-status" />
 				<c:set var="icon" scope="session" value="icon-status-table-dangan" />
-			</c:if> --%>
+			</c:if> 
 
-			<div class="col-lg-3 grid-margin stretch-card" data-dinnertableid='<c:out value="${dto.getDinnertable().getDinnertableid() }"></c:out>'>
+			<div id='<c:out value="${dto.getDinnertable().getDinnertableid() }"></c:out>'
+			 class="col-lg-3 grid-margin stretch-card" data-dinnertableid='<c:out value="${dto.getDinnertable().getDinnertableid() }"></c:out>'>
 				<!-- data-toggle="modal" data-target="#exampleModal" -->
 				<div class='<c:out value="${background}"></c:out>'>
 					<div class="badge badge-pill badge-primary number-table" style="">
@@ -68,7 +69,7 @@
 					</div>
 					<div class="content">
 						<p></p>
-						<p id='<c:out value="${dto.getDinnertable().getDinnertableid() }"></c:out>'>
+						<p>
 							<c:out
 								value="${dto.getDinnertable().getTablestatus().getName() }"></c:out>
 						</p>
@@ -95,6 +96,7 @@
 				<button id="close-modal" type="button" class="close">
 					<span aria-hidden="true">&times;</span>
 				</button>
+				
 			</div>
 			<div class="modal-body">
 				

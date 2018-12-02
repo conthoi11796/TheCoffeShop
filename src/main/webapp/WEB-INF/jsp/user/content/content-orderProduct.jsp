@@ -25,7 +25,7 @@
 									<td class="py-1"><img
 										src="../resouces/images/my-images/<c:out value="${productDTO.getImages().get(0).getName() }"></c:out>"
 										alt="image"> <c:out
-											value="${productDTO.getProduct().getName() }"></c:out></td>
+											value="${productDTO.getName() }"></c:out></td>
 									<td><input type="number"
 										value="<c:out value='${productDTO.getNumber() }'></c:out>" />
 									</td>

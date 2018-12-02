@@ -105,14 +105,20 @@ public class BillController extends Common {
 		for (Billdetail billdetail : billdetails) {
 			String productId = billdetail.getProduct().getProductid();
 
-			BillDetailDTO billDetailDTO = new BillDetailDTO();
-			billDetailDTO.setBilldetail(billdetail);
-			billDetailDTO.setSinglePrice(billdetailService.getSinglePriceOfBillDetail(productId, startdatetime));
+			BillDetailDTO dto = new BillDetailDTO();
+			dto.setBillid(Integer.valueOf(billid.trim()));
+			dto.setProductid(productId);
+			dto.setName(billdetail.getProduct().getName());
 
-			billDetailDTO.setTotalPrice(billdetailService
-					.getPriceOfBillDetail(new BilldetailId(productId, Integer.valueOf(billid.trim()))));
+			int quantity = billdetail.getQuantity();
+			int SinglePrice = billdetailService.getSinglePriceOfBillDetail(productId, startdatetime);
+			BilldetailId id = new BilldetailId(productId, Integer.valueOf(billid.trim()));
+			int TotalPrice = billdetailService.getPriceOfBillDetail(id);
+			dto.setQuantity(quantity);
+			dto.setSinglePrice(SinglePrice);
+			dto.setTotalPrice(TotalPrice);
 
-			dtos.add(billDetailDTO);
+			dtos.add(dto);
 		}
 
 		modelMap.addAttribute("dtos", dtos);
@@ -167,7 +173,7 @@ public class BillController extends Common {
 			return "/admin/public/Danger";
 		}
 		/* check[END] */
-		
+
 		Billdetail billdetail = billdetailService
 				.getInfoBilldetailByBilldetailId(new BilldetailId(productid.trim(), Integer.valueOf(billid.trim())));
 
@@ -175,7 +181,7 @@ public class BillController extends Common {
 			modelMap.addAttribute("results", "Chi tiết hóa đơn không tồn tại!");
 			return "/admin/public/Danger";
 		}
-		
+
 		billdetail.setQuantity(Integer.valueOf(quantity.trim()));
 
 		billdetailService.editBilldetail(billdetail);
@@ -183,7 +189,7 @@ public class BillController extends Common {
 		modelMap.addAttribute("result", "Cập nhật thành công!");
 		return "/admin/public/Success";
 	}
-	
+
 	public List<String> checkForm(String quantity) {
 		List<String> results = new ArrayList<String>();
 		if (quantity.trim().length() == 0 || Integer.valueOf(quantity.trim()) <= 0) {

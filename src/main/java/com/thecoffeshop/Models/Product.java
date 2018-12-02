@@ -28,7 +28,6 @@ public class Product implements java.io.Serializable {
 	private Categoryproduct categoryproduct;
 	private String name;
 	private String description;
-	private String numberinventory;
 	private Date updateat;
 	private Boolean isdelete;
 	private Set<Billdetail> billdetails = new HashSet<Billdetail>(0);
@@ -44,13 +43,12 @@ public class Product implements java.io.Serializable {
 	}
 
 	public Product(String productid, Categoryproduct categoryproduct, String name, String description,
-			String numberinventory, Date updateat, Boolean isdelete, Set<Billdetail> billdetails, Set<Image> images,
+			 Date updateat, Boolean isdelete, Set<Billdetail> billdetails, Set<Image> images,
 			Set<Exportbill> exportbills, Set<Price> prices) {
 		this.productid = productid;
 		this.categoryproduct = categoryproduct;
 		this.name = name;
 		this.description = description;
-		this.numberinventory = numberinventory;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
 		this.billdetails = billdetails;
@@ -96,15 +94,6 @@ public class Product implements java.io.Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@Column(name = "NUMBERINVENTORY", length = 10)
-	public String getNumberinventory() {
-		return this.numberinventory;
-	}
-
-	public void setNumberinventory(String numberinventory) {
-		this.numberinventory = numberinventory;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

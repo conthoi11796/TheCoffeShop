@@ -53,17 +53,20 @@ public class ProductController extends Common {
 		List<ProductDTO> dtos = new ArrayList<ProductDTO>();
 		for (Product product : products) {
 
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setCanDelete(true);
+			ProductDTO dto = new ProductDTO();
+			dto.setCanDelete(true);
 			if (product.getBilldetails().size() > 0) {
-				productDTO.setCanDelete(false);
+				dto.setCanDelete(false);
 			}
 			if (product.getExportbills().size() > 0) {
-				productDTO.setCanDelete(false);
+				dto.setCanDelete(false);
 			}
-			productDTO.setProduct(product);
+			dto.setProductid(product.getProductid());
+			dto.setName(product.getName());
+			dto.setCategoryproductNAME(product.getCategoryproduct().getName());
+			dto.setUpdateat(product.getUpdateat());
 
-			dtos.add(productDTO);
+			dtos.add(dto);
 		}
 
 		modelMap.addAttribute("dtos", dtos);

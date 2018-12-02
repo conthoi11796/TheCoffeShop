@@ -58,26 +58,26 @@
 							alt="First slide">
 						<figcaption style="text-align: center;">
 							<h4>
-								<c:out value="${dto.getProduct().getName()}" />
+								<c:out value="${dto.getName()}" />
 							</h4>
 							<h7>Tồn kho:
 							<h5 class="badge badge-warning"
-								id='quantity-<c:out value="${dto.getProduct().getProductid()}" />'>
-								<c:out value="${dto.getQuantity()}" />
+								id='quantity-<c:out value="${dto.getProductid()}" />'>
+								<c:out value="${dto.getQuantityInventory()}" />
 							</h5>
 							</h7>
 							<p>
 								Bỏ đi: <input
-									id='<c:out value="${dto.getProduct().getProductid()}" />'
+									id='<c:out value="${dto.getProductid()}" />'
 									type="number" class="col-md-4" value="0"> <i
-									data-productId='<c:out value="${dto.getProduct().getProductid()}" />'
+									data-productId='<c:out value="${dto.getProductid()}" />'
 									style="font-size: 20px; color: red;"
 									class="fa fa-trash-o btnUpdate" title="Vứt bỏ"></i>
 							</p>
 						</figcaption>
 					</figure>
 					<button
-						id='<c:out value="result-${dto.getProduct().getProductid()}" />'
+						id='<c:out value="result-${dto.getProductid()}" />'
 						class="delete"
 						style="background-color: #33c92e; height: 25px; width: 25px;">
 						<i style="font-size: 25px" class="fa fa-check-square-o"></i>

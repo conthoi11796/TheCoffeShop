@@ -200,8 +200,7 @@ public class ManagementImportController extends Common {
 
 		return "/admin/management-warehouse/content/import-material/form";
 	}
-
-	@PostMapping(value = "/admin//warehouse-import-material/edit")
+	@PostMapping(value = "/admin/warehouse-import-material/edit")
 	public String edit(ModelMap modelMap, HttpSession httpSession, @RequestParam String importbillid,
 			@RequestParam String listMaterialDetail) throws ParseException {
 
@@ -272,7 +271,7 @@ public class ManagementImportController extends Common {
 		return "/admin/public/Success"; // thành công
 	}
 
-	public List<String> checkForm(int materialid, int quantity, String dateofmanufacture, String expirationdate, int price) {
+	public List<String> checkForm(int materialid, int quantity, String dateofmanufacture, String expirationdate, int price) throws ParseException {
 		List<String> results = new ArrayList<String>();
 
 		if (materialid == -1) {
@@ -292,6 +291,11 @@ public class ManagementImportController extends Common {
 		}
 		if (expirationdate.length() <= 0) {
 			results.add("Ngày hết hạn không được để trống!");
+		}
+		Date SX = super.sdfDateField.parse(dateofmanufacture);
+		Date HH = super.sdfDateField.parse(expirationdate);
+		if(!SX.before(HH)) {
+			results.add("Ngày hết hạn phải lớn hơn ngày sản xuất!");
 		}
 		return results;
 	}

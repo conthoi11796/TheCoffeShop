@@ -16,16 +16,16 @@
 		<tr>
 			<td><label
 				data-billId='<c:out value="${dto.getBilldetail().getId().getBillid()}" />'
-				data-productId='<c:out value="${dto.getBilldetail().getId().getProductid()}" />'
+				data-productId='<c:out value="${dto.getProductid()}" />'
 				class="badge badge-info edit-billDetail"><i
 					class="fa fa-wrench"></i></label> <label
 				data-billId='<c:out value="${dto.getBilldetail().getId().getBillid()}" />'
-				data-productId='<c:out value="${dto.getBilldetail().getProduct().getProductid()}" />'
+				data-productId='<c:out value="${dto.getProductid()}" />'
 				class="badge badge-danger remove-billDetail"><i
 					class="fa fa-times"></i></label></td>
-			<td><c:out value="${dto.getBilldetail().getProduct().getName()}" /></td>
+			<td><c:out value="${dto.getName()}" /></td>
 			<td class="text-danger"><c:out
-					value="${dto.getBilldetail().getQuantity()}" /></td>
+					value="${dto.getQuantity()}" /></td>
 			<td><c:out value="${dto.getSinglePrice()}" /></td>
 			<td><c:out value="${dto.getTotalPrice()}" /></td>
 		</tr>

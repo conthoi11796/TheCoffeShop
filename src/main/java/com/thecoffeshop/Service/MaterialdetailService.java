@@ -52,4 +52,22 @@ public class MaterialdetailService implements MaterialdetailDAOImp {
 		// TODO Auto-generated method stub
 		return materialdetailDAO.checkExistMaterial(materialid);
 	}
+
+	@Override
+	public List<Materialdetail> layNguyenLieuTonKho(int materialid) {
+		// TODO Auto-generated method stub
+		return materialdetailDAO.layNguyenLieuTonKho(materialid);
+	}
+
+	@Override
+	public int laySoNguyenLieuTonKho(int materialid) {
+		// TODO Auto-generated method stub
+		return materialdetailDAO.laySoNguyenLieuTonKho(materialid);
+	}
+
+	@Override
+	public List<Materialdetail> search(String materialdetailid, String name) {
+		// TODO Auto-generated method stub
+		return materialdetailDAO.search(materialdetailid, name);
+	}
 }

@@ -1,15 +1,20 @@
 package com.thecoffeshop.DTO;
 
+import java.util.Date;
 import java.util.List;
 
 import com.thecoffeshop.Models.*;
 
 public class TableStatusDTO {
 
-	private Tablestatus tablestatus;
+	private int tablestatusid;
+	
+	private String name;
+	
+	private Date updateat;
 
 	private Boolean canDelete;
-	
+
 	public Boolean getCanDelete() {
 		return canDelete;
 	}
@@ -18,11 +23,27 @@ public class TableStatusDTO {
 		this.canDelete = canDelete;
 	}
 
-	public Tablestatus getTablestatus() {
-		return tablestatus;
+	public int getTablestatusid() {
+		return tablestatusid;
 	}
 
-	public void setTablestatus(Tablestatus tablestatus) {
-		this.tablestatus = tablestatus;
+	public void setTablestatusid(int tablestatusid) {
+		this.tablestatusid = tablestatusid;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getUpdateat() {
+		return updateat;
+	}
+
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	} 
 }

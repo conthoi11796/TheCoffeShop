@@ -220,7 +220,7 @@
 											class="menu-title">Thức ăn- Đồ uống tồn kho</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="/admin/warehouse/material"> <span
+										href="/admin/warehouse-material"> <span
 											class="menu-title">Nguyên liệu tồn kho</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
@@ -228,7 +228,7 @@
 											class="menu-title">Phiếu nhập nguyên liệu</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
-										href="pages/tables/basic-table.html"> <span
+										href="/admin/warehouse-export-material"> <span
 											class="menu-title">Phiếu xuất nguyên liệu</span>
 									</a></li>
 									<li class="nav-item"><a class="nav-link"
@@ -247,12 +247,14 @@
 									<li class="nav-item"><a href="/admin/employee"
 										class="nav-link"> <span class="menu-title">Nhân
 												viên</span>
+									</a>
+									</li>
+									<li class="nav-item"><a href="/admin/register-schedule"
+										class="nav-link"> <span class="menu-title">Đăng ký ca làm</span>
 									</a></li>
-									<li class="nav-item"><a href="/admin/employee"
+									</li>
+									<li class="nav-item"><a href="/admin/accept-register"
 										class="nav-link"> <span class="menu-title">Duyệt ca làm</span>
-									</a></li>
-									<li class="nav-item"><a href="/admin/employee"
-										class="nav-link"> <span class="menu-title">Thống kê lương</span>
 									</a></li>
 								</ul>
 							</div></li>

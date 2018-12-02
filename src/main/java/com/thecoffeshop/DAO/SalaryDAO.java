@@ -34,8 +34,7 @@ public class SalaryDAO implements SalaryDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			Salary salary = session
-					.createQuery("FROM Salary s WHERE s.dinnertableid = :dinnertableid and s.isdelete =: isdelete",
-							Salary.class)
+					.createQuery("FROM Salary s WHERE s.employee = :employee and s.isdelete =: isdelete ", Salary.class)
 					.setParameter("dinnertableid", dinnertableid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getSingleResult();
 			return salary;
@@ -46,11 +45,10 @@ public class SalaryDAO implements SalaryDAOImp {
 	}
 
 	@Override
-	public Boolean deleteSalary(int dinnertableid) {
+	public Boolean deleteSalary(Salary salary) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			Salary salary = this.getInfoById(dinnertableid);
 			session.remove(salary);
 			return true;
 		} catch (Exception e) {
@@ -72,14 +70,13 @@ public class SalaryDAO implements SalaryDAOImp {
 
 	@Override
 	public int getSalaryByEmployeeid(String employeeid) {
-		
+
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			Salary salary = session
-					.createQuery("FROM Salary s WHERE s.employees = :employees AND s.isdelete =: isdelete ORDER BY s.createat DESC",
-							Salary.class)
-					.setParameter("employees", new Employee(employeeid)).setParameter("isdelete", this.IS_NOT_DELETE)
-					.getSingleResult();
+			Salary salary = session.createQuery(
+					"FROM Salary s WHERE s.employee = :employee AND s.startdate <= now() AND s.enddate is null AND s.isdelete =: isdelete ORDER BY s.startdate DESC",
+					Salary.class).setParameter("employee", new Employee(employeeid))
+					.setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
 			return salary.getSalaryonhour();
 		} catch (Exception e) {
 

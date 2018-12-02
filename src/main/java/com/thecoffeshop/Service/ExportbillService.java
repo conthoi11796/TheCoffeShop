@@ -18,7 +18,7 @@ public class ExportbillService implements ExportbillDAOImp {
 	ExportbillDAO exportbillDAO;
 
 	@Override
-	public Boolean addExportbill(Exportbill exportbill) {
+	public int addExportbill(Exportbill exportbill) {
 		// TODO Auto-generated method stub
 		return exportbillDAO.addExportbill(exportbill);
 	}
@@ -27,6 +27,12 @@ public class ExportbillService implements ExportbillDAOImp {
 	public List<Exportbill> findAll() {
 		// TODO Auto-generated method stub
 		return exportbillDAO.findAll();
+	}
+	
+	@Override
+	public List<Exportbill> findLimit(int startPosition) {
+		// TODO Auto-generated method stub
+		return exportbillDAO.findLimit(startPosition);
 	}
 
 	@Override

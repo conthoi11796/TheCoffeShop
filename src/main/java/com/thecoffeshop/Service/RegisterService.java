@@ -1,5 +1,6 @@
 package com.thecoffeshop.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,21 +25,21 @@ public class RegisterService implements RegisterDAOImp {
 	}
 
 	@Override
-	public Register getInfoById(RegisterId registerId) {
+	public Register getInfoById(int registerid) {
 		// TODO Auto-generated method stub
-		return registerDAO.getInfoById(registerId);
+		return registerDAO.getInfoById(registerid);
 	}
 
 	@Override
-	public List<Register> getListRegisterOnWeek(int moth) {
+	public List<Register> getListRegisterOnWeek(Date from, Date to) {
 		// TODO Auto-generated method stub
-		return registerDAO.getListRegisterOnWeek(moth);
+		return registerDAO.getListRegisterOnWeek(from, to);
 	}
 
 	@Override
-	public Boolean deleteRegister(RegisterId registerId) {
+	public Boolean deleteRegister(Register register) {
 		// TODO Auto-generated method stub
-		return registerDAO.deleteRegister(registerId);
+		return registerDAO.deleteRegister(register);
 	}
 
 	@Override
@@ -51,5 +52,11 @@ public class RegisterService implements RegisterDAOImp {
 	public Boolean checkExistSchedule(String scheduleid) {
 		// TODO Auto-generated method stub
 		return registerDAO.checkExistSchedule(scheduleid);
+	}
+
+	@Override
+	public List<Register> listByDateScheduleid(Date date, String scheduleid) {
+		// TODO Auto-generated method stub
+		return registerDAO.listByDateScheduleid(date, scheduleid);
 	}
 }

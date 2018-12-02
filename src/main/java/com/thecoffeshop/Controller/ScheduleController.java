@@ -45,7 +45,12 @@ public class ScheduleController extends Common {
 		List<ScheduleDTO> dtos = new ArrayList<ScheduleDTO>();
 		for (Schedule schedule : schedules) {
 			ScheduleDTO scheduleDTO = new ScheduleDTO();
-			scheduleDTO.setSchedule(schedule);
+			
+			scheduleDTO.setScheduleid(schedule.getScheduleid());
+			scheduleDTO.setStarttime(schedule.getStarttime().toString());
+			scheduleDTO.setEndtime(schedule.getEndtime().toString());
+			scheduleDTO.setPayrate(schedule.getPayrate());
+			scheduleDTO.setUpdateat(schedule.getUpdateat());
 
 			dtos.add(scheduleDTO);
 		}

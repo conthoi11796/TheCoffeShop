@@ -36,20 +36,23 @@ public class ManagementProductController {
 
 		List<ProductDTO> dtos = new ArrayList<ProductDTO>();
 		for (Product product : products) {
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setProduct(product);
+			ProductDTO dto = new ProductDTO();
+			dto.setProductid(product.getProductid());
+			dto.setName(product.getName());
+			dto.setCategoryproductNAME(product.getCategoryproduct().getName());
+			dto.setUpdateat(product.getUpdateat());
 
 			Set<Image> setImages = product.getImages();
 			List<Image> images = new ArrayList<Image>();
 			for (Image image : setImages) {
 				images.add(image);
-				productDTO.setImages(images);
+				dto.setImages(images);
 				break;
 			}
 
-			productDTO.setQuantity(exportbillService.totalQuantityProduct(product.getProductid()));
+			dto.setQuantityInventory(exportbillService.totalQuantityProduct(product.getProductid()));
 
-			dtos.add(productDTO);
+			dtos.add(dto);
 		}
 
 		modelMap.addAttribute("dtos", dtos);
@@ -57,7 +60,7 @@ public class ManagementProductController {
 		return "/admin/management-warehouse/product";
 	}
 
-	@PostMapping(value = "/admin/warehouse-product")
+	@PostMapping(value = "/admin/warehouse-product")//Tìm kiếm
 	public String search(ModelMap modelMap, @RequestParam String categoryproductid, @RequestParam String productid,
 			@RequestParam String name) {
 
@@ -72,24 +75,28 @@ public class ManagementProductController {
 		}
 		List<Categoryproduct> categoryProducts = categoryProductService.findAll();
 		modelMap.addAttribute("categoryProducts", categoryProducts);
-		List<Product> products = productService.getListProductLimit(0, categoryproductid, name, null, null, null, productid);
+		List<Product> products = productService.getListProductLimit(0, categoryproductid, name, null, null, null,
+				productid);
 
 		List<ProductDTO> dtos = new ArrayList<ProductDTO>();
 		for (Product product : products) {
-			ProductDTO productDTO = new ProductDTO();
-			productDTO.setProduct(product);
+			ProductDTO dto = new ProductDTO();
+			dto.setProductid(product.getProductid());
+			dto.setName(product.getName());
+			dto.setCategoryproductNAME(product.getCategoryproduct().getName());
+			dto.setUpdateat(product.getUpdateat());
 
 			Set<Image> setImages = product.getImages();
 			List<Image> images = new ArrayList<Image>();
 			for (Image image : setImages) {
 				images.add(image);
-				productDTO.setImages(images);
+				dto.setImages(images);
 				break;
 			}
 
-			productDTO.setQuantity(exportbillService.totalQuantityProduct(product.getProductid()));
+			dto.setQuantityInventory(exportbillService.totalQuantityProduct(product.getProductid()));
 
-			dtos.add(productDTO);
+			dtos.add(dto);
 		}
 
 		modelMap.addAttribute("dtos", dtos);
@@ -97,7 +104,7 @@ public class ManagementProductController {
 		return "/admin/management-warehouse/content/product/content";
 	}
 
-	@PostMapping(value = "/admin/warehouse-product/update")
+	@PostMapping(value = "/admin/warehouse-product/update")//Vứt bỏ sản phẩm
 	public @ResponseBody String updateQuantity(ModelMap modelMap, @RequestParam String productid,
 			@RequestParam String quantity) {
 
@@ -118,15 +125,17 @@ public class ManagementProductController {
 		for (Exportbill exportbill : exportbills) {
 
 			// số nhập nhỏ hơn số lượng đang có
-			if ((exportbill.getQuantity() - intQuality) >= 0) {
-				exportbill.setQuantity(exportbill.getQuantity() - intQuality);
+			if ((exportbill.getQuantityInventory() - intQuality) >= 0) {
+				exportbill.setQuantityInventory(exportbill.getQuantityInventory() - intQuality);
+				exportbill.setQuantityThrow(exportbill.getQuantityThrow() + intQuality);
 				exportbillService.editExportbill(exportbill);
 			}
 			// số nhập lớn hơn số lượng đang có
-			if ((exportbill.getQuantity() - intQuality) < 0) {
-				exportbill.setQuantity(0);
+			if ((exportbill.getQuantityInventory() - intQuality) < 0) {
+				intQuality = intQuality - exportbill.getQuantityInventory();
+				exportbill.setQuantityInventory(0);
+				exportbill.setQuantityThrow(exportbill.getQuantityThrow() + exportbill.getQuantityInventory());
 				exportbillService.editExportbill(exportbill);
-				intQuality = intQuality - exportbill.getQuantity();
 			}
 		}
 

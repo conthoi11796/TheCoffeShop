@@ -12,6 +12,7 @@ $(".stretch-card").click(function() {
 });
 
 $("#close-modal").click(function() {
+	$('.modal-body').html('');
 	 $('#exampleModal').modal('hide');
 });
 

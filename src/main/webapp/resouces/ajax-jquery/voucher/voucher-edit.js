@@ -8,7 +8,7 @@
             startdatetime : $("#startdatetime").val(),
             enddate : $("#enddate").val(),
             number : $("#number").val(),
-            saleof : $("#saleof").val()
+            discount : $("#discount").val()
          }, function(data, status){
              $("#result-form").html(data);
  			$("#result-form").fadeToggle(3000);

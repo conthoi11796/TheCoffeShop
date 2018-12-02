@@ -20,6 +20,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.google.gson.JsonObject;
 import com.thecoffeshop.DTO.*;
 
 @Controller
@@ -67,20 +69,22 @@ public class UserOrderProductController extends Common {
 			Product product = productService.getInfoById(productid);
 			if (product != null) {
 				try {
-					ProductDTO productDTO = new ProductDTO();
-					productDTO.setProduct(product);
+					ProductDTO dto = new ProductDTO();
+					dto.setProductid(product.getProductid());
+					dto.setName(product.getName());
+					dto.setCategoryproductNAME(product.getCategoryproduct().getName());
+					dto.setUpdateat(product.getUpdateat());
 					List<Image> images = new ArrayList<Image>();
 					if (product.getImages().size() > 0) {
 						Set<Image> setImages = product.getImages();
 						for (Image image : setImages) {
 							images.add(image);
 						}
-						productDTO.setImages(images);
+						dto.setImages(images);
 					}
-					productDTO.setNumber(listNumber.get(i));
-					productDTO.setPrice(priceService.getOldPrice(product.getProductid()));
-
-					productDTOs.add(productDTO);
+					dto.setNumber(listNumber.get(i));
+					dto.setPrice(priceService.getOldPrice(product.getProductid()));
+					productDTOs.add(dto);
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
@@ -92,6 +96,28 @@ public class UserOrderProductController extends Common {
 
 		return "/user/orderProduct";
 	}
+
+//	@PostMapping(value = "")
+//	public String checkVoucher(@RequestParam String voucherName) {
+//
+//		JsonObject result = new JsonObject();
+//
+//		Voucher voucher = voucherService.findByName(voucherName);
+//		if (voucher == null) {
+//			result.addProperty("mes", "Voucher không tồn tại!");
+//			return result.toString();
+//		}
+//		Date now = new Date();
+//		// voucher hết hạn hoặc chưa áp dụng HOẶC đã sử dụng hết
+//		if ((now.before(voucher.getStartdatetime()) && now.after(voucher.getEnddate())) || voucher.getCount() <= 0) {
+//			result.addProperty("mes", "Voucher hết hạn hoặc đã sử dụng hết!");
+//			return result.toString();
+//		}
+//		
+//		result.addProperty("discount", voucher.getDiscount());
+//
+//		return result.toString();
+//	}
 
 	@PostMapping(value = "/pay-cart", produces = "application/x-www-form-urlencoded;charset=UTF-8")
 	public String orderProduct(ModelMap modelMap, HttpSession httpSession, @RequestParam String name,
@@ -116,7 +142,7 @@ public class UserOrderProductController extends Common {
 			}
 			bill.setStartdatetime(DatetimeStart);
 			bill.setNotice(notice);
-			bill.setBillstatus(new Billstatus("1"));
+			bill.setBillstatus(new Billstatus("CD"));
 			if (voucherName != null && voucherService.checkVoucher(voucherName.trim())) {
 				Voucher voucher = voucherService.findByName(voucherName);
 				bill.setVoucher(voucher);
@@ -131,7 +157,7 @@ public class UserOrderProductController extends Common {
 				int i = 0;
 				for (String productid : listProductId) {
 
-					if (productService.getInfoById(productid) != null) {//product is exist
+					if (productService.getInfoById(productid) != null) {// product is exist
 						Billdetail billdetail = new Billdetail();
 
 						BilldetailId billdetailId = new BilldetailId(productid, billid);
@@ -141,7 +167,7 @@ public class UserOrderProductController extends Common {
 						billdetail.setQuantity(listNumber.get(i));
 						billdetail.setIsdelete(super.IS_NOT_DELETE);
 						billdetail.setUpdateat(new Date());
-						
+
 						billdetailService.addBilldetail(billdetail);
 					}
 					i++;

@@ -3,11 +3,10 @@ $(function() {
 	var link = "/admin/employee/table";
 
 	$("#btnSave").click(function() {
-
 		$.post("/admin/employee/insert", {
 			employeeid : $("#employeeid").val(),
 			name : $("#name").val(),
-			sex : $("#sex").val(),
+			sex : $('input[name="sex"]:checked').val(),
 			phone : $("#phone").val(),
 			address : $("#address").val(),
 			usename : $("#usename").val(),

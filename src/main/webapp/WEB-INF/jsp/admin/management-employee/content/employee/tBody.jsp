@@ -18,7 +18,7 @@
 		<td><c:out value="${dto.getEmployee().getPhone()}" /></td>
 		<td><c:out value="${dto.getEmployee().getAddress()}" /></td>
 		<td><c:out
-				value="${dto.getEmployee().getSalary().getSalaryonhour()}" /></td>
+				value="${dto.getSalary()}" /></td>
 		<td class="text-danger"><c:out
 				value="${dto.getEmployee().getUpdateat()}" /></td>
 	</tr>

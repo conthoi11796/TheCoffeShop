@@ -12,17 +12,17 @@
 				<div class="product">
 					<div class="product_img">
 						<div
-							id="<c:out value="${productDTO.getProduct().getProductid()}" />"
+							id="<c:out value="${productDTO.getProductid()}" />"
 							class="carousel slide product_img" data-ride="carousel">
 							<ol class="carousel-indicators">
 								<i class="fa fa-circle active"
-									data-target="#<c:out value="${product.getPId()}" />"
+									data-target="#<c:out value="${productDTO.getProductid()}" />"
 									data-slide-to="0"></i>
 								<i class="fa fa-circle"
-									data-target="#<c:out value="${product.getPId()}" />"
+									data-target="#<c:out value="${productDTO.getProductid()}" />"
 									data-slide-to="1"></i>
 								<i class="fa fa-circle"
-									data-target="#<c:out value="${product.getPId()}" />"
+									data-target="#<c:out value="${productDTO.getProductid()}" />"
 									data-slide-to="2"></i>
 							</ol>
 							<div class="carousel-inner ">
@@ -45,7 +45,7 @@
 										</c:if>
 									">
 										<img
-											class="d-block w-100 col-lg-12 img-<c:if test="${i == 1}"><c:out value="${productDTO.getProduct().getProductid()}" /></c:if>"
+											class="d-block w-100 col-lg-12 img-<c:if test="${i == 1}"><c:out value="${productDTO.getProductid()}" /></c:if>"
 											src='../resouces/images/my-images/<c:out value="${image.getName()}" />'
 											alt='<c:out value="${alt}" />'>
 									</div>
@@ -55,12 +55,12 @@
 
 							</div>
 							<a class="carousel-control-prev"
-								href="#<c:out value="${productDTO.getProduct().getProductid()}" />"
+								href="#<c:out value="${productDTO.getProductid()}" />"
 								role="button" data-slide="prev"> <span
 								class="carousel-control-prev-icon" aria-hidden="true"></span> <span
 								class="sr-only">Previous</span>
 							</a> <a class="carousel-control-next"
-								href="#<c:out value="${productDTO.getProduct().getProductid()}" />"
+								href="#<c:out value="${productDTO.getProductid()}" />"
 								role="button" data-slide="next"> <span
 								class="carousel-control-next-icon" aria-hidden="true"></span> <span
 								class="sr-only">Next</span>
@@ -91,14 +91,14 @@
 					<div class="product-body">
 						<p class="product-category">
 							<c:out
-								value="${productDTO.getProduct().getCategoryproduct().getName()}" />
+								value="${productDTO.getCategoryproductNAME()}" />
 						</p>
 						<h3
-							class="product-name product-name-<c:out value="${productDTO.getProduct().getProductid()}" />">
-							<c:out value="${productDTO.getProduct().getName()}" />
+							class="product-name product-name-<c:out value="${productDTO.getProductid()}" />">
+							<c:out value="${productDTO.getName()}" />
 						</h3>
 						<h4
-							class="product-price product-price-<c:out value="${productDTO.getProduct().getProductid()}" />">
+							class="product-price product-price-<c:out value="${productDTO.getProductid()}" />">
 							<c:if test="${productDTO.getNewPrice()!=null}">
 								<!-- new price -->
 								<c:out value="${productDTO.getNewPrice().getPrice()}" />
@@ -124,13 +124,13 @@
 								<i class="fa fa-star-half-empty"></i>
 							</button>
 							<button
-								data-PId='<c:out value="${productDTO.getProduct().getProductid()}"></c:out>'
+								data-PId='<c:out value="${productDTO.getProductid()}"></c:out>'
 								title="Xem nhanh" class="quick-view btn-View" tabindex="-1"
 								data-toggle="modal" data-target="#exampleModal">
 								<i class="fa fa-eye"></i>
 							</button>
 							<button
-								data-PId='<c:out value="${productDTO.getProduct().getProductid()}"></c:out>'
+								data-PId='<c:out value="${productDTO.getProductid()}"></c:out>'
 								title="Thêm vào giỏ" class="quick-view btn-add-to-cart"
 								tabindex="-1">
 								<i class="fa fa-shopping-cart"></i>

@@ -85,6 +85,9 @@ public class VoucherDAO implements VoucherDAOImp {
 			Voucher voucher = session
 					.createQuery("FROM Voucher v WHERE v.name = :name AND v.isdelete =: isdelete", Voucher.class)
 					.setParameter("name", name).setParameter("isdelete", this.IS_NOT_DELETE).getSingleResult();
+			if(voucher.getCount() == 0) {
+				return false;
+			}
 			return true;
 		} catch (Exception e) {
 

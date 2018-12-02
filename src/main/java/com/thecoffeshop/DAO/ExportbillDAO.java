@@ -19,14 +19,14 @@ public class ExportbillDAO implements ExportbillDAOImp {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public Boolean addExportbill(Exportbill exportbill) {
+	public int addExportbill(Exportbill exportbill) {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
-			session.save(exportbill);
-			return true;
+			int lastID = (Integer)session.save(exportbill);
+			return lastID;
 		} catch (Exception e) {
-			return false;
+			return -1;
 		}
 	}
 
@@ -100,7 +100,7 @@ public class ExportbillDAO implements ExportbillDAOImp {
 					Exportbill.class).setParameter("productid", productid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getResultList();
 			for (Exportbill exportbill : exportbills) {
-				total += exportbill.getQuantity();
+				total += exportbill.getQuantityInventory();
 			}
 			return total;
 		} catch (Exception e) {
@@ -115,10 +115,26 @@ public class ExportbillDAO implements ExportbillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Exportbill> exportbills = session.createQuery(
-					"FROM Exportbill e WHERE e.product.productid =: productid AND e.quantity > 0 AND e.isdelete =: isdelete ORDER BY updateat ASC",
+					"FROM Exportbill e WHERE e.product.productid =: productid AND e.quantityInventory > 0 AND e.isdelete =: isdelete ORDER BY updateat ASC",
 					Exportbill.class).setParameter("productid", productid).setParameter("isdelete", this.IS_NOT_DELETE)
 					.getResultList();
-			
+
+			return exportbills;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
+
+	@Override
+	public List<Exportbill> findLimit(int startPosition) {
+
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+
+			List<Exportbill> exportbills = session
+					.createQuery("FROM Exportbill e WHERE e.isdelete =: isdelete", Exportbill.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).setFirstResult(startPosition*MAX_RESULTS).setMaxResults(MAX_RESULTS).getResultList();
 			return exportbills;
 		} catch (Exception e) {
 

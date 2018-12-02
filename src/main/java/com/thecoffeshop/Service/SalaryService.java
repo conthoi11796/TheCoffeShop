@@ -30,9 +30,9 @@ public class SalaryService implements SalaryDAOImp {
 	}
 
 	@Override
-	public Boolean deleteSalary(int dinnertableid) {
+	public Boolean deleteSalary(Salary Salary) {
 		// TODO Auto-generated method stub
-		return salaryDAO.deleteSalary(dinnertableid);
+		return salaryDAO.deleteSalary(Salary);
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class SalaryService implements SalaryDAOImp {
 	@Override
 	public int getSalaryByEmployeeid(String employeeid) {
 		// TODO Auto-generated method stub
-		return 0;
+		return salaryDAO.getSalaryByEmployeeid(employeeid);
 	}
 	
 }

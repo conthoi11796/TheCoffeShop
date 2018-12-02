@@ -6,9 +6,11 @@ import com.thecoffeshop.Models.*;
 
 public interface ExportbillDAOImp extends CommonDAOImp{
 
-    public Boolean addExportbill(Exportbill exportbill);
+    public int addExportbill(Exportbill exportbill);
     
     public List<Exportbill> findAll();
+    
+    public List<Exportbill> findLimit(int startPosition);
 
 	public Exportbill getInfoById(int exportbillid);
 

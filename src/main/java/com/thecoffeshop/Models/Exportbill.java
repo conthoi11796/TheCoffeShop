@@ -29,6 +29,8 @@ public class Exportbill implements java.io.Serializable {
 	private Employee employee;
 	private Product product;
 	private Integer quantity;
+	private Integer quantityInventory;
+	private Integer quantityThrow;
 	private Date updateat;
 	private Boolean isdelete;
 	private Set<Exportbilldetail> exportbilldetails = new HashSet<Exportbilldetail>(0);
@@ -40,12 +42,14 @@ public class Exportbill implements java.io.Serializable {
 		this.exportbillid = exportbillid;
 	}
 
-	public Exportbill(int exportbillid, Employee employee, Product product, Integer quantity, Date updateat,
-			Boolean isdelete, Set<Exportbilldetail> exportbilldetails) {
+	public Exportbill(int exportbillid, Employee employee, Product product, Integer quantity, Integer quantityInventory,
+			Integer quantityThrow, Date updateat, Boolean isdelete, Set<Exportbilldetail> exportbilldetails) {
 		this.exportbillid = exportbillid;
 		this.employee = employee;
 		this.product = product;
 		this.quantity = quantity;
+		this.quantityInventory = quantityInventory;
+		this.quantityThrow = quantityThrow;
 		this.updateat = updateat;
 		this.isdelete = isdelete;
 		this.exportbilldetails = exportbilldetails;
@@ -90,6 +94,24 @@ public class Exportbill implements java.io.Serializable {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	@Column(name = "QUANTITYINVENTORY")
+	public Integer getQuantityInventory() {
+		return this.quantityInventory;
+	}
+
+	public void setQuantityInventory(int quantityInventory) {
+		this.quantityInventory = quantityInventory;
+	}
+
+	@Column(name = "QUANTITYTHROW")
+	public Integer getQuantityThrow() {
+		return this.quantityThrow;
+	}
+
+	public void setQuantityThrow(int quantityThrow) {
+		this.quantityThrow = quantityThrow;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

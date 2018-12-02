@@ -33,11 +33,11 @@ pageEncoding="UTF-8"%>
         </div>
     </c:if>
     <div class="form-group">
-        <input id="saleof" 
+        <input id="discount" 
             <c:if test = "${temb == true}">
                     disabled
             </c:if> 
-        type="text" value= '<c:out value="${voucher.getSaleof()}" />' class="form-control" placeholder="Giảm giá"/>
+        type="text" value= '<c:out value="${voucher.getDiscount()}" />' class="form-control" placeholder="Giảm giá"/>
     </div>
         <c:if test = "${voucher.getVoucherid()==null}">
             <button id="btnSave" type="button" class="btn btn-success mr-2">

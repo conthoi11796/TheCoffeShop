@@ -142,4 +142,19 @@ public class DinnertableDAO implements DinnertableDAOImp {
 			return null;
 		}
 	}
+
+	@Override
+	public List<Dinnertable> dsBanTrong() {
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		try {
+			List<Dinnertable> dinnertables = session
+					.createQuery("FROM Dinnertable d WHERE d.tablestatus.tablestatusid = 5 AND d.isdelete =: isdelete", Dinnertable.class)
+					.setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
+			return dinnertables;
+		} catch (Exception e) {
+
+			return null;
+		}
+	}
 }

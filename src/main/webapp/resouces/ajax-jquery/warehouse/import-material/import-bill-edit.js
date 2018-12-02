@@ -5,12 +5,11 @@ $(function() {
 	$("#btn-Add-Row").click(
 			function() {
 				var htmlText = $(".-1").html();
-				$("#import_material_form table tbody").append(
-						"<tr>" + htmlText + "</tr>");
-
 				if(iRemove == -1){
 					iRemove = 1;
 				}
+				$("#import_material_form table tbody").append(
+						"<tr class='"+ iRemove++ +"'>" + htmlText + "</tr>");
 				$("#import_material_form table tbody tr:last label").attr(
 						"data-remove-import", iRemove++);
 			});

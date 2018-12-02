@@ -10,7 +10,7 @@ public interface CommonDAOImp {
 
 	public int NUM_PRODUCT_ONE_PAGE = 12;
 
-	public int MAX_RESULTS = 1;
+	public int MAX_RESULTS = 5;
 
 	public Boolean STATUS_CONFIRM = true;
 

@@ -112,7 +112,7 @@ public class ImportBillDAO implements ImportBillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Importbill> importbills = session
-					.createQuery("FROM Importbill i WHERE i.updateat = DATE(:date) AND i.isdelete =: isdelete",
+					.createQuery("FROM Importbill i WHERE  DATE(i.updateat) = DATE(:date) AND i.isdelete =: isdelete",
 							Importbill.class)
 					.setParameter("date", date).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 			int total = 0;
@@ -136,7 +136,7 @@ public class ImportBillDAO implements ImportBillDAOImp {
 		Session session = this.sessionFactory.getCurrentSession();
 		try {
 			List<Importbill> importbills = session
-					.createQuery("FROM Importbill i WHERE i.updateat = DATE(:date) AND i.isdelete =: isdelete",
+					.createQuery("FROM Importbill i WHERE  DATE(i.updateat) = DATE(:date) AND i.isdelete =: isdelete",
 							Importbill.class)
 					.setParameter("date", date).setParameter("isdelete", this.IS_NOT_DELETE).getResultList();
 

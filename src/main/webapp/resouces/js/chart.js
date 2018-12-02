@@ -7,7 +7,7 @@ $(function() {
 	$.post("/admin/statistic-profit", {}, function(data, status) {
 
 		obj = JSON.parse(data);
-	
+
 	var thongKeNgay = {
 		datasets : [ {
 			data : [ obj.ngay.tongtienImportBillTrongNgay, obj.ngay.tongtienBillTrongNgay, 30 ],

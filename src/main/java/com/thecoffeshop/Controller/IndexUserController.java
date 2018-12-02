@@ -107,7 +107,7 @@ public class IndexUserController extends Common {
 		List<ProductDTO> productDTOs = new ArrayList<ProductDTO>();
 		/* display price product and sale price and new product release */
 		for (Product product : products) {
-			ProductDTO productDTO = new ProductDTO();
+			ProductDTO dto = new ProductDTO();
 
 			/* image */
 			Set<Image> setImages = product.getImages();
@@ -119,14 +119,15 @@ public class IndexUserController extends Common {
 				}
 				size--;
 			}
-			productDTO.setImages(images);
+			dto.setImages(images);
 
 			/* find old price */
-			productDTO.setProduct(product);
+			dto.setProductid(product.getProductid());
+			dto.setCategoryproductNAME(product.getCategoryproduct().getName());
 
 			float oldPrice = priceService.getOldPrice(product.getProductid());
 			if (oldPrice > 0) {
-				productDTO.setPrice((int) oldPrice);
+				dto.setPrice((int) oldPrice);
 			}
 
 			/* find new price */
@@ -134,21 +135,21 @@ public class IndexUserController extends Common {
 			if (newPrice != null) {
 
 				/* new price */
-				productDTO.setNewPrice(newPrice);
+				dto.setNewPrice(newPrice);
 				/* rate price between new price to old price */
 				float newPriceValue = newPrice.getPrice();
 
 				int rate = this.rateOldAndNewPrice(oldPrice, newPriceValue);
-				productDTO.setRateOldAndNewPrice(rate);
+				dto.setRateOldAndNewPrice(rate);
 			}
 
 			/* check is new product */
-			productDTO.setCheckIsNew(false);
+			dto.setCheckIsNew(false);
 			if (productService.checkIsNewProduct(product.getProductid())) {
-				productDTO.setCheckIsNew(true);
+				dto.setCheckIsNew(true);
 			}
 
-			productDTOs.add(productDTO);
+			productDTOs.add(dto);
 		}
 
 		modelMap.addAttribute("productDTOs", productDTOs);

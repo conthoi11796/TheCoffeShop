@@ -10,6 +10,8 @@ public interface DinnertableDAOImp extends CommonDAOImp {
 
 	public List<Dinnertable> findAll();
 
+	public List<Dinnertable> dsBanTrong();
+
 	public List<Dinnertable> findLimit(int startPosition);
 
 	public Dinnertable getInfoById(int dinnertableid);

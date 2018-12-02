@@ -1,14 +1,19 @@
 package com.thecoffeshop.DTO;
 
+import java.util.Date;
 import java.util.List;
 
+import com.thecoffeshop.Models.Categoryproduct;
 import com.thecoffeshop.Models.Image;
 import com.thecoffeshop.Models.Price;
 import com.thecoffeshop.Models.Product;
 
 public class ProductDTO {
 
-	private Product product;
+	private String productid;
+	private String categoryproductNAME;
+	private String name;
+	private Date updateat;
 	private Boolean canDelete;
 	private List<Image> images;
 	private int number;
@@ -16,14 +21,55 @@ public class ProductDTO {
 	private Price newPrice;
 	private int rateOldAndNewPrice;
 	private boolean checkIsNew;
+	private int quantityInventory;
 	private int quantity;
-	
+
 	public int getQuantity() {
 		return quantity;
 	}
 
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getProductid() {
+		return productid;
+	}
+
+	public void setProductid(String productid) {
+		this.productid = productid;
+	}
+
+	public String getCategoryproductNAME() {
+		return categoryproductNAME;
+	}
+
+	public void setCategoryproductNAME(String categoryproductNAME) {
+		this.categoryproductNAME = categoryproductNAME;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getUpdateat() {
+		return updateat;
+	}
+
+	public void setUpdateat(Date updateat) {
+		this.updateat = updateat;
+	}
+
+	public int getQuantityInventory() {
+		return quantityInventory;
+	}
+
+	public void setQuantityInventory(int quantityInventory) {
+		this.quantityInventory = quantityInventory;
 	}
 
 	public Boolean getCanDelete() {
@@ -64,14 +110,6 @@ public class ProductDTO {
 
 	public void setPrice(int price) {
 		this.price = price;
-	}
-
-	public Product getProduct() {
-		return product;
-	}
-
-	public void setProduct(Product product) {
-		this.product = product;
 	}
 
 	public List<Image> getImages() {

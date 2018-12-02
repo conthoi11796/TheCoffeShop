@@ -65,4 +65,10 @@ public class DinnertableService implements DinnertableDAOImp {
 		return dinnertableDAO.getListCountChair();
 	}
 
+	@Override
+	public List<Dinnertable> dsBanTrong() {
+		// TODO Auto-generated method stub
+		return dinnertableDAO.dsBanTrong();
+	}
+
 }

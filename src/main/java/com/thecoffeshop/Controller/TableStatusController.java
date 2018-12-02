@@ -47,14 +47,16 @@ public class TableStatusController extends Common {
 
 		List<TableStatusDTO> dtos = new ArrayList<TableStatusDTO>();
 		for (Tablestatus tablestatus : tablestatuses) {
-			TableStatusDTO tableStatusDTO = new TableStatusDTO();
-			tableStatusDTO.setTablestatus(tablestatus);
+			TableStatusDTO dto = new TableStatusDTO();
+			dto.setTablestatusid(tablestatus.getTablestatusid());
+			dto.setName(tablestatus.getName());
+			dto.setUpdateat(tablestatus.getUpdateat());
 
-			tableStatusDTO.setCanDelete(false);
+			dto.setCanDelete(false);
 //			if (tablestatusService.checkExistBillStatus(tablestatus.getTablestatusid())) {
 //				tableStatusDTO.setCanDelete(true);
 //			}
-			dtos.add(tableStatusDTO);
+			dtos.add(dto);
 		}
 		modelMap.addAttribute("dtos", dtos);
 
